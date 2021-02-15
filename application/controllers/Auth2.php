@@ -8,6 +8,7 @@ class Auth2 extends CI_Controller {
         $this->load->model('auths');
     }    
 
+
     
     // Goto Login Page [POST CALL]
     public function login() {
