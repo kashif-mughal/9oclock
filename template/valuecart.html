@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+
+    <title>sauda express - home</title>
+</head>
+
+<body>
+
+
+    <!-- Body Content -->
+    <div id="body-content">
+
+        <!-- Header -->
+        <div class="section-head">
+            <div class="top-bar">
+                <div class="container-fluid">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-sm ml-md-auto">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">My Account</a>
+                                </li>
+                                <li>
+                                    <p class="seperator">|</p>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Wishlist</a>
+                                </li>
+                                <li>
+                                    <p class="seperator">|</p>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Track your order</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="main-nav bg-light">
+                <div class="container-fluid">
+                    <div class="row align-items-center py-4">
+                        <!-- Brand Logo & Sidebar Button -->
+                        <div class="col-lg-3 col-sm-6 mb-sm-4 mb-md-0 col-5 order-1">
+                            <div class="logo-container d-flex flex-row align-item-center justify-content-end">
+                                <div class="sidebar-button">
+                                    <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
+                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                        <img src="img/toggler_icon.png" alt="Toggle navigation">
+                                        </img>
+                                </div>
+                                <div class="logo ml-2">
+                                    <div class="logo_content">
+                                        <img src="img/logo.png" alt="Sauda Express" class="img-fluid d-block">
+                                        <small class="text-white tag-line">Where technology meets tradition</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search Bar -->
+                        <div class="col-lg-6 col-sm-12 order-lg-2 order-3 text-lg-left text-right">
+                            <div class="header_search">
+                                <div class="header_search_content">
+                                    <div class="header_search_form_container">
+                                        <form action="#">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <button
+                                                        class="btn btn-outline-secondary dropdown-toggle font-weight-400 category-button"
+                                                        type="button" data-toggle="dropdown" onclick="openNav()">
+                                                        All
+                                                        <img src="img/chevron.png" alt="" class="img-fluid">
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Fruits</a>
+                                                        <a class="dropdown-item" href="#">Vegetables</a>
+                                                        <a class="dropdown-item" href="#">Dry Fruits</a>
+                                                        <a class="dropdown-item" href="#">Rice</a>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control font-weight-400 border-none"
+                                                    placeholder="I'm shopping for...">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary btn-black border-none"
+                                                        type="button">Search</button>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Phone Number & Add to Cart Button -->
+                        <div class="col-lg-3 col-6 order-lg-3 order-2 text-lg-left text-left">
+                            <div class="phone_cart mb-1 d-flex flex-row align-item-center justify-content-start">
+                                <!-- Phone -->
+                                <div class="phone mx-4 d-flex flex-row align-item-center justify-content-start">
+                                    <div class="phone_icon mr-2">
+                                        <img src="img/hotline_phone_icon.png" alt="">
+                                    </div>
+                                    <div class="phone_content text-white">
+                                        <div class="phone_text">
+                                            <h6 class="mb-0">Hotline</h6>
+                                        </div>
+                                        <div class="phone_number">
+                                            <h6 class="font-weight-bold">+92 318 2294472</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Cart -->
+                                <div class="cart">
+                                    <div class="cart_container d-flex flex-row align-item-center justify-content-start">
+                                        <!-- Cart Icon -->
+                                        <div class="cart_icon">
+                                            <a href="#">
+                                                <img src="img/basket.png" alt="" id="basket-img">
+                                                <div class="cart_icon_text">
+                                                    <span id="add_to_cart_items"
+                                                        class="badge badge-pill badge-light">2</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+
+        <!-- Main Page -->
+        <div id="main-page">
+
+            <!-- Bread Crumb -->
+
+            <div class="bread_crumb">
+                <div class="container-fluid">
+                    <div class="row d-block">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item">Monthly Deal</li>
+                            </ol>
+                        </nav>
+                        <h3 class="mb-0">Monthly Deal</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bread Crumb -->
+
+            <!-- Main Content -->
+
+            <section class="main-content mx-4">
+                <div class="container-fluid">
+                    <div class="row mb-5">
+                        <div class="col-xl-3 col-lg-3 col-md-3">
+                            <div class="categories sidebar-inner-page">
+                                <h4>Shop By Department</h4>
+                                <div class="sidebar-inner-category-content">
+                                    <div class="sub-category">
+                                        <div class="sub-category-content">
+                            
+                                            <h6>EDIBLES</h6>
+                            
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                            </a>
+                            
+                            
+                                            <h6>SNACKS & BREAKFAST</h6>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                            </a>
+                            
+                                            <h6>EDIBLES</h6>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Packed)</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) / Sabit Masla</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Daals / Pulses</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Sauces & Ketchup</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea Whitener</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                            </a>
+                                            <a href="#">
+                                                <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                            </a>
+                            
+                                            
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9 col-md-9">
+                            <div class="order-history-top my-4">
+                                <h4>Sauda Express Value Cart</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis amet cumque sunt libero iste repudiandae ullam, ut ipsam fugiat architecto et repellendus minus non impedit dolorum! Nobis pariatur aut necessitatibus?</p>
+                            </div>
+                            <div class="order-history-header mt-3 p-0">
+                                <div class="card order-history-card">
+                                    
+                                    <div class="featured-products mt-0 border-none d-flex justify-content-between align-item-center">
+                                        <div class="order-history-checkbox align-self-center">
+                                            <input type="checkbox">
+                                        </div>
+                                        <img src="img/products/cauliflower.png" alt="" class="order-item">
+                                        <div class="order-product-name order-item align-self-center">
+                                            <p class="order-name">Onion</p>
+                                            <p class="order-weight">1kg</p>
+                                        </div>
+                                        <div class="order-product-price order-item align-self-center">
+                                            <p class="order-price">Rs.45</p>
+                                            <p class="order-discount"><del>Rs. 56</del></p>
+                                        </div>
+                                        <div class="quantity-area d-flex justify-content-center align-items-center order-item mt-2">
+                                            <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                            <input type="text" value="1" class="d-inline-flex quantity-input">
+                                            <span class="d-block quantity-button text-center align-self-center">
+                                                <a href="#" class="d-block">+</a>
+                                                <div class="separator"></div>
+                                                <a href="#" class="d-block">-</a>
+                                            </span>
+                                        </div>
+                                        <div class="order-button order-item text-center">
+                                            <a href="#" class="d-block align-self-center button-primary">Add to Cart</a>
+                                            <a href="#" class="d-block align-self-center button-secondary">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="order-history-header mt-3 p-0">
+                                <div class="card order-history-card">
+                            
+                                    <div class="featured-products mt-0 border-none d-flex justify-content-between align-item-center">
+                                        <div class="order-history-checkbox align-self-center">
+                                            <input type="checkbox">
+                                        </div>
+                                        <img src="img/products/cauliflower.png" alt="" class="order-item">
+                                        <div class="order-product-name order-item align-self-center">
+                                            <p class="order-name">Onion</p>
+                                            <p class="order-weight">1kg</p>
+                                        </div>
+                                        <div class="order-product-price order-item align-self-center">
+                                            <p class="order-price">Rs.45</p>
+                                            <p class="order-discount"><del>Rs. 56</del></p>
+                                        </div>
+                                        <div class="quantity-area d-flex justify-content-center align-items-center order-item mt-2">
+                                            <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                            <input type="text" value="1" class="d-inline-flex quantity-input">
+                                            <span class="d-block quantity-button text-center align-self-center">
+                                                <a href="#" class="d-block">+</a>
+                                                <div class="separator"></div>
+                                                <a href="#" class="d-block">-</a>
+                                            </span>
+                                        </div>
+                                        <div class="order-button order-item text-center">
+                                            <a href="#" class="d-block align-self-center button-primary">Add to Cart</a>
+                                            <a href="#" class="d-block align-self-center button-secondary">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                            <div class="order-history-header mt-3 p-0">
+                                <div class="card order-history-card">
+                            
+                                    <div class="featured-products mt-0 border-none d-flex justify-content-between align-item-center">
+                                        <div class="order-history-checkbox align-self-center">
+                                            <input type="checkbox">
+                                        </div>
+                                        <img src="img/products/cauliflower.png" alt="" class="order-item">
+                                        <div class="order-product-name order-item align-self-center">
+                                            <p class="order-name">Onion</p>
+                                            <p class="order-weight">1kg</p>
+                                        </div>
+                                        <div class="order-product-price order-item align-self-center">
+                                            <p class="order-price">Rs.45</p>
+                                            <p class="order-discount"><del>Rs. 56</del></p>
+                                        </div>
+                                        <div class="quantity-area d-flex justify-content-center align-items-center order-item mt-2">
+                                            <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                            <input type="text" value="1" class="d-inline-flex quantity-input">
+                                            <span class="d-block quantity-button text-center align-self-center">
+                                                <a href="#" class="d-block">+</a>
+                                                <div class="separator"></div>
+                                                <a href="#" class="d-block">-</a>
+                                            </span>
+                                        </div>
+                                        <div class="order-button order-item text-center">
+                                            <a href="#" class="d-block align-self-center button-primary">Add to Cart</a>
+                                            <a href="#" class="d-block align-self-center button-secondary">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- HOUSEHOLD ESSENTIALS -->
+
+                    <!-- Call to Action -->
+
+                    <div class="row my-4">
+                        <div class="col-md-4">
+
+                            <div class="call_to_action_grid border-right-full">
+                                <div class="call_to_action_image">
+                                    <img src="img/footer/call_to_action/SameNextDayDelivery_icon.png" alt="Icon">
+                                </div>
+                                <div class="call_to_action_content">
+                                    <h5 class="call_to_action_title">Same/Next Day Delivery</h5>
+                                    <h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100 for
+                                        orders below Rs. 4,000</h6>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="call_to_action_grid border-right-full">
+                                <div class="call_to_action_image">
+                                    <h4 class="call_to_action_custom_img m-0">Rs.</h4>
+                                </div>
+                                <div class="call_to_action_content">
+                                    <h5 class="call_to_action_title">Cash On Delivery</h5>
+                                    <h6 class="call_to_action_content">You pay when rider comes at your address.</h6>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="call_to_action_grid">
+                                <div class="call_to_action_image">
+                                    <img src="img/footer/call_to_action/OnlineSupport_icon.png" alt="Icon">
+                                </div>
+                                <div class="call_to_action_content">
+                                    <h5 class="call_to_action_title">Online Support</h5>
+                                    <h6 class="call_to_action_content">Customer support from 9AM - Midnight (021) 111 111 123
+                                    </h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Call to Action -->
+
+                </div>
+            </section>
+            
+            <!-- Main Content -->
+            <!-- Main Page -->
+        </div>
+
+        <!-- Footer -->
+
+        <section class="main-footer">
+            <div class="container-fluid">
+                <div class="main-content">
+                    <p class="footer-text">
+                        Sauda Express is not just another online grocery store. We at Sauda Express aim at revolutionizing
+                        the whole thinking of online shopping by introducing latest technology into the arena and at the
+                        same retaining cultural traditions that are still revered by shoppers in Pakistan but are so easily
+                        abandoned by online shopping platforms focusing only on the technological aspect. We consistently
+                        work hard to:
+                    </p>
+
+                    <div class="best_features">
+                        <div class="grid-container">
+                            <div class="feature-img">
+                                <h4 class="feature-img-text m-0">Rs.</h4>
+                            </div>
+                            <h4 class="feature-text my-2 py-1">Offer best quality at reasonable price</h4>
+                        </div>
+                    </div>
+                    <div class="best_features">
+                        <div class="grid-container">
+                            <div class="feature-img">
+                                <img src="img/footer/round-rectangle.png" alt="">
+                            </div>
+                            <h4 class="feature-text my-2 py-1">Present a wide range of grocery products to meet diversified
+                                needs of all our customers</h4>
+                        </div>
+                    </div>
+                    <div class="best_features">
+                        <div class="grid-container">
+                            <div class="feature-img">
+                                <img src="img/footer/arrow-left.png" alt="">
+                            </div>
+                            <h4 class="feature-text my-2 py-1">Maintain very high level of satisfaction of all our customers
+                                - we offer cashback and return options without any questions asked</h4>
+                        </div>
+                    </div>
+                    <div class="best_features">
+                        <div class="grid-container">
+                            <div class="feature-img">
+                                <img src="img/footer/rocket.png" alt="">
+                            </div>
+                            <h4 class="feature-text my-2 py-1">Continuously innovate and improve out offerings to enhance
+                                the experience of our customers</h4>
+                        </div>
+                    </div>
+
+                    <div class="mission_vision my-4">
+                        <h4>Mission & Vision</h4>
+                        <div class="mission_vision_content">
+                            <h6>Mission:</h6>
+                            <p>To become the most customer-centric, technologically sound and practical online shopping
+                                platform which is highly respected for ethics and professionalism by customers and
+                                competition alike</p>
+                        </div>
+                        <div class="mission_vision_content">
+                            <h6>Vision:</h6>
+                            <p>Build strong understanding of customer needs fby carefully analyzing their shopping patterns
+                                and paying close attension to their stated expectations through intelligently carried out
+                                research and surverys. Use most suitable technology to create out of box solutions with the
+                                aim to acheiving optimum level of satisfaction for our customers and at the same time
+                                fullfilling our economic objectives. Attract best talent by offering competative
+                                remunerations and a healthy work environment that enables every team member to perform at
+                                his or her optimum level and at the same time achieve a perfect work-life balance.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="categories my-4">
+                        <h4>Categories</h4>
+                        <div class="category-grid">
+                            <div class="sub-category">
+                                <div class="sub-category-content">
+
+                                    <h6>EDIBLES</h6>
+
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices
+                                            (Packed)</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) /
+                                            Sabit Masla</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Daals /
+                                            Pulses</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Sauces &
+                                            Ketchup</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea
+                                            Whitener</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <div class="sub-category">
+                                <div class="sub-category-content">
+
+                                    <h6>SNACKS & BREAKFAST</h6>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices
+                                            (Packed)</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) /
+                                            Sabit Masla</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Daals /
+                                            Pulses</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Sauces &
+                                            Ketchup</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea
+                                            Whitener</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <div class="sub-category">
+                                <div class="sub-category-content">
+
+                                    <h6>EDIBLES</h6>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices
+                                            (Packed)</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) /
+                                            Sabit Masla</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Daals /
+                                            Pulses</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Sauces &
+                                            Ketchup</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea
+                                            Whitener</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <div class="sub-category">
+                                <div class="sub-category-content">
+
+                                    <h6>EDIBLES</h6>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices
+                                            (Packed)</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) /
+                                            Sabit Masla</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Daals /
+                                            Pulses</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Sauces &
+                                            Ketchup</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea
+                                            Whitener</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <div class="sub-category">
+                                <div class="sub-category-content">
+
+                                    <h6>EDIBLES</h6>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Atta / Flour</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Cooking Oil</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Ghee</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices
+                                            (Packed)</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spices (Loose) /
+                                            Sabit Masla</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Rice</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Daals /
+                                            Pulses</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Sauces &
+                                            Ketchup</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Milk (Packaged) Tea
+                                            Whitener</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Pasta</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Spaghetti</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Lasagne</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Noodles</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="hyphen">&#8212;</span> <span class="category-text">Beverages</span>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="feature-details my-4">
+                        <h4>Sauda Express - the most customer-centeric online shopping platform</h4>
+                        <div class="feature_details_content">
+                            <h6>Wide Geographic Voverage</h6>
+                            <p>Order from anywhere in karachi to get best deals in grocery items delivered at your doorsteps
+                                in a timely and professional manner</p>
+                        </div>
+                        <div class="feature_details_content">
+                            <h6>Innovative Approach</h6>
+                            <p>We at Sauda Express take special pride in being innovative and ahead of our competition to
+                                create convenience for our shoppers.</p>
+                        </div>
+                        <div class="feature_details_content">
+                            <h6>Long term Commitment</h6>
+                            <p>We genuinely believe in long lasting relationships based on trust and mutual respect.</p>
+                        </div>
+                    </div>
+
+                    <div class="useful-links my-4">
+                        <h4>Useful Links</h4>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-2 pl-0">
+                                    <a href="#">Mission & Vision</a>
+                                </div>
+                                <div class="col-md-2 pl-0">
+                                    <a href="#">Brand Stores</a>
+                                </div>
+                                <div class="col-md-2 pl-0">
+                                    <a href="#">Privacy Policy</a>
+                                </div>
+                                <div class="col-md-2 pl-0">
+                                    <a href="#">Terms & Conditions</a>
+                                </div>
+
+                                <div class="w-100"></div>
+
+                                <div class="col-md-2 pl-0">
+                                    <a href="#">FAQs</a>
+                                </div>
+                                <div class="col-md-2 pl-0">
+                                    <a href="#">Return & Refund</a>
+                                </div>
+                                <div class="col-md-2 pl-0">
+                                    <a href="#">Categories</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="top-brands my-4">
+                        <h4>Top Brands</h4>
+                        <a href="#">Unilever (151)</a>
+                        <a href="#">Reckitt (105)</a>
+                        <a href="#">National (73)</a>
+                        <a href="#">Nestle (68)</a>
+                        <a href="#">Reckitt-Health (59)</a>
+                        <a href="#">Peek-Freans (50)</a>
+                        <a href="#">Mitchell's (47)</a>
+                        <a href="#">Reckitt-RB-Hygiene (39)</a>
+                        <a href="#">Dawn (38)</a>
+                        <a href="#">Bake-Parlor (30)</a>
+                        <a href="#">Dettol (30)</a>
+                        <a href="#">K&N's (29)</a>
+                        <a href="#">Kolson (28)</a>
+                        <a href="#">Shezan (26)</a>
+                        <a href="#">Bunnys (26)</a>
+                        <a href="#">Shangrilla (25)</a>
+                        <a href="#">Youngs (24)</a>
+                        <a href="#">LifeBuoy (23)</a>
+                        <a href="#">Marhaba (22)</a>
+                        <a href="#">Cnabebe (21)</a>
+                        <a href="#">Kausar (20)</a>
+                        <a href="#">Lux (20)</a>
+                        <a href="#">Guard-Rice (20)</a>
+                        <a href="#">Scotch-Brite (20)</a>
+                        <a href="#">Colgate (19)</a>
+                    </div>
+
+                    <div class="company-address">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <p>info@saudaexpress.com, 0300 123 45678, Plot No. 30, Sector 26, Korangi Industrial
+                                        Area, Karachi,<br>PakistanSauda Express &#0174 2020</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="float-right">Power by: Malejol</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+    </div>
+    <!-- Body Content -->
+
+
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- Slick -->
+    <script src="js/slick.js"></script>
+
+    <!-- Custom Scripts -->
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>
