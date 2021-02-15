@@ -245,7 +245,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                  </div>
                                  <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="Search here" onfocus="this.value=''">
                                  <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">Search</button>
+                                    <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">
+                                       <i class="fas fa-search"></i>
+                                    </button>
                                  </div>
                               </div>
                               </div>
