@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteBase /9oclock/
+RewriteCond $1 !^(index\.php|my-assets|assets|robots\.txt)
+RewriteRule ^(.*)$ index.php/$1 [L]
+php_value max_input_vars 8000
