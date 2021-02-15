@@ -9,7 +9,6 @@ class Auth2 extends CI_Controller {
     }    
 
     
-
     // Goto Login Page [POST CALL]
     public function login() {
 
