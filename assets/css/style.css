@@ -1,3 +1,33 @@
+:root {
+   --main-color: #03005D;
+   --secondary-color: #1813C5;
+   --btn-color-hover: rgba(3, 0, 93, 0.6);
+}
+
+#main-banner {
+   margin-top: 20px !important;
+   max-width: 1100px !important;
+   /* margin-right: auto !important; */
+   margin-left: auto !important;
+   height: 45vh;
+   margin-left: 0px !important;
+   margin-right: 0px !important;
+}
+#main-banner img {
+   height: 45vh;
+}
+#main-banner .carousel-indicators li {
+   width: 8px !important;
+   height: 8px !important;
+   border-radius: 50% !important;
+}
+#main-banner .carousel-indicators li {
+   background-color: #878684;
+}
+#main-banner .carousel-indicators li.active {
+   background-color: #fff;
+}
+
 .categories .category-grid .sub-category .sub-category-content .category-text:hover {
    text-decoration: underline;
 }.form-control {
@@ -30,8 +60,8 @@ html,body
 }
 
 #inputOtp input:focus {
-   border-color: #17a18d;
-   box-shadow: 0 0 5px #17a18d inset;
+   border-color: var(--main-color);
+   box-shadow: 0 0 5px var(--main-color) inset;
 }
 
 .wrapper {
@@ -176,7 +206,7 @@ html,body
    display: none;
 }
 .ordertrackingprogress ul li i {
-   background: #25bfa9;
+   background: var(--secondary-color);
    border-radius: 50%;
    padding: 13px;
    color: #f0f0f0;
@@ -286,7 +316,7 @@ div.total .price {
    font-family: "Work Sans";
 }
 #orderNumberTitle #orderNumber {
-   color: #25bfa9;
+   color: var(--secondary-color);
 }
 #orderNumberSubtitle {
    display: block !important;
@@ -316,7 +346,7 @@ div.total .price {
 /* Custom Scrollbar Ends */
 
 a:hover {
-   color: #17a18d;
+   color: var(--main-color);
 }
 
 input:focus, textarea:focus, select:focus{
@@ -438,7 +468,7 @@ input:focus, textarea:focus, select:focus{
    padding: 0px !important;
 }
 .top-bar {
-   background-color: #17a18d;
+   background-color: var(--main-color);
 }
 .top-bar ul {
    list-style: none;
@@ -463,10 +493,10 @@ input:focus, textarea:focus, select:focus{
    color: #ffffff;
 }
 .bg-dark {
-   background-color: #17a18d !important;
+   background-color: var(--main-color) !important;
 }
 .bg-light {
-   background-color: #25bfa9 !important;
+   background-color: var(--secondary-color) !important;
 }
 .btn-black {
    background-color: #000000 !important;
@@ -537,7 +567,7 @@ input:focus {
    bottom: -18px;
    left: -26px;
    background-color: #ffffff;
-   color: #25bfa9;
+   color: var(--secondary-color);
 }
 .dropdown-toggle::after {
    display: none;
@@ -858,7 +888,7 @@ input:focus {
 .products-widget-heading {
    font-size: 24px;
    letter-spacing: -1px;
-   color: #25bfa9;
+   color: var(--secondary-color);
    font-weight: 600;
    font-family: "Work Sans";
    margin-bottom: 20px;
@@ -868,7 +898,7 @@ input:focus {
    border: none;
 }
 .product-card-category-list a:hover {
-   color: #17a18d;
+   color: var(--main-color);
 }
 
 /* Utilities End */
@@ -943,7 +973,7 @@ button.category-button:active {
    bottom: -22px;
    left: 26px;
    background-color: #ffffff;
-   color: #25bfa9;
+   color: var(--secondary-color);
 }
 .main-content .featured-products {
    background-color: #ffffff;
@@ -965,14 +995,14 @@ button.category-button:active {
 .products-widget-heading a,
 #va-filter .heading-primary a,
 .innerPageMenu a {
-   color: #25bfa9;
+   color: var(--secondary-color);
    display: none;
 }
 
 .products-widget-heading a:hover,
 #va-filter .heading-primary a,
 .innerPageMenu a {
-   color: #17a18d;
+   color: var(--main-color);
 }
 
 /* Loading */
@@ -1095,7 +1125,7 @@ button.category-button:active {
 .main-content .featured-products h2 {
    font-size: 24px;
    letter-spacing: -1px;
-   color: #25bfa9;
+   color: var(--secondary-color);
    font-weight: 600;
    font-family: "Work Sans";
 }
@@ -1150,7 +1180,7 @@ button.category-button:active {
 .product-card-viewmore-btn {
    width: 100% !important;
    height: 32px;
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    font-size: 15px;
    color: #ffffff;
    font-weight: 500;
@@ -1163,7 +1193,7 @@ button.category-button:active {
 .product-card-viewmore-btn:hover {
    text-decoration: none;
    color: #ffffff;
-   background-color: #17A18D;
+   background-color: var(--main-color);
 }
 
 
@@ -1335,7 +1365,7 @@ button.category-button:active {
 .main-content .featured-products-content .card .product-card-btn {
    width: 88%;
    height: 29px;
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    text-align: center;
    text-decoration: none;
    color: #ffffff;
@@ -1393,7 +1423,7 @@ button.category-button:active {
 .product-card-btn:hover {
    text-decoration: none;
    color: #ffffff;
-   background-color: #17A18D !important;
+   background-color: var(--main-color) !important;
 }
 .grocery-features {
    background-color: #ffffff;
@@ -1520,7 +1550,7 @@ button.category-button:active {
    width: 54px;
    height: 54px;
    border-radius: 27px;
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    display: flex;
    align-items: center;
    justify-content: center;
@@ -1930,7 +1960,7 @@ button.category-button:active {
    width: 150px;
 }
 .order-button .button-primary {
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    color: #fff;
 }
 .order-button .button-primary:hover {
@@ -2003,7 +2033,7 @@ button.category-button:active {
    text-align: center;
 }
 .button-secondary {
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    text-align: center;
 }
 .button-full-width {
@@ -2174,7 +2204,7 @@ button.category-button:active {
 #mySidenav .sidebar-heading {
    font-size: 24px;
    letter-spacing: -1px;
-   color: #25bfa9;
+   color: var(--secondary-color);
    font-weight: 500;
    font-family: "Work Sans";
    border-bottom: 1px solid #cccccc;
@@ -2301,7 +2331,7 @@ button.category-button:active {
    margin: 4px 0px;
 }
 .order-button .button-primary {
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
 }
 .order-button .button-primary:hover {
    background-color: #23b19c !important;
@@ -2431,7 +2461,7 @@ button.category-button:active {
    min-height: 60px;
    padding: 0 20px 20px 30px;
    margin-left: 20px;
-   border-left: 0.2rem solid #17a18d;
+   border-left: 0.2rem solid var(--main-color);
 }
 .timeline li .item p {
    font-size: 12px;
@@ -2451,10 +2481,10 @@ button.category-button:active {
    line-height: 21px;
    text-align: center;
    background: #ffffff;
-   color: #17a18d;
+   color: var(--main-color);
    font-weight: 600;
    border-radius: 50%;
-   border: 2px solid #17a18d;
+   border: 2px solid var(--main-color);
 }
 .timeline li .item span i {
    position: absolute;
@@ -2682,7 +2712,7 @@ a#newAddressAddBtn {
    bottom: 12px;
    left: 36%;
    padding: 2px 4px;
-   background-color: #17a18d;
+   background-color: var(--main-color);
    color: #fff !important;
    font-size: 12px;
    border-radius: 3px;
@@ -2797,7 +2827,7 @@ a#newAddressCancelBtn {
    font-family: "Work Sans";
 }
 .filter-brand-button button {
-   background-color: #25bfa9 !important;
+   background-color: var(--secondary-color) !important;
    font-size: 15px !important;
    color: #ffffff !important;
    font-weight: 500 !important;
@@ -2872,7 +2902,7 @@ a#newAddressCancelBtn {
 }
 .va-panel-content .product-content-button button.nav-btn-secondary {
    padding: 4px 16px !important;
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    border-radius: 0px;
    color: #ffffff;
 }
@@ -2886,7 +2916,7 @@ a#newAddressCancelBtn {
 .va-products-content .product-card-btn {
    width: 88%;
    height: 24px;
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    text-align: center;
    text-decoration: none;
    color: #ffffff;
@@ -2913,7 +2943,7 @@ a#newAddressCancelBtn {
    font-family: "Work Sans";
 }
 .va-panel-content .product-card-btn {
-   background-color: #25bfa9;
+   background-color: var(--secondary-color);
    font-size: 14px;
    color: #ffffff;
    font-weight: 600;
@@ -3518,7 +3548,7 @@ a#newAddressCancelBtn {
    .products-widget-heading a,
    #va-filter .heading-primary a,
    .innerPageMenu a {
-      color: #25bfa9;
+      color: var(--secondary-color);
       display: block;
    }
 
