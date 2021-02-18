@@ -76,7 +76,7 @@
             if ($url != "login") {
                 $this->load->view('include/header', $data);
             }
-            $this->load->view('include/banner');
+            $this->load->view('include/banner', $BannerImages);
             ?>
             {content}
             <?php

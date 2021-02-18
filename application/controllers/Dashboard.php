@@ -18,6 +18,7 @@ class Dashboard extends CI_Controller {
         $CI->load->model('Products');
         $CI->load->model('Units');
         $CI->load->model('Brands');
+        $CI->load->model('Banner');
         
         
         $query = $this->db->query("SELECT gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
@@ -41,11 +42,16 @@ class Dashboard extends CI_Controller {
                 $products = $products['products'];
             $value->products = $products;
         }
+        $banner = $CI->Banner->get_banners();
+
+        //print_r($banner[0]['image_path']);die;
+
         $data = array(
             'title' => 'Sauda Express | Buy all your grocery here',
             'CatList' => $catArray,
             'ProdList' => $product_list,
-            'Assistant' => json_encode($assistant)
+            'Assistant' => json_encode($assistant),
+            'BannerImages' => $banner
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);

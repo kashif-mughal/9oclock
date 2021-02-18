@@ -128,6 +128,88 @@
 
         <script type="text/javascript">
             $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+
+            $(document).ready(function() {
+                
+                $('.banner_image_list').sortable({
+                    update: function() {
+                        $(this).children().each(function(index) {
+                            if($(this).attr('data-position') != (index)) {
+                                $(this).attr('data-position', (index)).attr('updated');
+                            }
+                        });
+                        UpdateNewPosition();
+                    } // update
+                }); // sortable
+
+                $('.AClass').click(function() {
+                    var image_id = $(this).attr('data-index');
+                    var x = confirm("Are You Sure,Want to Delete ?");
+                    if (x == true) {debugger;
+                        $.ajax({
+                            type: "POST",
+                            url: '<?php echo base_url('Cbanner/image_delete'); ?>',
+                            data: {id: image_id},
+                            dataType: 'json',
+                            // cache: false,
+                            success: function (datas) {
+                                console.log(datas);
+                            },
+                            error: function(error) {
+                                console.log(error)
+                            }
+                        });
+                    }
+                });
+                
+            });
+
+            function UpdateNewPosition() {
+                var position = [];
+                $('.banner_image_list img').each(function(index) { 
+                    position.push({ 'image_id': $(this).attr('data-index'), 'image_order': index+1 });
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '<?php echo base_url('Cbanner/update_image_list'); ?>',
+                    data: {position: JSON.stringify(position)},
+                    dataType: 'json',
+                    // cache: false,
+                    success: function (datas) {
+                        console.log(datas);
+                    },
+                    error: function(error) {
+                        console.log(error)
+                    }
+                });
+            }
+
+            document.querySelectorAll('.dropzone-input').forEach(inputElement => {
+                const dropZoneElement = inputElement.closest('.dropzone');
+
+                dropZoneElement.addEventListener("dragover", e => {
+                    e.preventDefault();
+                    dropZoneElement.classList.add("dropzone-over");
+                });
+
+                ["dragleave", "dragend"].forEach(type => {
+                    dropZoneElement.addEventListener(type, e => {
+                        dropZoneElement.classList.remove('dropzone-over');
+                    });
+                });
+
+                dropZoneElement.addEventListener("drop", e => {
+                    e.preventDefault();
+                    if(e.dataTransfer.files.length) {
+                        inputElement.files = e.dataTransfer.files;
+                        console.log(inputElement.files);
+                    }
+                });
+            });
+
+            // -------------------------------
+
             $( function() {
                 $( "#sortable-sss" ).sortable({
                     axis: 'y'
@@ -144,10 +226,13 @@
                         console.log($(this).attr('data-id')); 
                     });
                 });
-                
+                                
                 //$( "#sortable-sss" ).disableSelection();
               });
             
+            
+            
+
             $("#home_page_cat").select2({
                 placeholder: 'Select a Category'
             }).on("select2:select", function (evt) {
@@ -167,6 +252,8 @@
                     console.log(""+$("#home_page_cat").val())
                 }
             });
+
+            
             
             orderSortedValues = function() {
             var value = ''

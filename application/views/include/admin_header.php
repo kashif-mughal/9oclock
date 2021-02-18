@@ -288,6 +288,27 @@ $users = $CI->Users->profile_edit_data();
                 </ul>
             </li>
             <!-- Unit menu end -->
+
+            <!-- Home Banner -->
+            <li class="treeview <?php
+            if ($this->uri->segment('1') == ("Cbanner")) {
+                echo "active";
+                } else {
+                    echo " ";
+                }
+                ?>">
+                <a href="#">
+                    <i class="fas fa-file-contract"></i><span>Banner</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('Cbanner') ?>">Manage Banner</a></li>
+                </ul>
+            </li>
+            <!-- Home Banner -->
+
             <!-- Site Setting menu start -->
             <li class="treeview <?php
             if ($this->uri->segment('1') == ("Csettings")) {
