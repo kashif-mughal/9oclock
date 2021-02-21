@@ -51,7 +51,8 @@ class Dashboard extends CI_Controller {
             'CatList' => $catArray,
             'ProdList' => $product_list,
             'Assistant' => json_encode($assistant),
-            'BannerImages' => $banner
+            'BannerImages' => $banner,
+            'Page' => 'Home'
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);

@@ -3,12 +3,10 @@
     padding: 20px;
 }
 .banner_image_list img {
-   max-width: 200px !important;
-   max-height: 200px !important;
+   max-width: 600px !important;
+   max-height: 600px !important;
    margin: 4px;
    border-radius: 4px;
-   height: 120px !important;
-   width: 180px !important;
 }
 .banner_image_list .image-container {
     display: inline-block;
@@ -68,17 +66,6 @@
 
 </style>
 
-<script type="text/javascript">
-    // $(document).ready(funciton() {
-    //     alert('Admin Document Ready');
-        
-
-    // });
-
-    
-</script>
-
-
 <!-- Manage Category Start -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -87,25 +74,26 @@
         </div>
         <div class="header-title">
             <h1>Banner</h1>
-            <small>Manage Banner</small>
+            <small>Edit Banner</small>
             <ol class="breadcrumb">
                 <li><a href=""><i class="pe-7s-home"></i> Home</a></li>
-                <li><a href="#">Manage Banner</a></li>
+                <li><a href="#">Edit Banner</a></li>
             </ol>
         </div>
     </section>
 
     <section class="upload_area">
-        <?php echo form_open('Cbanner/insert_banner_image', array('class' => 'form-vertical', 'enctype' => 'multipart/form-data', 'id' => 'insert_banner_image')) ?>
-            <input type="text" name="image_url" class="dropzone-image-url form-control" placeholder="Image Redirect Url Here">
+        <?php echo form_open('Cbanner/update_edited_banner_image', array('class' => 'form-vertical', 'enctype' => 'multipart/form-data', 'id' => 'edit_banner_image')) ?>
+            <input type="text" name="image_url" class="dropzone-image-url form-control" placeholder="Image Redirect Url Here" value="<?php echo $bannerImage[0]['image_url'] ?>">
             <div class="dropzone">    
                 <span class="dropzone_text">Drop banner image here or click to upload</span>
-                <input type="file" name="image" class="dropzone-input">
+                <input type="file" name="image" class="dropzone-input" ?>">
+                <input type="hidden" id="imageId" name="imageId" value="<?php echo $bannerImage[0]['id']  ?>">
             </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col text-center">
-                        <input type="submit" id="add-banner" class="btn btn-success btn-large" name="add-banner" value="Click to Upload" />
+                        <input type="submit" id="edit-banner" class="btn btn-success btn-large" name="edit-banner" value="Click to Upload" />
                     </div>
                 </div>
             </div>
@@ -114,24 +102,12 @@
 
     <section>
         <div>
-            <h3 class="container-fluid mt-4">Banner Images in Order</h3>
+            <h3 class="container-fluid mt-4">Banner Image</h3>
         </div>
         <div class="banner_image_list d-flex flex-column justify-content-center align-item-center">
-            <?php 
-                if($banner) {
-                    ?>
-            {banner}
-                <div class="image-container" style="position:relative;">
-                    <button data-index="{id}" class="close-{id} image_delete">
-                        <span><i class="fas fa-trash-alt" aria-hidden="true"></i></span>
-                    </button>
-                    <button onclick="EditBannerImage('{id}')" data-index="{id}" class="edit-{id} image_edit">
-                        <span><i class="fas fa-edit" aria-hidden="true"></i></span>
-                    </button>
-                    <img data-index="{id}" data-position="{image_order}" src="<?php echo base_url() ?>{image_path}" alt="">
-                </div>
-            {/banner}
-            <?php } ?>
+            <div class="image-container" style="position:relative;">
+               <img data-index="<?php echo $bannerImage[0]['id'] ?>" data-position="<?php echo $bannerImage[0]['image_order'] ?>" src="<?php echo base_url() . $bannerImage[0]['image_path'] ?>" alt="">
+            </div>
         </div>
 
     </section>

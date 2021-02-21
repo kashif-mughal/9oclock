@@ -203,19 +203,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       </div>
       <div class="main-nav bg-light">
          <div class="container">
-            <div class="row align-items-center py-2 py-md-3 pb-sm-0">
+            <div class="row align-items-center py-1 py-md-2 pb-sm-0">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-3 col-md-6 col-sm-8 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
+               <div class="col-lg-2 col-md-6 col-sm-8 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-end justify-content-md-end justify-content-sm-center">
-                     <div class="sidebar-button">
-                        <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
-                              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                              aria-expanded="false" aria-label="Toggle navigation">
-                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png">
-                              <!-- <i class="fa fa-bars" style="font-size: 40px;"></i> -->
-                        </button>
-                     </div>
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
                            <img src="<?php echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block">
@@ -224,13 +216,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </div>
                   </div>
                </div>
+               <!-- Brand Logo & Sidebar Button End -->
                <!-- Search Bar -->
-               <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right align-item-center">
+               <div class="col-lg-8 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right align-item-center">
                   <div class="header_search">
                      <div class="header_search_content">
                         <div class="header_search_form_container">
                            <form action="<?=base_url('cproduct/products')?>" method="get">
-                              <div class="input-group mb-3">
+                              <div class="input-group mb-1">
                                  <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary dropdown-toggle font-weight-400 category-button" type="button"
                                        data-toggle="dropdown">
@@ -250,23 +243,24 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                     </button>
                                  </div>
                               </div>
-                              </div>
                               <input type="hidden" name="categoryId" id="categoryId">
                            </form>
                         </div>
                      </div>
                   </div>
+               </div>
+               <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-3 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-right col-4">
+                  <div class="col-lg-2 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-right col-4">
                      <div class="phone_cart d-flex flex-row align-item-center 
-                        justify-content-start justify-content-md-start justify-content-sm-center">
+                        justify-content-between justify-content-md-between justify-content-sm-between">
                         <!-- Phone -->
-                        <div class="phone ml-1 mr-4 d-flex flex-row align-item-center justify-content-start">
-                           <div class="phone_icon mr-2">
-                            <a href="tel:+92 318 2294472">
-                              <img src="<?php echo base_url() ?>assets/img/hotline_phone_icon.png" alt="">
-                            </a>
+                        <div class="phone ml-1 d-flex flex-row align-item-center justify-content-start">
+                           <!-- <div class="phone_icon mr-2">
+                              <a href="tel:+92 318 2294472">
+                                 <img src="<?php //echo base_url() ?>assets/img/hotline_phone_icon.png" alt="">
+                              </a>
                            </div>
                            <div class="phone_content text-white">
                               <div class="phone_text">
@@ -275,7 +269,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                               <div class="phone_number">
                                  <h6 class="font-weight-bold">+92 318 2294472</h6>
                               </div>
-                           </div>
+                           </div> -->
+
+                           <i class="fas fa-user" id="user_icon" style="font-size:30px;"></i>
+
                         </div>
                         <!-- Cart -->
                         <div class="cart">
@@ -291,6 +288,15 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                               </div>
                            </div>
                         </div>
+                        
+                        <div class="sidebar-button">
+                           <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
+                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                 aria-expanded="false" aria-label="Toggle navigation">
+                                 <img src="<?php echo base_url() ?>assets/img/toggler_icon.png">
+                           </button>
+                        </div>
+
                      </div>
                   </div>
                </div>
@@ -345,6 +351,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       </div>
    </div>
 </div>
+
+
+<?php
+   if($PageName == 'Home') {
+      $this->load->view('include/banner', $BannerImages); 
+   }
+?>
 
 <div class="wrapper">
 

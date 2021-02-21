@@ -74,6 +74,9 @@
 
     </head>
     <body class="hold-transition sidebar-mini">
+
+
+
         <div class="se-pre-con"></div>
 
         <!-- Site wrapper -->
@@ -130,7 +133,6 @@
             $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
 
             $(document).ready(function() {
-                
                 $('.banner_image_list').sortable({
                     update: function() {
                         $(this).children().each(function(index) {
@@ -142,10 +144,10 @@
                     } // update
                 }); // sortable
 
-                $('.AClass').click(function() {
+                $('.image_delete').click(function() {
                     var image_id = $(this).attr('data-index');
                     var x = confirm("Are You Sure,Want to Delete ?");
-                    if (x == true) {debugger;
+                    if (x == true) {
                         $.ajax({
                             type: "POST",
                             url: '<?php echo base_url('Cbanner/image_delete'); ?>',
@@ -160,9 +162,13 @@
                             }
                         });
                     }
-                });
-                
+                }); 
             });
+
+            function EditBannerImage(image_id) {debugger;
+                var url= '<?php echo base_url('Cbanner/edit_image/'); ?>' + image_id;
+                window.location = url;
+            }
 
             function UpdateNewPosition() {
                 var position = [];

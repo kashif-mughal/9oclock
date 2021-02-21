@@ -6,9 +6,9 @@ if (!defined('BASEPATH'))
 class Banner extends CI_Model {
 
     public function __construct() {
-        parent::__construct('banner_images');
+        parent::__construct('grocery_banner');
     }
-    private $tableName = 'banner_images';
+    private $tableName = 'grocery_banner';
 
     public function get_banners() {
        $this->db->select('*');
@@ -68,6 +68,14 @@ class Banner extends CI_Model {
             return 1;
         }
         return 0;
+    }
+
+    public function get_image_by_id($image_id) {
+        $query = $this->db->where('id',$image_id)->get($this->tableName);
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
     }
 
     public function update_status($image_id, $status) {
