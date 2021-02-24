@@ -51,6 +51,7 @@
         <link href="<?php echo base_url() ?>assets/dist/css/styleBD.min.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>assets/css/select2.min.css" rel="stylesheet" type="text/css"/>
         <!--<link href="<?php echo base_url() ?>assets/css/select2.sortable.css" rel="stylesheet" type="text/css"/>-->
+
         <?php
         if ($Web_settings[0]['rtr'] == 1) {
             ?>
@@ -64,6 +65,9 @@
         <!-- jQuery -->
         <script src="<?php echo base_url() ?>assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js" type="text/javascript"></script>
+
+        <!-- CKEditor 4 -->
+        <script src="//cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
 
 
         <!-- Date Time Picker -->
@@ -143,6 +147,8 @@
                         UpdateNewPosition();
                     } // update
                 }); // sortable
+
+                CKEDITOR.replace('Description');
 
                 $('.image_delete').click(function() {
                     var image_id = $(this).attr('data-index');

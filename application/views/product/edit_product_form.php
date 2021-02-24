@@ -294,6 +294,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="Description" class="col-sm-3 col-form-label">Description </label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" name="Description" rows="5" id="Description" placeholder="Description">{Description}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6" id="TagPool">
                                 

@@ -364,4 +364,21 @@ class Products extends CI_Model {
 
       return $response;
     }
+
+    public function similarProducts($categoryId, $brandId) {
+        $this->db->select('*');
+        $this->db->from($this->tableName);
+        $where1 = "Category = " . $categoryId . " OR Brand = " . $brandId;
+        $where2 = "Brand = " . $brandId . " OR Category = " . $categoryId;
+        $this->db->where($where1);
+        $this->db->where($where2);
+        $response = $this->db->get();
+
+        // $response = $this->db->query("SELECT * FROM " . $this->tableName . " WHERE Category = " . $categoryId . " OR Brand = " . $brandId . " AND Status = 1 ORDER BY DESC");
+        if ($response->result_array() > 0) {
+            return $response->result_array();
+        }
+        return false;
+    }
+
 }

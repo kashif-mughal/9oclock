@@ -106,7 +106,8 @@ class Cproduct extends CI_Controller {
             'SaleUnit' => $this->input->post('SaleUnit'),
             'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png'),
             'tags' => $this->input->post('allTags'),
-            'Brand' => $this->input->post('BrandId')
+            'Brand' => $this->input->post('BrandId'),
+            'Description' => $this->input->post('Description')
         );
         $result = $this->Products->product_entry($data);
         if ($result == TRUE) {
@@ -170,7 +171,8 @@ class Cproduct extends CI_Controller {
             'tags' => $this->input->post('allTags'),
             'stock' => $this->input->post('stock'),
             'season' => $this->input->post('season'),
-            'sort' => $this->input->post('sort')
+            'sort' => $this->input->post('sort'),
+            'Description' => $this->input->post('Description')
             //'status' => $this->input->post('status')
         );
         if($_FILES['image']['name'])
@@ -358,4 +360,10 @@ class Cproduct extends CI_Controller {
         fclose($file);
         exit;
     }
+    
+    public function viewProduct($id) {
+        $content = $this->lproduct->product_inner_data($id);
+        $this->template->full_html_view($content);
+    }
+
 }
