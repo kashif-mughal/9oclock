@@ -95,11 +95,10 @@ class Lproduct {
             'stock' => $product_detail[0]['stock'],
             'season' => $product_detail[0]['season'],
             'sort' => $product_detail[0]['sort'],
-            'Description' => $product_detail[0]['Description']
+            'Description' => $product_detail[0]['Description'],
+            'product_varient' => $product_detail[0]['varientData']
         );
-        
         //var_dump($data);exit();
-
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
 
         return $chapterList;

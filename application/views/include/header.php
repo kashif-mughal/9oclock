@@ -36,6 +36,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    .error{
     color: red;
    }
+   .select2-container--default .select2-results__option--highlighted[aria-selected]{
+    background-color: var(--secondary-color);
+   }
 </style>
 
 <!-- Script for the use of auto complete search START-->
@@ -366,7 +369,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 <!-- Cart Scripts Start -->
 
 <script type="text/javascript">
-   const currency = 'Rs';
+  //€  £
+   const currency = '€';
    function getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);

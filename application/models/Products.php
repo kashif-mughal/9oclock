@@ -136,8 +136,12 @@ class Products extends CI_Model {
             return FALSE;
         } else {
             $this->db->insert($this->tableName, $data);
-            return TRUE;
+            return $this->db->insert_id();;
         }
+    }
+    //Adding product varient
+    public function insert_grocery_product_varient($data){
+        $this->db->insert('grocery_product_varient', $data);
     }
 
     // Supplier product information

@@ -144,9 +144,23 @@ class CI_Model extends Lic {
         $this->db->where($key, $value);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            $productData = $query->result_array();
+            $productData[0]['varientData'] = $this->get_product_varient($value);
+            return $productData;
         }
         return false;
+    }
+    public function get_product_varient($productId){
+        $this->db->select('*');
+        $this->db->from('grocery_product_varient');
+        $this->db->where('ProductId', $productId);
+        $this->db->where('Status', 1);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }else{
+            return null;
+        }
     }
 
     public function get_pagination_config($url, $per_page = 10, $count = null){

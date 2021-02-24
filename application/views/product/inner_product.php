@@ -1,5 +1,12 @@
 <!-- Bread Crumb -->
-
+<style type="text/css">
+  .main-content .featured-products-content .product-card-inner{
+    border-radius: unset;
+  }
+  .main-content .featured-products{
+    border-radius: unset;
+  }
+</style>
 <div class="bread_crumb">
     <div class="container">
         <div class="row d-block">
@@ -106,11 +113,11 @@
    </div>
 </section>
 
-<section>
+<section class="main-content">
 <div class="container">
-      <div class="row inner-product-content">
-         <div class="inner-product-similar">
-         <div class="featured-products panel-min-height">
+  <div class="row">
+      <div style="padding-left: 0px;" class="col-xl-12 col-lg-12 col-md-12 pr-md-0">
+          <div class="featured-products panel-min-height">
                <div class="header">
                   <h2 class="d-inline">SIMILAR PRODUCTS</h2>
                   <a class="d-none d-md-inline" href="javascript:void(0)">
@@ -186,8 +193,8 @@
                      <?php } ?>
                </div>
                
-            </div>
-         </div>
+          </div>
       </div>
-   </div>
+  </div>
+ </div>
 </section>

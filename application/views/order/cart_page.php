@@ -395,11 +395,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           <td class="text-center">
           <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
           </td>
-          <td colspan="3">{prodName}</td>
+          <td colspan="3" kashif>{prodName}</td>
           <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
           <td>
             <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-              <div kashif class="quantity-area d-flex justify-content-center align-items-center mt-2">
+              <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                   <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}">
                   <span class="d-block quantity-button">
                      <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
