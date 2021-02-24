@@ -10,7 +10,7 @@
          <?php 
             foreach($BannerImages as $key => $value) { ?>
                <div class="carousel-item <?php if($key == 0) { echo "active"; }?>">
-                  <a href="<?=base_url($value['image_url'])?>">
+                  <a href="<?=$value['image_url']?>">
                      <img class="d-block w-100" src="<?=base_url($value['image_path'])?>" alt="Banner">
                   </a>
                </div>

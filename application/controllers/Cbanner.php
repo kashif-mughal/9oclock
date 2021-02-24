@@ -43,8 +43,6 @@ class Cbanner extends CI_Controller {
       $image_id = $this->input->post();
       $id = json_decode($image_id['id']);
       $this->Banner->soft_delete_by_key("id", $id);
-      $this->session->set_userdata(array('message' => display('successfully_delete')));
-      redirect(base_url('Cbanner'));
       return true;
     }
 
@@ -53,9 +51,6 @@ class Cbanner extends CI_Controller {
       $this->load->model('Banner');
       $post_data = $this->input->post();
 
-      if(!$post_data["image_url"]) {
-        return false;
-      }
       if ($_FILES['image']['name']) {
         $image_path = '/assets/img/banner/' . $_FILES['image']['name'];
         $image_exist = $this->Banner->get_image($image_path);
@@ -88,12 +83,12 @@ class Cbanner extends CI_Controller {
           'Status' => 1
         );
         
-          $this->db->insert('banner_images', $data);
+          $this->db->insert('grocery_banner', $data);
           redirect(base_url('Cbanner'));
-        }
-        else {
-          $this->Banner->update_status($image_exist["id"], 1);
-        }
+      }
+      else {
+        redirect(base_url('Cbanner'));
+      }
     }
 
     //Update Banner Image
@@ -108,20 +103,6 @@ class Cbanner extends CI_Controller {
       $image_selected = '';
       $image_exist_by_id = $this->Banner->get_image_by_id($post_data["imageId"]);
       if($image_exist_by_id) {
-        // if ($_FILES['image']['name'] != $image_exist_by_id["image_url"]) {
-        //   print_r($_FILES['image']['name']);die;
-        //   $image_selected = '/assets/img/banner/' . $_FILES['image']['name'];
-        // }
-        // else {
-        //   $image_selected = $image_exist_by_id["image_url"];
-        // }
-        //$image_exist = $this->Banner->get_image($image_path);
-        
-        // print_r($image_exist_by_id[0]["image_path"]);
-        // $existing_image_path = str_replace('/assets/img/banner/', '', $image_exist_by_id[0]["image_path"]);
-        // print_r(" |||||||||| ");
-        // print_r($_FILES['image']['name']);
-        // print_r(" |||||||||| ");
 
         if($existing_image_path != $post_data["image_path"]) {
           //Chapter add start
@@ -152,7 +133,7 @@ class Cbanner extends CI_Controller {
         $this->db->set('image_order', $curr_image_order);
         $this->db->set('Status', 1);
         $this->db->where('id', $post_data["imageId"]);
-        $this->db->update('banner_images');
+        $this->db->update('grocery_banner');
         
         redirect(base_url('Cbanner'));
     }

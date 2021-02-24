@@ -151,6 +151,7 @@
                 CKEDITOR.replace('Description');
 
                 $('.image_delete').click(function() {
+                    var currentElem = $(this);
                     var image_id = $(this).attr('data-index');
                     var x = confirm("Are You Sure,Want to Delete ?");
                     if (x == true) {
@@ -158,10 +159,13 @@
                             type: "POST",
                             url: '<?php echo base_url('Cbanner/image_delete'); ?>',
                             data: {id: image_id},
-                            dataType: 'json',
                             // cache: false,
                             success: function (datas) {
                                 console.log(datas);
+                                if(datas == 'Successfully deleted'){
+                                    alert("Banner removed successfully");
+                                    currentElem.closest(".image-container").remove();
+                                }
                             },
                             error: function(error) {
                                 console.log(error)
@@ -171,7 +175,7 @@
                 }); 
             });
 
-            function EditBannerImage(image_id) {debugger;
+            function EditBannerImage(image_id) {
                 var url= '<?php echo base_url('Cbanner/edit_image/'); ?>' + image_id;
                 window.location = url;
             }
@@ -190,6 +194,9 @@
                     // cache: false,
                     success: function (datas) {
                         console.log(datas);
+                        if(datas == 1){
+                            alert("Order saved successfully");
+                        }
                     },
                     error: function(error) {
                         console.log(error)
