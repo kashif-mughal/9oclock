@@ -3,6 +3,9 @@
   .main-content .featured-products-content .product-card-inner{
     border-radius: unset;
   }
+  .zeroMarginLeft {
+     margin-left: 0px !important;
+  }
   .main-content .featured-products{
     border-radius: unset;
   }
@@ -10,7 +13,15 @@
       margin-right: 0;
       margin-left: 0;
    }
-  @media (max-width: 991px) {
+   @media (max-width: 375px) {
+      .product-card-btn {
+         padding: 8px 20px;
+      }
+      .inner-product-bottom .remove-cart {
+         padding: 8px 20px;
+      }
+   }
+   @media (max-width: 991px) {
       .main-content .featured-products-content .card .product-card-btn {
          font-size: 14px;
       }
@@ -36,6 +47,38 @@
       top: 15px;
    }
 
+   .inner-product-bottom .remove-cart {
+      top: 0;
+      left: 0;
+      text-align: center;
+      z-index: 20;
+      position: relative;
+      vertical-align: middle;
+      background: var(--main-color) !important;
+      border-radius: 0 !important;
+      color: white;
+      font-weight: bolder;
+      width: 62%;
+      height: 34px;
+   }
+   .inner-product-bottom .remove-cart:hover {
+      background: var(--main-color) !important;
+   }
+   .inner-product-slider .featured-products-content .card .card-body h5 {
+      width: 80%;
+      background: #ff2524d1;
+      color: #fff;
+      z-index: 1;
+      text-align: center;
+      font-size: 14px;
+      position: absolute;
+      top: 60px;
+      text-transform: uppercase;
+      margin: 0px 20px;
+      padding: 10px 0px;
+      border-radius: 0px 20px;
+      font-weight: 700;
+   }
 </style>
 
 <div class="bread_crumb">
@@ -59,9 +102,9 @@
    <div class="container">
       <div class="row inner-product-content">
          <div class="col-xl-6 col-lg-6 col-md-12">
-            <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
-                   data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>">Remove From Cart
-            </a>
+            <!-- <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                   data-json="<?php //echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>">Remove From Cart
+            </a> -->
             <img src="<?php echo base_url() . $ProductImg; ?>" alt="" style="width: 100%;">
          </div>
          <div class="col-xl-6 col-lg-6 col-md-12">
@@ -163,7 +206,7 @@
                   </div>
                   <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                </div>
-               <div class="slider featured-product-slider">
+               <div class="slider featured-product-slider inner-product-slider">
                      <?php foreach($similarProducts as $value) { 
                          $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                          ?>
@@ -199,8 +242,8 @@
                                             'pName' => $value['ProductName'],
                                             'price' => $value['SalePrice'],
                                             'img' => base_url().$value['ProductImg'],
-                                             'saleUnitQty' => $value['SaleUnitQty'],
-                                             'saleUnit' => $value['UnitName']
+                                            'saleUnitQty' => $value['SaleUnitQty'],
+                                            'saleUnit' => $value['UnitName']
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
@@ -237,6 +280,13 @@
 
 <script>
    $(document).ready(function(){
+
+      if($('.inner-product-bottom .remove-cart').css('display') == 'none') {
+         $('.inner-product-bottom .add-cart').css('display','inline');
+      }
+      else {
+         $('.inner-product-bottom .add-cart').css('display','none');
+      }
    
    $('.featured-product-slider-inner').slick({
       dots: false,
@@ -292,6 +342,59 @@
       }
       ]
    });
-    
+
+   $(document).on('click', '.inner-product-bottom .add-cart', function () {
+      var productJson = $(this).data('json');
+      var quantity = parseInt($(this).parent().parent().parent().find('.quantity')[0].value);
+      if(!isNaN(quantity) && quantity > 0){
+         var cart = getCookie('baskit');
+         if(cart)
+            cart = JSON.parse(cart);
+         addOrUpdateCart(cart && cart.length > 0 ? cart : [], productJson, quantity, $(this));
+         if($('.inner-product-bottom .add-cart').css('display') == 'inline') {
+            $('.inner-product-bottom .add-cart').css('display','none');
+         }
+
+      }else{
+         $.notify("Select a valid quantity, quantity must be greater then 0", "error");
+      }
+   });
+
+   $(document).on('click', '.inner-product-bottom .qty-mns', function() {
+      if($('.inner-product-bottom .remove-cart').css('display') == 'none') {
+         $('.inner-product-bottom .add-cart').css('display','inline');
+      }
+   });
+
+   $(document).on('click', '.inner-product-bottom .remove-cart', function () {
+      var productJson = $(this).data('json');
+      removeAndUpdateFromCartInside(productJson, $(this));
+      if($('.inner-product-bottom .add-cart').css('display') == 'none') {
+         $('.inner-product-bottom .add-cart').css('display','inline');
+      }
+   });
+
+   function removeAndUpdateFromCartInside(productJson, removeCartObj){
+      var cart = getCookie('baskit');
+      if(!cart)
+         return true;
+      cart = JSON.parse(cart);
+      var cartExceptCurrentProduct = cart.filter((each)=>{return each.id != productJson.id});
+      var cookieString = `baskit=${JSON.stringify(cartExceptCurrentProduct)};path=/;`;
+      if(cartExceptCurrentProduct.length == 0){
+         var oldDt = new Date(1);
+         cookieString += `expires=${oldDt}`;
+      }
+      document.cookie = cookieString;
+      $('#add_to_cart_items').html(cartExceptCurrentProduct.length);
+
+      // removeCartObj.hide();
+      // $(removeCartObj.parent().find('.quantity')[0]).val('');
+      // $(removeCartObj.parent().find('.add-cart')[0]).html('Add to Cart');
+      loadCartData();
+      $.notify(`${productJson.pName} removed from cart`, "warn");
+      return true;
+   }
+
  });
 </script>
