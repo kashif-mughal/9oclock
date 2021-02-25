@@ -216,15 +216,6 @@ html{
       $(document).on('click', '#popup-checkout', function () {
          checkout($(this));
       });
-      var groceryAssistantNumber = 0;
-      var categoryByName = [];
-      var assistantJson = JSON.parse(`<?=$Assistant?>`);
-      assistantJsonArray = assistantJson;
-      
-      for(each in assistantJson["Assistant"])
-      {
-         categoryByName.push(each);
-      }
 
       $('.featured-product-slider').on('init', function(event, slick, direction){
          $('.lds-roller').hide();
