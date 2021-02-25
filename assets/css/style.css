@@ -678,7 +678,7 @@ input:focus {
    position: relative;
 }
 .header-container #add_to_cart_items {
-   font-size: 14px !important;
+   font-size: 14px;
    position: relative;
    bottom: -18px;
    left: -26px;
@@ -1081,13 +1081,13 @@ button.category-button:active {
 }
 #basket-img {
    position: absolute;
-   margin-left: 10px;
+   margin-left: 6px;
 }
 #add_to_cart_items {
-   font-size: 14px !important;
+   font-size: 12px;
    position: relative;
-   bottom: -22px;
-   left: 26px;
+   bottom: -12px;
+   left: 15px;
    background-color: #ffffff;
    color: var(--secondary-color);
 }
@@ -3148,6 +3148,21 @@ a#newAddressCancelBtn {
 
 /*Grocery Panel*/
 
+.sidebar-button i {
+   font-size: 22px;
+   color: #fff;
+}
+
+.cart_icon img {
+   width: 22px;
+}
+
+.phone_cart i {
+   font-size: 22px;
+   color: #fff;
+}
+
+
 
 /* ========== Timeline Ends ============ */
 /* ===================================== */
@@ -3236,6 +3251,10 @@ a#newAddressCancelBtn {
    }
    .tag-line {
       font-size: calc(0.2rem + 0.4vw);
+   }
+   .logo .logo_content img {
+      max-width: 130px !important;
+      width: 130px !important;
    }
 }
 
@@ -3385,7 +3404,7 @@ a#newAddressCancelBtn {
 
 @media (max-width: 991px) {
    #add_to_cart_items {
-      left: 54px !important;
+      left: 14px;
    }
    .grocery-features-columns {
       padding-right: 0px;
@@ -3459,7 +3478,7 @@ a#newAddressCancelBtn {
    }   
    .logo .logo_content img {
       max-width: 130px !important;
-      width: 140px imp !important;
+      width: 130px !important;
    }
 /* top bar */
    .top-bar .navbar {
@@ -3987,6 +4006,23 @@ a#newAddressCancelBtn {
    }
    #va-panel .va-panel-header .va-panel-heading {
       font-size: 21px !important;
+   }
+   
+   .sidebar-button i {
+      font-size: 18px;
+      color: #fff;
+   }   
+   .cart_icon img {
+      width: 18px;
+   }   
+   .phone_cart i {
+      font-size: 18px;
+      color: #fff;
+   }
+   .cart_icon .cart_icon_text #add_to_cart_items {
+      font-size: 8px;
+      bottom: -7px;
+      left: 13px;
    }
    
 }

@@ -208,9 +208,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <div class="container">
             <div class="row align-items-center py-1 py-md-2 pb-sm-0">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-2 col-md-6 col-sm-8 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
+               <div class="col-lg-2 col-md-9 col-sm-9 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
-                     justify-content-end justify-content-md-end justify-content-sm-center">
+                     justify-content-start justify-content-md-start justify-content-sm-start">
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
                            <img src="<?php echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block">
@@ -255,52 +255,62 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-2 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-right col-4">
-                     <div class="phone_cart d-flex flex-row align-item-center 
-                        justify-content-between justify-content-md-between justify-content-sm-between">
-                        <!-- Phone -->
-                        <div class="phone ml-1 d-flex flex-row align-item-center justify-content-start">
-                           <!-- <div class="phone_icon mr-2">
-                              <a href="tel:+92 318 2294472">
-                                 <img src="<?php //echo base_url() ?>assets/img/hotline_phone_icon.png" alt="">
-                              </a>
-                           </div>
-                           <div class="phone_content text-white">
-                              <div class="phone_text">
-                                 <h6 class="mb-0">Hotline</h6>
-                              </div>
-                              <div class="phone_number">
-                                 <h6 class="font-weight-bold">+92 318 2294472</h6>
-                              </div>
-                           </div> -->
+                  <div class="col-lg-2 col-md-3 col-sm-3 mb-sm-2 order-lg-3 order-2 col-4">
+                     <div class="d-flex justify-content-between align-items-start">
 
-                           <i class="fas fa-user" id="user_icon" style="font-size:30px;"></i>
+                        <div class="phone_cart">
+                           <i class="fas fa-user" id="user_icon"></i>
+                        </div>
 
-                        </div>
-                        <!-- Cart -->
-                        <div class="cart">
-                           <div class="cart_container d-flex flex-row align-item-center justify-content-start">
-                              <!-- Cart Icon -->
-                              <div class="cart_icon">
-                                 <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
-                                    <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
-                                    <div class="cart_icon_text">
-                                       <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
-                                    </div>
-                                 </a>
+                        <div class="cart_icon">
+                           <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
+                              <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
+                              <div class="cart_icon_text">
+                                 <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
                               </div>
-                           </div>
+                           </a>
                         </div>
-                        
+
                         <div class="sidebar-button">
-                           <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
+                           <button class="navbar-toggler" id="btn-sidebar"
+                           class="p-0"
+                            type="button" data-toggle="collapse"
                                  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                  aria-expanded="false" aria-label="Toggle navigation">
-                                 <img src="<?php echo base_url() ?>assets/img/toggler_icon.png">
+                                 <i class="fa fa-bars"></i>
                            </button>
                         </div>
 
                      </div>
+
+
+
+                     <!-- <div class="phone_cart d-flex flex-row justify-content-between justify-content-md-between justify-content-sm-between align-items-center">
+                           <i class="fas fa-user" id="user_icon" style="font-size: 22px; color:#fff;"></i>
+                     </div>
+                     
+                     <div class="cart d-flex justify-content-between">
+                        <div class="cart_container d-flex flex-row align-item-center justify-content-start">
+                           <div class="cart_icon">
+                              <a href="<?php //echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
+                                 <img src="<?php //echo base_url() ?>assets/img/basket.png" alt="" id="basket-img" style="width: 22px; color:#fff;">
+                                 <div class="cart_icon_text">
+                                    <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
+                                 </div>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="sidebar-button">
+                        <button class="navbar-toggler" id="btn-sidebar" type="button" data-toggle="collapse"
+                              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                              aria-expanded="false" aria-label="Toggle navigation">
+                              <i class="fa fa-bars" style="font-size: 22px; color:#fff;"></i>
+                        </button>
+                     </div> -->
+
+
                   </div>
                </div>
             </div>
