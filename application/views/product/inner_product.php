@@ -6,18 +6,49 @@
   .main-content .featured-products{
     border-radius: unset;
   }
+  .inner-product-bottom .quantity-area {
+      margin-right: 0;
+      margin-left: 0;
+   }
+  @media (max-width: 991px) {
+      .main-content .featured-products-content .card .product-card-btn {
+         font-size: 14px;
+      }
+   }
+   
+   @media (max-width: 1240px) {
+      .inner-product-bottom .quantity-area {
+         width: 95px;
+         margin-right: auto;
+         margin-left: 0;
+         padding-left: 0;
+         padding-right: 0;
+      }
+   }
+   .featured-products .header a img .left {
+      right: 65px;
+      position: absolute;
+      top: 15px;
+   }
+   .featured-products .header a img .right {
+      right: 10px;
+      position: absolute;
+      top: 15px;
+   }
+
 </style>
+
 <div class="bread_crumb">
     <div class="container">
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
-                    <!--<li class="breadcrumb-item"><a href="#"><?php echo $SelectCategory['MainCategory']; ?></a></li>-->
-                    <li class="breadcrumb-item"><?php echo $SelectCategory['SubCategory']; ?></li>
+                    <!--<li class="breadcrumb-item"><a href="#"><?php echo $categoryName; ?></a></li>-->
+                    <li class="breadcrumb-item"><?php echo $categoryName; ?></li>
                 </ol>
             </nav>
-            <h3 class="mb-0 d-inline"><?php echo $SelectCategory['MainCategory']; ?><?php if($CurrentBrandName){echo " (".$CurrentBrandName.")";}?></h3>
+            <h3 class="mb-0 d-inline"><?php echo $categoryName; ?><?php if($CurrentBrandName){echo " (".$CurrentBrandName.")";}?></h3>
         </div>
     </div>
 </div>
@@ -64,8 +95,8 @@
                   ];
                ?>
                
-               <div class="inner-product-bottom mt-5 each-prod">
-                  <div class="quantity-area d-flex justify-content-start align-items-start mt-2">
+               <div class="inner-product-bottom mt-5 each-prod ">
+                  <div class="quantity-area text-center d-flex justify-content-start align-items-start mt-2">
                      <span class="d-inline-flex quantity-text mr-1">Qty</span>
                      <input type="text" class="d-inline-flex quantity-input quantity">
                      <span class="d-block quantity-button text-center">
@@ -117,15 +148,19 @@
 <div class="container">
   <div class="row">
       <div style="padding-left: 0px;" class="col-xl-12 col-lg-12 col-md-12 pr-md-0">
-          <div class="featured-products panel-min-height">
-               <div class="header">
-                  <h2 class="d-inline">SIMILAR PRODUCTS</h2>
-                  <a class="d-none d-md-inline" href="javascript:void(0)">
-                     <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon.png?>" class="float-right" alt="">
-                  </a>
-                  <a class="d-none d-md-inline" href="javascript:void(0)">
-                     <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" style="right: 65px;position:absolute;top: 30px;" alt="">
-                  </a>
+          <div class="featured-products  panel-min-height mt-0">
+               <div class="header d-flex justify-content-between align-items-between">
+                  <div>
+                     <h2 class="d-inline">SIMILAR PRODUCTS</h2>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-between">
+                     <a href="javascript:void(0)">
+                        <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon.png?>" class="right" style="right: 23px;position:absolute;top: 18px;" alt="">
+                     </a>
+                     <a href="javascript:void(0)">
+                        <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" class="left" style="right: 65px;position:absolute;top: 18px;" alt="">
+                     </a>
+                  </div>
                   <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                </div>
                <div class="slider featured-product-slider">
@@ -155,7 +190,7 @@
                                          <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
                                          <p class="card-text product-card-inner-weight">
                                              <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
-                                         <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p> -->
+                                         <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php //echo $value['SalePrice']; ?>",0)); </script></p> -->
                                          <?php if($discountPercentage != 0) { ?> 
                                              <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
                                          <?php } 
@@ -169,7 +204,7 @@
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
-                                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2 px-0">
                                              <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                              <input type="text" class="d-inline-flex quantity-input quantity">
                                              <span class="d-block quantity-button">
@@ -198,3 +233,65 @@
   </div>
  </div>
 </section>
+
+
+<script>
+   $(document).ready(function(){
+   
+   $('.featured-product-slider-inner').slick({
+      dots: false,
+      infinite: false,
+      speed: 300,
+      responsive: [
+      {
+         breakpoint: 2559,
+         settings: {
+            slidesToShow: 6,
+            slidesToScroll: 6,
+            infinite: true,
+            dots: false
+         }
+      },
+      {
+         breakpoint: 1440,
+         settings: {
+            slidesToShow: 6,
+            slidesToScroll: 6,
+            dots: false
+         }
+      },
+      {
+         breakpoint: 1200,
+         settings: {
+            slidesToShow: 6,
+            slidesToScroll: 6,
+            dots: false
+         }
+      },
+      {
+         breakpoint: 992,
+         settings: {
+            slidesToShow: 5,
+            slidesToScroll: 5
+         }
+      },
+      {
+         breakpoint: 768,
+         settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+         }
+      },
+      {
+         breakpoint: 576,
+         settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            //centerMode: true
+         }
+      }
+      ]
+   });
+    
+ });
+</script>

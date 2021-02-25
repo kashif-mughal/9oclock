@@ -127,6 +127,14 @@ class Lproduct {
             }
         }
 
+        $product_category = null;
+        foreach($categories as $cat) {
+            if ($product_detail[0]['Category'] == $cat["CategoryId"]) {
+                $product_category = $cat["CatName"];
+                break;
+            }
+        }
+
         $data = array(
             'title' => 'Product View',
             'product_id' => $product_detail[0]['ProductId'],
@@ -152,6 +160,7 @@ class Lproduct {
             'sort' => $product_detail[0]['sort'],
             'Description' => $product_detail[0]['Description'],
             'unitName' => $unitItem,
+            'categoryName' => $product_category,
             'similarProducts' => $similar_products
         );
         $chapterList = $CI->parser->parse('product/inner_product', $data, true);

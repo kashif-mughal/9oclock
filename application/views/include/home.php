@@ -3,6 +3,9 @@
         height: 100vh;
         overflow-y: hidden;
     }
+    .wrapper {
+      margin-top: 0px;
+   }
 </style>
 
 <section class="main-content" >
