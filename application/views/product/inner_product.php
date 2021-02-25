@@ -35,7 +35,15 @@
       position: absolute;
       top: 15px;
    }
-
+   .remove-cart-main{
+      background: #03005d !important;
+      top: unset;
+      position: initial;
+      border-radius: unset;
+   }
+   .remove-cart-main:hover{
+    background:#030133 !important;
+   }
 </style>
 
 <div class="bread_crumb">
@@ -110,13 +118,12 @@
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Add to Cart
                      </a>
-                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart remove-cart-main"
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Remove From Cart
                      </a>
                   </div>
                </div>
-
 
             </div>
          </div>
@@ -292,6 +299,5 @@
       }
       ]
    });
-    
  });
 </script>
