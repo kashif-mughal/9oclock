@@ -46,6 +46,7 @@
       position: absolute;
       top: 15px;
    }
+<<<<<<< HEAD
 
    .inner-product-bottom .remove-cart {
       top: 0;
@@ -78,6 +79,16 @@
       padding: 10px 0px;
       border-radius: 0px 20px;
       font-weight: 700;
+=======
+   .remove-cart-main{
+      background: #03005d !important;
+      top: unset;
+      position: initial;
+      border-radius: unset;
+   }
+   .remove-cart-main:hover{
+    background:#030133 !important;
+>>>>>>> ba1be9d32360865de1f0db9cc7b43a156edb1b63
    }
 </style>
 
@@ -153,13 +164,12 @@
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Add to Cart
                      </a>
-                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart remove-cart-main"
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Remove From Cart
                      </a>
                   </div>
                </div>
-
 
             </div>
          </div>
@@ -342,6 +352,7 @@
       }
       ]
    });
+<<<<<<< HEAD
 
    $(document).on('click', '.inner-product-bottom .add-cart', function () {
       var productJson = $(this).data('json');
@@ -396,5 +407,7 @@
       return true;
    }
 
+=======
+>>>>>>> ba1be9d32360865de1f0db9cc7b43a156edb1b63
  });
 </script>

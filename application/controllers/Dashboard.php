@@ -30,9 +30,6 @@ class Dashboard extends CI_Controller {
         if ($query->num_rows() > 0) {
             $product_list =  $query->result_array();
         }
-        $assistant = $CI->lassistant->last_assistant();
-        // echo '<pre>'; print_r($assistant);die;
-        
         //$catArray = $CI->lcategory->get_category_hierarchy();
         $catArray = $CI->lcategory->get_category_hierarchy_in();
         //echo '<pre>'; print_r($catArray);die;
@@ -50,7 +47,6 @@ class Dashboard extends CI_Controller {
             'title' => 'Sauda Express | Buy all your grocery here',
             'CatList' => $catArray,
             'ProdList' => $product_list,
-            'Assistant' => json_encode($assistant),
             'BannerImages' => $banner,
             'Page' => 'Home'
         );

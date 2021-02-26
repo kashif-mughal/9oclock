@@ -462,6 +462,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    $('#add_to_cart_items').html(cart.length);
    $(addCartObj.parent().find('.remove-cart')[0]).show();
    addCartObj.html('Update to Cart');
+   if($(addCartObj.parent().find('.remove-cart')[0]).hasClass('remove-cart-main')){
+      addCartObj.hide();
+   }
    return true;
 }
 function removeAndUpdateFromCart(productJson, removeCartObj){
@@ -500,10 +503,16 @@ function loadCartData(){
          $($(allProducts[i]).find('.remove-cart')[0]).show();
          $($(allProducts[i]).find('.quantity')[0]).val(currentProduct[0].quantity);
          $($(allProducts[i]).find('.add-cart')[0]).html('Update to Cart');
+         if($($(allProducts[i]).find('.remove-cart')[0]).hasClass('remove-cart-main')){
+            $($(allProducts[i]).find('.add-cart')[0]).hide();
+         }
       }else{
          $($(allProducts[i]).find('.remove-cart')[0]).hide();
          $($(allProducts[i]).find('.quantity')[0]).val('');
          $($(allProducts[i]).find('.add-cart')[0]).html('Add to Cart');
+         if($($(allProducts[i]).find('.remove-cart')[0]).hasClass('remove-cart-main')){
+            $($(allProducts[i]).find('.add-cart')[0]).show();
+         }
       }
    }
    $('#add_to_cart_items').html(cart.length);
