@@ -265,10 +265,10 @@
                             cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
                             cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
                             cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice,0));
-                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, base_url + 'Cproduct/viewProduct/' + data[i].ProductId)
+                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
                             pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
                             cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);
-                            cartTemplateCopy = cartTemplateCopy.replace(/{detailPageLink}/g, base_url + 'Cproduct/viewProduct/' +  data[i].ProductId)
+                            cartTemplateCopy = cartTemplateCopy.replace(/{detailPageLink}/g, baseUrl + 'Cproduct/viewProduct/' +  data[i].ProductId);
                             productArea.append(cartTemplateCopy);
                         }
                         if(data.length < perpage)
