@@ -159,6 +159,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 
         <section class="cart-page main-content">
+            <div class="content-box1" style="margin-left: -3px;" id="shoppingCartBody2">
+            </div>
             <div class="container">
                 <!-- Alert Message -->
                 <?php
@@ -377,6 +379,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
     function loadShoppingCart1(){
        var cartBody = $('#shoppingCartBody1');
+       var cartBody2 = $('#shoppingCartBody2');
        var cart = getCookie('baskit');
        $(cartBody.find('tbody')).empty();
        if(cart){
@@ -395,7 +398,32 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           <td class="text-center">
           <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
           </td>
-          <td colspan="3" kashif>{prodName}</td>
+          <td colspan="3">{prodName}</td>
+          <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
+          <td>
+            <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
+              <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                  <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}">
+                  <span class="d-block quantity-button">
+                     <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
+                     <div class="separator"></div>
+                     <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
+                  </span>
+               </div>
+            </td>
+        <td class="" style="text-align: center;"><b>{totalPrice}</b></td>
+          <td class="" style="text-align: center;">
+          <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
+          <i class="fas fa-times" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
+          </a>
+          </td>
+          </tr>`;
+
+          var eachProdTemplate2 = `<tr class="each-prod">
+          <td class="text-center">
+          <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
+          </td>
+          <td colspan="3">{prodName}</td>
           <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
           <td>
             <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
@@ -428,7 +456,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
              //append newly created row in card body
              $(cartBody.find('tbody')).append(eachProdTemplateCopy1);
-             }
+             cartBody2.append(eachProdTemplateCopy1);
+            }
 
           }
           else{

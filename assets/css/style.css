@@ -2425,7 +2425,7 @@ button.category-button:active {
    z-index: 20;
    position: absolute;
    vertical-align: middle !important;
-   background: rgba(43, 233, 204, 0.7) !important;
+   background: rgb(24 19 197 / 63%) !important;
    border-radius: 10px 0px 10px 0px;
    color: white;
    font-weight: bolder;
