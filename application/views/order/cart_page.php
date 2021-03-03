@@ -314,6 +314,161 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             </div>
         </section>
     </div>
+
+
+    <!-- TESTING ADD TO CART -->
+
+    <a href="#addtoCartModal" role="button" class="btn btn-primary" data-toggle="modal">Launch addtoCartModal</a>
+
+    <div class="modal" id="addtoCartModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0; min-height: 100vh;">
+          <div class="modal-content" style="min-height: 100vh;">
+            <div class="container-fluid">
+              <div class="row d-flex justify-content-start align-items-center" style="background-color: #1BAB32;">
+                  <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-arrow-left" style="color: #fff; font-size: 20px;"></i>
+                  </button>
+                  <p class="mb-0" style="font-size: 22px; font-weight: 600; margin-left: 10px; color: #fff;">Cart</p>
+              </div>
+              <div class="row" style="background-color: #fff; padding: 20px;">
+                <div class="d-flex justify-content-between align-items-between px-4" style="width: 100%;">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <img class="mr-3" src="<?=base_url("/assets/img/products/0a4d195be1511b86338d6500c722b320.jpg") ?>" alt="" style="width: 120px;">
+                    <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%;">
+                      <div>
+                        <p class="mb-1" style="color: #333; font-size:20px; font-weight:600;">Nestle Everyday Tea Whitener With Mug 900g</p>
+                        <p style="color: #A9A9A9; font-size: 16px; font-weight: 500;">900g</p>
+                      </div>
+                      <p class="info-bottom mb-0" style="font-size:18px; font-weight: 600; color: #409244;">Rs. 900</p>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column justify-content-between align-items-end" style="height:100%;">
+                    <button style="color: #ECA5A5; font-size: 22px; background-color: transparent; border:none; padding: 0px;">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                    <div class="add-to-cart-btn d-flex flex-row align-items-center p-2" style="border: 1px solid #448AFF; border-radius: 18px 18px 18px 18px;">
+                      <button style="background-color: transparent; border:none; padding: 0px; color: #ECA5A5;">
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                      <button style="background-color: transparent; border:none; padding: 0px; display:none;">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <p class="px-3 mb-0" style="color: #619CFF; font-weight: 500;">1</p>
+                      <button style="background-color: transparent; border:none; padding: 0px;">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row d-flex justify-content-start align-items-center py-3 px-3" style="background-color: #1BAB32;">
+                  <button class="d-flex justify-content-between align-items-center mb-0" style="width: 100%; background-color: transparent; border: none; height: 100%; color: #fff; font-size: 18px;  font-weight: 500;">
+                    <p class="mb-0">Sign in to Checkout</p>
+                    <div>
+                      <p class="d-inline pr-2" style="border-right: 2px solid #fff;">Rs. 10027</p>
+                      <i class="fas fa-chevron-right" style="color: #fff;"></i>
+                    </div>
+                  </button>
+              </div>
+
+            </div>
+          </div>
+      </div>
+    </div> 
+
+    
+
+
+    <!-- TESTING ADD TO CART ENDS -->
+
+    <div class="seperatorDiv my-5"></div>
+
+    <!-- TESTING SEARCHING -->
+
+    <a href="#searchingModal" role="button" class="btn btn-primary" data-toggle="modal">Launch searchingModal</a>
+
+
+    <div class="modal" id="searchingModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0;">
+          <div class="modal-content" style="min-height: 100vh;">
+
+      <div class="container-fluid">
+        <div class="row d-flex justify-content-start align-items-center" style="background-color: #fff; margin-bottom: 10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+            <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="fas fa-arrow-left" style="color: #1BAB32; font-size: 20px;"></i>
+            </button>
+            <div class="mx-3" style="border: 1px solid #ccc; position: relative; width: 85%; border-radius: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+              <i class="fa fa-search" style="position: absolute; top:12px; left: 10px; color: #1BAB32;"></i>
+              <input type="text" class="form-control" placeholder="Search" style="padding: 6px 6px 6px 34px; border:none; width: 98%; border-radius: 20px; font-weight: 600;">
+            </div>
+        </div>
+        <div class="row" style="background-color: #fff; padding: 8px; margin-bottom:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+          <a href="javascript:void(0)" class="d-flex justify-content-between align-items-between" style="width: 100%; text-decoration: none;">
+            <div class="d-flex justify-content-between align-items-between px-4" style="width: 100%;">
+              <div class="d-flex justify-content-between align-items-center">
+                <img class="mr-3" src="<?=base_url("/assets/img/products/0d99f0c7c0517866014fa14e1ca04380.jpg") ?>" alt="" style="width: 180px; max-width: 180px;">
+                <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%;">
+                  <div>
+                    <p class="mb-1" style="color: #333; font-size:20px; font-weight:600;">Nestle Everyday Tea Whitener With Mug 900g</p>
+                    <p style="color: #A9A9A9; font-size: 16px; font-weight: 500;">900g</p>
+                  </div>
+                  <div>
+                    <p class="info-bottom mb-0" style="font-size:14px; font-weight: 600; color: #red; text-decoration: line-through;">Rs. 960</p>
+                    <p class="info-bottom mb-0" style="font-size:18px; font-weight: 600; color: #409244;">Rs. 900</p>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column justify-content-end align-items-end" style="height:100%;">
+                <!-- <button style="color: #ECA5A5; font-size: 22px; background-color: transparent; border:none; padding: 0px;">
+                  <i class="far fa-trash-alt"></i>
+                </button> -->
+                <i class="fas fa-chevron-right" style="color: #1BAB32; font-size: 30px; margin-bottom: 30px;"></i>
+                <button style="background-color: #1BAB32; color: #fff; border:none; border-radius: 10px; font-size: 16px; font-weight: 600;">
+                        ADD TO CART
+                </button>
+              </div>
+            </div>
+          </a>
+        </div> <!-- ROW ENDS -->
+
+        <div class="row" style="background-color: #fff; padding: 8px; margin-bottom:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+          <a href="javascript:void(0)" class="d-flex justify-content-between align-items-between" style="width: 100%; text-decoration: none;">
+            <div class="d-flex justify-content-between align-items-between px-4" style="width: 100%;">
+              <div class="d-flex justify-content-between align-items-center">
+                <img class="mr-3" src="<?=base_url("/assets/img/products/0a1695db78e45e0e43c79134ef25fb80.png") ?>" alt="" style="width: 220px; max-width: 220px;">
+                <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%;">
+                  <div>
+                    <p class="mb-1" style="color: #333; font-size:20px; font-weight:600;">Nestle Everyday Tea Whitener With Mug 900g</p>
+                    <p style="color: #A9A9A9; font-size: 16px; font-weight: 500;">900g</p>
+                  </div>
+                  <p class="info-bottom mb-0" style="font-size:18px; font-weight: 600; color: #409244;">Rs. 900</p>
+                </div>
+              </div>
+              <div class="d-flex flex-column justify-content-end align-items-end" style="height:100%;">
+                <!-- <button style="color: #ECA5A5; font-size: 22px; background-color: transparent; border:none; padding: 0px;">
+                  <i class="far fa-trash-alt"></i>
+                </button> -->
+                <i class="fas fa-chevron-right" style="color: #1BAB32; font-size: 30px; margin-bottom: 30px;"></i>
+                <button style="background-color: #1BAB32; color: #fff; border:none; border-radius: 10px; font-size: 16px; font-weight: 600;">
+                        ADD TO CART
+                </button>
+              </div>
+            </div>
+          </a>
+        </div> <!-- ROW ENDS -->
+
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+    <!-- TESTING SEARCHING ENDS -->
+
+
+
 <script type="text/javascript">
     var baskit = getCookie('baskit');
     var selectedAddress = false;
