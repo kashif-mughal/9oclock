@@ -165,7 +165,9 @@
                                                     'id' => $value['ProductId'],
                                                     'pName' => $value['ProductName'],
                                                     'price' => $value['SalePrice'],
-                                                    'img' => base_url().$value['ProductImg']
+                                                    'img' => base_url().$value['ProductImg'],
+                                                    'saleUnitQty' => $value['SaleUnitQty'],
+                                                    'saleUnit' => $value['SaleUnitName']
                                                 ];
                                                 ?>
                                                 <?php if($value['stock'] == '1') { ?>

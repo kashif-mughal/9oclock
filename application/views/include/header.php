@@ -484,6 +484,7 @@ function removeAndUpdateFromCart(productJson, removeCartObj){
    // removeCartObj.hide();
    // $(removeCartObj.parent().find('.quantity')[0]).val('');
    // $(removeCartObj.parent().find('.add-cart')[0]).html('Add to Cart');
+
    loadCartData();
    $.notify(`${productJson.pName} removed from cart`, "warn");
    return true;
@@ -520,17 +521,28 @@ function loadCartData(){
 function changeQtyOfProductAndPutInCart(targetElem, operation){
    var prodContainer = $(targetElem.closest('.each-prod')[0]);
    var prodCountObj = prodContainer.find('.quantity')[0];
-   if(!prodCountObj || isNaN(prodCountObj.value)){
+   if((!prodCountObj || isNaN(prodCountObj.value)) && prodCountObj.tagName == 'INPUT'){
       $.notify(`Please add a valid quantity`, "error");
       return false;
    }
    else{
       var qty = prodCountObj.value == "" ? 0 : prodCountObj.value;
+      if(prodCountObj.tagName == 'P'){
+        var tempQty = parseInt(prodCountObj.innerHTML);
+        if(!isNaN(tempQty)){
+          qty = tempQty;
+        }
+        else{
+          qty = 0;
+        }
+      }
       if(qty <= 0 && operation == 'minus')
          return false;
       prodCountObj.value = operation == 'plus' ? ++qty : --qty;
+      if(prodCountObj.tagName == "P")
+        prodCountObj.innerHTML = qty;
       var addCartObj = $(prodContainer.find('.add-cart')[0]);
-      if(addCartObj.html().toLocaleLowerCase() == 'add to cart'){
+      if(addCartObj && addCartObj.html() && addCartObj.html().toLocaleLowerCase() == 'add to cart'){
          return true;
       }
       var cart = getCookie('baskit');
@@ -546,8 +558,9 @@ function changeQtyOfProductAndPutInCart(targetElem, operation){
           dataJson = dataJson[0];
       }
       if(qty == 0){
-         removeAndUpdateFromCart(dataJson, $(prodContainer.find('.remove-cart')[0]));
-         return true;
+        prodContainer.remove();
+        removeAndUpdateFromCart(dataJson, $(prodContainer.find('.remove-cart')[0]));
+        return true;
       }else{
          addOrUpdateCart(cart && cart.length > 0 ? cart : [], 
             dataJson, 
@@ -571,7 +584,7 @@ function removeItemFromShoppingCart(currentElem){
       cookieString += `expires=${oldDt}`;
    }
    document.cookie = cookieString;
-   currentElem.closest('tr').remove();
+   currentElem.closest('.cart-single-elem').remove();
    $.notify(`${prodName} removed from cart`, "warn");
    if(cartExceptCurrentProduct.length == 0){
       var cartObj = $('#shoppingCartBody');
