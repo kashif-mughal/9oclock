@@ -270,7 +270,6 @@
                             cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
                             pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
                             cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);
-                            cartTemplateCopy = cartTemplateCopy.replace(/{detailPageLink}/g, baseUrl + 'Cproduct/viewProduct/' +  data[i].ProductId);
                             productArea.append(cartTemplateCopy);
                         }
                         if(data.length < perpage)

@@ -283,34 +283,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
                      </div>
 
-
-
-                     <!-- <div class="phone_cart d-flex flex-row justify-content-between justify-content-md-between justify-content-sm-between align-items-center">
-                           <i class="fas fa-user" id="user_icon" style="font-size: 22px; color:#fff;"></i>
-                     </div>
-                     
-                     <div class="cart d-flex justify-content-between">
-                        <div class="cart_container d-flex flex-row align-item-center justify-content-start">
-                           <div class="cart_icon">
-                              <a href="<?php //echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
-                                 <img src="<?php //echo base_url() ?>assets/img/basket.png" alt="" id="basket-img" style="width: 22px; color:#fff;">
-                                 <div class="cart_icon_text">
-                                    <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
-                                 </div>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     
-                     <div class="sidebar-button">
-                        <button class="navbar-toggler" id="btn-sidebar" type="button" data-toggle="collapse"
-                              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                              aria-expanded="false" aria-label="Toggle navigation">
-                              <i class="fa fa-bars" style="font-size: 22px; color:#fff;"></i>
-                        </button>
-                     </div> -->
-
-
                   </div>
                </div>
             </div>
@@ -375,6 +347,65 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 <div class="wrapper">
 
 <!-- Shopping Cart Modal End -->
+
+
+
+    <!-- SEARCHING -->
+
+    <a href="#searchingModal" role="button" class="btn btn-primary" data-toggle="modal" style="display: none;" id="search-modal-trigger">Launch searchingModal</a>
+    <div class="modal" id="searchingModal" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0;">
+          <div class="modal-content" style="min-height: 100vh;">
+             <div class="container-fluid">
+                <div class="row d-flex justify-content-start align-items-center" style="background-color: #fff; margin-bottom: 10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+                   <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <i class="fas fa-arrow-left" style="color: #1BAB32; font-size: 20px;"></i>
+                   </button>
+                   <div class="mx-3" style="border: 1px solid #ccc; position: relative; width: 85%; border-radius: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+                      <i class="fa fa-search" style="position: absolute; top:12px; left: 10px; color: #1BAB32;"></i>
+                      <input id="q2" type="text" class="form-control" placeholder="Search" style="padding: 6px 6px 6px 34px; border:none; width: 98%; border-radius: 20px; font-weight: 600;">
+                   </div>
+                </div>
+                <div id="products-area">
+                  
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+
+
+    <!-- SEARCHING ENDS -->
+
+
+<script type="text" id="clone-cart">
+  <div class="row" style="background-color: #fff; padding: 8px; margin-bottom:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+     <a href="javascript:void(0)" class="d-flex justify-content-between align-items-between" style="width: 100%; text-decoration: none;">
+        <div class="d-flex justify-content-between align-items-between px-4" style="width: 100%;">
+           <div class="d-flex justify-content-between align-items-center" onclick="location.href='{productId}'">
+              <img class="mr-3" src="{imgUrl}" alt="" style="width: 180px; max-width: 180px;">
+              <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%;">
+                 <div>
+                    <p class="mb-1" style="color: #333; font-size:20px; font-weight:600;">{productName}</p>
+                    <p style="color: #A9A9A9; font-size: 16px; font-weight: 500;">{unitName}</p>
+                 </div>
+                 <div>
+                    <p class="info-bottom mb-0" style="font-size:14px; font-weight: 600; color: #red; text-decoration: line-through;">{priceString}</p>
+                    <p class="info-bottom mb-0" style="font-size:18px; font-weight: 600; color: #409244;">{salePrice}</p>
+                 </div>
+              </div>
+           </div>
+           <div class="d-flex flex-column justify-content-end align-items-end" style="height:100%;">
+              <i class="fas fa-chevron-right" style="color: #1BAB32; font-size: 30px; margin-bottom: 30px;"></i>
+              <button style="background-color: #1BAB32; color: #fff; border:none; border-radius: 10px; font-size: 16px; font-weight: 600;">
+              ADD TO CART
+              </button>
+           </div>
+        </div>
+     </a>
+  </div>
+</script>
+
 
 <!-- Cart Scripts Start -->
 
@@ -673,13 +704,17 @@ function removeItemFromShoppingCart(currentElem){
              return false;
         }
      });
-  });
-  $(document).ready(function(){
+
     var allTxt = $(".card-text, .product-card-title");
     for (var i = 0; i < allTxt.length; i++) {
       $(allTxt[i]).attr("data-toggle", "tooltip");
     }
     $('[data-toggle="tooltip"]').tooltip();
+    $("#q").focusin(function() {
+      $('#searchingModal').fadeIn("slow");
+      $('#search-modal-trigger')[0].click();
+      $('#q2').focus();
+    });
   });
 
   function WindowsResizeFunc() {
@@ -698,6 +733,76 @@ function removeItemFromShoppingCart(currentElem){
       $("#InnerPageMenuContent").removeClass('show');
     }
   }
+
+
+
+
+    $(document).ready(function(){
+        var urlVars = getUrlVars();
+        $('#q2').on('keyup', function(e){
+           var currentElem = $(this);
+            var perpage = 20
+            $.ajax({
+                url : '<?=base_url("Cproduct/fetch");?>',
+                type : 'GET',
+                data : {
+                    'q' : currentElem.val(),
+                    'categoryId' : urlVars['categoryId'],
+                    'page': 0,
+                    'perpage' : perpage
+                },
+                dataType:'json',
+                success : function(data) {
+                    var productArea = $('#products-area');
+                    var baseUrl = '<?=base_url()?>';
+                    if(!data){
+                        productArea.empty();
+                    }else{
+                        var totalProducts = data.total;
+                        data = data.products;
+                        var cartTemplate = $('#clone-cart').text();
+                        productArea.empty();
+                        for (var i = 0; i < data.length; i++) {
+                            var discountPercentage = parseInt(((data[i].Price - data[i].SalePrice)/data[i].Price) * 100);
+                            var disText = null;
+                            if(discountPercentage != 0){
+                                var disString = `<h5 class="card-title float-left">${discountPercentage}% OFF</h5>`;
+                                var priceString = `<span class="product-discount"><del>${formatCurrency(data[i].Price,0)}</del></span>`;
+                            }
+                            var cartTemplateCopy = cartTemplate;
+                            if(disString)
+                                cartTemplateCopy = cartTemplateCopy.replace(/{discountString}/g, disString);
+                            else
+                                cartTemplateCopy = cartTemplateCopy.replace(/{discountString}/g, "");
+                            if(priceString)
+                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, priceString);
+                            else
+                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, "");
+                            cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].ProductImg);
+                            cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
+                            cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
+                            cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice,0));
+                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
+                            pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
+                            cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);
+                            productArea.append(cartTemplateCopy);
+                        }
+                    }
+                },
+                error : function(request,error)
+                {
+                    console.log("Request: " + JSON.stringify(request));
+                },
+                complete: function(data){
+                }
+            });
+        });
+    });
+
+
+
+
+
+
 </script>
-<!-- Auto Complete search script END-->
  
