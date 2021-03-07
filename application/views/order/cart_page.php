@@ -310,8 +310,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   </button>
                   <p class="mb-0" style="font-size: 22px; font-weight: 600; margin-left: 10px; color: #fff;">Cart</p>
               </div>
-              <div id="cart-area">
-                <section style="display: none; margin-bottom: 10px;" class="empty-cart-page main-content">
+              <div id="cart-area" style="margin-bottom: 70px;">
+                <section style="display: none; margin-bottom: 10px; " class="empty-cart-page main-content">
                   <div class="container">
                     <div class="row">
                       <div class="col-md-12">
@@ -468,30 +468,39 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           var eachProdTemplate2 = `<div class="each-prod row cart-single-elem" style="background-color: #fff; padding: 20px 20px 0px 0px;">
                     <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
                     <div class="d-flex justify-content-between align-items-between" style="width: 100%;">
-                      <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
                         <img src="{imgValue}" alt="" style="width: 100px;">
-                        <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%;">
+                        <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%; width: 100%;">
                           <div>
-                            <p class="mb-1" style="color: #333; font-size:17px; font-weight:600;">{prodName}</p>
-                            <p style="color: #A9A9A9; font-size: 15px; font-weight: 500;">{unitValue}</p>
+                            <p class="mb-1" style="color: #333; font-size:17px; font-weight:600; height: 2.8rem !important; line-height: 1.3em !important;     overflow: hidden !important;">{prodName}</p>
+                            <div class="d-flex justify-content-between align-items-end" style="width:100%;">
+                              <div class="d-flex flex-column justify-content-start align-items-start" style="width:100%;">
+                                <p style="color: #A9A9A9; font-size: 15px; font-weight: 500;">{unitValue}</p>
+                                <p class="info-bottom mb-0" style="font-size:15px; font-weight: 600; color: #409244;">{price}</p>
+                              </div>
+
+                              <div class="d-flex flex-column justify-content-between align-items-end" style="height:100%; ">
+                              <button class="remove-item-from-cart" data-id="{pId}" data-name="{prodName}" style="color: #ECA5A5; font-size: 22px; background-color: transparent; border:none; padding: 0px;">
+                                <i class="far fa-trash-alt"></i>
+                              </button>
+                              <div class="add-to-cart-btn d-flex flex-row align-items-center p-2" style="border: 1px solid #448AFF; border-radius: 18px 18px 18px 18px;">
+                                <button style="background-color: transparent; border:none; padding: 0px;">
+                                  <i class="fas fa-minus qty-mns"></i>
+                                </button>
+                                <p class="px-3 mb-0 quantity" style="color: #619CFF; font-weight: 500;">{qty}</p>
+                                <button style="background-color: transparent; border:none; padding: 0px;">
+                                  <i class="fas fa-plus qty-pls"></i>
+                                </button>
+                              </div>
+                            </div>
+
+                            </div>
+                            
                           </div>
-                          <p class="info-bottom mb-0" style="font-size:15px; font-weight: 600; color: #409244;">{price}</p>
+                          
                         </div>
                       </div>
-                      <div class="d-flex flex-column justify-content-between align-items-end" style="height:100%;">
-                        <button class="remove-item-from-cart" data-id="{pId}" data-name="{prodName}" style="color: #ECA5A5; font-size: 22px; background-color: transparent; border:none; padding: 0px;">
-                          <i class="far fa-trash-alt"></i>
-                        </button>
-                        <div class="add-to-cart-btn d-flex flex-row align-items-center p-2" style="border: 1px solid #448AFF; border-radius: 18px 18px 18px 18px;">
-                          <button style="background-color: transparent; border:none; padding: 0px;">
-                            <i class="fas fa-minus qty-mns"></i>
-                          </button>
-                          <p class="px-3 mb-0 quantity" style="color: #619CFF; font-weight: 500;">{qty}</p>
-                          <button style="background-color: transparent; border:none; padding: 0px;">
-                            <i class="fas fa-plus qty-pls"></i>
-                          </button>
-                        </div>
-                      </div>
+                      
                     </div>
                     </div>`;
 
