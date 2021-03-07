@@ -198,6 +198,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <li class="nav-item">
                         <a class="nav-link" href="<?=base_url().'Dashboard/user_authentication'?>">Register Or Login</a>
                      </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#userAccount" role="button" data-toggle="modal">Sign in Modal</a>
+                     </li>
                    <?php } ?>
                   </ul>
                </nav>
@@ -213,7 +216,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      justify-content-start justify-content-md-start justify-content-sm-start">
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
-                           <img src="<?php echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block">
+                           <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block"> -->
+                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block">
+
                            <!-- <p class="text-white tag-line mb-0">Inventing Tomorrow</p>  -->
                         </div>
                      </div>
@@ -259,11 +264,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <div class="d-flex justify-content-between align-items-center">
 
                         <div class="phone_cart">
-                           <i class="fas fa-user" id="user_icon"></i>
+                           <!-- <i class="fas fa-user" id="user_icon"></i> -->
+                           <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
                         </div>
 
                         <div class="cart_icon">
                            <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
+                              <!-- <img src="<?php //echo base_url() ?>assets/img/basket.png" alt="" id="basket-img"> -->
                               <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
                               <div class="cart_icon_text">
                                  <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
@@ -277,7 +284,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                             type="button" data-toggle="collapse"
                                  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                  aria-expanded="false" aria-label="Toggle navigation">
-                                 <i class="fa fa-bars"></i>
+                                 <!-- <i class="fa fa-bars"></i> -->
+                                 <img src="<?php echo base_url() ?>assets/img/Menu-icon.png" alt="">
                            </button>
                         </div>
 
@@ -338,6 +346,40 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 </div>
 
 
+
+  <!-- TESTING ADD TO CART -->
+
+  <div class="modal" id="userAccount" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0; min-height: 100vh;">
+      <div class="modal-content" style="min-height: 100vh;">
+        <div class="container-fluid">
+          <div class="row" style="height: 40vh; background-color: #EFF3F6;">
+
+              <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
+              </button>
+
+          </div>
+          <div class="row justify-content-center" style="background-color: #fff; height: 60vh;">
+            <div class="text-center my-3">
+               <p class="mb-0" style="font-size: 17px; font-weight: 500;">ACCOUNT</p>
+               <p style="font-size: 16px; font-weight: 500; margin-bottom: 10px;">Login to access all the features of 9oClock</p>
+               <button style="color: #fff; background-color: #1BAB32; font-size: 17px; font-weight: 500; border-color: #1BAB32; width: 390px; height: 60px;">LOGIN</button>
+               <p style="font-size: 16px; font-weight: 500; margin-top: 16px;">Don't have an account?</p>
+               <a href="<?=base_url().'Dashboard/user_authentication_email'?>" style="color: #fff; background-color: #1BAB32; font-size: 17px; font-weight: 500; border-color: #1BAB32; padding: 18px 161px;">SIGN UP</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+</div> 
+
+<!-- TESTING ADD TO CART ENDS -->
+
+
+
+
 <?php
    if($PageName == 'Home') {
       $this->load->view('include/banner', $BannerImages); 
@@ -352,21 +394,21 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
     <!-- SEARCHING -->
 
-    <a href="#searchingModal" role="button" class="btn btn-primary" data-toggle="modal" style="display: none;" id="search-modal-trigger">Launch searchingModal</a>
-    <div class="modal" id="searchingModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <a href="#searchingModal" role="button" class="btn btn-primary pl-0" data-toggle="modal" style="display: none;" id="search-modal-trigger">Launch searchingModal</a>
+    <div class="modal" id="searchingModal" tabindex="-1" role="dialog" aria-hidden="true" style="padding:0px !important;">
        <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0;">
           <div class="modal-content" style="min-height: 100vh;">
-             <div class="container-fluid">
+             <div class="container-fluid p-0">
                 <div class="row d-flex justify-content-start align-items-center" style="background-color: #fff; margin-bottom: 10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
-                   <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <i class="fas fa-arrow-left" style="color: #1BAB32; font-size: 20px;"></i>
+                   <button style="height: 60px; width: 50px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close pl-3" data-dismiss="modal" aria-label="Close">
+                     <i class="fas fa-arrow-left" style="color: #1BAB32; font-size: 20px;"></i>
                    </button>
-                   <div class="mx-3" style="border: 1px solid #ccc; position: relative; width: 85%; border-radius: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+                   <div style="border: 1px solid #ccc; position: relative; width: 82%; border-radius: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
                       <i class="fa fa-search" style="position: absolute; top:12px; left: 10px; color: #1BAB32;"></i>
                       <input id="q2" type="text" class="form-control" placeholder="Search" style="padding: 6px 6px 6px 34px; border:none; width: 98%; border-radius: 20px; font-weight: 600;">
                    </div>
                 </div>
-                <div id="products-area">
+                <div id="products-area" style="padding:0px 20px; background-color: #EFF3F6;">
                   
                 </div>
              </div>
@@ -379,28 +421,30 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 
 <script type="text" id="clone-cart">
-  <div class="row" style="background-color: #fff; padding: 8px; margin-bottom:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+  <div class="row" style="background-color: #fff; padding: 8px 0px; margin-bottom:10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; border-radius: 5px;">
      <a href="javascript:void(0)" class="d-flex justify-content-between align-items-between" style="width: 100%; text-decoration: none;">
-        <div class="d-flex justify-content-between align-items-between px-4" style="width: 100%;">
-           <div class="d-flex justify-content-between align-items-center" onclick="location.href='{productId}'">
-              <img class="mr-3" src="{imgUrl}" alt="" style="width: 180px; max-width: 180px;">
-              <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%;">
+        <div class="d-flex justify-content-between align-items-between" style="width: 100%;">
+           <div class="d-flex justify-content-between align-items-center" onclick="location.href='{productId}'" style="position:relative; width:100%;">
+              <img src="{imgUrl}" alt="" style="width: 100px; max-width: 100px;">
+              <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%; width:100%;">
                  <div>
-                    <p class="mb-1" style="color: #333; font-size:20px; font-weight:600;">{productName}</p>
-                    <p style="color: #A9A9A9; font-size: 16px; font-weight: 500;">{unitName}</p>
+                    <p class="mb-1" style="color: #333; font-size:17px; font-weight:600;">{productName}</p>
+                    <p style="color: #A9A9A9; font-size: 15px; font-weight: 500;">{unitName}</p>
                  </div>
-                 <div>
-                    <p class="info-bottom mb-0" style="font-size:14px; font-weight: 600; color: #red; text-decoration: line-through;">{priceString}</p>
-                    <p class="info-bottom mb-0" style="font-size:18px; font-weight: 600; color: #409244;">{salePrice}</p>
-                 </div>
+                 <i class="fas fa-chevron-right" style="color: #1BAB32; font-size: 20px; margin-bottom: 30px; position:absolute; top: 45px; right: 19px;"></i>
+                 <div class="d-flex justify-content-between align-items-between" style="height:100%;">
+                     <div>
+                        <p class="info-bottom mb-0" style="font-size:14px; font-weight: 600; color: #red; text-decoration: line-through;">{priceString}</p>
+                        <p class="info-bottom mb-0" style="font-size:15px; font-weight: 600; color: #409244;">{salePrice}</p>
+                     </div>
+                     <button style="background-color: #1BAB32; color: #fff; border:none; border-radius: 10px; font-size: 15px; font-weight: 600; margin-right: 10px; ">
+                     ADD TO CART
+                     </button>
+                  </div>
               </div>
+               
            </div>
-           <div class="d-flex flex-column justify-content-end align-items-end" style="height:100%;">
-              <i class="fas fa-chevron-right" style="color: #1BAB32; font-size: 30px; margin-bottom: 30px;"></i>
-              <button style="background-color: #1BAB32; color: #fff; border:none; border-radius: 10px; font-size: 16px; font-weight: 600;">
-              ADD TO CART
-              </button>
-           </div>
+           
         </div>
      </a>
   </div>

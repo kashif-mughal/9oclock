@@ -303,7 +303,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     <div class="modal" id="addtoCartModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0; min-height: 100vh;">
           <div class="modal-content" style="min-height: 100vh;">
-            <div class="container-fluid">
+            <div class="container-fluid" style="min-height: 100vh;">
               <div class="row d-flex justify-content-start align-items-center" style="background-color: var(--secondary-color);">
                   <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close" aria-label="Close">
                     <i class="fas fa-arrow-left" onclick="history.back();" style="color: #fff; font-size: 20px;"></i>
@@ -334,7 +334,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
               </div>
 
 
-              <div class="row d-flex justify-content-start align-items-center py-3 px-3" style="background-color: var(--secondary-color)">
+              <div class="row d-flex justify-content-start align-items-center py-3 px-3" style="background-color: var(--secondary-color); position: fixed; bottom: 0; width: 100%;">
                   <button class="d-flex justify-content-between align-items-center mb-0" style="width: 100%; background-color: transparent; border: none; height: 100%; color: #fff; font-size: 18px;  font-weight: 500;">
                     <a href="<?=base_url("corder/checkout_form")?>" style="color:white;"><p class="mb-0">Checkout</p></a>
                     <div>
@@ -465,17 +465,17 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           </td>
           </tr>`;
 
-          var eachProdTemplate2 = `<div class="each-prod row cart-single-elem" style="background-color: #fff; padding: 20px;">
+          var eachProdTemplate2 = `<div class="each-prod row cart-single-elem" style="background-color: #fff; padding: 20px 20px 0px 0px;">
                     <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-                    <div class="d-flex justify-content-between align-items-between px-4" style="width: 100%;">
+                    <div class="d-flex justify-content-between align-items-between" style="width: 100%;">
                       <div class="d-flex justify-content-between align-items-center">
-                        <img class="mr-3" src="{imgValue}" alt="" style="width: 120px;">
+                        <img src="{imgValue}" alt="" style="width: 100px;">
                         <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%;">
                           <div>
-                            <p class="mb-1" style="color: #333; font-size:20px; font-weight:600;">{prodName}</p>
-                            <p style="color: #A9A9A9; font-size: 16px; font-weight: 500;">{unitValue}</p>
+                            <p class="mb-1" style="color: #333; font-size:17px; font-weight:600;">{prodName}</p>
+                            <p style="color: #A9A9A9; font-size: 15px; font-weight: 500;">{unitValue}</p>
                           </div>
-                          <p class="info-bottom mb-0" style="font-size:18px; font-weight: 600; color: #409244;">{price}</p>
+                          <p class="info-bottom mb-0" style="font-size:15px; font-weight: 600; color: #409244;">{price}</p>
                         </div>
                       </div>
                       <div class="d-flex flex-column justify-content-between align-items-end" style="height:100%;">
