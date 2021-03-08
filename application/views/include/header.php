@@ -764,16 +764,10 @@ function removeItemFromShoppingCart(currentElem){
   function WindowsResizeFunc() {
     if ($(window).width() >  768) {
       $(".edibles-main .product-category").addClass('show');
-      $(".filter-brand-button").addClass('show');
-      $(".filter-weight-button").addClass('show');
-      $(".filter-type-checkbox").addClass('show');
       $("#InnerPageMenuContent").addClass('show');
     }
     else {
       $(".edibles-main .product-category").removeClass('show');
-      $(".filter-brand-button").removeClass('show');
-      $(".filter-weight-button").removeClass('show');
-      $(".filter-type-checkbox").removeClass('show');
       $("#InnerPageMenuContent").removeClass('show');
     }
   }
@@ -782,6 +776,7 @@ function removeItemFromShoppingCart(currentElem){
 
 
     $(document).ready(function(){
+      $('.modal').off('resize');
         var urlVars = getUrlVars();
         $('#q2').on('keyup', function(e){
            var currentElem = $(this);
