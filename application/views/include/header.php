@@ -401,10 +401,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
              <div class="container-fluid p-0">
                 <div class="row d-flex justify-content-start align-items-center" style="background-color: #fff; margin-bottom: 10px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
                    <button style="height: 60px; width: 50px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close pl-3" data-dismiss="modal" aria-label="Close">
-                     <i class="fas fa-arrow-left" style="color: #1BAB32; font-size: 20px;"></i>
+                     <i class="fas fa-arrow-left" style="color: var(--secondary-color); font-size: 20px;"></i>
                    </button>
                    <div style="border: 1px solid #ccc; position: relative; width: 82%; border-radius: 20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
-                      <i class="fa fa-search" style="position: absolute; top:12px; left: 10px; color: #1BAB32;"></i>
+                      <i class="fa fa-search" style="position: absolute; top:12px; left: 10px; color: var(--secondary-color);"></i>
                       <input id="q2" type="text" class="form-control" placeholder="Search" style="padding: 6px 6px 6px 34px; border:none; width: 98%; border-radius: 20px; font-weight: 600;">
                    </div>
                 </div>
@@ -431,13 +431,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                     <p class="mb-1" style="color: #333; font-size:17px; font-weight:600;">{productName}</p>
                     <p style="color: #A9A9A9; font-size: 15px; font-weight: 500;">{unitName}</p>
                  </div>
-                 <i class="fas fa-chevron-right" style="color: #1BAB32; font-size: 20px; margin-bottom: 30px; position:absolute; top: 45px; right: 19px;"></i>
+                 <i class="fas fa-chevron-right" style="color: var(--secondary-color); font-size: 20px; margin-bottom: 30px; position:absolute; top: 45px; right: 19px;"></i>
                  <div class="d-flex justify-content-between align-items-between" style="height:100%;">
                      <div>
                         <p class="info-bottom mb-0" style="font-size:14px; font-weight: 600; color: #red; text-decoration: line-through;">{priceString}</p>
-                        <p class="info-bottom mb-0" style="font-size:15px; font-weight: 600; color: #409244;">{salePrice}</p>
+                        <p class="info-bottom mb-0" style="font-size:15px; font-weight: 600; color: var(--secondary-color);">{salePrice}</p>
                      </div>
-                     <button style="background-color: #1BAB32; color: #fff; border:none; border-radius: 10px; font-size: 15px; font-weight: 600; margin-right: 10px; ">
+                     <button style="background-color: var(--secondary-color); color: #fff; border:none; border-radius: 10px; font-size: 15px; font-weight: 600; margin-right: 10px; ">
                      ADD TO CART
                      </button>
                   </div>
