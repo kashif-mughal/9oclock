@@ -472,7 +472,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         <img src="{imgValue}" alt="" style="width: 100px;">
                         <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%; width: 100%;">
                           <div>
-                            <p class="mb-1" style="color: #333; font-size:17px; font-weight:600; height: 2.8rem !important; line-height: 1.3em !important;     overflow: hidden !important;">{prodName}</p>
+                            <p class="mb-1" style="color: #333; font-size:17px; font-weight:600; max-height: 2.8rem !important; line-height: 1.3em !important;     overflow: hidden !important;">{prodName}</p>
                             <div class="d-flex justify-content-between align-items-end" style="width:100%;">
                               <div class="d-flex flex-column justify-content-start align-items-start" style="width:100%;">
                                 <p style="color: #A9A9A9; font-size: 15px; font-weight: 500;">{unitValue}</p>
