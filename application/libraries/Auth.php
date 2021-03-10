@@ -80,6 +80,45 @@ class Auth {
         }
     }
 
+     //Login....
+     public function login_email($email_address, $password) {
+        $CI = & get_instance();
+        $CI->load->model('Users');
+
+        $result = $CI->Users->check_valid_user_email($email_address, $password);
+
+        if ($result) {
+            $key = md5(time());
+            $key = str_replace("1", "z", $key);
+            $key = str_replace("2", "J", $key);
+            $key = str_replace("3", "y", $key);
+            $key = str_replace("4", "R", $key);
+            $key = str_replace("5", "Kd", $key);
+            $key = str_replace("6", "jX", $key);
+            $key = str_replace("7", "dH", $key);
+            $key = str_replace("8", "p", $key);
+            $key = str_replace("9", "Uf", $key);
+            $key = str_replace("0", "eXnyiKFj", $key);
+            $sid_web = substr($key, rand(0, 3), rand(28, 32));
+
+            // codeigniter session stored data          
+            $user_data = array(
+                'sid_web' => $sid_web,
+                'user_id' => $result[0]['user_id'],
+                'user_type' => $result[0]['user_type'],
+                'user_name' => $result[0]['first_name'] . " " . $result[0]['last_name'],
+                'user_email' => $result[0]['username'],
+                'address' => $result[0]['address'],
+                'email' => $result[0]['email']
+            );
+
+            $CI->session->set_userdata($user_data);
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
     //Check if is logged....
     public function is_logged() {
         $CI = & get_instance();
