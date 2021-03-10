@@ -30,6 +30,13 @@
         $CI->load->model('Web_settings');
         $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
         $data['Web_settings'] = $Web_settings;
+        $data['BannerImages'] = $BannerImages;
+        if(isset($Page)) {
+            $data['PageName'] = $Page;
+        }
+        else {
+            $data['PageName'] = '';
+        }
         ?>
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="<?php
@@ -76,7 +83,7 @@
             if ($url != "login") {
                 $this->load->view('include/header', $data);
             }
-            $this->load->view('include/banner');
+            
             ?>
             {content}
             <?php

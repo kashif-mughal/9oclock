@@ -5,16 +5,16 @@
 }
 
 #main-banner {
-   margin-top: 20px !important;
-   max-width: 1100px !important;
+   /* margin-top: 20px !important; */
+   /* max-width: 1100px !important; */
    /* margin-right: auto !important; */
-   margin-left: auto !important;
-   height: 45vh;
+   /* margin-left: auto !important; */
+   height: 55vh;
    margin-left: 0px !important;
    margin-right: 0px !important;
 }
 #main-banner img {
-   height: 45vh;
+   height: 55vh;
 }
 #main-banner .carousel-indicators li {
    width: 8px !important;
@@ -27,6 +27,122 @@
 #main-banner .carousel-indicators li.active {
    background-color: #fff;
 }
+
+/* Custom DropDown */
+
+select.minimal {
+   /* styling */
+   background-color: white;
+   border: thin solid blue;
+   border-radius: 4px;
+   display: inline-block;
+   font: inherit;
+   line-height: 1.5em;
+   padding: 0.5em 3.5em 0.5em 1em;
+ 
+   /* reset */
+ 
+   margin: 0;      
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+ }
+
+select.minimal {
+   background-image: 2px solid black;
+     /* linear-gradient(45deg, transparent 50%, gray 50%),
+     linear-gradient(14deg, gray 50%, transparent 50%),
+     linear-gradient(to right, #ccc, #ccc); */
+   background-position:
+     calc(100% - 20px) calc(1em + 2px),
+     calc(100% - 15px) calc(1em + 2px),
+     calc(100% - 2.5em) 0.5em;
+   background-size:
+     5px 5px,
+     5px 5px,
+     1px 1.5em;
+   background-repeat: no-repeat;
+ }
+ 
+ select.minimal:focus {
+   background-image:
+     linear-gradient(45deg, green 50%, transparent 50%),
+     linear-gradient(135deg, transparent 50%, green 50%),
+     linear-gradient(to right, #ccc, #ccc);
+   background-position:
+     calc(100% - 15px) 1em,
+     calc(100% - 20px) 1em,
+     calc(100% - 2.5em) 0.5em;
+   background-size:
+     5px 5px,
+     5px 5px,
+     1px 1.5em;
+   background-repeat: no-repeat;
+   border-color: green;
+   outline: 0;
+ }
+
+/* Custom DropDown Ends */
+
+
+.product-card-btn {
+   width: 100%;
+   height: 24px;
+   background-color: var(--main-color);
+   text-align: center;
+   text-decoration: none;
+   color: #ffffff;
+   padding: 8px 80px;
+   font-size: 16px;
+}
+
+.inner-product-content {
+   background-color: #ffffff;
+   padding: 50px;
+   border: 1px solid #cccccc;
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+.inner-product-content-info {
+   height: 100% !important;
+}
+
+.inner-product-top p {
+   font-size: 16px;
+   color: #999999;
+   margin-top: 0px;
+   margin-bottom: 0px;
+   font-weight: 500;
+   font-family: "Work Sans";
+}
+
+.inner-product-mid span.price {
+   color: var(--main-color);
+   font-size: 24px;
+   font-weight: 600;
+   margin-right: 15px;
+}
+.inner-product-mid span.discount {
+   text-decoration: line-through;
+   font-size: 16px;
+   color: #999999;
+   margin-top: 0px;
+   margin-bottom: 0px;
+   font-weight: 500;
+   font-family: "Work Sans";
+}
+
+.main-heading {
+   font-size: 36px;
+   letter-spacing: -1px;
+   color: var(--main-color);
+   font-weight: 600;
+   font-family: "Work Sans";
+}
+
 
 .categories .category-grid .sub-category .sub-category-content .category-text:hover {
    text-decoration: underline;
@@ -65,7 +181,7 @@ html,body
 }
 
 .wrapper {
-   margin-top: 178px;
+   margin-top: 100px;
 }
 
 /* ===== OTP Input Ends ===== */
@@ -562,7 +678,7 @@ input:focus {
    position: relative;
 }
 .header-container #add_to_cart_items {
-   font-size: 14px !important;
+   font-size: 14px;
    position: relative;
    bottom: -18px;
    left: -26px;
@@ -965,13 +1081,13 @@ button.category-button:active {
 }
 #basket-img {
    position: absolute;
-   margin-left: 10px;
+   margin-left: 6px;
 }
 #add_to_cart_items {
-   font-size: 14px !important;
+   font-size: 12px;
    position: relative;
-   bottom: -22px;
-   left: 26px;
+   bottom: -12px;
+   left: 15px;
    background-color: #ffffff;
    color: var(--secondary-color);
 }
@@ -2098,7 +2214,7 @@ button.category-button:active {
   position: fixed;
   z-index: 10000;
   top: 0;
-  left: 0;
+  right: 0;
   background-color: #ffffff !important;
   border: 1px solid #cccccc;
   overflow-x: hidden;
@@ -2309,7 +2425,7 @@ button.category-button:active {
    z-index: 20;
    position: absolute;
    vertical-align: middle !important;
-   background: rgba(43, 233, 204, 0.7) !important;
+   background: rgb(24 19 197 / 63%) !important;
    border-radius: 10px 0px 10px 0px;
    color: white;
    font-weight: bolder;
@@ -3032,6 +3148,21 @@ a#newAddressCancelBtn {
 
 /*Grocery Panel*/
 
+.sidebar-button i {
+   font-size: 22px;
+   color: #fff;
+}
+
+.cart_icon img {
+   width: 22px;
+}
+
+.phone_cart i {
+   font-size: 22px;
+   color: #fff;
+}
+
+
 
 /* ========== Timeline Ends ============ */
 /* ===================================== */
@@ -3121,6 +3252,10 @@ a#newAddressCancelBtn {
    .tag-line {
       font-size: calc(0.2rem + 0.4vw);
    }
+   .logo .logo_content img {
+      max-width: 130px !important;
+      width: 130px !important;
+   }
 }
 
 
@@ -3133,7 +3268,7 @@ a#newAddressCancelBtn {
 
 @media(min-width: 1024px) {
    .wrapper {
-      margin-top: 124px;
+      margin-top: 100px;
   }
 }
 
@@ -3269,7 +3404,7 @@ a#newAddressCancelBtn {
 
 @media (max-width: 991px) {
    #add_to_cart_items {
-      left: 54px !important;
+      left: 14px;
    }
    .grocery-features-columns {
       padding-right: 0px;
@@ -3342,7 +3477,8 @@ a#newAddressCancelBtn {
       display: none;
    }   
    .logo .logo_content img {
-      max-width: 155px !important;
+      max-width: 130px !important;
+      width: 130px !important;
    }
 /* top bar */
    .top-bar .navbar {
@@ -3590,7 +3726,8 @@ a#newAddressCancelBtn {
       margin-bottom: 12px !important;
    }
    .logo .logo_content img {
-      max-width: 150px !important;
+      max-width: 130px !important;
+      width: 140px !important;
    }
    #btn-sidebar img {
       width: 35px;
@@ -3640,7 +3777,7 @@ a#newAddressCancelBtn {
    .logo-container,
    .phone_cart {
       justify-content: left !important;
-      margin-bottom: 10px !important;
+      margin-bottom: 8px !important;
    }
 
    #clearFilter .clearFilterText {
@@ -3869,6 +4006,23 @@ a#newAddressCancelBtn {
    }
    #va-panel .va-panel-header .va-panel-heading {
       font-size: 21px !important;
+   }
+   
+   .sidebar-button i {
+      font-size: 18px;
+      color: #fff;
+   }   
+   .cart_icon img {
+      width: 18px;
+   }   
+   .phone_cart i {
+      font-size: 18px;
+      color: #fff;
+   }
+   .cart_icon .cart_icon_text #add_to_cart_items {
+      font-size: 8px;
+      bottom: -7px;
+      left: 13px;
    }
    
 }

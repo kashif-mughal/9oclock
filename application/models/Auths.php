@@ -47,6 +47,19 @@ class Auths extends CI_Model {
         }
     }
 
+    // Login user by Email Address
+    public function user_login_email($email_address) {
+        $CI = & get_instance();
+        $CI->load->model('Users');
+        $check_user_login = $CI->Users->check_user_login_email($email_address);
+        
+        if($check_user_login) {
+            return $check_user_login;
+        }
+        return false; 
+
+    }
+
     // Get user from user_login table by user id
     public function get_user_by_id($user_id) {
         $this->db->where('user_id', $user_id);
@@ -79,8 +92,27 @@ class Auths extends CI_Model {
         return false;     
     }
 
+    public function get_user_detail_by_email($email_address) {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('email', $email_address);
+        $query = $this->db->get();
+        if($query->num_rows() > 0) {
+            return $query->result_array();    
+        }
+        return false;        
+    }
+
     public function get_otp_by_phone_number($phone_number) {
         $this->db->where('phone_number', $phone_number);
+        $this->db->order_by('otp_id', 'DESC');
+        $query = $this->db->get('grocery_otp');
+
+        return $query;
+    }
+
+    public function get_otp_by_email_address($email_address) {
+        $this->db->where('email_address', $email_address);
         $this->db->order_by('otp_id', 'DESC');
         $query = $this->db->get('grocery_otp');
 
@@ -164,6 +196,19 @@ class Auths extends CI_Model {
         return TRUE;
     }
 
+    public function update_otp_verified_email($email_address) {
+        // Current Date
+        $dateTime = new DateTime();
+        $currDate = $dateTime->format('Y-m-d H:i:s');
+        $data = array(
+            'verified' => 1,
+            'verified_on' => $currDate
+        );
+        $this->db->where('email_address', $email_address);
+        $this->db->update('grocery_otp', $data);
+        return TRUE;
+    }
+
     public function phone_registered($phone_number) {
         $this->db->where('phone_number', $phone_number);
         $db_phone = $this->db->get('grocery_otp');
@@ -191,6 +236,39 @@ class Auths extends CI_Model {
         return TRUE;
     }
 
+    public function insert_user_login_email($user_id, $email, $password) {
+        $user_login_data = array(
+            'user_id' => $user_id,
+            'user_type' => 1,
+            'status' => 1,
+            'username' => $email,
+            'password' => md5($password)
+        );
+        $r = $this->db->insert('user_login', $user_login_data);
+        return TRUE;
+    }
+
+    public function insert_user_email($user_id, $name, $email, $phone, $address) {
+        $user_data = array(
+            'user_id' => $user_id,
+            'first_name' => $name,
+            'phone' => $phone,
+            'email' => $email,
+            'address' => $address,
+            'status' => 1,
+            'AddressId' => 0,
+            'address_details' => ''
+        );
+        $this->db->insert('users', $user_data);
+
+        $user_address = array(
+            'Address' => $address,
+            'UserId' => $user_id,
+            'Status' => 1
+        );
+        $this->db->insert('grocery_user_address', $user_address);
+    }
+
     public function insert_user($user_id, $phone_number) {
         $user_data = array(
             'user_id' => $user_id,
@@ -199,6 +277,15 @@ class Auths extends CI_Model {
         );
         $this->db->insert('users', $user_data);
     }
+
+    // public function insert_user_email($user_id, $email_address) {
+    //     $user_data = array(
+    //         'user_id' => $user_id,
+    //         'phone' => $email_address,
+    //         'status' => 1
+    //     );
+    //     $this->db->insert('users', $user_data);
+    // }
 
     public function insert_otp_data($phone_number, $fourRandomDigit, $formatDate) {
         $otp_data = array(
@@ -212,6 +299,67 @@ class Auths extends CI_Model {
         // print_r($phone_number);die;
         $messageStatus = $this->sendmessage($phone_number, $message);
         return TRUE;
+
+    }
+
+
+    public function insert_otp_data_email($to_email, $fourRandomDigit, $formatDate) {
+        // $otp_data = array(
+        //     'phone_number' => $phone_number,
+        //     'code' => $fourRandomDigit,
+        //     'expiry_date' => $formatDate,
+        //     'verified' => 0
+        // );
+        // $this->db->insert('grocery_otp', $otp_data);
+        // $message = "Your OTP Code is ". $fourRandomDigit;
+        // // print_r($phone_number);die;
+        // $messageStatus = $this->sendmessage($phone_number, $message);
+        // return TRUE;
+
+
+        // By Email Address
+        $otp_data = array(
+            'email_address' => $to_email,
+            'code' => $fourRandomDigit,
+            'expiry_date' => $formatDate,
+            'verified' => 0
+        );
+
+        $this->db->insert('grocery_otp', $otp_data);
+        $message = "Your OTP is " . $fourRandomDigit;
+        //$messageStatus = $this->sendemail($to_email, $message);
+        return $message;
+     
+    }
+
+    public function is_email_exist($email_address) {
+        $this->db->where('username', $email_address);
+        $db_email = $this->db->get('user_login');
+
+        if($db_email->num_rows() > 0) {
+            return $db_email->result_array();    
+        }
+        return false; 
+    }
+
+    public function is_otp_verified($email_address) {
+        $this->db->where('email_address', $email_address);
+        $db_email = $this->db->get('grocery_otp');
+
+        if($db_email->num_rows() > 0) {
+            return $db_email->result_array();    
+        }
+        return false; 
+    }
+
+    public function check_user_detail($email_address) {
+        $this->db->where('email', $email_address);
+        $db_email = $this->db->get('users');
+
+        if($db_email->num_rows() > 0) {
+            return $db_email->result_array();    
+        }
+        return false; 
     }
 
     // ================================================================================
@@ -283,4 +431,38 @@ class Auths extends CI_Model {
     // ================================================================================
     // ======================= PRIVATE FUNCTIONS ======================================
     // ================================================================================
+
+
+
+    //=================================================================================
+    //===================== SEND EMAIL WITH OTP =======================================
+    //=================================================================================
+
+    public function sendemail($to_email, $otp_code) {
+        $this->load->library('email');
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.gmail.com';
+        $config['smtp_port'] = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user'] = 'mumtaz.alam.home@gmail.com';
+        $config['smtp_pass'] = 'Foosball@1';
+        $config['charset'] = 'utf-8';
+        $config['newline'] = '\r\n';
+        $config['mailtype'] = 'text';
+        $config['validation'] = TRUE;
+
+        $this->email->initialize($config);
+
+        
+        $this->email->from('mumtaz.alam.home@gmail.com', '9oClock Admin');
+        $this->email->to($to_email);
+        // $this->email->cc('another@another-example.com');
+        // $this->email->bcc('them@their-example.com');
+        
+        $this->email->subject('9oClock - User Email Verification');
+        $this->email->message('Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: ' . $otp_code);
+        
+        print_r($this->email->send());die;
+        return $this->email->send();
+    }
 }

@@ -70,16 +70,17 @@ class Cproduct extends CI_Controller {
 
     //Insert Product and uload
     public function insert_product() {
-        if ($_FILES['image']['name']) {
-            //Chapter chapter add start
-            $config['upload_path'] = './assets/img/products/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
-            $config['max_size'] = "*";
-            $config['max_width'] = "*";
-            $config['max_height'] = "*";
-            $config['encrypt_name'] = TRUE;
+        //Chapter chapter add start
+        $config['upload_path'] = './assets/img/products/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
+        $config['max_size'] = "*";
+        $config['max_width'] = "*";
+        $config['max_height'] = "*";
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
 
-            $this->load->library('upload', $config);
+
+        if ($_FILES['image']['name']) {
             if (!$this->upload->do_upload('image')) {
                 $error = array('error' => $this->upload->display_errors());
                 $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
@@ -89,6 +90,8 @@ class Cproduct extends CI_Controller {
                 $image_url = "assets/img/products/" . $image['file_name'];
             }
         }
+
+
         $isFeatured = ($this->input->post('IsFeatured') == 'on') ? 1 : 0;
         $isHot = ($this->input->post('IsHot') == 'on') ? 1 : 0;
         $data = array(
@@ -106,10 +109,52 @@ class Cproduct extends CI_Controller {
             'SaleUnit' => $this->input->post('SaleUnit'),
             'ProductImg' =>(!empty($image_url) ? $image_url : 'assets/img/product.png'),
             'tags' => $this->input->post('allTags'),
-            'Brand' => $this->input->post('BrandId')
+            'Brand' => $this->input->post('BrandId'),
+            'Description' => $this->input->post('Description')
         );
         $result = $this->Products->product_entry($data);
-        if ($result == TRUE) {
+        if (is_numeric($result)) {
+            //adding varient images
+            $files = $_FILES;
+            $cpt = count($this->input->post('vNames'));
+            $varientsData = array();
+            $j = -1;
+            for ($i=0; $i < $cpt; $i++) {
+                echo '<br>step3_' . $i;
+                if(empty($this->input->post('vNames')[$i]))
+                    continue;
+                $j++;
+                $varientsData[$j] = array();
+                $varientsData[$j]['VName'] = $this->input->post('vNames')[$i];
+                $varientsData[$j]['VType'] = $this->input->post('vType')[$i];
+                $varientsData[$j]['VValue'] = $this->input->post('vValue')[$i];
+                $varientsData[$j]['Status'] = 1;
+                $varientsData[$j]['VImage'] = null;
+                if ($files['vImage']['name'][$i]) {
+                    $_FILES['vImage']['name']= $files['vImage']['name'][$i];
+                    $_FILES['vImage']['type']= $files['vImage']['type'][$i];
+                    $_FILES['vImage']['tmp_name']= $files['vImage']['tmp_name'][$i];
+                    $_FILES['vImage']['error']= $files['vImage']['error'][$i];
+                    $_FILES['vImage']['size']= $files['vImage']['size'][$i];
+
+                    if (!$this->upload->do_upload('vImage')) {
+                        $error = array('error' => $this->upload->display_errors());
+                        $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+                        redirect(base_url('Cproduct'));
+                    } else {
+                        $varientsData[$j]['VImage'] = "assets/img/products/" . $this->upload->data()['file_name'];
+                        echo 'kashif '.$varientsData[$j]['VImage']. '<br>';
+                    }
+                }
+            }
+            for ($i=0; $i < count($varientsData); $i++) {
+                if(is_null($varientsData[$i]['VImage'])){
+                    $varientsData[$i]['VImage'] = $data['ProductImg'];
+                }
+                $varientsData[$i]['ProductId'] = $result;
+                //insert varient in db
+                $this->Products->insert_grocery_product_varient($varientsData[$i]);
+            }
             $this->session->set_userdata(array('message' => 'Successfully Added'));
             if (isset($_POST['add-product'])) {
                 redirect(base_url('Cproduct/manage_product'));
@@ -170,7 +215,8 @@ class Cproduct extends CI_Controller {
             'tags' => $this->input->post('allTags'),
             'stock' => $this->input->post('stock'),
             'season' => $this->input->post('season'),
-            'sort' => $this->input->post('sort')
+            'sort' => $this->input->post('sort'),
+            'Description' => $this->input->post('Description')
             //'status' => $this->input->post('status')
         );
         if($_FILES['image']['name'])
@@ -358,4 +404,10 @@ class Cproduct extends CI_Controller {
         fclose($file);
         exit;
     }
+    
+    public function viewProduct($id) {
+        $content = $this->lproduct->product_inner_data($id);
+        $this->template->full_html_view($content);
+    }
+
 }

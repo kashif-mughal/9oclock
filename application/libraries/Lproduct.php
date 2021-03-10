@@ -94,12 +94,76 @@ class Lproduct {
             'tags' => $product_detail[0]['tags'],
             'stock' => $product_detail[0]['stock'],
             'season' => $product_detail[0]['season'],
-            'sort' => $product_detail[0]['sort']
+            'sort' => $product_detail[0]['sort'],
+            'Description' => $product_detail[0]['Description'],
+            'product_varient' => $product_detail[0]['varientData']
         );
-        
         //var_dump($data);exit();
-
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
+
+        return $chapterList;
+    }
+
+    //Product Edit Data
+    public function product_inner_data($product_id) {
+        $CI = & get_instance();
+        $CI->load->model('Products');
+        $CI->load->model('Categories');
+        $CI->load->model('Brands');
+        $CI->load->model('Units');
+
+        $product_detail = $CI->Products->retrieve_editdata('ProductId', $product_id);
+        $categories = $CI->Categories->customSelect('CategoryId, CatName');
+        $brands = $CI->Brands->customSelect('BrandId, BrandName');
+        $units = $CI->Units->customSelect('UnitId, UnitName');
+        
+        $similar_products = $CI->Products->similarProducts($product_detail[0]['Category'], $product_detail[0]['Brand']);
+
+        $unitItem = null;
+        foreach($units as $unit) {
+            if ($product_detail[0]['SaleUnit'] == $unit["UnitId"]) {
+                $unitItem = $unit["UnitName"];
+                break;
+            }
+        }
+
+        $product_category = null;
+        foreach($categories as $cat) {
+            if ($product_detail[0]['Category'] == $cat["CategoryId"]) {
+                $product_category = $cat["CatName"];
+                break;
+            }
+        }
+
+        $data = array(
+            'title' => 'Product View',
+            'product_id' => $product_detail[0]['ProductId'],
+            'product_name' => $product_detail[0]['ProductName'],
+            'unit' => $product_detail[0]['Unit'],
+            'OriginalPrice' => $product_detail[0]['OriginalPrice'],
+            'price' => $product_detail[0]['Price'],
+            'sale_price' => $product_detail[0]['SalePrice'],
+            'is_featured' => $product_detail[0]['IsFeatured'],
+            'is_hot' => $product_detail[0]['IsHot'],
+            'category' => $product_detail[0]['Category'],
+            'categories' => $categories,
+            'brand' => $product_detail[0]['Brand'],
+            'brands' => $brands,
+            'status' => $product_detail[0]['status'],
+            'units' => $units,
+            'sale_unit_qty' => $product_detail[0]['SaleUnitQty'],
+            'sale_unit' => $product_detail[0]['SaleUnit'],
+            'ProductImg' => $product_detail[0]['ProductImg'],
+            'tags' => $product_detail[0]['tags'],
+            'stock' => $product_detail[0]['stock'],
+            'season' => $product_detail[0]['season'],
+            'sort' => $product_detail[0]['sort'],
+            'Description' => $product_detail[0]['Description'],
+            'unitName' => $unitItem,
+            'categoryName' => $product_category,
+            'similarProducts' => $similar_products
+        );
+        $chapterList = $CI->parser->parse('product/inner_product', $data, true);
 
         return $chapterList;
     }

@@ -36,6 +36,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    .error{
     color: red;
    }
+   .select2-container--default .select2-results__option--highlighted[aria-selected]{
+    background-color: var(--secondary-color);
+   }
 </style>
 
 <!-- Script for the use of auto complete search START-->
@@ -195,6 +198,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <li class="nav-item">
                         <a class="nav-link" href="<?=base_url().'Dashboard/user_authentication'?>">Register Or Login</a>
                      </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#userAccount" role="button" data-toggle="modal">Sign in Modal</a>
+                     </li>
                    <?php } ?>
                   </ul>
                </nav>
@@ -203,34 +209,29 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       </div>
       <div class="main-nav bg-light">
          <div class="container">
-            <div class="row align-items-center py-2 py-md-3 pb-sm-0">
+            <div class="row align-items-center py-1 py-md-2 pb-sm-0">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-3 col-md-6 col-sm-8 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
+               <div class="col-lg-2 col-md-9 col-sm-9 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
-                     justify-content-end justify-content-md-end justify-content-sm-center">
-                     <div class="sidebar-button">
-                        <button class="navbar-toggler h-100" id="btn-sidebar" type="button" data-toggle="collapse"
-                              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                              aria-expanded="false" aria-label="Toggle navigation">
-                              <img src="<?php echo base_url() ?>assets/img/toggler_icon.png">
-                              <!-- <i class="fa fa-bars" style="font-size: 40px;"></i> -->
-                        </button>
-                     </div>
+                     justify-content-start justify-content-md-start justify-content-sm-start">
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
-                           <img src="<?php echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block">
+                           <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block"> -->
+                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block">
+
                            <!-- <p class="text-white tag-line mb-0">Inventing Tomorrow</p>  -->
                         </div>
                      </div>
                   </div>
                </div>
+               <!-- Brand Logo & Sidebar Button End -->
                <!-- Search Bar -->
-               <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right align-item-center">
+               <div class="col-lg-8 col-md-12 col-sm-12 order-lg-2 order-3 text-lg-left text-right align-item-center">
                   <div class="header_search">
                      <div class="header_search_content">
                         <div class="header_search_form_container">
                            <form action="<?=base_url('cproduct/products')?>" method="get">
-                              <div class="input-group mb-3">
+                              <div class="input-group mb-1">
                                  <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary dropdown-toggle font-weight-400 category-button" type="button"
                                        data-toggle="dropdown">
@@ -250,48 +251,46 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                     </button>
                                  </div>
                               </div>
-                              </div>
                               <input type="hidden" name="categoryId" id="categoryId">
                            </form>
                         </div>
                      </div>
                   </div>
+               </div>
+               <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-3 col-md-6 col-sm-4 mb-sm-2 order-lg-3 order-2 text-lg-left text-right col-4">
-                     <div class="phone_cart d-flex flex-row align-item-center 
-                        justify-content-start justify-content-md-start justify-content-sm-center">
-                        <!-- Phone -->
-                        <div class="phone ml-1 mr-4 d-flex flex-row align-item-center justify-content-start">
-                           <div class="phone_icon mr-2">
-                            <a href="tel:+92 318 2294472">
-                              <img src="<?php echo base_url() ?>assets/img/hotline_phone_icon.png" alt="">
-                            </a>
-                           </div>
-                           <div class="phone_content text-white">
-                              <div class="phone_text">
-                                 <h6 class="mb-0">Hotline</h6>
-                              </div>
-                              <div class="phone_number">
-                                 <h6 class="font-weight-bold">+92 318 2294472</h6>
-                              </div>
-                           </div>
+                  <div class="col-lg-2 col-md-3 col-sm-3 mb-sm-2 order-lg-3 order-2 col-4">
+                     <div class="d-flex justify-content-between align-items-center">
+
+                        <div class="phone_cart">
+                           <!-- <i class="fas fa-user" id="user_icon"></i> -->
+                           <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
                         </div>
-                        <!-- Cart -->
-                        <div class="cart">
-                           <div class="cart_container d-flex flex-row align-item-center justify-content-start">
-                              <!-- Cart Icon -->
-                              <div class="cart_icon">
-                                 <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
-                                    <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
-                                    <div class="cart_icon_text">
-                                       <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
-                                    </div>
-                                 </a>
+
+                        <div class="cart_icon">
+                           <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
+                              <!-- <img src="<?php //echo base_url() ?>assets/img/basket.png" alt="" id="basket-img"> -->
+                              <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
+                              <div class="cart_icon_text">
+                                 <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
                               </div>
-                           </div>
+                           </a>
                         </div>
+
+                        <div class="sidebar-button">
+                           <button class="navbar-toggler" id="btn-sidebar"
+                           class="p-0"
+                            type="button" data-toggle="collapse"
+                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                 aria-expanded="false" aria-label="Toggle navigation">
+                                 <!-- <i class="fa fa-bars"></i> -->
+                                 <img src="<?php echo base_url() ?>assets/img/Menu-icon.png" alt="">
+                           </button>
+                        </div>
+
                      </div>
+
                   </div>
                </div>
             </div>
@@ -346,14 +345,52 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    </div>
 </div>
 
+
+
+  <!-- TESTING ADD TO CART -->
+
+  <div class="modal" id="userAccount" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0; min-height: 100vh;">
+      <div class="modal-content" style="min-height: 100vh;">
+        <div class="container-fluid">
+          <div class="row" style="height: 40vh; background-color: #EFF3F6;">
+
+              <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
+              </button>
+
+          </div>
+          <div class="row justify-content-center" style="background-color: #fff; height: 60vh;">
+            <div class="text-center my-3">
+               <p class="mb-0" style="font-size: 17px; font-weight: 500;">ACCOUNT</p>
+               <p style="font-size: 16px; font-weight: 500; margin-bottom: 10px;">Login to access all the features of 9oClock</p>
+               <button style="color: #fff; background-color: #1BAB32; font-size: 17px; font-weight: 500; border-color: #1BAB32; width: 390px; height: 60px;">LOGIN</button>
+               <p style="font-size: 16px; font-weight: 500; margin-top: 16px;">Don't have an account?</p>
+               <a href="<?=base_url().'Dashboard/user_authentication_email'?>" style="color: #fff; background-color: #1BAB32; font-size: 17px; font-weight: 500; border-color: #1BAB32; padding: 18px 161px;">SIGN UP</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+</div> 
+
+<!-- TESTING ADD TO CART ENDS -->
+
+
+
+
+<?php
+   if($PageName == 'Home') {
+      $this->load->view('include/banner', $BannerImages); 
+   }
+?>
+
 <div class="wrapper">
 
-<!-- Shopping Cart Modal End -->
-
-<!-- Cart Scripts Start -->
-
 <script type="text/javascript">
-   const currency = 'Rs';
+  //€  £
+   const currency = '€';
    function getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
@@ -435,6 +472,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    $('#add_to_cart_items').html(cart.length);
    $(addCartObj.parent().find('.remove-cart')[0]).show();
    addCartObj.html('Update to Cart');
+   if($(addCartObj.parent().find('.remove-cart')[0]).hasClass('remove-cart-main')){
+      addCartObj.hide();
+   }
    return true;
 }
 function removeAndUpdateFromCart(productJson, removeCartObj){
@@ -454,6 +494,7 @@ function removeAndUpdateFromCart(productJson, removeCartObj){
    // removeCartObj.hide();
    // $(removeCartObj.parent().find('.quantity')[0]).val('');
    // $(removeCartObj.parent().find('.add-cart')[0]).html('Add to Cart');
+
    loadCartData();
    $.notify(`${productJson.pName} removed from cart`, "warn");
    return true;
@@ -473,10 +514,16 @@ function loadCartData(){
          $($(allProducts[i]).find('.remove-cart')[0]).show();
          $($(allProducts[i]).find('.quantity')[0]).val(currentProduct[0].quantity);
          $($(allProducts[i]).find('.add-cart')[0]).html('Update to Cart');
+         if($($(allProducts[i]).find('.remove-cart')[0]).hasClass('remove-cart-main')){
+            $($(allProducts[i]).find('.add-cart')[0]).hide();
+         }
       }else{
          $($(allProducts[i]).find('.remove-cart')[0]).hide();
          $($(allProducts[i]).find('.quantity')[0]).val('');
          $($(allProducts[i]).find('.add-cart')[0]).html('Add to Cart');
+         if($($(allProducts[i]).find('.remove-cart')[0]).hasClass('remove-cart-main')){
+            $($(allProducts[i]).find('.add-cart')[0]).show();
+         }
       }
    }
    $('#add_to_cart_items').html(cart.length);
@@ -484,17 +531,28 @@ function loadCartData(){
 function changeQtyOfProductAndPutInCart(targetElem, operation){
    var prodContainer = $(targetElem.closest('.each-prod')[0]);
    var prodCountObj = prodContainer.find('.quantity')[0];
-   if(!prodCountObj || isNaN(prodCountObj.value)){
+   if((!prodCountObj || isNaN(prodCountObj.value)) && prodCountObj.tagName == 'INPUT'){
       $.notify(`Please add a valid quantity`, "error");
       return false;
    }
    else{
       var qty = prodCountObj.value == "" ? 0 : prodCountObj.value;
+      if(prodCountObj.tagName == 'P'){
+        var tempQty = parseInt(prodCountObj.innerHTML);
+        if(!isNaN(tempQty)){
+          qty = tempQty;
+        }
+        else{
+          qty = 0;
+        }
+      }
       if(qty <= 0 && operation == 'minus')
          return false;
       prodCountObj.value = operation == 'plus' ? ++qty : --qty;
+      if(prodCountObj.tagName == "P")
+        prodCountObj.innerHTML = qty;
       var addCartObj = $(prodContainer.find('.add-cart')[0]);
-      if(addCartObj.html().toLocaleLowerCase() == 'add to cart'){
+      if(addCartObj && addCartObj.html() && addCartObj.html().toLocaleLowerCase() == 'add to cart'){
          return true;
       }
       var cart = getCookie('baskit');
@@ -510,8 +568,9 @@ function changeQtyOfProductAndPutInCart(targetElem, operation){
           dataJson = dataJson[0];
       }
       if(qty == 0){
-         removeAndUpdateFromCart(dataJson, $(prodContainer.find('.remove-cart')[0]));
-         return true;
+        prodContainer.remove();
+        removeAndUpdateFromCart(dataJson, $(prodContainer.find('.remove-cart')[0]));
+        return true;
       }else{
          addOrUpdateCart(cart && cart.length > 0 ? cart : [], 
             dataJson, 
@@ -535,7 +594,7 @@ function removeItemFromShoppingCart(currentElem){
       cookieString += `expires=${oldDt}`;
    }
    document.cookie = cookieString;
-   currentElem.closest('tr').remove();
+   currentElem.closest('.cart-single-elem').remove();
    $.notify(`${prodName} removed from cart`, "warn");
    if(cartExceptCurrentProduct.length == 0){
       var cartObj = $('#shoppingCartBody');
@@ -624,31 +683,100 @@ function removeItemFromShoppingCart(currentElem){
              return false;
         }
      });
-  });
-  $(document).ready(function(){
+
     var allTxt = $(".card-text, .product-card-title");
     for (var i = 0; i < allTxt.length; i++) {
       $(allTxt[i]).attr("data-toggle", "tooltip");
     }
     $('[data-toggle="tooltip"]').tooltip();
+    $("#q").focusin(function() {
+      $('#searchingModal').fadeIn("slow");
+      $('#search-modal-trigger')[0].click();
+      $('#q2').focus();
+    });
   });
 
   function WindowsResizeFunc() {
     if ($(window).width() >  768) {
       $(".edibles-main .product-category").addClass('show');
-      $(".filter-brand-button").addClass('show');
-      $(".filter-weight-button").addClass('show');
-      $(".filter-type-checkbox").addClass('show');
       $("#InnerPageMenuContent").addClass('show');
     }
     else {
       $(".edibles-main .product-category").removeClass('show');
-      $(".filter-brand-button").removeClass('show');
-      $(".filter-weight-button").removeClass('show');
-      $(".filter-type-checkbox").removeClass('show');
       $("#InnerPageMenuContent").removeClass('show');
     }
   }
+
+
+
+
+    $(document).ready(function(){
+      $('.modal').off('resize');
+        var urlVars = getUrlVars();
+        $('#q2').on('keyup', function(e){
+           var currentElem = $(this);
+            var perpage = 20
+            $.ajax({
+                url : '<?=base_url("Cproduct/fetch");?>',
+                type : 'GET',
+                data : {
+                    'q' : currentElem.val(),
+                    'categoryId' : urlVars['categoryId'],
+                    'page': 0,
+                    'perpage' : perpage
+                },
+                dataType:'json',
+                success : function(data) {
+                    var productArea = $('#products-area');
+                    var baseUrl = '<?=base_url()?>';
+                    if(!data){
+                        productArea.empty();
+                    }else{
+                        var totalProducts = data.total;
+                        data = data.products;
+                        var cartTemplate = $('#clone-cart').text();
+                        productArea.empty();
+                        for (var i = 0; i < data.length; i++) {
+                            var discountPercentage = parseInt(((data[i].Price - data[i].SalePrice)/data[i].Price) * 100);
+                            var disText = null;
+                            if(discountPercentage != 0){
+                                var disString = `<h5 class="card-title float-left">${discountPercentage}% OFF</h5>`;
+                                var priceString = `<span class="product-discount"><del>${formatCurrency(data[i].Price,0)}</del></span>`;
+                            }
+                            var cartTemplateCopy = cartTemplate;
+                            if(disString)
+                                cartTemplateCopy = cartTemplateCopy.replace(/{discountString}/g, disString);
+                            else
+                                cartTemplateCopy = cartTemplateCopy.replace(/{discountString}/g, "");
+                            if(priceString)
+                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, priceString);
+                            else
+                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, "");
+                            cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].ProductImg);
+                            cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
+                            cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
+                            cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice,0));
+                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
+                            pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
+                            cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);
+                            productArea.append(cartTemplateCopy);
+                        }
+                    }
+                },
+                error : function(request,error)
+                {
+                    console.log("Request: " + JSON.stringify(request));
+                },
+                complete: function(data){
+                }
+            });
+        });
+    });
+
+
+
+
+
+
 </script>
-<!-- Auto Complete search script END-->
  

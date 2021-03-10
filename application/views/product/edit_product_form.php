@@ -45,6 +45,24 @@
     #TagPool a.tag:hover::after {
         border-left-color: crimson; 
     }
+    .times:hover{
+        cursor: pointer;
+    }
+    .times{
+        float: right;
+        color: red;
+        font-weight: 900;
+    }
+    .addvarient:hover{
+        cursor: pointer;
+    }
+    .addvarient{
+        float: left;
+        margin-top: 10px;
+    }
+    .vicon{
+        width: 45px;
+    }
 </style>
 <!--Edit customer start -->
 <div class="content-wrapper">
@@ -275,6 +293,62 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="varient" class="col-sm-3 col-form-label">Varient </label>
+                            <div class="col-sm-9">
+                                <table id="varientTable">
+                                    <tr>
+                                        <th>Icon</th>
+                                        <th>Varient Name</th>
+                                        <th>Image</th>
+                                        <th>Type</th>
+                                        <th>Value</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <?php 
+                                    if(!is_null($product_varient)){
+                                        for ($i=0; $i < count($product_varient); $i++) { ?>
+                                        <tr>
+                                            <td><img src="<?=base_url($product_varient[$i]["VImage"])?>" class="vicon"></td>
+                                            <td><input type='text' value="<?php echo $product_varient[$i]["VName"] ?>" name='vNames[]' class="form-control"></td>
+                                            <td><input type="file" value="<?php echo $product_varient[$i]["VImage"] ?>" name="vImage[]" class="form-control"></td>
+                                            <td style="width: 15%">
+                                                <select name='vType[]' onchange='changeVarientType(this)' class="form-control">
+                                                    <option <?php if($product_varient[$i]["VType"] == 'text')
+                                                    {
+                                                        echo 'selected';
+                                                    } ?>>text</option>
+                                                    <option <?php if($product_varient[$i]["VType"] == 'color')
+                                                    {
+                                                        echo 'selected';
+                                                    } ?>>color</option>
+                                                </select>
+                                            </td>
+                                            <td class='val'><input type="text" class="form-control" value="<?php echo $product_varient[$i]["VValue"] ?>" name="vValue[]"/></td>
+                                            <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
+                                        </tr>
+                                    <?php }
+                                    }
+                                    else{?>
+                                        <tr>
+                                            <td></td>
+                                            <td><input type='text' name='vNames[]' class="form-control"></td>
+                                            <td><input type="file" name="vImage[]" class="form-control"></td>
+                                            <td style="width: 15%">
+                                                <select name='vType[]' onchange='changeVarientType(this)' class="form-control">
+                                                    <option>text</option>
+                                                    <option>color</option>
+                                                </select>
+                                            </td>
+                                            <td class='val'><input type="text" class="form-control" name="vValue[]"/></td>
+                                            <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
+                                        </tr>
+                                    <?php } ?>
+                                </table>
+                                <div class="addvarient btn btn-success btn-large" onclick="addVarient()">Add Varient</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="Img" class="col-sm-3 col-form-label">&nbsp; </label>
                             <div class="col-sm-6">
                                 <img style="background: green; max-width: 100px;" src="<?=base_url()?>{ProductImg}">
@@ -290,6 +364,13 @@
                                         <button class="btn btn-default" id="addTag" type="button">Add</button>
                                     </span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Description" class="col-sm-3 col-form-label">Description </label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" name="Description" rows="5" id="Description" placeholder="Description">{Description}</textarea>
                             </div>
                         </div>
 
@@ -321,55 +402,83 @@
 
 
 <script>
-$(document).ready(function() {
-    $('#is_featured').val(<?=$is_featured; ?>);
-    $('#is_hot').val(<?=$is_hot; ?>);
+    $(document).ready(function() {
+        $('#is_featured').val(<?=$is_featured; ?>);
+        $('#is_hot').val(<?=$is_hot; ?>);
 
-    var tagsList = $('#allTags').val();
-    if(tagsList) {
-        var tagsArrayList = tagsList.split(",");
-        for(var i = 0; i < tagsArrayList.length; i++) {
-            $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}" title="Remove Tag">${tagsArrayList[i]}</a>`);
-        }
-    }
-
-    var tags = '';
-    $('#addTag').click(function(e) {
-        if($('#Tags').val()) {
-            var singleTag = $('#Tags').val();
-            if(!isDuplicate(singleTag)) {
-                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}" title="Remove Tag">${singleTag}</a>`);
-                $('#Tags').val('');
+        var tagsList = $('#allTags').val();
+        if(tagsList) {
+            var tagsArrayList = tagsList.split(",");
+            for(var i = 0; i < tagsArrayList.length; i++) {
+                $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${tagsArrayList[i]}" title="Remove Tag">${tagsArrayList[i]}</a>`);
             }
         }
+
+        var tags = '';
+        $('#addTag').click(function(e) {
+            if($('#Tags').val()) {
+                var singleTag = $('#Tags').val();
+                if(!isDuplicate(singleTag)) {
+                    $('#TagPool').append(`<a href="javascript:void(0)" class="tag" id="tag-${singleTag}" title="Remove Tag">${singleTag}</a>`);
+                    $('#Tags').val('');
+                }
+            }
+        });
+
+        $(document).on("click", "a.tag", function (e) { $(this).remove(); });
+
+        $('#product_update').submit(function() {
+            var tagsData = $('#TagPool a');
+            var tagsDatalength = $('#TagPool a').length;
+            var arrayTags = [];
+            var arrayList = "";
+            for(var i = 0; i < tagsDatalength; i++) {
+                arrayTags.push($('#TagPool a')[i].text);
+            }
+            arrayList = arrayTags.join(',');
+            $('#allTags').val(arrayList);
+        });
+
     });
 
-    $(document).on("click", "a.tag", function (e) { $(this).remove(); });
-
-    $('#product_update').submit(function() {
+    function isDuplicate(tag) {
         var tagsData = $('#TagPool a');
         var tagsDatalength = $('#TagPool a').length;
-        var arrayTags = [];
-        var arrayList = "";
         for(var i = 0; i < tagsDatalength; i++) {
-            arrayTags.push($('#TagPool a')[i].text);
+            if($('#TagPool a')[i].text == tag) {
+                return true;
+            }
         }
-        arrayList = arrayTags.join(',');
-        $('#allTags').val(arrayList);
-    });
-
-});
-
-function isDuplicate(tag) {
-    var tagsData = $('#TagPool a');
-    var tagsDatalength = $('#TagPool a').length;
-    for(var i = 0; i < tagsDatalength; i++) {
-        if($('#TagPool a')[i].text == tag) {
-            return true;
+        return false;
+    }
+    function addVarient(){
+        var varientTable = $('#varientTable');
+        varientTable.append(`<tr>
+                                <td><img src="" class="vicon"></td>
+                                <td><input type='text' name='vNames[]' class="form-control"></td>
+                                <td><input type="file" name="vImage[]" class="form-control"></td>
+                                <td style="width: 15%">
+                                    <select name='vType[]' onchange='changeVarientType(this)' class="form-control">
+                                        <option>text</option>
+                                        <option>color</option>
+                                    </select>
+                                </td>
+                                <td class='val'><input type="text" class="form-control" name="vValue[]"/></td>
+                                <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
+                            </tr>`);
+    }
+    function removeVarient(currentElem){
+        $(currentElem).closest('tr').remove();
+    }
+    function changeVarientType(currentElem){
+        var currentVarientVal = $(currentElem).val();
+        if(currentVarientVal == 'text'){
+            $(currentElem).closest('tr').find('.val').html('<input type="text" class="form-control" name="vValue[]"/>');
+        }
+        else if(currentVarientVal == 'color'){
+            $(currentElem).closest('tr').find('.val').html('<input type="color" class="form-control" name="vValue[]"/>');
         }
     }
-    return false;
-}
 </script>
 
 

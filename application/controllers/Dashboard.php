@@ -18,6 +18,7 @@ class Dashboard extends CI_Controller {
         $CI->load->model('Products');
         $CI->load->model('Units');
         $CI->load->model('Brands');
+        $CI->load->model('Banner');
         
         
         $query = $this->db->query("SELECT gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
@@ -29,9 +30,6 @@ class Dashboard extends CI_Controller {
         if ($query->num_rows() > 0) {
             $product_list =  $query->result_array();
         }
-        $assistant = $CI->lassistant->last_assistant();
-        // echo '<pre>'; print_r($assistant);die;
-        
         //$catArray = $CI->lcategory->get_category_hierarchy();
         $catArray = $CI->lcategory->get_category_hierarchy_in();
         //echo '<pre>'; print_r($catArray);die;
@@ -41,11 +39,16 @@ class Dashboard extends CI_Controller {
                 $products = $products['products'];
             $value->products = $products;
         }
+        $banner = $CI->Banner->get_banners();
+
+        //print_r($banner[0]['image_path']);die;
+
         $data = array(
             'title' => 'Sauda Express | Buy all your grocery here',
             'CatList' => $catArray,
             'ProdList' => $product_list,
-            'Assistant' => json_encode($assistant)
+            'BannerImages' => $banner,
+            'Page' => 'Home'
         );
         $content = $CI->parser->parse('include/home', $data, true);
         $this->template->full_html_view($content);
@@ -208,6 +211,79 @@ class Dashboard extends CI_Controller {
         // $content = $this->parser->parse('users/registration', $data, true);
         // $this->template->full_html_view($content);
     }
+
+    public function user_authentication_email() {
+        if(isset($_SERVER["HTTP_REFERER"])){
+            redirect(base_url("Dashboard/user_login_email?ret_url=".urlencode($_SERVER["HTTP_REFERER"])));
+        }
+        else
+            redirect(base_url("Dashboard/user_login_email"));
+        // $CI = & get_instance();
+        // $CI->load->model('Auths');
+        // $data['title'] = 'Sauda Express | Buy each and everything home grocery';
+        // $data['countries'] = $CI->Auths->get_country();
+        // $data['cities'] = $CI->Auths->get_city();
+        // $content = $this->parser->parse('users/registration', $data, true);
+        // $this->template->full_html_view($content);
+    }
+
+    public function user_login_email() {
+        $data['title'] = '9oClock | Buy each and everything home grocery';
+        $data['countries'] = $this->Auths->get_country();
+        $data['cities'] = $this->Auths->get_city();
+        $content = $this->parser->parse('users/registration_email', $data, true);
+        
+        $this->template->full_html_view($content);
+    }
+
+    public function email_exist() {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+        $email_address = $this->input->Post('email');
+
+        if(!isset($email_address)) {
+            $result['response'] = 'Email address is not valid';
+            $result['status'] = 'Error';
+            echo json_encode($result);
+            return;
+        }
+        // Check email in user_login table
+        $isEmailExist = $CI->Auths->is_email_exist($email_address);
+        if($isEmailExist) {
+            // check is otp is verified
+            $isOTPVerified = $CI->Auths->is_otp_verified($email_address);
+            if($isOTPVerified) {
+                if($isOTPVerified[0]["verified"] == "1") {
+                    // Check user detail
+                    $userDetail = $CI->Auths->check_user_detail($email_address);
+
+                    if($userDetail) {
+                        $result['response'] = "User is already available";
+                        $result['status'] = 'userAvailable'; // send to Login Page
+                        echo json_encode($result);
+                        return;
+                    }
+
+                    $result['response'] = "User is available but not fully registered.";
+                    $result['status'] = 'userNotRegister'; // send to Register Page
+                    echo json_encode($result);
+                    return;
+                }
+            }
+        }
+        $otp_response = $this->send_registeration_email($email_address);
+        if($otp_response->success) {
+            $result['response'] = $otp_response->responseMessage;
+            $result['status'] = 'OTPsend';
+            echo json_encode($result); // stay on the same page
+            return;
+        }
+        $result['response'] = "Please try again.";
+        $result['status'] = 'Stay';
+        echo json_encode($result); // stay on the same page
+        return;
+
+    }
    
     
     // Verify Phone Number
@@ -251,6 +327,48 @@ class Dashboard extends CI_Controller {
         }
     
     }
+
+    // Email Verify
+    public function send_registeration_email($email_address) {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
+        if(!isset($email_address)) {
+            $result['response'] = 'Email address is not valid';
+            $result['status'] = 'Error';
+            return $result;
+        }
+
+        // step 1: add an entry in otp table
+        $fourRandomDigit = mt_rand(1000,9999);
+        $dateTime = new DateTime();
+        $date = $dateTime->format('Y-m-d H:i:s');
+        $currentDate = strtotime($date);
+        $futureDate = $currentDate+(40);
+        $formatDate = date("Y-m-d H:i:s", $futureDate);
+
+        $result = $CI->Auths->insert_otp_data_email($email_address, $fourRandomDigit, $formatDate);
+        if($result) {
+            $returnobj = (object)[
+                'success' => TRUE,
+                'responseMessage' => 'We have sent you a 4-digit code on you phone, Please Verify'
+            ];
+            return $returnobj;
+        } 
+        else {
+            $returnobj = (object)[
+                'success' => FALSE,
+                'responseMessage' => 'Something went wrong, Please resend code'
+            ];
+            return $returnobj;
+        }
+    }
+
+
+
+
+
+
 
     // Welcome Screen
     public function welcome() {

@@ -19,12 +19,13 @@
 							<span>1</span>   
 						</div>                  
 						<div class="sign-in-content ml-4">
-							<h4 class="mb-1">Phone Number Verification</h4>
+							<!-- <h4 class="mb-1">Phone Number Verification</h4> -->
+							<h4 class="mb-1">Email Verification</h4>
 							<div class="errorNotify my-4"></div>
-							<span class="d-block mb-4">We need your phone number so that we can update you about your order.</span>
-							<span class="d-block mb-3">Enter your mobile number</span>
+							<span class="d-block mb-4">We need your email address so that we can update you about your order.</span>
+							<span class="d-block mb-3">Enter your email address</span>
 						
-							<div class="input-group mb-3">
+							<!-- <div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text font-size-26 bg-white" id="countryCode">+92</span>
 									<span class="input-group-text font-size-26 px-0 bg-white border-l-none" id="dash">-</span>
@@ -36,7 +37,28 @@
 										Verify Number
 									</a>
 								</div>
+							</div> -->
+
+
+							<!-- Email Address Work -->
+
+							<div class="input-group mb-3">
+								<!-- <div class="input-group-prepend">
+									<span class="input-group-text font-size-26 bg-white" id="countryCode">+92</span>
+									<span class="input-group-text font-size-26 px-0 bg-white border-l-none" id="dash">-</span>
+									<span class="input-group-text font-size-26 bg-white border-l-none" id="startingCode">3</span>
+								</div> -->
+								<input type="text" class="form-control mr-0" id="inputEmail" autofocus>
+								<div class="input-group-append m-0 phone-Submit-Btn">
+									<a href="javascript:void(0)" class="btn btn-dark px-4 py-3" type="submit" id="emailSubmit">
+										Verify Email
+									</a>
+								</div>
 							</div>
+
+							<!-- Email Address Work Ends -->
+
+
 							<span class="d-block phoneInputFooterText">* You will receive a sms shortly</span>
 							<span class="d-block phoneInputFooterText">Existing user will log in right after verifying the confirmation code</span>
 						</div>
@@ -284,7 +306,7 @@
 		// Phone Verification Submit
 		$('#phoneSubmit').click(function() {
 			var phoneNumber = $('#inputPhone').val();
-			var phoneRegEx = /^[0-9]{9}$/;debugger;
+			var phoneRegEx = /^[0-9]{9}$/;
 			if(!phoneNumber.match(phoneRegEx)) {
 				$.notify("Phone number is wronng", "error");
 			}
@@ -324,6 +346,60 @@
 			}
 			$("digit-1").select().focus();
 		});
+
+		// Email Work
+		// email Verification Submit
+		$('#emailSubmit').click(function() {
+			var emailAddress = $('#inputEmail').val();
+			var emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+			if(!emailAddress.match(emailRegEx)) {
+				$.notify("Email address is wronng", "error");
+			}
+			else {
+				// phoneNumber = '923' + emailAddress;
+				$.ajax({
+					url: "<?php echo base_url(); ?>Dashboard/send_registeration_email",
+					method: "POST",
+					data: { email: emailAddress },
+					dataType: "json",
+					success: function(data) {
+						if(data.success) {
+							//responseMessage
+							$('.errorNotify').html(`<div style='background-color: #75ff7e; border-radius: 3px; padding:5px;'><small>` + data.responseMessage + `</small></div>`);
+							$('.errorNotify').show();
+							var currentScreenWidth = $(window).width();
+							if(currentScreenWidth <= 576) {
+								$('.emailInputFooterText').remove();
+							}
+							setTimeout(function() {
+								
+								$('.errorNotify').hide();
+								$('#emailForm').hide();
+								$('#otpForm').show();
+								$("#digit-1").focus();
+							}, 2000);
+						}
+						else {
+							$.notify(data.responseMessage, "error");
+						}
+
+					},
+					error: function(data) {
+						$.notify(data.responseMessage, "error");
+					}
+				});
+			}
+			$("digit-1").select().focus();
+		});
+
+
+
+
+
+
+
+
+
 
 		// Submit OTP
 		$('#otpSubmit').click(function() {

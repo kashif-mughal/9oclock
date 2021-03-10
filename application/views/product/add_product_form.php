@@ -46,6 +46,15 @@
     #TagPool a.tag:hover::after {
         border-left-color: crimson; 
     }
+    .times:hover{
+        cursor: pointer;
+        float: right;
+        color: red;
+        font-weight: 900;
+    }
+    .addvarient:hover{
+        cursor: pointer;
+    }
 </style>
 
 <div class="content-wrapper">
@@ -239,6 +248,35 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="varient" class="col-sm-3 col-form-label">Varient </label>
+                            <div class="col-sm-9">
+                                <table id="varientTable">
+                                    <tr>
+                                        <th>Varient Name</th>
+                                        <th>Image</th>
+                                        <th>Type</th>
+                                        <th>Value</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type='text' name='vNames[]' class="form-control"></td>
+                                        <td><input type="file" name="vImage[]" class="form-control"></td>
+                                        <td style="width: 15%">
+                                            <select name='vType[]' onchange='changeVarientType(this)' class="form-control">
+                                                <option>text</option>
+                                                <option>color</option>
+                                            </select>
+                                        </td>
+                                        <td class='val'><input type="text" class="form-control" name="vValue[]"/></td>
+                                        <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
+                                    </tr>
+                                </table>
+                                <div style="float: right;margin-top: 10px;" class="addvarient btn btn-success btn-large" onclick="addVarient()">Add Varient</div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label for="Tags" class="col-sm-3 col-form-label">Tags </label>
                             <div class="col-sm-6">
                                 <div class="input-group">
@@ -247,6 +285,13 @@
                                         <button class="btn btn-default" id="addTag" type="button">Add</button>
                                     </span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Description" class="col-sm-3 col-form-label">Description </label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" name="Description" rows="5" id="Description" placeholder="Description"></textarea>
                             </div>
                         </div>
 
@@ -320,6 +365,33 @@
             }
         }
         return false;
+    }
+    function addVarient(){
+        var varientTable = $('#varientTable');
+        varientTable.append(`<tr>
+                                <td><input type='text' name='vNames[]' class="form-control"></td>
+                                <td><input type="file" name="vImage[]" class="form-control"></td>
+                                <td style="width: 15%">
+                                    <select name='vType[]' onchange='changeVarientType(this)' class="form-control">
+                                        <option>text</option>
+                                        <option>color</option>
+                                    </select>
+                                </td>
+                                <td class='val'><input type="text" class="form-control" name="vValue[]"/></td>
+                                <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
+                            </tr>`);
+    }
+    function removeVarient(currentElem){
+        $(currentElem).closest('tr').remove();
+    }
+    function changeVarientType(currentElem){
+        var currentVarientVal = $(currentElem).val();
+        if(currentVarientVal == 'text'){
+            $(currentElem).closest('tr').find('.val').html('<input type="text" class="form-control" name="vValue[]"/>');
+        }
+        else if(currentVarientVal == 'color'){
+            $(currentElem).closest('tr').find('.val').html('<input type="color" class="form-control" name="vValue[]"/>');
+        }
     }
 </script>
 

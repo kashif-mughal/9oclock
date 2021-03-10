@@ -51,6 +51,7 @@
         <link href="<?php echo base_url() ?>assets/dist/css/styleBD.min.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>assets/css/select2.min.css" rel="stylesheet" type="text/css"/>
         <!--<link href="<?php echo base_url() ?>assets/css/select2.sortable.css" rel="stylesheet" type="text/css"/>-->
+
         <?php
         if ($Web_settings[0]['rtr'] == 1) {
             ?>
@@ -65,6 +66,9 @@
         <script src="<?php echo base_url() ?>assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js" type="text/javascript"></script>
 
+        <!-- CKEditor 4 -->
+        <script src="//cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
+
 
         <!-- Date Time Picker -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/dateRangePicker/daterangepicker.css" />
@@ -74,6 +78,9 @@
 
     </head>
     <body class="hold-transition sidebar-mini">
+
+
+
         <div class="se-pre-con"></div>
 
         <!-- Site wrapper -->
@@ -128,6 +135,100 @@
 
         <script type="text/javascript">
             $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+
+            $(document).ready(function() {
+                $('.banner_image_list').sortable({
+                    update: function() {
+                        $(this).children().each(function(index) {
+                            if($(this).attr('data-position') != (index)) {
+                                $(this).attr('data-position', (index)).attr('updated');
+                            }
+                        });
+                        UpdateNewPosition();
+                    } // update
+                }); // sortable
+
+                CKEDITOR.replace('Description');
+
+                $('.image_delete').click(function() {
+                    var currentElem = $(this);
+                    var image_id = $(this).attr('data-index');
+                    var x = confirm("Are You Sure,Want to Delete ?");
+                    if (x == true) {
+                        $.ajax({
+                            type: "POST",
+                            url: '<?php echo base_url('Cbanner/image_delete'); ?>',
+                            data: {id: image_id},
+                            // cache: false,
+                            success: function (datas) {
+                                console.log(datas);
+                                if(datas == 'Successfully deleted'){
+                                    alert("Banner removed successfully");
+                                    currentElem.closest(".image-container").remove();
+                                }
+                            },
+                            error: function(error) {
+                                console.log(error)
+                            }
+                        });
+                    }
+                }); 
+            });
+
+            function EditBannerImage(image_id) {
+                var url= '<?php echo base_url('Cbanner/edit_image/'); ?>' + image_id;
+                window.location = url;
+            }
+
+            function UpdateNewPosition() {
+                var position = [];
+                $('.banner_image_list img').each(function(index) { 
+                    position.push({ 'image_id': $(this).attr('data-index'), 'image_order': index+1 });
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '<?php echo base_url('Cbanner/update_image_list'); ?>',
+                    data: {position: JSON.stringify(position)},
+                    dataType: 'json',
+                    // cache: false,
+                    success: function (datas) {
+                        console.log(datas);
+                        if(datas == 1){
+                            alert("Order saved successfully");
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error)
+                    }
+                });
+            }
+
+            document.querySelectorAll('.dropzone-input').forEach(inputElement => {
+                const dropZoneElement = inputElement.closest('.dropzone');
+
+                dropZoneElement.addEventListener("dragover", e => {
+                    e.preventDefault();
+                    dropZoneElement.classList.add("dropzone-over");
+                });
+
+                ["dragleave", "dragend"].forEach(type => {
+                    dropZoneElement.addEventListener(type, e => {
+                        dropZoneElement.classList.remove('dropzone-over');
+                    });
+                });
+
+                dropZoneElement.addEventListener("drop", e => {
+                    e.preventDefault();
+                    if(e.dataTransfer.files.length) {
+                        inputElement.files = e.dataTransfer.files;
+                        console.log(inputElement.files);
+                    }
+                });
+            });
+
+            // -------------------------------
+
             $( function() {
                 $( "#sortable-sss" ).sortable({
                     axis: 'y'
@@ -144,10 +245,13 @@
                         console.log($(this).attr('data-id')); 
                     });
                 });
-                
+                                
                 //$( "#sortable-sss" ).disableSelection();
               });
             
+            
+            
+
             $("#home_page_cat").select2({
                 placeholder: 'Select a Category'
             }).on("select2:select", function (evt) {
@@ -167,6 +271,8 @@
                     console.log(""+$("#home_page_cat").val())
                 }
             });
+
+            
             
             orderSortedValues = function() {
             var value = ''

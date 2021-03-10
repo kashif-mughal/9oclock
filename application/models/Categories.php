@@ -158,10 +158,11 @@ class Categories extends CI_Model {
             $whereString .= "AND gp.Brand = $brand ";
         }
         $query = "SELECT 
-                        gp.*, gu2.UnitName SaleUnitName, 
+                        gpv.*, gp.*, gu2.UnitName SaleUnitName, 
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
                     LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
+                    LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
                     left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
                     WHERE gp.Status = 1 $whereString AND 
                     gp.Category IN(
@@ -173,6 +174,7 @@ class Categories extends CI_Model {
                         count(1) total
                     FROM grocery_products gp
                     LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
+                    LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
                     left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
                     WHERE gp.Status = 1 $whereString AND 
                     gp.Category IN(
@@ -189,11 +191,46 @@ class Categories extends CI_Model {
         $query = $this->db->query($query);
         if ($query->num_rows() > 0) {
             $returnData["products"] = $query->result_array();
+            return $this->product_data_after_varient_sort($returnData);
+            echo '<pre>'; print_r($returnData);die;
             return $returnData;
         }
         else{
             return false;
         }
+    }
+    private function product_data_after_varient_sort($returnData){
+        $tempProducts = array();
+        for ($i=0; $i < count($returnData['products']); $i++) { 
+            $key = array_search($returnData['products'][$i]['ProductId'], array_column($tempProducts, 'ProductId'));
+            //echo '<pre>';print_r($key);
+            if(!$key){
+                $returnData['products'][$i]['VarientData'] = null;
+                if(!empty($returnData['products'][$i]['VName'])){
+                    $returnData['products'][$i]['VarientData'] = array();
+                    array_push($returnData['products'][$i]['VarientData'], array(
+                        'VId' => $returnData['products'][$i]['Id'],
+                        'VName' => $returnData['products'][$i]['VName'],
+                        'VType' => $returnData['products'][$i]['VType'],
+                        'VImage' => $returnData['products'][$i]['VImage'],
+                        'VValue' => $returnData['products'][$i]['VValue'],
+                        'VPId' => $returnData['products'][$i]['ProductId']
+                    ));
+                }
+                array_push($tempProducts, $returnData['products'][$i]);
+            }else{
+                array_push($tempProducts[$key]['VarientData'], array(
+                    'VId' => $returnData['products'][$i]['Id'],
+                    'VName' => $returnData['products'][$i]['VName'],
+                    'VType' => $returnData['products'][$i]['VType'],
+                    'VImage' => $returnData['products'][$i]['VImage'],
+                    'VValue' => $returnData['products'][$i]['VValue'],
+                    'VPId' => $returnData['products'][$i]['ProductId']
+                ));
+            }
+        }
+        $returnData['products'] = $tempProducts;
+        return $returnData;
     }
     function update_category_sort_order($catData){
         try {
