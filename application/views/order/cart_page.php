@@ -138,8 +138,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       vertical-align: middle;
     }
 </style>
-<script type="text/javascript">$('body').hide();</script>
-<div id="main-page" style="display: none;">
+
+<div id="main-page">
         <!-- Bread Crumb -->
         <div class="bread_crumb">
             <div class="container">
@@ -159,8 +159,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 
         <section class="cart-page main-content">
-            <div class="content-box1" style="margin-left: -3px;" id="shoppingCartBody2">
-            </div>
             <div class="container">
                 <!-- Alert Message -->
                 <?php
@@ -252,7 +250,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                                     </div>
                                     <div class="orderbox-footer d-flex justify-content-between mx-3">
                                         <h6>TOTAL</h6>
-                                        <h6 class="total-price font-size-15 sub-total grand-amount"></h6>
+                                        <h6 class="total-price font-size-15 sub-total" id="grand-amount"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -293,73 +291,27 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
             </div>
         </section>
-</div>
-
-
-    <!-- TESTING ADD TO CART -->
-<!-- 
-    <a href="#addtoCartModal" role="button" class="btn btn-primary" data-toggle="modal">Launch addtoCartModal</a>
- -->
-    <div class="modal" id="addtoCartModal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0; min-height: 100vh;">
-          <div class="modal-content" style="min-height: 100vh;">
-            <div class="container-fluid" style="min-height: 100vh;">
-              <div class="row d-flex justify-content-start align-items-center" style="background-color: var(--secondary-color);">
-                  <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none;" type="button" class="close" aria-label="Close">
-                    <i class="fas fa-arrow-left" onclick="history.back();" style="color: #fff; font-size: 20px;"></i>
-                  </button>
-                  <p class="mb-0" style="font-size: 22px; font-weight: 600; margin-left: 10px; color: #fff;">Cart</p>
-              </div>
-              <div id="cart-area" style="margin-bottom: 70px;">
-                <section style="display: none; margin-bottom: 10px; " class="empty-cart-page main-content">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="content-box1">
-                            <div class="container">
-                              <div class="emptycart">
-                                <p>
-                                  <h3>SHOPPING CART</h3>
-                                  <span>You have no items in your shopping cart.</span><br>
-                                  <b>
-                                    <span>Click <a href="<?=base_url()?>">here</a> to continue shopping.</span>
-                                  </b>
-                                </p>
-                              </div>
-                            </div>
-                        </div>
+        <section style="display: none;" class="empty-cart-page main-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content-box1">
+                    <div class="container">
+                      <div class="emptycart">
+                        <p>
+                          <h3>SHOPPING CART</h3>
+                          <span>You have no items in your shopping cart.</span><br>
+                          <b>
+                            <span>Click <a href="<?=base_url()?>">here</a> to continue shopping.</span>
+                          </b>
+                        </p>
                       </div>
                     </div>
-                </section>
+                </div>
               </div>
-
-
-              <div class="row d-flex justify-content-start align-items-center py-3 px-3" style="background-color: var(--secondary-color); position: fixed; bottom: 0; width: 100%;">
-                  <button class="d-flex justify-content-between align-items-center mb-0" style="width: 100%; background-color: transparent; border: none; height: 100%; color: #fff; font-size: 18px;  font-weight: 500;">
-                    <a href="<?=base_url("corder/checkout_form")?>" style="color:white;"><p class="mb-0">Checkout</p></a>
-                    <div>
-                      <p class="d-inline pr-2 grand-amount" style="border-right: 2px solid #fff;"></p>
-                      <i class="fas fa-chevron-right" style="color: #fff;"></i>
-                    </div>
-                  </button>
-              </div>
-
             </div>
-          </div>
-      </div>
-    </div> 
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#addtoCartModal').modal('show');
-            $('body').show();
-        });
-    </script>
-
-    <!-- TESTING ADD TO CART ENDS -->
-
-    <div class="seperatorDiv my-5"></div>
-
-
+        </section>
+    </div>
 <script type="text/javascript">
     var baskit = getCookie('baskit');
     var selectedAddress = false;
@@ -407,7 +359,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             subTotal = sum;
             $('#copun-form #ov').val(subTotal);
              $('.subtotal-price').html(formatCurrency(sum));
-             $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
+             $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
             if(cart.length >= 15){
                 $('#delivery-date').html('Next working day');
             }else{
@@ -425,7 +377,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
     function loadShoppingCart1(){
        var cartBody = $('#shoppingCartBody1');
-       var cartBody2 = $('#cart-area');
        var cart = getCookie('baskit');
        $(cartBody.find('tbody')).empty();
        if(cart){
@@ -448,7 +399,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
           <td>
             <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-              <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+              <div kashif class="quantity-area d-flex justify-content-center align-items-center mt-2">
                   <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}">
                   <span class="d-block quantity-button">
                      <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
@@ -465,49 +416,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           </td>
           </tr>`;
 
-          var eachProdTemplate2 = `<div class="each-prod row cart-single-elem" style="background-color: #fff; padding: 20px 20px 0px 0px;">
-                    <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-                    <div class="d-flex justify-content-between align-items-between" style="width: 100%;">
-                      <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
-                        <img src="{imgValue}" alt="" style="width: 100px;">
-                        <div class="d-flex flex-column justify-content-between align-items-stretch" style="height:100%; width: 100%;">
-                          <div>
-                            <p class="mb-1" style="color: #333; font-size:17px; font-weight:600; max-height: 2.8rem !important; line-height: 1.3em !important;     overflow: hidden !important;">{prodName}</p>
-                            <div class="d-flex justify-content-between align-items-end" style="width:100%;">
-                              <div class="d-flex flex-column justify-content-start align-items-start" style="width:100%;">
-                                <p style="color: #A9A9A9; font-size: 15px; font-weight: 500;">{unitValue}</p>
-                                <p class="info-bottom mb-0" style="font-size:15px; font-weight: 600; color: #409244;">{price}</p>
-                              </div>
-
-                              <div class="d-flex flex-column justify-content-between align-items-end" style="height:100%; ">
-                              <button class="remove-item-from-cart" data-id="{pId}" data-name="{prodName}" style="color: #ECA5A5; font-size: 22px; background-color: transparent; border:none; padding: 0px;">
-                                <i class="far fa-trash-alt"></i>
-                              </button>
-                              <div class="add-to-cart-btn d-flex flex-row align-items-center p-2" style="border: 1px solid #448AFF; border-radius: 18px 18px 18px 18px;">
-                                <button style="background-color: transparent; border:none; padding: 0px;">
-                                  <i class="fas fa-minus qty-mns"></i>
-                                </button>
-                                <p class="px-3 mb-0 quantity" style="color: #619CFF; font-weight: 500;">{qty}</p>
-                                <button style="background-color: transparent; border:none; padding: 0px;">
-                                  <i class="fas fa-plus qty-pls"></i>
-                                </button>
-                              </div>
-                            </div>
-
-                            </div>
-                            
-                          </div>
-                          
-                        </div>
-                      </div>
-                      
-                    </div>
-                    </div>`;
-
           var sum = 0;
           for (var i = 0; i < cart.length; i++) {
              var eachProdTemplateCopy1 = eachProdTemplate1;
-             var eachProdTemplateCopy2 = eachProdTemplate2;
              sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{pId}/g, cart[i].id);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{imgValue}', cart[i].img);
@@ -515,19 +426,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{price}', formatCurrency(cart[i].price));
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
-
-             eachProdTemplateCopy2 = eachProdTemplateCopy2.replace(/{pId}/g, cart[i].id);
-             eachProdTemplateCopy2 = eachProdTemplateCopy2.replace('{imgValue}', cart[i].img);
-             eachProdTemplateCopy2 = eachProdTemplateCopy2.replace(/{prodName}/g, `${cart[i].pName}`);
-             eachProdTemplateCopy2 = eachProdTemplateCopy2.replace(/{unitValue}/g, `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
-             eachProdTemplateCopy2 = eachProdTemplateCopy2.replace('{price}', formatCurrency(cart[i].price));
-             eachProdTemplateCopy2 = eachProdTemplateCopy2.replace('{qty}', cart[i].quantity);
-             eachProdTemplateCopy2 = eachProdTemplateCopy2.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
-
              //append newly created row in card body
              $(cartBody.find('tbody')).append(eachProdTemplateCopy1);
-             cartBody2.append(eachProdTemplateCopy2);
-            }
+             }
 
           }
           else{
@@ -554,12 +455,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             subTotal = sum;
             $('#copun-form #ov').val(subTotal);
             $('.subtotal-price').html(formatCurrency(sum));
-            $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
+            $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
         }
 
         if(copun){
             if(copun.copunMinPurchase > subTotal){
-                $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
+                $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
                 $('#cDiscountValue').html("");
                 $('#cDiscount').removeClass('d-flex');
                 $('#cDiscount').hide();
@@ -573,10 +474,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           var discountedValue = 0.00;
           if(copun.copunDiscountType == "Amount"){
             $('#cDiscountValue').html(formatCurrency(-copun.copunDiscountValue));
-            $('.grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
+            $('#grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
           }else{
             $('#cDiscountValue').html(copun.copunDiscountValue + "%");
-            $('.grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
+            $('#grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
           }
           $('#cDiscount').addClass('d-flex');
         }else{

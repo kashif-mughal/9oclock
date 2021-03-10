@@ -53,73 +53,72 @@
                     </div>
                 </div>
             </div>
-            
+            <div style="display: none;">
+                <script type="text" id="clone-cart">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="featured-products-content mb-2 d-flex justify-content-between">
+                        <div class="card each-prod product-card-inner">
+                            <div class="card-body p-0">
+                                    <div class="header">
+                                        {discountString}
+                                        <!--<a href="#" class="add_to_favorite">
+                                            <i class="fas fa-heart float-right"></i>
+                                        </a>-->
+                                    </div>
+                                </div>
+                                <a href="{productId}">
+                                <img class="img-fluid text-center" src="{imgUrl}" alt="Card image cap">
+                                </a>
+                                <div class="product-info text-center">
+                                    <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
+                                    <p class="card-text product-card-inner-weight">{unitName}</p>
+                                    <p class="card-text product-card-inner-price d-inline">{salePrice}</p>
+                                    {priceString}
+                                    <div class="quantity-area d-flex justify-content-center align-items-center mt-2 ml-3">
+                                        <span class="d-inline-flex quantity-text mr-1">Qty</span>
+                                        <input type="text" class="d-inline-flex quantity-input quantity">
+                                        <span class="d-block quantity-button">
+                                            <a href="javascript:void(0);" class="qty-pls d-block">+</a>
+                                            <div class="separator"></div>
+                                            <a href="javascript:void(0);" class="qty-mns d-block">-</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
+                                data-json="{pjsonString}"
+                                >Add to Cart</a>
+                                <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                                data-json="{pjsonString}"
+                                >Remove From Cart</a>
+                        </div>
+
+                    </div>
+                </div>
+                </script>
+            </div>
+            <style>
+                .main-content {
+                    margin-top: 0 !important;
+                }
+                .main-content .featured-products-content .card .card-body h5{
+                    width: 80%;
+                    background: #ff2524d1;
+                    color: #fff;
+                    z-index: 1;
+                    text-align: center;
+                    font-size: 14px;
+                    position: absolute;
+                    top: 60px;
+                    text-transform: uppercase;
+                    margin: 0px 20px;
+                    padding: 10px 0px;
+                    border-radius: 0px 20px;
+                    font-weight: 700;
+                }
+            </style>
             <div class="col-xl-9 col-lg-9 col-md-12 my-3 pr-0">
                 <div class="container bg-transparent">
                     <div class="row" id="products-area">
-                        <div style="display: none;">
-                            <script type="text" id="clone-cart">
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="featured-products-content mb-2 d-flex justify-content-between">
-                                    <div class="card each-prod product-card-inner">
-                                        <div class="card-body p-0">
-                                                <div class="header">
-                                                    {discountString}
-                                                    <!--<a href="#" class="add_to_favorite">
-                                                        <i class="fas fa-heart float-right"></i>
-                                                    </a>-->
-                                                </div>
-                                            </div>
-                                            <a href="{productId}">
-                                            <img class="img-fluid text-center" src="{imgUrl}" alt="Card image cap">
-                                            </a>
-                                            <div class="product-info text-center">
-                                                <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
-                                                <p class="card-text product-card-inner-weight">{unitName}</p>
-                                                <p class="card-text product-card-inner-price d-inline">{salePrice}</p>
-                                                {priceString}
-                                                <div class="quantity-area d-flex justify-content-center align-items-center mt-2 ml-3">
-                                                    <span class="d-inline-flex quantity-text mr-1">Qty</span>
-                                                    <input type="text" class="d-inline-flex quantity-input quantity">
-                                                    <span class="d-block quantity-button">
-                                                        <a href="javascript:void(0);" class="qty-pls d-block">+</a>
-                                                        <div class="separator"></div>
-                                                        <a href="javascript:void(0);" class="qty-mns d-block">-</a>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
-                                            data-json="{pjsonString}"
-                                            >Add to Cart</a>
-                                            <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
-                                            data-json="{pjsonString}"
-                                            >Remove From Cart</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                            </script>
-                        </div>
-                        <style>
-                        .main-content {
-                            margin-top: 0 !important;
-                        }
-                            .main-content .featured-products-content .card .card-body h5{
-                                width: 80%;
-                                background: #ff2524d1;
-                                color: #fff;
-                                z-index: 1;
-                                text-align: center;
-                                font-size: 14px;
-                                position: absolute;
-                                top: 60px;
-                                text-transform: uppercase;
-                                margin: 0px 20px;
-                                padding: 10px 0px;
-                                border-radius: 0px 20px;
-                                font-weight: 700;
-                            }
-                        </style>
                         
                         <?php foreach($ProdList as $value) { 
                             
@@ -222,31 +221,31 @@
 <script type="text/javascript">
     var page = 0;
     $(document).ready(function(){
-        $('#load-more').on('click', function(){
+        $('#q').keydown(function(){
             var currentElem = $(this);
             var urlVars = getUrlVars();
             $(currentElem.find('#spinner')[0]).addClass('spinner-border text-info');
-            currentElem.attr('disabled', true);
             var perpage = urlVars['perpage'] ? urlVars['perpage'] : -1;
             $.ajax({
                 url : '<?=base_url("Cproduct/fetch");?>',
                 type : 'GET',
                 data : {
-                    'q' : urlVars['q'],
+                    'q' : currentElem.val(),
                     'categoryId' : urlVars['categoryId'],
-                    'page': ++page,
-                    'perpage' : perpage
+                    'page': 0,
+                    'perpage' : 40
                 },
                 dataType:'json',
                 success : function(data) {
                     var baseUrl = '<?=base_url()?>';
                     if(!data){
-                        currentElem.hide();
+                        //currentElem.hide();
                     }else{
                         var totalProducts = data.total;
                         data = data.products;
                         var cartTemplate = $('#clone-cart').text();
                         var productArea = $('#products-area');
+                        productArea.empty();
                         for (var i = 0; i < data.length; i++) {
                             var discountPercentage = parseInt(((data[i].Price - data[i].SalePrice)/data[i].Price) * 100);
                             var disText = null;
