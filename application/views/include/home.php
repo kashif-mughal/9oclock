@@ -46,13 +46,13 @@
                                          </div>
                                      </div>
                                      <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
-                                     <div class="product-info text-left">
-                                         <p class="card-text product-card-inner-name ml-2" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                                         <p class="card-text product-card-inner-weight ml-2">
+                                     <div class="product-info text-left px-2">
+                                         <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
+                                         <p class="card-text product-card-inner-weight">
                                              <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
                                          <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p> -->
                                          <?php if($discountPercentage != 0) { ?> 
-                                             <span class="product-discount ml-2"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
+                                             <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
                                          <?php } 
                                          $productObject = (object) [
                                             'id' => $value['ProductId'],
@@ -64,7 +64,7 @@
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
-                                          <div class="input-group" style="width: 90%;">
+                                          <div class="input-group">
                                              <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
                                                 <option selected>Variant</option>
                                                 <option value="1">1kg</option>
@@ -83,14 +83,16 @@
                                          </div>
                                          <?php } ?>
                                      </div>
-                                     <?php if($value['stock'] == '1') { ?>
-                                     <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
-                                     data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                     >Add to Cart</a>
-                                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
-                                     data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                     >Remove From Cart</a>
-                                     <?php } ?>
+                                     <div class="d-flex align-items-center justify-content-center">
+                                       <?php if($value['stock'] == '1') { ?>
+                                       <a href="javascript:void(0);" class="product-card-btn add-cart"
+                                       data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                       >Add to Cart</a>
+                                       <a href="javascript:void(0);" style="display: none;" class="product-card-btn remove-cart"
+                                       data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                       >Remove From Cart</a>
+                                       <?php } ?>
+                                    </div>
                                  </div>
                              </div>
                      <?php } ?>

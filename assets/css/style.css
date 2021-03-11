@@ -95,7 +95,7 @@ select.minimal {
    text-decoration: none;
    color: #ffffff;
    padding: 8px 80px;
-   font-size: 16px;
+   font-size: 14px;
 }
 
 .inner-product-content {
@@ -1329,7 +1329,7 @@ button.category-button:active {
 }
 .product-info {
    margin-top: 4px;
-   padding: 8px 4px 0px 4px;
+   /* padding: 8px 4px 0px 4px; */
 }
 .product-name {
    font-size: 16px;
