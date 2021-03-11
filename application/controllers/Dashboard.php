@@ -44,7 +44,7 @@ class Dashboard extends CI_Controller {
         //print_r($banner[0]['image_path']);die;
 
         $data = array(
-            'title' => '9o'Clock | Buy all your grocery here',
+            'title' => '9o\'Clock | Buy all your grocery here',
             'CatList' => $catArray,
             'ProdList' => $product_list,
             'BannerImages' => $banner,
@@ -191,7 +191,7 @@ class Dashboard extends CI_Controller {
     #============User Authentication=======#
 
     public function user_login(){
-        $data['title'] = '9o'Clock | Buy each and everything home grocery';
+        $data['title'] = '9o\'Clock | Buy each and everything home grocery';
         $data['countries'] = $this->Auths->get_country();
         $data['cities'] = $this->Auths->get_city();
         $content = $this->parser->parse('users/registration', $data, true);
@@ -205,7 +205,7 @@ class Dashboard extends CI_Controller {
             redirect(base_url("Dashboard/user_login"));
         // $CI = & get_instance();
         // $CI->load->model('Auths');
-        // $data['title'] = '9o'Clock | Buy each and everything home grocery';
+        // $data['title'] = '9o\'Clock | Buy each and everything home grocery';
         // $data['countries'] = $CI->Auths->get_country();
         // $data['cities'] = $CI->Auths->get_city();
         // $content = $this->parser->parse('users/registration', $data, true);
@@ -220,7 +220,7 @@ class Dashboard extends CI_Controller {
             redirect(base_url("Dashboard/user_login_email"));
         // $CI = & get_instance();
         // $CI->load->model('Auths');
-        // $data['title'] = '9o'Clock | Buy each and everything home grocery';
+        // $data['title'] = '9o\'Clock | Buy each and everything home grocery';
         // $data['countries'] = $CI->Auths->get_country();
         // $data['cities'] = $CI->Auths->get_city();
         // $content = $this->parser->parse('users/registration', $data, true);
@@ -374,7 +374,7 @@ class Dashboard extends CI_Controller {
     public function welcome() {
         // echo 'Welcome Screen';
         if($this->auth->is_logged()) {
-            $data['title'] = '9o'Clock | Buy each and everything home grocery';
+            $data['title'] = '9o\'Clock | Buy each and everything home grocery';
             // $data['countries'] = $CI->Auths->get_country();
             // $data['cities'] = $CI->Auths->get_city();
             $content = $this->parser->parse('users/welcome', $data, true);
