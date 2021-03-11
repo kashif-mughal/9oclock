@@ -614,11 +614,11 @@ function removeItemFromShoppingCart(currentElem){
     }
     $('[data-toggle="tooltip"]').tooltip();
     $("#q").click(function() {
-      if(window.location.href.indexOf("cproduct") == -1)
+      if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
         window.location.href = "<?php echo base_url('cproduct/products?q=&categoryId=');?>";
     });
     $("#q").keydown(function() {
-      if(window.location.href.indexOf("cproduct") == -1)
+      if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
         $("#searchform").submit();
     });
   });
