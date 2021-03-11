@@ -191,13 +191,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <div class="container">
             <div class="row align-items-center py-1 py-md-2 pb-sm-0">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-2 col-md-9 col-sm-9 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
+               <div class="col-lg-2 col-md-9 col-sm-6 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-start justify-content-md-start justify-content-sm-start">
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
                            <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block"> -->
-                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block">
+                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block" style="height:60px; width:auto;">
 
                            <!-- <p class="text-white tag-line mb-0">Inventing Tomorrow</p>  -->
                         </div>
@@ -212,10 +212,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         <div class="header_search_form_container">
                            <form id="searchform" action="<?=base_url('cproduct/products')?>" method="get">
                               <div class="input-group mb-1">
-                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="Search here" onfocus="this.value=''">
+                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="I'm Shopping for..." onfocus="this.value=''">
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">
-                                       <i class="fas fa-search"></i>
+                                       Search
+                                       <!-- <i class="fas fa-search"></i> -->
                                     </button>
                                  </div>
                               </div>
@@ -228,15 +229,15 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-2 col-md-3 col-sm-3 mb-sm-2 order-lg-3 order-2 col-4">
-                     <div class="d-flex justify-content-between align-items-center">
+                  <div class="col-lg-2 col-md-3 col-sm-6 mb-sm-2 order-lg-3 order-2 col-4 pr-sm-3" id="header-buttons">
+                     <div class="d-flex justify-content-sm-around align-items-center justify-content-start">
 
-                        <div class="phone_cart">
+                        <div class="phone_cart mr-4 mr-sm-0">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
                            <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
                         </div>
 
-                        <div class="cart_icon">
+                        <div class="cart_icon mr-4 mr-sm-0">
                            <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="">
                               <!-- <img src="<?php //echo base_url() ?>assets/img/basket.png" alt="" id="basket-img"> -->
                               <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
@@ -249,9 +250,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         <div class="sidebar-button">
                            <button class="navbar-toggler" id="btn-sidebar"
                            class="p-0"
-                            type="button" data-toggle="collapse"
-                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                 aria-expanded="false" aria-label="Toggle navigation">
+                           type="button" data-toggle="collapse"
+                           data-target="#navbarSupportedContent" 
+                           aria-controls="navbarSupportedContent"
+                           aria-expanded="false" 
+                           aria-label="Toggle navigation"
+                           style="padding:0px; margin-left: 8px;">
                                  <!-- <i class="fa fa-bars"></i> -->
                                  <img src="<?php echo base_url() ?>assets/img/Menu-icon.png" alt="">
                            </button>

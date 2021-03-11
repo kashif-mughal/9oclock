@@ -1371,7 +1371,8 @@ button.category-button:active {
    width: 168px;
    max-width: 253px;
    height: 348px;
-   border-radius: 10px 10px 0px 0px;
+   border-radius: 2px;
+   /* 10px 10px 0px 0px; */
    background-color: #ffffff;
    border: 1px solid #cccccc;
    margin-bottom: 10px; 
@@ -1381,7 +1382,8 @@ button.category-button:active {
     width: 100% !important;
     max-width: 400px !important;
     /* height: 377px; */
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 2px;
+     /* 10px 10px 0px 0px; */
     background-color: #ffffff;
     border: 1px solid #cccccc;
     margin-bottom: 4px;
@@ -3613,6 +3615,10 @@ a#newAddressCancelBtn {
       padding-bottom: 3px;
    }
 
+   .sidebar-button {
+      width: 24px !important;
+   }
+
 }
 
 
@@ -3705,7 +3711,11 @@ a#newAddressCancelBtn {
    }
 
    .phone_cart .phone {
-      display: none !important;
+      display: none !important;    
+   }
+
+   .phone_cart {
+      width: 24px;
    }
 }
 
@@ -3922,7 +3932,6 @@ a#newAddressCancelBtn {
    .main-page-product-card {
       width: 160px;
    }
-   
    .product-card img {
       width: 145px;
    } 
@@ -3982,6 +3991,20 @@ a#newAddressCancelBtn {
    .main-content .featured-products-content .product-card-inner {
       width: 177px;
   }
+  .phone_cart {
+     width: 15px !important;
+  }
+  .sidebar-button {
+      width: 15px !important;
+   }
+   #cartBtn img {
+      width: 25px;
+      margin-top: 6px;
+   }
+   #cartBtn img #cart_icon_text {
+      bottom: -14px;
+      left: 19px;
+   }
 }
 
 
@@ -4021,8 +4044,8 @@ a#newAddressCancelBtn {
    }
    .cart_icon .cart_icon_text #add_to_cart_items {
       font-size: 8px;
-      bottom: -7px;
-      left: 13px;
+      /* bottom: -7px;
+      left: 13px; */
    }
    
 }

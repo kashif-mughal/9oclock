@@ -46,13 +46,13 @@
                                          </div>
                                      </div>
                                      <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
-                                     <div class="product-info text-center">
-                                         <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                                         <p class="card-text product-card-inner-weight">
+                                     <div class="product-info text-left">
+                                         <p class="card-text product-card-inner-name ml-2" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
+                                         <p class="card-text product-card-inner-weight ml-2">
                                              <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
                                          <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p> -->
                                          <?php if($discountPercentage != 0) { ?> 
-                                             <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
+                                             <span class="product-discount ml-2"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
                                          <?php } 
                                          $productObject = (object) [
                                             'id' => $value['ProductId'],
@@ -64,7 +64,15 @@
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
-                                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                          <div class="input-group" style="width: 90%;">
+                                             <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                                <option selected>Variant</option>
+                                                <option value="1">1kg</option>
+                                                <option value="2">1 Dozen</option>
+                                                <option value="3">500 grm</option>
+                                             </select>
+                                          </div>
+                                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2 text-center">
                                              <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                              <input type="text" class="d-inline-flex quantity-input quantity">
                                              <span class="d-block quantity-button">
@@ -291,7 +299,8 @@ html{
       padding: 10px;
    }
    .cat-card, .cat-card img{
-      border-radius: 10px 10px 0px 0px;
+      border-radius: 2px;
+      /* 10px 10px 0px 0px; */
    }
 
    @media (max-width: 1024px) {
