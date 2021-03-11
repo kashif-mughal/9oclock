@@ -312,6 +312,106 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             </div>
         </section>
     </div>
+
+
+<section id="cart_page_new" >
+   <div class="container">
+      <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
+         <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
+            <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
+         </button>
+         <h3>Cart</h3>
+      </div>
+      <div style="background-color: #ffffff;">      
+        <table class="table table-hover table-responsive-md table-condensed">
+            <!-- <thead>
+                <tr>
+                    <th colspan="4"></th>
+                    <th colspan="2" class="text-left"></th>
+                    <th style="text-align: center;"></th>
+                    <th style="text-align: center;"></th>
+                    <th style="text-align: center;"></th>
+                </tr>
+            </thead> -->
+            <tbody>
+              <tr class="each-prod">
+                <td class="text-center">
+                  <img style="width: 110px;" src="<?php echo base_url("assets/img/0a4d195be1511b86338d6500c722b320.jpg") ?>" alt="" class="img-fluid">
+                </td>
+              <td colspan="3">Mitchell's Mango Jam</td>
+              <td class="" style="text-align: center;" colspan="2"><b>9</b></td>
+              <td>
+                <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
+                  <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                      <!-- <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}"> -->
+                      <span class="d-flex justify-content-between align-items-center px-2 py-2" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
+                        <a href="javascript:void(0)">-</a>
+                        <p class="m-0 p-0">2</p>
+                        <a href="javascript:void(0)">+</a>
+                      </span>
+                      <!-- <span class="d-block quantity-button">
+                        <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
+                        <div class="separator"></div>
+                        <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
+                      </span> -->
+                  </div>
+                </td>
+                <td class="" style="text-align: center;">
+                <a href="javascript:void(0)" data-id="1" data-name="apple" class="remove-item-from-cart">
+                <i class="fas fa-trash-alt" data-id="1" data-name="apple" style="font-size:25px; color:red;"></i>
+                </a>
+              </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <div style="background-color: #fff; border-color: #ececec; border-radius: 2px; padding: 12px;">
+        <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
+          <h6 style="font-weight: 600; margin-bottom: 0px;">Sub Total</h6>
+          <h5 style="font-weight: 600; margin-bottom: 0px;">Rs.35</h5>
+        </div>
+        <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
+          <h6 style="font-weight: 600; margin-bottom: 0px;">Coupon No.</h6>
+          <a href="javascript:void(0)" id="btnCoupon">
+            <h5 style="font-weight: 600; margin-bottom: 0px;">
+              <i class="fas fa-chevron-down ml-3" style="font-size: 1.25rem;"></i>
+            </h5>
+          </a>
+        </div>
+        <div>
+          <input type="text" style="width:100%; border-radius: 0px; font-size: 20px; display:none;" id="inputCoupon">
+        </div>
+        <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
+          <div>
+            <h6 style="color: orange; font-weight: 600; margin-bottom: 0px;">Delivery Charges</h6>
+            <p style="font-size:12px; font-weight: 600; margin-bottom: 0px;">Free delivery on order above Rs.45</p>
+          </div>
+          <h5 style="font-weight: 600;">Rs.5</h5>
+        </div>
+        <div class="d-flex justify-content-between align-items-center px-3 py-3">
+          <h6 style="color: green; font-weight: 600; margin-bottom: 0px;">Total Amount</h6>
+          <h5 style="color: green; font-weight: 600; margin-bottom: 0px;">Rs.40</h5>
+        </div>
+      </div>
+
+      <div style="background-color: var(--main-color); border: 1px solid #ececec; border-radius: 2px; padding: 12px; margin-top: 12px;">
+        <div class="d-flex justify-content-between align-items-center px-3 py-2" style="color:#fff;">
+          <h5 class="p-0 m-0">Sign in to Checkout</h5>
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 pr-2" style="border-right: 1px solid #fff;">Rs.40</h5>
+            <i class="fas fa-chevron-right ml-3" style="font-size: 1.25rem;"></i>
+          </div>
+        </div>
+      </div>
+
+   </div>
+</section>
+
+
+
+
+
 <script type="text/javascript">
     var baskit = getCookie('baskit');
     var selectedAddress = false;
@@ -328,6 +428,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     $(document).ready(() => {
         loadCheckoutCartArea();
         loadShoppingCart1();
+
+        $('#btnCoupon').on('click',function() {
+          $('#inputCoupon').toggle();
+        });
     });
 
     function loadCheckoutCartArea(){
