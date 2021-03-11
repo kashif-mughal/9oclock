@@ -196,7 +196,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      justify-content-start justify-content-md-start justify-content-sm-start">
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
-                           <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block"> -->
+                           <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="9o'Clock" class="img-fluid d-block"> -->
                            <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block" style="height:60px; width:auto;">
 
                            <!-- <p class="text-white tag-line mb-0">Inventing Tomorrow</p>  -->

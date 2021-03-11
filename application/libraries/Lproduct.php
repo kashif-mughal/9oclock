@@ -409,7 +409,7 @@ class Lproduct {
             );   
         }
         $data = array(
-            'title' => 'Sauda Express | Buy each and everything home grocery',
+            'title' => '9o'Clock | Buy each and everything home grocery',
             'CatList' => $catArray,
             'ProdList' => $product_list["products"],
             'TotalProducts' => $product_list["total"],

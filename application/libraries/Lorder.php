@@ -132,12 +132,12 @@ class Lorder {
         $AdminData = $CI->Web_settings->retrieve_setting_editdata();
         $adminPhone = $AdminData[0]->AdminPhone;
 
-        // Your have successfully placed an order on Sauda Express.\n
+        // Your have successfully placed an order on 9o'Clock.\n
         // Tracking ID: ____\n
         // Amount: ___
 
-        $userMessage = "Your have successfully placed an order on Sauda Express.\nTracking ID:".$orderId."\nAmount:".$grantAmount;
-        $adminMessage = "New order has been placed on Sauda Express.\nTracking ID:".$orderId."\nAmount:".$grantAmount;
+        $userMessage = "Your have successfully placed an order on 9o'Clock.\nTracking ID:".$orderId."\nAmount:".$grantAmount;
+        $adminMessage = "New order has been placed on 9o'Clock.\nTracking ID:".$orderId."\nAmount:".$grantAmount;
 
         $CI = & get_instance();
         $CI->load->model('Auths');
