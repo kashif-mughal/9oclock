@@ -401,7 +401,7 @@ class Auths extends CI_Model {
             $From = "923018582392"; ///Your Username
             $password = "Master@1"; ///Your Password
             $To = $to_phone_number; ///Recepient Mobile Number
-            $sender = "Sauda Express";
+            $sender = "9o'Clock";
             // $code = $otp_code;
         
             // sending sms

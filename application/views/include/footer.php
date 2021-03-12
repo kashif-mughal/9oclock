@@ -67,7 +67,7 @@ foreach($CatList as $key => $value) {
 	<div class="container">
 		<div class="main-footer-content">
 			<p class="footer-text text-center text-md-left">
-				Sauda Express is not just another online grocery store. We at Sauda Express aim at revolutionizing the whole thinking of online shopping by introducing latest technology into the arena and at the same retaining cultural traditions that are still revered by shoppers in Pakistan but are so easily abandoned by online shopping platforms focusing only on the technological aspect. We consistently work hard to:
+				9o'Clock is not just another online grocery store. We at 9o'Clock aim at revolutionizing the whole thinking of online shopping by introducing latest technology into the arena and at the same retaining cultural traditions that are still revered by shoppers in Pakistan but are so easily abandoned by online shopping platforms focusing only on the technological aspect. We consistently work hard to:
 			</p>
 
 			<div class="best_features">
@@ -117,14 +117,14 @@ foreach($CatList as $key => $value) {
 			</div> -->
 
 	        <div class="feature-details my-4">
-				<h4>Sauda Express - the most customer-centeric online shopping platform</h4>
+				<h4>9o'Clock - the most customer-centeric online shopping platform</h4>
 				<div class="feature_details_content">
 					<h6>Wide Geographic Coverage</h6>
 					<p>Order from anywhere in Karachi to get best deals in grocery items delivered at your doorsteps in a timely and professional manner</p>
 				</div>
 				<div class="feature_details_content">
 					<h6>Innovative Approach</h6>
-					<p>We at Sauda Express take special pride in being innovative and ahead of our competition to create convenience for our shoppers.</p>
+					<p>We at 9o'Clock take special pride in being innovative and ahead of our competition to create convenience for our shoppers.</p>
 				</div>
 				<div class="feature_details_content">
 					<h6>Long term Commitment</h6>
@@ -132,11 +132,11 @@ foreach($CatList as $key => $value) {
 				</div>
 				<div class="feature_details_content">
 					<h6>Best Value for your Money</h6>
-					<p>We understand that our customers have the right to get best value for their money when they shop at Sauda Express and hence we make every effort to offer wide range of quality products at lowest possible prices.</p>
+					<p>We understand that our customers have the right to get best value for their money when they shop at 9o'Clock and hence we make every effort to offer wide range of quality products at lowest possible prices.</p>
 				</div>
 				<div class="feature_details_content">
 					<h6>Special features for members</h6>
-					<p>By becoming Sauda Express member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>
+					<p>By becoming 9o'Clock member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>
 				</div>
 				<div class="feature_details_content">
 					<h6>Payment Options</h6>

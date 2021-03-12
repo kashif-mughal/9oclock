@@ -159,49 +159,29 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 
 <div class="section-head" style="position: fixed; top: 0; width: 100%; z-index: 21;">
+  <style type="text/css">
+    @keyframes ticker {
+  0% {
+    transform: translate(100%, 0);
+  }
+
+  50% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+  </style>
       <div class="top-bar">
          <div class="container">
             <div class="row">
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
-                  <ul class="navbar-nav">
-                    <?php if(!is_null($users)){?>
+                  <ul style="animation: ticker 10s infinite linear forwards;" class="navbar-nav">
                      <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url("User/edit_profile");?>">My Account</a>
+                        <a class="nav-link" href="#userAccount" role="button" data-toggle="modal">Get special discount of 10% on purchase min 10 items</a>
                      </li>
-                     <li>
-                        <p class="seperator">|</p>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url("Corder/track_order_form")?>">Track your order</a>
-                     </li>
-                     <li>
-                        <p class="seperator">|</p>
-                     </li>
-                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url("Corder/my_order")?>">Order History</a>
-                       </li>
-                     <?php if($_SESSION['user_type'] == 1){?>
-                      <li>
-                        <p class="seperator">|</p>
-                     </li>
-                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url("Admin_dashboard")?>">Admin Panel</a>
-                       </li>
-                     <?php } ?>
-                     <li>
-                        <p class="seperator">|</p>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url().'Dashboard/logout'?>">Logout</a>
-                     </li>
-                   <?php }else{?>
-                     <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url().'Dashboard/user_authentication'?>">Register Or Login</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#userAccount" role="button" data-toggle="modal">Sign in Modal</a>
-                     </li>
-                   <?php } ?>
                   </ul>
                </nav>
             </div>
@@ -211,13 +191,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <div class="container">
             <div class="row align-items-center py-1 py-md-2 pb-sm-0">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-2 col-md-9 col-sm-9 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
+               <div class="col-lg-2 col-md-9 col-sm-6 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-start justify-content-md-start justify-content-sm-start">
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
-                           <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="Sauda Express" class="img-fluid d-block"> -->
-                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block">
+                           <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="9o'Clock" class="img-fluid d-block"> -->
+                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block" style="height:60px; width:auto;">
 
                            <!-- <p class="text-white tag-line mb-0">Inventing Tomorrow</p>  -->
                         </div>
@@ -230,24 +210,13 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   <div class="header_search">
                      <div class="header_search_content">
                         <div class="header_search_form_container">
-                           <form action="<?=base_url('cproduct/products')?>" method="get">
+                           <form id="searchform" action="<?=base_url('cproduct/products')?>" method="get">
                               <div class="input-group mb-1">
-                                 <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary dropdown-toggle font-weight-400 category-button" type="button"
-                                       data-toggle="dropdown">
-                                       All
-                                       <img src="<?php echo base_url() ?>assets/img/chevron.png" alt="" class="img-fluid">
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <?php foreach($menuCatList as $key => $value) {?>
-                                         <a class="dropdown-item" id="cat-<?=$value->catId?>" onclick="changeSelectedCat(this);" href="javascript:void(0);" data-value="<?=$value->catId?>"><?=$key?></a>
-                                      <?php } ?>
-                                   </div>
-                                 </div>
-                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="Search here" onfocus="this.value=''">
+                                 <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="I'm Shopping for..." onfocus="this.value=''">
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">
-                                       <i class="fas fa-search"></i>
+                                       Search
+                                       <!-- <i class="fas fa-search"></i> -->
                                     </button>
                                  </div>
                               </div>
@@ -260,16 +229,16 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-2 col-md-3 col-sm-3 mb-sm-2 order-lg-3 order-2 col-4">
-                     <div class="d-flex justify-content-between align-items-center">
+                  <div class="col-lg-2 col-md-3 col-sm-6 mb-sm-2 order-lg-3 order-2 col-4 pr-sm-3" id="header-buttons">
+                     <div class="d-flex justify-content-sm-around align-items-center justify-content-start">
 
-                        <div class="phone_cart">
+                        <div class="phone_cart mr-4 mr-sm-0">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
                            <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
                         </div>
 
-                        <div class="cart_icon">
-                           <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="" data-target="#shoppingCartModal">
+                        <div class="cart_icon mr-4 mr-sm-0">
+                           <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="">
                               <!-- <img src="<?php //echo base_url() ?>assets/img/basket.png" alt="" id="basket-img"> -->
                               <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
                               <div class="cart_icon_text">
@@ -281,9 +250,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         <div class="sidebar-button">
                            <button class="navbar-toggler" id="btn-sidebar"
                            class="p-0"
-                            type="button" data-toggle="collapse"
-                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                 aria-expanded="false" aria-label="Toggle navigation">
+                           type="button" data-toggle="collapse"
+                           data-target="#navbarSupportedContent" 
+                           aria-controls="navbarSupportedContent"
+                           aria-expanded="false" 
+                           aria-label="Toggle navigation"
+                           style="padding:0px; margin-left: 8px;">
                                  <!-- <i class="fa fa-bars"></i> -->
                                  <img src="<?php echo base_url() ?>assets/img/Menu-icon.png" alt="">
                            </button>
@@ -296,55 +268,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             </div>
          </div>
    </div>
-
-
-
-<!-- Shopping Cart Modal Start -->
-<div id="shoppingCartModal" class="modal fade" role="dialog">
-   <div class="modal-dialog modal-lg">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-         <div class="modal-body w-100 p-0">
-            <div class="card">
-               <div class="card-header">
-                  Shopping Cart
-               </div>
-               <div class="emptyCart" style="display: none;">The cart is empty!!!</div>
-               <div class="card-body" id="shoppingCartBody">
-                  <table class="table table-sm table-bordered table-responsive-md">
-                     <thead>
-                        <tr>
-                           <th>Image</th>
-                           <th colspan="3">Product Name</th>
-                           <th>Quantity</th>
-                           <th colspan="2">Price</th>
-                           <th>Total</th>
-                           <th>Action</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-
-                     </tbody>
-                  </table>
-                  <div class="text-right">
-                     <a href="<?php echo base_url() ?>corder/checkout_form" class="checkout-btn btn btn-sm btn-primary">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout
-                     </a>
-                       <a href="<?php echo base_url() ?>corder/cart_page" class="checkout-btn btn btn-sm btn-primary">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Proceed to Cart Page
-                     </a>
-                     <a href="javascript:void(0);" onclick="emptyCart();" class="btn btn-sm btn-secondary">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Clear
-                     </a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-
 
 
   <!-- TESTING ADD TO CART -->
@@ -662,37 +585,41 @@ function removeItemFromShoppingCart(currentElem){
  <!-- Auto Complete search script START-->
 <script type='text/javascript'>
   $(document).ready(function(){
-     $("#q").autocomplete({
-        source: function( request, response )
-        {
-             $.ajax({
-                url: "<?php echo base_url();?>Autocomplete/userdata",
-                type: 'post',
-                dataType: "json",
-                data: {
-                  search: request.term
-                },
-                success: function( data ) 
-                {
-                  response( data );
-                }
-             });
-        },
-        select: function (values, ui) {
-             $('#q').val(ui.item.label);
-             return false;
-        }
-     });
+    $('#q').focus();
+     // $("#q").autocomplete({
+     //    source: function( request, response )
+     //    {
+     //         $.ajax({
+     //            url: "<?php echo base_url();?>Autocomplete/userdata",
+     //            type: 'post',
+     //            dataType: "json",
+     //            data: {
+     //              search: request.term
+     //            },
+     //            success: function( data ) 
+     //            {
+     //              response( data );
+     //            }
+     //         });
+     //    },
+     //    select: function (values, ui) {
+     //         $('#q').val(ui.item.label);
+     //         return false;
+     //    }
+     // });
 
     var allTxt = $(".card-text, .product-card-title");
     for (var i = 0; i < allTxt.length; i++) {
       $(allTxt[i]).attr("data-toggle", "tooltip");
     }
     $('[data-toggle="tooltip"]').tooltip();
-    $("#q").focusin(function() {
-      $('#searchingModal').fadeIn("slow");
-      $('#search-modal-trigger')[0].click();
-      $('#q2').focus();
+    $("#q").click(function() {
+      if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
+        window.location.href = "<?php echo base_url('cproduct/products?q=&categoryId=');?>";
+    });
+    $("#q").keydown(function() {
+      if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
+        $("#searchform").submit();
     });
   });
 
@@ -706,77 +633,6 @@ function removeItemFromShoppingCart(currentElem){
       $("#InnerPageMenuContent").removeClass('show');
     }
   }
-
-
-
-
-    $(document).ready(function(){
-      $('.modal').off('resize');
-        var urlVars = getUrlVars();
-        $('#q2').on('keyup', function(e){
-           var currentElem = $(this);
-            var perpage = 20
-            $.ajax({
-                url : '<?=base_url("Cproduct/fetch");?>',
-                type : 'GET',
-                data : {
-                    'q' : currentElem.val(),
-                    'categoryId' : urlVars['categoryId'],
-                    'page': 0,
-                    'perpage' : perpage
-                },
-                dataType:'json',
-                success : function(data) {
-                    var productArea = $('#products-area');
-                    var baseUrl = '<?=base_url()?>';
-                    if(!data){
-                        productArea.empty();
-                    }else{
-                        var totalProducts = data.total;
-                        data = data.products;
-                        var cartTemplate = $('#clone-cart').text();
-                        productArea.empty();
-                        for (var i = 0; i < data.length; i++) {
-                            var discountPercentage = parseInt(((data[i].Price - data[i].SalePrice)/data[i].Price) * 100);
-                            var disText = null;
-                            if(discountPercentage != 0){
-                                var disString = `<h5 class="card-title float-left">${discountPercentage}% OFF</h5>`;
-                                var priceString = `<span class="product-discount"><del>${formatCurrency(data[i].Price,0)}</del></span>`;
-                            }
-                            var cartTemplateCopy = cartTemplate;
-                            if(disString)
-                                cartTemplateCopy = cartTemplateCopy.replace(/{discountString}/g, disString);
-                            else
-                                cartTemplateCopy = cartTemplateCopy.replace(/{discountString}/g, "");
-                            if(priceString)
-                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, priceString);
-                            else
-                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, "");
-                            cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].ProductImg);
-                            cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
-                            cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
-                            cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice,0));
-                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
-                            pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
-                            cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);
-                            productArea.append(cartTemplateCopy);
-                        }
-                    }
-                },
-                error : function(request,error)
-                {
-                    console.log("Request: " + JSON.stringify(request));
-                },
-                complete: function(data){
-                }
-            });
-        });
-    });
-
-
-
-
-
 
 </script>
  

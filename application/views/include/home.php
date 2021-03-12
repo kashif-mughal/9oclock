@@ -46,7 +46,7 @@
                                          </div>
                                      </div>
                                      <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
-                                     <div class="product-info text-center">
+                                     <div class="product-info text-left px-2">
                                          <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
                                          <p class="card-text product-card-inner-weight">
                                              <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
@@ -64,7 +64,15 @@
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
-                                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                                          <div class="input-group">
+                                             <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                                <option selected>Variant</option>
+                                                <option value="1">1kg</option>
+                                                <option value="2">1 Dozen</option>
+                                                <option value="3">500 grm</option>
+                                             </select>
+                                          </div>
+                                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2 text-center">
                                              <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                              <input type="text" class="d-inline-flex quantity-input quantity">
                                              <span class="d-block quantity-button">
@@ -75,14 +83,16 @@
                                          </div>
                                          <?php } ?>
                                      </div>
-                                     <?php if($value['stock'] == '1') { ?>
-                                     <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
-                                     data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                     >Add to Cart</a>
-                                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
-                                     data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
-                                     >Remove From Cart</a>
-                                     <?php } ?>
+                                     <div class="d-flex align-items-center justify-content-center">
+                                       <?php if($value['stock'] == '1') { ?>
+                                       <a href="javascript:void(0);" class="product-card-btn add-cart"
+                                       data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                       >Add to Cart</a>
+                                       <a href="javascript:void(0);" style="display: none;" class="product-card-btn remove-cart"
+                                       data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                       >Remove From Cart</a>
+                                       <?php } ?>
+                                    </div>
                                  </div>
                              </div>
                      <?php } ?>
@@ -187,7 +197,7 @@
           </div>
        </div>
     </div>
-   <div class="bg-overlay" style="position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.5;"></div>
+   <div class="bg-overlay" style="display: block; position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.5;"></div>
     <!-- Website Note -->
 
 <style>
@@ -291,7 +301,8 @@ html{
       padding: 10px;
    }
    .cat-card, .cat-card img{
-      border-radius: 10px 10px 0px 0px;
+      border-radius: 2px;
+      /* 10px 10px 0px 0px; */
    }
 
    @media (max-width: 1024px) {

@@ -25,7 +25,7 @@
                         <h2 class="mb-5"> Return & Refund Policy:</h2>
                         <h6>
                             <span>
-                               If products purchased from SAUDA EXPRESS are found to be damaged, used, worn out, incorrect or incomplete at the time of delivery, the customers can claim refund or replacement. Return / replacement request will not be entertained if the customer does not need the product(s) in question anymore. No extra charges apply when product is replaced or cost is refunded due to product being unfit, as defined earlier, at the time of delivery. 
+                               If products purchased from 9o'Clock are found to be damaged, used, worn out, incorrect or incomplete at the time of delivery, the customers can claim refund or replacement. Return / replacement request will not be entertained if the customer does not need the product(s) in question anymore. No extra charges apply when product is replaced or cost is refunded due to product being unfit, as defined earlier, at the time of delivery. 
                             </span>
                             <br/>
                             <br/>

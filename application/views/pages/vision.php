@@ -31,14 +31,14 @@
                             Build strong understanding of customer needs by carefully analyzing their shopping patterns and paying close attention to their stated expectations shared by them in intelligently designed surverys. Use most suitable technology to create out of box solutions with the aim to achieving optimum level of customer satisfaction and at the same time fulfilling our economic objectives. Attract best talent by offering competitive remunerations and a healthy work environment that enables every team member to perform at his or her optimum level and at the same time achieve a perfect work-life balance.<br>
 
                <!--         <div class="feature-details my-4">-->
-            			<!--	<h4>Sauda Express - the most customer-centeric online shopping platform</h4>-->
+            			<!--	<h4>9o'Clock - the most customer-centeric online shopping platform</h4>-->
             			<!--	<div class="feature_details_content">-->
             			<!--		<h6>Wide Geographic Coverage</h6>-->
             			<!--		<p>Order from anywhere in karachi to get best deals in grocery items delivered at your doorsteps in a timely and professional manner</p>-->
             			<!--	</div>-->
             			<!--	<div class="feature_details_content">-->
             			<!--		<h6>Innovative Approach</h6>-->
-            			<!--		<p>We at Sauda Express take special pride in being innovative and ahead of our competition to create convenience for our shoppers.</p>-->
+            			<!--		<p>We at 9o'Clock take special pride in being innovative and ahead of our competition to create convenience for our shoppers.</p>-->
             			<!--	</div>-->
             			<!--	<div class="feature_details_content">-->
             			<!--		<h6>Long term Commitment</h6>-->
@@ -46,11 +46,11 @@
             			<!--	</div>-->
             			<!--	<div class="feature_details_content">-->
             			<!--		<h6>Best Value for your Money</h6>-->
-            			<!--		<p>We understand that our customers have the right to get best value for their money when they shop at Sauda Express. After all, it’s their hard-earned money which must be spent wisely and hence we make every effort to offer wide range of products at lowest possible prices.</p>-->
+            			<!--		<p>We understand that our customers have the right to get best value for their money when they shop at 9o'Clock. After all, it’s their hard-earned money which must be spent wisely and hence we make every effort to offer wide range of products at lowest possible prices.</p>-->
             			<!--	</div>-->
             			<!--	<div class="feature_details_content">-->
             			<!--		<h6>Special features for members</h6>-->
-            			<!--		<p>By becoming Sauda Express member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>-->
+            			<!--		<p>By becoming 9o'Clock member our customers can view their history, compare their present grocery cart with previous ones and place standing instructions for seamless shopping experience</p>-->
             			<!--	</div>-->
             			<!--	<div class="feature_details_content">-->
             			<!--		<h6>Payment Options</h6>-->

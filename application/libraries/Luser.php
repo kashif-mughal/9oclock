@@ -44,7 +44,7 @@ class Luser {
         $value_list = $CI->lvalue->last_value();
 
         $data = array(
-            'title' => 'Sauda Express | Value cart',
+            'title' => '9o\'Clock | Value cart',
             'value_list' => $value_list
         );
         return $CI->parser->parse('user/value_cart', $data, true);
