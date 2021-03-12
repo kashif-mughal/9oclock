@@ -86,7 +86,6 @@ class Auth {
         $CI->load->model('Users');
 
         $result = $CI->Users->check_valid_user_email($email_address, $password);
-
         if ($result) {
             $key = md5(time());
             $key = str_replace("1", "z", $key);
@@ -139,6 +138,19 @@ class Auth {
 
     //Logout....
     public function logout() {
+        $CI = & get_instance();
+        $user_data = array(
+            'sid_web' => '',
+            'user_id' => '',
+            'user_type' => '',
+            'user_name' => ''
+        );
+        $CI->session->sess_destroy($user_data);
+        return true;
+    }
+
+    //Logout Email....
+    public function logout_email() {
         $CI = & get_instance();
         $user_data = array(
             'sid_web' => '',

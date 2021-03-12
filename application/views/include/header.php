@@ -234,7 +234,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
                         <div class="phone_cart mr-4 mr-sm-0">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
-                           <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
+                           <a href="<?php echo base_url() ?>dashboard/user_login_email">
+                              <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
+                           </a>
                         </div>
 
                         <div class="cart_icon mr-4 mr-sm-0">
@@ -308,6 +310,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       $this->load->view('include/banner', $BannerImages); 
    }
 ?>
+
+<?php //isset($_SESSION['sid_web']) { ?>
+   <p>Session: <?php //echo '<pre>'; 
+                  print_r($_SESSION); ?></p>
+<?php //} ?>
 
 <div class="wrapper">
 

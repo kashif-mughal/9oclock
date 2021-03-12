@@ -49,6 +49,27 @@ class Users extends CI_Model {
 
     // validate user using email address 
     function check_valid_user_email($email_address, $password) {
+        // $dateTime = new DateTime();
+        // $currDate = $dateTime->format('Y-m-d H:i:s');
+
+        $this->db->select('a.*,b.*');
+        $this->db->from('grocery_otp a');
+        $this->db->join('users b', 'b.email = a.email_address');
+        $this->db->join('user_login c', 'c.username = a.email_address');
+        $this->db->where('a.email_address', $email_address);
+        $this->db->where('c.password', md5($password));
+        $this->db->where('c.status', 1);
+        $this->db->where('a.verified', 1);
+        // $this->db->where('a.expiry_date > ', $currDate);
+        $query = $this->db->get();
+        
+        if($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+
+    function check_valid_user_email_otp($email_address) {
         $dateTime = new DateTime();
         $currDate = $dateTime->format('Y-m-d H:i:s');
 
@@ -57,16 +78,18 @@ class Users extends CI_Model {
         $this->db->join('users b', 'b.email = a.email_address');
         $this->db->join('user_login c', 'c.username = a.email_address');
         $this->db->where('a.email_address', $email_address);
-        $this->db->where('c.password', $password);
+        $this->db->where('c.password', md5($password));
         $this->db->where('c.status', 1);
         $this->db->where('a.verified', 1);
         $this->db->where('a.expiry_date > ', $currDate);
         $query = $this->db->get();
+
         if($query->num_rows() > 0) {
             return $query->result_array();
         }
         return false;
     }
+
     function check_user_login_email($email_address) {
         $this->db->where('username', $email_address);
         $this->db->where('status', 1);
@@ -77,6 +100,8 @@ class Users extends CI_Model {
         }
         return false;
     }
+
+
 
     /*
      * *User registration
@@ -115,6 +140,7 @@ class Users extends CI_Model {
     }
 
     public function profile_edit_data() {
+        // print_r($this->session);die;
         $user_id = $this->session->userdata('user_id');
         $this->db->select('a.*,b.username');
         $this->db->from('users a');

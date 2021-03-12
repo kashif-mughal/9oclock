@@ -1,11 +1,11 @@
 <style>
-   /* #registration, #login, #otpForm {
+   #registration, #login, #otpForm {
       display:none;
-   } */
+   }
 </style>
 
 <!-- Login New  -->
-<section id="otpForm" >
+<section id="otpForm" style="display:none;">
    <div class="container">
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
@@ -59,15 +59,19 @@
                   >
                </form>
             </div>
+            
+         </div>
+
+         <div class="row">
             <div class="d-block">
-               <a href="javascript:void(0)" id="resendCode" class="d-block mb-4">Resend Code again</a>
+               <a href="javascript:void(0)" id="resendCode" class="d-block mb-4 ml-2">Resend Code again</a>
             </div>
 
             <div class="text-center" style="width:100%; margin-top: 40px; margin-bottom: 20px;">
-               <input type="submit" value="Verify Code" name="verifyCode" style="width:97%; background-color: var(--main-color); border-radius:2px; color: #fff; border: none; font-size: 18px;" class="py-2">
+               <input type="submit" value="Verify Code" name="otpSubmit" id="otpSubmit" style="width:97%; background-color: var(--main-color); border-radius:2px; color: #fff; border: none; font-size: 18px;" class="py-2">
             </div>
-
          </div>
+
       </div>
    </div>
 </section>
@@ -114,7 +118,7 @@
 
 <!-- TESTING SIGN UP -->
 
-<section id="registration_new" >
+<section id="registration_new" style="display:none;">
    <div class="container">
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
@@ -168,7 +172,7 @@
 
 
 <!-- Login New  -->
-<section id="login_new" >
+<section id="login_new" style="display:none;">
    <div class="container">
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
@@ -186,14 +190,14 @@
          <div class="row d-flex justify-content-center align-items-center">
             <form id="userLoginForm_new" method="post" style="width:100%;">
                
-               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputEmailContainer">
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputLoginEmailContainer">
                   <i class="fas fa-envelope" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
-                  <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email Address" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off" autofocus>
+                  <input type="email" name="inputLoginEmail" id="inputLoginEmail" class="form-control" placeholder="Email Address" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off" autofocus>
                </div>
                
-               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputPasswordContainer">
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputLoginPasswordContainer">
                   <i class="fas fa-lock" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
-                  <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
+                  <input type="password" name="inputLoginPassword" id="inputLoginPassword" class="form-control" placeholder="Password" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
                
                <div class="text-center" style="width:100%; margin-top: 40px; margin-bottom: 20px;">
@@ -208,7 +212,7 @@
 <!-- Login New Ends -->
 
 
-<section id="sign_up" >
+<section id="sign_up">
    <div class="container">
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
@@ -224,9 +228,9 @@
             </div>
          </div>
          <div class="row d-flex justify-content-center align-items-center">
-               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputEmailContainer">
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputEmailVerifyContainer">
                   <i class="fas fa-envelope" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
-                  <input type="email" name="inputEmail" id="inputEmail" class="form-control" id="sign_up_email" placeholder="Email Address" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off" autofocus>
+                  <input type="email" name="inputEmailVerify" class="form-control" id="sign_up_email" placeholder="Email Address" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off" autofocus>
                </div>
                               
                <!-- <input type="submit" value="Login" name="loginForm" style="width:97%; background-color: var(--main-color); border-radius:2px; color: #fff; border: none; font-size: 18px;" class="py-2"> -->
@@ -287,8 +291,9 @@
 
       $('#registerationContinue').on('click', function(e) {
          e.preventDefault();
+         debugger;
          // call to verify provided email
-         if($('#sign_up_email').val().length > 0) {
+         if($('#sign_up_email').val().length > 0) {debugger;
             try {
             $.ajax({
                 url: "<?php echo base_url();?>Dashboard/email_exist",
@@ -301,6 +306,7 @@
                   if(data.status == 'userAvailable') { // 0 = otp email is verified
                      $('#sign_up').hide();
                      $('#login_new').show(); // to login page
+                     $('#digit-1').focus();
                   }
                   else if(data.status == 'userNotRegister') {
                      $('#sign_up').hide();
@@ -326,7 +332,7 @@
       });
 
       // Submit OTP
-		$('#otpSubmit').click(function() {
+		$('#otpSubmit').click(function() {debugger;
 			var otpCode = $('#digit-1').val() + $('#digit-2').val() + $('#digit-3').val() + $('#digit-4').val();
 			var otpRegEx = /^[0-9]{4}$/;
          var email_address = $('#sign_up_email').val();
@@ -339,20 +345,21 @@
 					method: "POST",
 					data: { code: otpCode, email: email_address },
 					dataType: "json",
-					success: function(data) {
+					success: function(data) {debugger;
+                  console.log(data);
 						if(data.status == 'Error') {
                         $.notify(data.responseMessage, "error");
+                  }
+                  else {
+                     if(data.status) { // && data.redirectURL == false) {
+                        $('#otpForm').hide(); // to otp page
+                        $('#login_new').show();
                      }
                      else {
-                        if(data.loggedInStatus) { // && data.redirectURL == false) {
-                           $('#otpForm').hide(); // to otp page
-                           $('#login_new').show();
-                        }
-                        else {
-                           $('#otpForm').hide(); // to otp page
-                           $('#registration_new').show(); // to register page
-                        }
+                        $('#otpForm').hide(); // to otp page
+                        $('#registration_new').show(); // to register page
                      }
+                  }
 					},
 					error: function(data) {
 						$.notify(data.responseMessage, "error");
@@ -361,12 +368,70 @@
 			}
 		});
 
-      $('#userLoginForm_new').on('submit',funciton(event) {
+      $('#userLoginForm_new').on('submit',function(event) {
          event.preventDefault();
          $('#userId').val(localStorage.getItem('UserId'));
 
+         if(!$('#inputLoginEmail').val()) { $('#inputLoginEmail').css("border", "1px solid red"); }
+			else { $('#inputLoginEmailContainer').css("border", "1px solid green"); }
+
+			if(!$('#inputLoginPassword').val()) { $('#inputLoginPassword').css("border", "1px solid red"); }
+			else { $('#inputLoginPasswordContainer').css("border", "1px solid green"); }
+
+         if(!$('#inputLoginEmail').val() && !$('#inputLoginPassword').val()) {
+            $.notify("Error! Please fill all fields", "error");
+         }
+         else {
+
+            $.ajax({
+					url: "<?php echo base_url(); ?>Auth2/login_email",
+					method: "POST",
+					data: $(this).serialize(),
+					dataType: "json",
+					success: function(data) {
+						if(data.status == 'Error') {
+							//$.notify(data.responseMessage, 'error');
+                     console.log('Error is True');
+						}
+						else {
+							//$.notify(data.responseMessage, 'success');
+							setTimeout(function() {
+								if(!data.redirectUrl) {
+									$("#userLoginForm").trigger("reset");
+								 	window.location = "<?php echo base_url(); ?>"; 
+                            console.log('data redirect URL is FALSE');
+								}
+								else {
+									window.location = decodeURIComponent(data.redirectURL); 	
+                           console.log('data redirect URL is TRUE');
+								}
+							}, 2000);
+						}
+					},
+					error: function(data) {
+						$.notify(data.responseMessage, 'success');
+					}
+				});
+         }
+
       });
 
+      //Logout
+      $('#userLoggedOut').click(function() {
+			window.location = "<?= base_url(); ?>Auth2/logout_email";
+		});
+
+      $('#resendCode').click(function() {
+			$('#digit-1').val('');
+			$('#digit-2').val('');
+			$('#digit-3').val('');
+			$('#digit-4').val('');
+
+			$('#otpForm').hide();
+			$('#phoneForm').show();
+		});
+
+      
       // Register User
 		$('#userRegistrationForm_new').on('submit', function(event) {debugger;
 			event.preventDefault();
@@ -427,6 +492,35 @@
 				});
 			}
 		});
+
+      // Private Functions
+		function validateEmail() {
+			var email = $('#inputEmail').val();
+			var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+			return (reg.test(email)) ? true : false;
+		}
+      var allowKeys = ["0","1","2","3","4","5","6","7","8","9"];
+
+      $('input[name^=digit-]').keydown(function() {
+			// Check Character
+			if(allowKeys.indexOf(event.key) == -1) return false;
+			if(event.key.length <= 1) 
+			{
+				$("#inputOtp #" + event.target.id).val(event.key);
+				var nextElement = $("#inputOtp #" + event.target.id).next();
+				nextElement.focus();
+				if($("#inputOtp #" + event.target.id).attr('last') == "true"){
+					$('#otpSubmit').select().focus();
+					$('#otpSubmit').trigger('click');
+				}
+				return false;
+			}
+			else {
+				var str = event.key;
+				str = str.substring(0, str.length - 1);
+				$("#inputOtp #" + event.target.id).val(str);
+			}
+		});	
 
    });
 
