@@ -140,182 +140,72 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 </style>
 
 <div id="main-page">
-        <!-- Bread Crumb -->
-        <div class="bread_crumb">
-            <div class="container">
-                <div class="row d-block">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="<?=base_url()?>">Home</a></li>
-                            <li class="breadcrumb-item">Cart</li>
-                        </ol>
-                    </nav>
-                    <h3 class="mb-0">Shopping Cart</h3>
-                </div>
+    <!-- Bread Crumb -->
+    <div class="bread_crumb">
+        <div class="container">
+            <div class="row d-block">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?=base_url()?>">Home</a></li>
+                        <li class="breadcrumb-item">Cart</li>
+                    </ol>
+                </nav>
+                <h3 class="mb-0">Shopping Cart</h3>
             </div>
         </div>
-
-        <!-- Bread Crumb -->
-
-
-        <section class="cart-page main-content">
-            <div class="container">
-                <!-- Alert Message -->
-                <?php
-                    $message = $this->session->userdata('message');
-                    if (isset($message)) {
-                        ?>
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <?php echo $message ?>
-                        </div>
-                        <?php
-                        $this->session->unset_userdata('message');
-                    }
-                    $error_message = $this->session->userdata('error_message');
-                    if (isset($error_message)) {
-                        ?>
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <?php echo $error_message ?>                    
-                        </div>
-                        <?php
-                        $this->session->unset_userdata('error_message');
-                    }
-                ?>
-                <!-- Alert Message -->
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="content-box1" style="margin-left: -3px;">
-                            <div class="container" id="shoppingCartBody1">
-                                <table class="table table-hover table-responsive-md table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <!-- <th colspan="3">Product Name</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th> 
-                                            <th class="text-center">total</th> -->
-                                            <!-- <th style="width: 110px; height:70px ">Image</th> -->
-                                            <th colspan="4" style="color: #25bfa9;">Product Name</th>
-                                            <th colspan="2" style="text-align: center; color: #25bfa9;">Price</th>
-                                            <th style="text-align: center; color: #25bfa9;">Quantity</th>
-                                            <th style="text-align: center; color: #25bfa9;">Total</th>
-                                            <th style="text-align: center; color: #25bfa9;">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row d-none d-md-block">
-                          <div class="col-12">
-                            <div class="content-box order-box" style="border-radius: 0px 0px 5px 5px;">
-                              <div class="row">
-                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                  <a href="<?=base_url("corder/checkout_form")?>" style="width: 100%; margin-bottom: 3px; color:white; background-color:#25bfa9;" class="btn">Proceed To Checkout</a>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6" style="text-align: right;">
-                                    <a href="<?=base_url()?>" class="btn" style="width: 100%;color:white; background-color:#333333;"><i class="fas fa-long-arrow-alt-left"></i> Continue Shopping</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="content-box order-box">
-                                    <h4>Your Order</h4>
-                                    <div class="content-box-gray">
-                                        <div class="orderbox-header d-flex justify-content-between">
-                                            <h6 class="font-weight-600">Subtotal</h6>
-                                            <h6 class="subtotal-price font-size-15"></h6>
-                                        </div>
-                                        <div class="orderbox-content">
-                                            <div class="orderbox-content-charges d-flex justify-content-between mb-3">
-                                                <h6>Delivery Charges</h6>
-                                                <h6 id="dCharges"><script type="text/javascript">document.write(formatCurrency(0));</script></h6>
-                                            </div>
-                                            <div id="cDiscount" style="display: none;" class="orderbox-content-charges justify-content-between mb-3">
-                                                <h6>Coupon Discount</h6>
-                                                <h6 id="cDiscountValue"></h6>
-                                            </div>
-                                            <div class="orderbox-content-footer d-inline-flexbox align-self-start">
-                                                <h6>Shipping options will be updated during checkout.</h6>
-                                            </div>
-        
-                                        </div>
-                                    </div>
-                                    <div class="orderbox-footer d-flex justify-content-between mx-3">
-                                        <h6>TOTAL</h6>
-                                        <h6 class="total-price font-size-15 sub-total" id="grand-amount"></h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="content-box order-box" style="border-radius: 0px 0px 10px 10px;">
-                                    <h3 class="text-center">Apply Coupon Here</h3>
-                                    <div class="input-group">
-                                        <form method="POST" id="copun-form" action="<?=base_url("Ccopun/apply_copun")?>" style="width: 100%;">
-                                            <input name="copun" type="text" class="form-control coupon" placeholder="Enter coupon code here...">
-                                            <input type="hidden" name="ov" id="ov">
-                                            <div class="input-group-append">
-                                                <button class="btn" style="width:100%; margin-top:5px; margin-bottom: 2px; background-color:#333333; color:white;" type="submit">Apply</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row d-none d-block d-md-none">
-                          <div class="col-md-12">
-                            <div class="content-box order-box" style="border-radius: 0px 0px 10px 10px;">
-                              <div class="col-md-12">
-                                <a href="<?=base_url("corder/checkout_form")?>" style="width: 100%; margin-bottom: 3px; color:white; background-color:#25bfa9;" class="btn">Proceed To Checkout</a>
-                              </div>
-                              <div class="col-md-12" style="text-align: right;">
-                                  <a href="<?=base_url()?>" class="btn" style="width: 100%;color:white; background-color:#333333;"><i class="fas fa-long-arrow-alt-left"></i> Continue Shopping</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HOUSEHOLD ESSENTIALS -->
-
-            </div>
-        </section>
-        <section style="display: none;" class="empty-cart-page main-content">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="content-box1">
-                    <div class="container">
-                      <div class="emptycart">
-                        <p>
-                          <h3>SHOPPING CART</h3>
-                          <span>You have no items in your shopping cart.</span><br>
-                          <b>
-                            <span>Click <a href="<?=base_url()?>">here</a> to continue shopping.</span>
-                          </b>
-                        </p>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-        </section>
     </div>
 
+    <!-- Bread Crumb -->
 
-<section id="cart_page_new" >
-   <div class="container">
+    <section style="display: none;" class="empty-cart-page main-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="content-box1">
+                <div class="container">
+                  <div class="emptycart">
+                    <p>
+                      <h3>SHOPPING CART</h3>
+                      <span>You have no items in your shopping cart.</span><br>
+                      <b>
+                        <span>Click <a href="<?=base_url()?>">here</a> to continue shopping.</span>
+                      </b>
+                    </p>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</div>
+
+
+<section id="cart_page_new" class="cart_page_new">
+   <div class="container" id="shoppingCartBody1">
+    <!-- Alert Message -->
+        <?php
+            $message = $this->session->userdata('message');
+            if (isset($message)) {
+                ?>
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <?php echo $message ?>
+                </div>
+                <?php
+                $this->session->unset_userdata('message');
+            }
+            $error_message = $this->session->userdata('error_message');
+            if (isset($error_message)) {
+                ?>
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <?php echo $error_message ?>                    
+                </div>
+                <?php
+                $this->session->unset_userdata('error_message');
+            }
+        ?>
+    <!-- Alert Message -->
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
             <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
@@ -324,44 +214,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       </div>
       <div style="background-color: #ffffff;">      
         <table class="table table-hover table-responsive-md table-condensed">
-            <!-- <thead>
-                <tr>
-                    <th colspan="4"></th>
-                    <th colspan="2" class="text-left"></th>
-                    <th style="text-align: center;"></th>
-                    <th style="text-align: center;"></th>
-                    <th style="text-align: center;"></th>
-                </tr>
-            </thead> -->
             <tbody>
-              <tr class="each-prod">
-                <td class="text-center">
-                  <img style="width: 110px;" src="<?php echo base_url("assets/img/0a4d195be1511b86338d6500c722b320.jpg") ?>" alt="" class="img-fluid">
-                </td>
-              <td colspan="3">Mitchell's Mango Jam</td>
-              <td class="" style="text-align: center;" colspan="2"><b>9</b></td>
-              <td>
-                <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-                  <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                      <!-- <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}"> -->
-                      <span class="d-flex justify-content-between align-items-center px-2 py-2" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
-                        <a href="javascript:void(0)">-</a>
-                        <p class="m-0 p-0">2</p>
-                        <a href="javascript:void(0)">+</a>
-                      </span>
-                      <!-- <span class="d-block quantity-button">
-                        <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
-                        <div class="separator"></div>
-                        <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
-                      </span> -->
-                  </div>
-                </td>
-                <td class="" style="text-align: center;">
-                <a href="javascript:void(0)" data-id="1" data-name="apple" class="remove-item-from-cart">
-                <i class="fas fa-trash-alt" data-id="1" data-name="apple" style="font-size:25px; color:red;"></i>
-                </a>
-              </td>
-              </tr>
             </tbody>
         </table>
       </div>
@@ -369,7 +222,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       <div style="background-color: #fff; border-color: #ececec; border-radius: 2px; padding: 12px;">
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
           <h6 style="font-weight: 600; margin-bottom: 0px;">Sub Total</h6>
-          <h5 style="font-weight: 600; margin-bottom: 0px;">Rs.35</h5>
+          <h5 style="font-weight: 600; margin-bottom: 0px;" class="subtotal-price"></h5>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
           <h6 style="font-weight: 600; margin-bottom: 0px;">Coupon No.</h6>
@@ -379,19 +232,25 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             </h5>
           </a>
         </div>
-        <div>
-          <input type="text" style="width:100%; border-radius: 0px; font-size: 20px; display:none;" id="inputCoupon">
+        <div class="input-group" id="inputCoupon" style="width:100%; border-radius: 0px; font-size: 20px; display:none;">
+            <form method="POST" id="copun-form" action="<?=base_url("Ccopun/apply_copun")?>" style="width: 100%;">
+                <input name="copun" type="text" class="form-control coupon" placeholder="Enter coupon code here..." autocomplete="off">
+                <input type="hidden" name="ov" id="ov">
+                <div class="input-group-append">
+                    <button class="btn" style="width:100%; margin-top:5px; margin-bottom: 2px; background-color:var(--secondary-color); color:white;" type="submit">Apply</button>
+                </div>
+            </form>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
           <div>
             <h6 style="color: orange; font-weight: 600; margin-bottom: 0px;">Delivery Charges</h6>
             <p style="font-size:12px; font-weight: 600; margin-bottom: 0px;">Free delivery on order above Rs.45</p>
           </div>
-          <h5 style="font-weight: 600;">Rs.5</h5>
+          <h5 style="font-weight: 600;"><script type="text/javascript">document.write(formatCurrency(0));</script></h5>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3">
           <h6 style="color: green; font-weight: 600; margin-bottom: 0px;">Total Amount</h6>
-          <h5 style="color: green; font-weight: 600; margin-bottom: 0px;">Rs.40</h5>
+          <h5 style="color: green; font-weight: 600; margin-bottom: 0px;" class="grand-amount"></h5>
         </div>
       </div>
 
@@ -399,7 +258,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         <div class="d-flex justify-content-between align-items-center px-3 py-2" style="color:#fff;">
           <h5 class="p-0 m-0">Sign in to Checkout</h5>
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 pr-2" style="border-right: 1px solid #fff;">Rs.40</h5>
+            <h5 class="mb-0 pr-2 grand-amount" style="border-right: 1px solid #fff;"></h5>
             <i class="fas fa-chevron-right ml-3" style="font-size: 1.25rem;"></i>
           </div>
         </div>
@@ -407,9 +266,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
    </div>
 </section>
-
-
-
 
 
 <script type="text/javascript">
@@ -422,7 +278,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     var step4Verified = true;
     if(!baskit || JSON.parse(baskit).length == 0){
         //window.location.href = '<?=base_url();?>';
-        $(".cart-page").hide();
+        $(".cart_page_new").hide();
         $('.empty-cart-page').show();
     }
     $(document).ready(() => {
@@ -437,13 +293,36 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     function loadCheckoutCartArea(){
          var cartBody = $('#cartProductsArea');
          cartBody.empty();
-         var eachProdTemplate = `<div data-id="{pId}" data-name="{prodName}" class="my-box-order d-flex">
+         var eachProdTemplate2 = `<div data-id="{pId}" data-name="{prodName}" class="my-box-order d-flex">
                                     <img src="{imgValue}" alt="" class="img-fluid">
                                     <div class="my-box-order-content ml-3 d-flex flex-column justify-content-center">
                                         <h6>{prodName}  X {qty}</h6>
                                         <h6 class="mt-2 my-order-price">{totalPrice}</h6>
                                     </div>
                                 </div>`;
+        var eachProdTemplate = `
+            <tr class="each-prod" data-id="{pId}" data-name="{prodName}">
+                <td class="text-center">
+                  <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
+                </td>
+                  <td colspan="3">{prodName}</td>
+                  <td class="" style="text-align: center;" colspan="2"><b>{qty}</b></td>
+                  <td>
+                    <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
+                      <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                          <span class="d-flex justify-content-between align-items-center px-2 py-2" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
+                            <a href="javascript:void(0)">-</a>
+                            <p class="m-0 p-0">2</p>
+                            <a href="javascript:void(0)">+</a>
+                          </span>
+                      </div>
+                    </td>
+                    <td class="" style="text-align: center;">
+                    <a href="javascript:void(0)" data-id="1" data-name="apple" class="remove-item-from-cart">
+                    <i class="fas fa-trash-alt" data-id="1" data-name="apple" style="font-size:25px; color:red;"></i>
+                    </a>
+                  </td>
+              </tr>`;
          var cart = getCookie('baskit');
          if(cart){
             cart = JSON.parse(cart);
@@ -463,7 +342,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             subTotal = sum;
             $('#copun-form #ov').val(subTotal);
              $('.subtotal-price').html(formatCurrency(sum));
-             $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
+             $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
             if(cart.length >= 15){
                 $('#delivery-date').html('Next working day');
             }else{
@@ -488,14 +367,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           if(cart.length == 0)
           {
              //show empty response here
-             showEmptyResponse($('.cart-page'));
+             showEmptyResponse($('.cart_page_new'));
              return;
           }
           //<td style="text-align:center;"><b>{qty}</b></td>
           $(cartBody).show();
           $($('.emptyCart')[0]).hide();
           $(document).off('click', '.checkout-btn', handleCheckout(event));
-          var eachProdTemplate1 = `<tr class="each-prod">
+          var eachProdTemplate2 = `<tr class="each-prod">
           <td class="text-center">
           <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
           </td>
@@ -519,6 +398,28 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           </a>
           </td>
           </tr>`;
+          var eachProdTemplate1 = `<tr class="each-prod">
+                <td class="text-center">
+                  <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
+                </td>
+                  <td colspan="3">{prodName}<br><small>{unit}</small></td>
+                  <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
+                  <td>
+                    <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
+                      <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                          <span class="d-flex justify-content-between align-items-center px-2 py-2" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
+                            <a href="javascript:void(0)">-</a>
+                            <p class="m-0 p-0">2</p>
+                            <a href="javascript:void(0)">+</a>
+                          </span>
+                      </div>
+                    </td>
+                    <td class="" style="text-align: center;">
+                    <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
+                    <i class="fas fa-trash-alt" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
+                    </a>
+                  </td>
+              </tr>`;
 
           var sum = 0;
           for (var i = 0; i < cart.length; i++) {
@@ -526,9 +427,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
              sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{pId}/g, cart[i].id);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{imgValue}', cart[i].img);
-             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, `${cart[i].pName} ( ${cart[i].saleUnitQty} ${cart[i].saleUnit} )`);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, `${cart[i].pName}`);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{price}', formatCurrency(cart[i].price));
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
              //append newly created row in card body
              $(cartBody.find('tbody')).append(eachProdTemplateCopy1);
@@ -537,7 +439,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           }
           else{
              //show empty response here
-             showEmptyResponse($('.cart-page'));
+             showEmptyResponse($('.cart_page_new'));
              return false;
           }   
        }
@@ -559,12 +461,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             subTotal = sum;
             $('#copun-form #ov').val(subTotal);
             $('.subtotal-price').html(formatCurrency(sum));
-            $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
+            $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
         }
 
         if(copun){
             if(copun.copunMinPurchase > subTotal){
-                $('#grand-amount').html(formatCurrency(parseFloat(subTotal)));
+                $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
                 $('#cDiscountValue').html("");
                 $('#cDiscount').removeClass('d-flex');
                 $('#cDiscount').hide();
@@ -578,10 +480,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           var discountedValue = 0.00;
           if(copun.copunDiscountType == "Amount"){
             $('#cDiscountValue').html(formatCurrency(-copun.copunDiscountValue));
-            $('#grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
+            $('.grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
           }else{
             $('#cDiscountValue').html(copun.copunDiscountValue + "%");
-            $('#grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
+            $('.grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
           }
           $('#cDiscount').addClass('d-flex');
         }else{
