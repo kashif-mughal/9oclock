@@ -57,7 +57,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       color: #fff;
    }
 </style>
-
+<div class="bg-overlay" style="display: block; position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.8;"></div>
 <!-- Script for the use of auto complete search START-->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

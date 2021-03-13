@@ -56,6 +56,7 @@
             <div style="display: none;">
                 <script type="text" id="clone-cart">
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                Hello
                     <div class="featured-products-content mb-2 d-flex justify-content-between">
                         <div class="card each-prod product-card-inner">
                             <div class="card-body p-0">
@@ -70,10 +71,20 @@
                                 <img class="img-fluid text-center" src="{imgUrl}" alt="Card image cap">
                                 </a>
                                 <div class="product-info text-center">
-                                    <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
-                                    <p class="card-text product-card-inner-weight">{unitName}</p>
-                                    <p class="card-text product-card-inner-price d-inline">{salePrice}</p>
+                                    <div class="text-left mx-2">
+                                        <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
+                                        <p class="card-text product-card-inner-weight text-left">{unitName}</p>
+                                        <p class="card-text product-card-inner-price d-inline text-left">{salePrice}</p>
+                                    </div>
                                     {priceString}
+                                    <div class="input-group justify-content-center">
+                                        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                        <option selected>Variant</option>
+                                        <option value="1">1kg</option>
+                                        <option value="2">1 Dozen</option>
+                                        <option value="3">500 grm</option>
+                                        </select>
+                                    </div>
                                     <div class="quantity-area d-flex justify-content-center align-items-center mt-2 ml-3">
                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                         <input type="text" class="d-inline-flex quantity-input quantity">
@@ -152,11 +163,13 @@
                                                 <a href="<?php echo base_url() . 'Cproduct/viewProduct/' . $value['ProductId']; ?>"> 
                                                 <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                                                 </a>
-                                                <div class="product-info text-center">
-                                                    <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                                                    <p class="card-text product-card-inner-weight">
-                                                        <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
-                                                    <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p>
+                                                <div class="product-info text-center" style="    margin-left: auto; width: 98%;">
+                                                    <div class="text-left mx-2">
+                                                        <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
+                                                        <p class="card-text product-card-inner-weight text-left px-2">
+                                                            <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
+                                                        <p class="card-text product-card-inner-price d-inline px-2"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p>
+                                                    </div>
                                                     <?php if($discountPercentage != 0) { ?> 
                                                         <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
                                                     <?php } 
@@ -170,6 +183,14 @@
                                                 ];
                                                 ?>
                                                 <?php if($value['stock'] == '1') { ?>
+                                                    <div class="input-group justify-content-center">
+                                                        <select class="custom-select mx-2" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                                            <option selected>Variant</option>
+                                                            <option value="1">1kg</option>
+                                                            <option value="2">1 Dozen</option>
+                                                            <option value="3">500 grm</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                         <input type="text" class="d-inline-flex quantity-input quantity">
