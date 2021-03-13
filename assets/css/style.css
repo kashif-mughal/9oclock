@@ -13,6 +13,10 @@
    width: 100%;
 }
 
+.wrapper {
+   margin-top: 113px;
+}
+
 #main-banner {
    /* margin-top: 20px !important; */
    /* max-width: 1100px !important; */
@@ -221,9 +225,9 @@ html,body
    box-shadow: 0 0 5px var(--main-color) inset;
 }
 
-.wrapper {
+/* .wrapper {
    margin-top: 100px;
-}
+} */
 
 /* ===== OTP Input Ends ===== */
 
@@ -3312,11 +3316,11 @@ a#newAddressCancelBtn {
 }
 
 
-@media(min-width: 1024px) {
+/* @media(min-width: 1024px) {
    .wrapper {
       margin-top: 100px;
   }
-}
+} */
 
 
 @media (max-width: 1024px) {
@@ -3511,6 +3515,10 @@ a#newAddressCancelBtn {
    }
    #registration_form {
       margin-top: 238px !important;
+   }
+
+   .wrapper {
+      margin-top: 166px;
    }
 
 }
@@ -3800,8 +3808,6 @@ a#newAddressCancelBtn {
    /*   margin-top: 190px !important;*/
    /*}*/
 
-   
-
    .top-bar .cart-basket-main {
       width: 100% !important;
    }
@@ -3939,6 +3945,10 @@ a#newAddressCancelBtn {
       padding-left: 20%;
       padding-right: 15%;
    }
+
+   .wrapper {
+      margin-top: 154px;
+   }
    
 }
 
@@ -4028,9 +4038,9 @@ a#newAddressCancelBtn {
    .va-panel-content .product-card {
       width: 115px !important;
   }
-  .wrapper {
+  /* .wrapper {
       margin-top: 160px;
-   }
+   } */
    .main-content .featured-products-content .product-card-inner {
       width: 177px;
   }
@@ -4086,6 +4096,9 @@ a#newAddressCancelBtn {
    }
    #header-buttons {
       padding-left: 0px;
+   }
+   .cart_icon .cart_icon_text #add_to_cart_items {
+      top: 19px;
    }
 }
 
@@ -4234,6 +4247,10 @@ a#newAddressCancelBtn {
    }
    #header-buttons {
       padding-left: 0px;
+   }  
+
+   .wrapper {
+      margin-top: 172px;
    }
 
 }

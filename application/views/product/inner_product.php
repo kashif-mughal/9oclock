@@ -87,6 +87,12 @@
    .remove-cart-main:hover{
     background:#030133 !important;
    }
+
+   @media (max-width: 320px) {
+      .wrapper {
+         margin-top: 172px !important;
+      }
+    }
 </style>
 
 <div class="bread_crumb">

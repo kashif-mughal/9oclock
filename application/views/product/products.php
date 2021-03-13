@@ -1,3 +1,18 @@
+<style>
+    @media (max-width: 991px) {
+        .wrapper {
+            margin-top: 166px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .wrapper {
+            margin-top: 154px;
+        }
+    }
+    
+</style>
+
 <!-- Bread Crumb -->
 
 <div class="bread_crumb">
