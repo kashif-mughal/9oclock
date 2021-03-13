@@ -56,6 +56,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       background-color: var(--main-color) !important;
       color: #fff;
    }
+   .button-primary{
+    background-color: var(--main-color);
+   }
+   .button-primary:hover{
+    background-color: #0c0792;
 </style>
 <div class="bg-overlay" style="display: block; position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.8;"></div>
 <!-- Script for the use of auto complete search START-->
@@ -178,16 +183,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 <div class="section-head" style="position: fixed; top: 0; width: 100%; z-index: 21;">
   <style type="text/css">
     @keyframes ticker {
-  0% {
-    transform: translate(100%, 0);
+  from {
+    transform: translate(50%, 0);
   }
 
-  50% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(-100%, 0);
+  to {
+    transform: translate(-280%, 0);
   }
 }
   </style>
@@ -195,9 +196,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <div class="container">
             <div class="row">
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
-                  <ul style="animation: ticker 10s infinite linear forwards;" class="navbar-nav">
+                  <ul style="animation: ticker 8s infinite linear;" class="navbar-nav">
                      <li class="nav-item">
-                        <a class="nav-link" href="#userAccount" role="button" data-toggle="modal">Get special discount of 10% on purchase min 10 items</a>
+                        <a class="nav-link" href="javascript:void(0)" role="button">Get special discount of 10% on purchase min 10 items</a>
                      </li>
                   </ul>
                </nav>
@@ -299,37 +300,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             </div>
          </div>
    </div>
-
-
-  <!-- TESTING ADD TO CART -->
-
-  <div class="modal" id="userAccount" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog modal-full" role="document" style="min-width: 100%; margin: 0; min-height: 100vh;">
-      <div class="modal-content" style="min-height: 100vh;">
-        <div class="container-fluid">
-          <div class="row" style="height: 40vh; background-color: #EFF3F6;">
-
-              <button style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
-              </button>
-
-          </div>
-          <div class="row justify-content-center" style="background-color: #fff; height: 60vh;">
-            <div class="text-center my-3">
-               <p class="mb-0" style="font-size: 17px; font-weight: 500;">ACCOUNT</p>
-               <p style="font-size: 16px; font-weight: 500; margin-bottom: 10px;">Login to access all the features of 9oClock</p>
-               <button style="color: #fff; background-color: #1BAB32; font-size: 17px; font-weight: 500; border-color: #1BAB32; width: 390px; height: 60px;">LOGIN</button>
-               <p style="font-size: 16px; font-weight: 500; margin-top: 16px;">Don't have an account?</p>
-               <a href="<?=base_url().'Dashboard/user_authentication_email'?>" style="color: #fff; background-color: #1BAB32; font-size: 17px; font-weight: 500; border-color: #1BAB32; padding: 18px 161px;">SIGN UP</a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-  </div>
-</div> 
-
-<!-- TESTING ADD TO CART ENDS -->
 
 
 

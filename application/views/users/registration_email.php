@@ -326,7 +326,7 @@
 
          }
          else {
-            $.notify("Please enter email to continue", "error");
+            //$.notify("Please enter email to continue", "error");
          }
    
       });
@@ -337,7 +337,7 @@
 			var otpRegEx = /^[0-9]{4}$/;
          var email_address = $('#sign_up_email').val();
 			if(!otpCode.match(otpRegEx)) {
-				$.notify("OTP should be 4 digit number", "error");
+				//$.notify("OTP should be 4 digit number", "error");
 			}
 			else {
 				$.ajax({
@@ -348,7 +348,7 @@
 					success: function(data) {debugger;
                   console.log(data);
 						if(data.status == 'Error') {
-                        $.notify(data.responseMessage, "error");
+                        //$.notify(data.responseMessage, "error");
                   }
                   else {
                      if(data.status) { // && data.redirectURL == false) {
@@ -362,7 +362,7 @@
                   }
 					},
 					error: function(data) {
-						$.notify(data.responseMessage, "error");
+						//$.notify(data.responseMessage, "error");
 				   }
 				});
 			}
@@ -379,7 +379,7 @@
 			else { $('#inputLoginPasswordContainer').css("border", "1px solid green"); }
 
          if(!$('#inputLoginEmail').val() && !$('#inputLoginPassword').val()) {
-            $.notify("Error! Please fill all fields", "error");
+            //$.notify("Error! Please fill all fields", "error");
          }
          else {
 
@@ -409,7 +409,7 @@
 						}
 					},
 					error: function(data) {
-						$.notify(data.responseMessage, 'success');
+						//$.notify(data.responseMessage, 'success');
 					}
 				});
          }
@@ -458,7 +458,7 @@
 
             console.log('Error');
 
-            $.notify("Please fill all the required fields", "error");
+            //$.notify("Please fill all the required fields", "error");
 				
 				
 			}
@@ -471,10 +471,10 @@
 					dataType: "json",
 					success: function(data) {
 						if(data.status == 'Error') {
-                     $.notify(data.responseMessage, "error");
+                     //$.notify(data.responseMessage, "error");
 						}
 						else {
-                     $.notify(data.responseMessage, "success");
+                     //$.notify(data.responseMessage, "success");
 							
 							$('#registrationForm_new').hide();
 							$('#registrationForm_new').css('display', 'none');
@@ -486,7 +486,7 @@
 						}
 					},
 					error: function(data) {
-                  $.notify(data.responseMessage, "error");
+                  //$.notify(data.responseMessage, "error");
 
 					}
 				});

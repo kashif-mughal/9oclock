@@ -292,83 +292,19 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         $('.empty-cart-page').show();
     }
     $(document).ready(() => {
-        loadCheckoutCartArea();
-        loadShoppingCart1();
+        calculatePrice();
+        loadShoppingCart();
 
         $('#btnCoupon').on('click',function() {
           $('#inputCoupon').toggle();
         });
     });
 
-    function loadCheckoutCartArea(){
-         var cartBody = $('#cartProductsArea');
-         cartBody.empty();
-         var eachProdTemplate2 = `<div data-id="{pId}" data-name="{prodName}" class="my-box-order d-flex">
-                                    <img src="{imgValue}" alt="" class="img-fluid">
-                                    <div class="my-box-order-content ml-3 d-flex flex-column justify-content-center">
-                                        <h6>{prodName}  X {qty}</h6>
-                                        <h6 class="mt-2 my-order-price">{totalPrice}</h6>
-                                    </div>
-                                </div>`;
-        var eachProdTemplate = `
-            <tr class="each-prod" data-id="{pId}" data-name="{prodName}">
-                <td class="text-center">
-                  <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
-                </td>
-                  <td colspan="3">{prodName}</td>
-                  <td class="" style="text-align: center;" colspan="2"><b>{qty}</b></td>
-                  <td>
-                    <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-                      <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                          <span class="d-flex justify-content-between align-items-center px-2 py-2" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
-                            <a href="javascript:void(0)">-</a>
-                            <p class="m-0 p-0">2</p>
-                            <a href="javascript:void(0)">+</a>
-                          </span>
-                      </div>
-                    </td>
-                    <td class="" style="text-align: center;">
-                    <a href="javascript:void(0)" data-id="1" data-name="apple" class="remove-item-from-cart">
-                    <i class="fas fa-trash-alt" data-id="1" data-name="apple" style="font-size:25px; color:red;"></i>
-                    </a>
-                  </td>
-              </tr>`;
-         var cart = getCookie('baskit');
-         if(cart){
-            cart = JSON.parse(cart);
-            var sum = 0;
-            for (var i = 0; i < cart.length; i++) {
-               var eachProdTemplateCopy = eachProdTemplate;
-               sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, `${cart[i].pName} ( ${cart[i].saleUnitQty} ${cart[i].saleUnit} )`);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
-               //append newly created row in card body
-               cartBody.append(eachProdTemplateCopy);
-            }
-            $('.item-counts').html(`${cart.length} ${cart.length > 1 ? 'Items' : 'Item'}`);
-            subTotal = sum;
-            $('#copun-form #ov').val(subTotal);
-             $('.subtotal-price').html(formatCurrency(sum));
-             $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
-            if(cart.length >= 15){
-                $('#delivery-date').html('Next working day');
-            }else{
-                $('#delivery-date').html('Today');
-            }
-         }
-         else{
-            //show empty message
-            return false;
-         }
-    }   
     
     var subTotal = 0;
     var addressCounter = 1;
 
-    function loadShoppingCart1(){
+    function loadShoppingCart(){
        var cartBody = $('#shoppingCartBody1');
        var cart = getCookie('baskit');
        $(cartBody.find('tbody')).empty();
