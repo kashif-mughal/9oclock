@@ -669,7 +669,7 @@ function removeItemFromShoppingCart(currentElem){
       $(".edibles-main .product-category").removeClass('show');
       $("#InnerPageMenuContent").removeClass('show');
     }
-  }
+  } 
 
 </script>
  
