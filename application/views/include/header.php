@@ -363,6 +363,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
  }
  $(document).ready(() => {
+    var isWebNoteAvailable = $('body').find($('#websiteNote'));
+    if(isWebNoteAvailable.length == 0) {
+      $('.bg-overlay').hide();
+    }
   var urlVars = getUrlVars();
   var searchText = urlVars["q"];
   $(".dropdown").hover(function(){
