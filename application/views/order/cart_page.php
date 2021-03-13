@@ -13,6 +13,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 ?>
 
 <style>
+  /*#checkout_text {
+    font-size: 1.25rem;
+  }*/
+
   .table-hover tbody tr:hover{
         background-color: transparent;
     }
@@ -206,7 +210,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             }
         ?>
     <!-- Alert Message -->
-      <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
+      <div class="row d-flex justify-content-start align-items-center">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
             <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
          </button>
@@ -226,7 +230,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       <div style="background-color: #fff; border-color: #ececec; border-radius: 2px; padding: 12px;" id="cart_page_summary">
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
           <h6 style="font-weight: 600; margin-bottom: 0px;" id="subTotal">Sub Total</h6>
-          <h5 style="font-weight: 600; margin-bottom: 0px;" class="subtotal-price"></h5>
+          <p style="font-weight: 600; margin-bottom: 0px;" class="subtotal-price grand-amount"></p>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
           <h6 style="font-weight: 600; margin-bottom: 0px;">Coupon No.</h6>
@@ -248,9 +252,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
           <div>
             <h6 style="color: orange; font-weight: 600; margin-bottom: 0px;">Delivery Charges</h6>
-            <p style="font-size:12px; font-weight: 600; margin-bottom: 0px;">Free delivery on order above Rs.45</p>
+            <p style="font-size:12px; font-weight: 600; margin-bottom: 0px;" class="delivery-charges-text">Free delivery on order above Rs.45</p>
           </div>
-          <h5 style="font-weight: 600;"><script type="text/javascript">document.write(formatCurrency(0));</script></h5>
+          <p style="font-weight: 600;" class="grand-amount">
+            <script type="text/javascript">document.write(formatCurrency(0));</script>
+          </p>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3">
           <h6 style="color: green; font-weight: 600; margin-bottom: 0px;">Total Amount</h6>
@@ -258,11 +264,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         </div>
       </div>
 
-      <div style="background-color: var(--main-color); border: 1px solid #ececec; border-radius: 2px; padding: 12px; margin-top: 12px;">
+      <div style="background-color: var(--main-color); border: 1px solid #ececec; border-radius: 2px; padding: 12px; margin-top: 12px;" id="cart_page_summary_bottom">
         <div class="d-flex justify-content-between align-items-center px-3 py-2" style="color:#fff;">
-          <h5 class="p-0 m-0" id="checkout_text">Sign in to Checkout</h5>
+          <p class="p-0 m-0" id="checkout_text">Sign in to Checkout</p>
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 pr-2 grand-amount" style="border-right: 1px solid #fff;"></h5>
+            <p class="mb-0 pr-2 grand-amount" style="border-right: 1px solid #fff;"></p>
             <i class="fas fa-chevron-right ml-3 grand-amount-icon" style="font-size: 1.25rem;"></i>
           </div>
         </div>

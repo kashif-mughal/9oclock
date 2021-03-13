@@ -4,7 +4,7 @@
    --btn-color-hover: rgba(3, 0, 93, 0.6);
 }
 
-.each-prod-mobile {
+#mobile_cart {
    display:none;
    width: 100%;
 }
@@ -48,13 +48,15 @@
     -webkit-box-orient: vertical;
 }
 
-#cart_page_summary #checkout_text {
-   font-size: 16px !important;
+#checkout_text {
+   font-size: 1.25em;
+   font-weight: 600;
 }
-#cart_page_summary #checkout_text .grand-amount {
-   font-size: 16px !important;
+.grand-amount {
+   font-size: 1.25em;
+   font-weight: 600;
 }
-#cart_page_summary #checkout_text .grand-amount-icon {
+#checkout_text .grand-amount-icon {
    font-size: 1.25rem;
 }
 
@@ -4037,7 +4039,7 @@ a#newAddressCancelBtn {
       left: 19px;
    }
 
-   .each-prod-mobile {
+   #mobile_cart {
       display:block;
    }
    .each-prod {
@@ -4057,14 +4059,15 @@ a#newAddressCancelBtn {
       height: 38px !important;
    }
 
-   #cart_page_summary #checkout_text {
-      font-size: 16px !important;
+   #checkout_text {
+      font-size: 16px;
    }
-   #cart_page_summary #checkout_text .grand-amount {
-      font-size: 16px !important;
+   #checkout_text .grand-amount {
+      font-size: 16px;
    }
-   #cart_page_summary #checkout_text .grand-amount-icon {
-      font-size: 16px !important;
+
+   #checkout_text .grand-amount-icon {
+      font-size: 16px;
    }
 }
 
@@ -4121,6 +4124,30 @@ a#newAddressCancelBtn {
       width: 64px !important;
       height: 32px !important;
    }
+
+   #shoppingCartBody1 {
+      padding-left: 0px;
+      padding-right: 0px;
+   }
+
+   #checkout_text {
+      font-size: 12px;
+   }
+   #checkout_text .grand-amount {
+      font-size: 10px;
+   }
+   #checkout_text .grand-amount-icon {
+      font-size: 13px;
+   }
+   #cart_page_summary_bottom {
+      padding:8px;
+   }
+   #cart_page_summary {
+      padding:8px;
+   }
+   .delivery-charges-text {
+      width: 90% !important;
+   }
 }
 
 @media (max-width: 360px) {
@@ -4153,11 +4180,29 @@ a#newAddressCancelBtn {
   .order-history-card .quantity-area {
    padding-left: 20% !important;
    padding-right: 6% !important;
+   }
+   
 }
+
+
   
+
+
+@media (max-width: 320px) {
+   #checkout_text {
+      font-size: 11px;
+   }
+   #checkout_text .grand-amount {
+      font-size: 10px;
+   }
+   #checkout_text .grand-amount-icon {
+      font-size: 13px;
+   }
+   #cart_page_summary_bottom {
+      padding: 6px; 
+   }
+
 }
-
-
 
 
 
