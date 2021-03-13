@@ -4079,6 +4079,14 @@ a#newAddressCancelBtn {
    #checkout_text .grand-amount-icon {
       font-size: 16px;
    }
+
+   #header-logo {
+      padding-right: 0px;
+      max-width: 63.666667%;
+   }
+   #header-buttons {
+      padding-left: 0px;
+   }
 }
 
 
@@ -4158,6 +4166,14 @@ a#newAddressCancelBtn {
    .delivery-charges-text {
       width: 90% !important;
    }
+
+   #header-logo {
+      padding-right: 0px;
+      max-width: 61.666667%;
+   }
+   #header-buttons {
+      padding-left: 0px;
+   }
 }
 
 @media (max-width: 360px) {
@@ -4210,6 +4226,14 @@ a#newAddressCancelBtn {
    }
    #cart_page_summary_bottom {
       padding: 6px; 
+   }
+
+   #header-logo {
+      padding-right: 0px;
+      max-width: 55.666667%;
+   }
+   #header-buttons {
+      padding-left: 0px;
    }
 
 }

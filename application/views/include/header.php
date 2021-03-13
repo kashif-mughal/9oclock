@@ -208,7 +208,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <div class="container">
             <div class="row align-items-center py-1 py-md-2 pb-sm-0">
                <!-- Brand Logo & Sidebar Button -->
-               <div class="col-lg-2 col-md-9 col-sm-6 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center">
+               <div class="col-lg-2 col-md-9 col-sm-7 mb-sm-4 mb-md-2 mb-lg-0 col-8 order-1 text-center" id="header-logo">
                   <div class="logo-container d-flex flex-row align-item-center 
                      justify-content-start justify-content-md-start justify-content-sm-start">
                      <div class="logo ml-2">
@@ -246,7 +246,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-2 col-md-3 col-sm-6 mb-sm-2 order-lg-3 order-2 col-4 pr-sm-3" id="header-buttons">
+                  <div class="col-lg-2 col-md-3 col-sm-5 mb-sm-2 order-lg-3 order-2 col-4 pr-sm-3" id="header-buttons">
                      <div class="d-flex justify-content-sm-around align-items-center justify-content-sm-end justify-content-start">
 
                         <div class="phone_cart mr-4 mr-sm-0">
