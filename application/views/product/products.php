@@ -56,7 +56,6 @@
             <div style="display: none;">
                 <script type="text" id="clone-cart">
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                Hello
                     <div class="featured-products-content mb-2 d-flex justify-content-between">
                         <div class="card each-prod product-card-inner">
                             <div class="card-body p-0">

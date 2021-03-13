@@ -247,7 +247,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
                   <div class="col-lg-2 col-md-3 col-sm-6 mb-sm-2 order-lg-3 order-2 col-4 pr-sm-3" id="header-buttons">
-                     <div class="d-flex justify-content-sm-around align-items-center justify-content-start">
+                     <div class="d-flex justify-content-sm-around align-items-center justify-content-sm-end justify-content-start">
 
                         <div class="phone_cart mr-4 mr-sm-0">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->

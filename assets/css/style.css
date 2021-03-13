@@ -4052,7 +4052,7 @@ a#newAddressCancelBtn {
    #mobile_cart {
       display:block;
    }
-   .each-prod {
+   #main_cart {
       display:none;
    }
 
