@@ -285,6 +285,45 @@
 </section>
 
 
+
+
+<section id="cart_page" >
+   <div class="container">
+      <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
+         <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
+            <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
+         </button>
+         <h3>Cart</h3>
+      </div>
+      <div style="background-color: #ffffff; border-radius: 2px; padding: 35px; border: 1px solid #cccccc;">
+         <div class="row">
+            <div class="d-flex flex-column justify-content-between align-items-center">
+              <div class="cart-content-left">
+                <img 
+                  src="<?php echo base_url("assets/img/products/0a4d195be1511b86338d6500c722b320.jpg") ?>" 
+                  alt="Product Image"
+                  style="width: 120px;">
+                <div>
+                  <h4>Product Name Heading</h4>
+                  <p>20kg</p>
+                </div>
+              </div>
+              <div class="cart-content-right">
+                <p>Rs. 8</p>
+                <div class="quantity">
+                    
+                </div>
+                <div>
+                  <i class="fas fa-trash"></i>
+                </div>
+              </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
 <script>
    $(document).ready(function(){
 

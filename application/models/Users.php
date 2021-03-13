@@ -60,6 +60,8 @@ class Users extends CI_Model {
         $this->db->where('c.password', md5($password));
         $this->db->where('c.status', 1);
         $this->db->where('a.verified', 1);
+        $this->db->order_by('c.uid', 'desc');
+        $this->db->limit(1);
         // $this->db->where('a.expiry_date > ', $currDate);
         $query = $this->db->get();
         

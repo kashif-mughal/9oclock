@@ -88,30 +88,37 @@ $(document).ready(function(){
  });
  
    
-  $("#btn-sidebar").click(function() {
-    document.getElementById("mySidenav").style.width = "315px";
-    var bodyContent = document.getElementById("body-content")
-    if(bodyContent)
-      bodyContent.style.marginLeft = "315px";
+   $("#btn-sidebar").click(function () {
+      var screenWidth = $(document).width();
+      
+      document.getElementById("mySidenav").style.width = "315px";
+      document.getElementById("mySidenav").style.overflow = "hidden";
+      $('.bg-overlay').show();
+      var bodyContent = document.getElementById("body-content");
+      if(bodyContent)
+         bodyContent.style.marginLeft = "315px";
    //  $('.sidebar-menu').fadeIn("slow");
     // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
   });
 
-  $("#btn-close-sidebar").click(function() {
-    document.getElementById("mySidenav").style.width = "0";
-    var bodyContent = document.getElementById("body-content")
-    if(bodyContent)
-      bodyContent.style.marginLeft = "0";
+   $("#btn-close-sidebar").click(function () {
+      var screenWidth = $(document).width();
+      document.getElementById("mySidenav").style.width = "0";
+      $('.bg-overlay').hide();
+      var bodyContent = document.getElementById("body-content");
+      if(bodyContent)
+         bodyContent.style.marginLeft = "0";
    //  $('.sidebar-menu').fadeOut(1000);
     // document.body.style.backgroundColor = "white";
   });
 
   if ($(window).width() < 768) {
-    $(".edibles-main .product-category").removeClass('show');
-    $(".filter-brand-button").removeClass('show');
-    $(".filter-weight-button").removeClass('show');
-    $(".filter-type-checkbox").removeClass('show');
-    $("#InnerPageMenuContent").removeClass('show');
+      $(".edibles-main .product-category").removeClass('show');
+      $(".filter-brand-button").removeClass('show');
+      $(".filter-weight-button").removeClass('show');
+      $(".filter-type-checkbox").removeClass('show');
+      $("#InnerPageMenuContent").removeClass('show');
+      $('.bg-overlay').hide();
   }
 
   

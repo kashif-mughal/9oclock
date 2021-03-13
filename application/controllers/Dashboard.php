@@ -124,6 +124,11 @@ class Dashboard extends CI_Controller {
             $this->output->set_header("Location: " . base_url(), TRUE, 302);
     }
 
+    public function logout_email() {
+        if ($this->auth->logout_email())
+            $this->output->set_header("Location: " . base_url(), TRUE, 302);
+    }
+
     #=============Edit Profile======#
 
     public function edit_profile() {

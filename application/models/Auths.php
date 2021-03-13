@@ -50,8 +50,8 @@ class Auths extends CI_Model {
     // Login user by Email Address
     public function user_login_email($email_address, $password) {
         $CI = & get_instance();
-        $CI->load->model('Users');
-        $check_user_login = $CI->Users->check_valid_user_email($email_address, $password);
+        $CI->load->library('auth');
+        $check_user_login = $CI->auth->login_email($email_address, $password);
         
         if($check_user_login) {
             return $check_user_login;

@@ -212,16 +212,20 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          </button>
          <h3>Cart</h3>
       </div>
-      <div style="background-color: #ffffff;">      
+      <div style="background-color: #ffffff;" id="main_cart">      
         <table class="table table-hover table-responsive-md table-condensed">
             <tbody>
             </tbody>
         </table>
       </div>
 
-      <div style="background-color: #fff; border-color: #ececec; border-radius: 2px; padding: 12px;">
+      <div id="mobile_cart" style="background-color: #ffffff; border: 1px solid #ececec;" class="px-2 py-3">
+        
+      </div>
+
+      <div style="background-color: #fff; border-color: #ececec; border-radius: 2px; padding: 12px;" id="cart_page_summary">
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
-          <h6 style="font-weight: 600; margin-bottom: 0px;">Sub Total</h6>
+          <h6 style="font-weight: 600; margin-bottom: 0px;" id="subTotal">Sub Total</h6>
           <h5 style="font-weight: 600; margin-bottom: 0px;" class="subtotal-price"></h5>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
@@ -256,10 +260,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
       <div style="background-color: var(--main-color); border: 1px solid #ececec; border-radius: 2px; padding: 12px; margin-top: 12px;">
         <div class="d-flex justify-content-between align-items-center px-3 py-2" style="color:#fff;">
-          <h5 class="p-0 m-0">Sign in to Checkout</h5>
+          <h5 class="p-0 m-0" id="checkout_text">Sign in to Checkout</h5>
           <div class="d-flex justify-content-between align-items-center">
             <h5 class="mb-0 pr-2 grand-amount" style="border-right: 1px solid #fff;"></h5>
-            <i class="fas fa-chevron-right ml-3" style="font-size: 1.25rem;"></i>
+            <i class="fas fa-chevron-right ml-3 grand-amount-icon" style="font-size: 1.25rem;"></i>
           </div>
         </div>
       </div>
@@ -362,6 +366,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
        var cartBody = $('#shoppingCartBody1');
        var cart = getCookie('baskit');
        $(cartBody.find('tbody')).empty();
+
        if(cart){
           cart = JSON.parse(cart);
           if(cart.length == 0)
@@ -378,7 +383,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           <td class="text-center">
           <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
           </td>
-          <td colspan="3">{prodName}</td>
+          <td colspan="3" class="prod_name">{prodName}</td>
           <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
           <td>
             <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
@@ -421,6 +426,31 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   </td>
               </tr>`;
 
+            var mobileProdTemp = `<div class="d-flex justify-content-start align-items-center mb-3">
+              <img style="width: 90px;" src="{imgValue}" alt="">  
+              <div class="ml-3" style="width: 100%;">
+                <div class="each-prod-top">
+                  <p>{prodName}</p>
+                  <small>{unit}</small>
+                  <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
+                </div>
+                <div class="each-prod-bottom d-flex justify-content-between align-items-center">
+                  <b class="cart-price">{price}</b>
+                  <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
+                      <span class="d-flex justify-content-between align-items-center px-2 py-2 px-sm-1 py-sm-1 quantity-btn" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
+                        <a href="javascript:void(0)">-</a>
+                        <p class="m-0 p-0">2</p>
+                        <a href="javascript:void(0)">+</a>
+                      </span>
+                  </div>
+                  <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
+                    <i class="fas fa-trash-alt" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>`;
+
+
           var sum = 0;
           for (var i = 0; i < cart.length; i++) {
              var eachProdTemplateCopy1 = eachProdTemplate1;
@@ -432,8 +462,19 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
+
+            var mobileProdTempCopy = mobileProdTemp;
+            mobileProdTempCopy = mobileProdTempCopy.replace(/{pId}/g, cart[i].id);
+            mobileProdTempCopy = mobileProdTempCopy.replace('{imgValue}', cart[i].img);
+            mobileProdTempCopy = mobileProdTempCopy.replace(/{prodName}/g, `${cart[i].pName}`);
+            mobileProdTempCopy = mobileProdTempCopy.replace('{price}', formatCurrency(cart[i].price));
+            mobileProdTempCopy = mobileProdTempCopy.replace('{qty}', cart[i].quantity);
+            mobileProdTempCopy = mobileProdTempCopy.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
+            mobileProdTempCopy = mobileProdTempCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));  
+
              //append newly created row in card body
              $(cartBody.find('tbody')).append(eachProdTemplateCopy1);
+             $(cartBody.find('#mobile_cart')).append(mobileProdTempCopy);
              }
 
           }

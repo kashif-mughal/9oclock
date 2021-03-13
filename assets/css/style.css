@@ -4,17 +4,26 @@
    --btn-color-hover: rgba(3, 0, 93, 0.6);
 }
 
+.each-prod-mobile {
+   display:none;
+   width: 100%;
+}
+.each-prod {
+   /*display:block;*/
+   width: 100%;
+}
+
 #main-banner {
    /* margin-top: 20px !important; */
    /* max-width: 1100px !important; */
    /* margin-right: auto !important; */
    /* margin-left: auto !important; */
-   height: 55vh;
+   height: 65vh;
    margin-left: 0px !important;
    margin-right: 0px !important;
 }
 #main-banner img {
-   height: 55vh;
+   height: 65vh;
 }
 #main-banner .carousel-indicators li {
    width: 8px !important;
@@ -27,6 +36,28 @@
 #main-banner .carousel-indicators li.active {
    background-color: #fff;
 }
+
+#mobile_cart .each-prod-top p {
+   height: 2.6em !important;
+    line-height: 1.2em !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    display: -webkit-box;
+    text-overflow: ellipsis !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+#cart_page_summary #checkout_text {
+   font-size: 16px !important;
+}
+#cart_page_summary #checkout_text .grand-amount {
+   font-size: 16px !important;
+}
+#cart_page_summary #checkout_text .grand-amount-icon {
+   font-size: 1.25rem;
+}
+
 
 /* Custom DropDown */
 
@@ -2327,6 +2358,7 @@ button.category-button:active {
    font-family: "Work Sans";
    border-bottom: 1px solid #cccccc;
    padding: 0 12px 12px 10px;
+   overflow-x: hidden;
 }
 .sidenav a {
    text-decoration: none;
@@ -4004,6 +4036,36 @@ a#newAddressCancelBtn {
       bottom: -14px;
       left: 19px;
    }
+
+   .each-prod-mobile {
+      display:block;
+   }
+   .each-prod {
+      display:none;
+   }
+
+   #mobile_cart .cart-price {
+      font-size: 14px !important;
+   }
+
+   #mobile_cart .remove-item-from-cart i {
+      font-size: 22px !important;
+   }
+
+   #mobile_cart .quantity-btn {
+      width: 76px !important;
+      height: 38px !important;
+   }
+
+   #cart_page_summary #checkout_text {
+      font-size: 16px !important;
+   }
+   #cart_page_summary #checkout_text .grand-amount {
+      font-size: 16px !important;
+   }
+   #cart_page_summary #checkout_text .grand-amount-icon {
+      font-size: 16px !important;
+   }
 }
 
 
@@ -4046,7 +4108,19 @@ a#newAddressCancelBtn {
       /* bottom: -7px;
       left: 13px; */
    }
-   
+
+   #mobile_cart .cart-price {
+      font-size: 11px !important;
+   }
+
+   #mobile_cart .remove-item-from-cart i {
+      font-size: 20px !important;
+   }
+
+   #mobile_cart .quantity-btn {
+      width: 64px !important;
+      height: 32px !important;
+   }
 }
 
 @media (max-width: 360px) {

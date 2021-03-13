@@ -39,6 +39,23 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    .select2-container--default .select2-results__option--highlighted[aria-selected]{
     background-color: var(--secondary-color);
    }
+
+   .dropdown:hover .dropdown-menu{
+      display: block;
+   }
+   #profileDropdown .dropdown-menu{
+      margin-top: 1px;
+      transition: 0.5s ease-in-out;
+      border-radius: 2px;
+      padding: 0px;
+   }
+   #profileDropdown a.dropdown-item {
+      padding: 0.8rem 1.2rem;
+   }
+   #profileDropdown a.dropdown-item:hover {
+      background-color: var(--main-color) !important;
+      color: #fff;
+   }
 </style>
 
 <!-- Script for the use of auto complete search START-->
@@ -234,9 +251,21 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
                         <div class="phone_cart mr-4 mr-sm-0">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
-                           <a href="<?php echo base_url() ?>dashboard/user_login_email">
-                              <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
-                           </a>
+                           
+                           <div class="dropdown" id="profileDropdown">
+                              <a href="<?php echo base_url() ?>dashboard/user_login_email" >
+                                 <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
+                              </a>
+                              <?php if(isset($_SESSION['user_id'])) { ?>
+                              <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">My Account</a>
+                                    <a href="#" class="dropdown-item">Track your order</a>
+                                    <a href="#" class="dropdown-item">Order History</a>
+                                    <a href="#" class="dropdown-item">Admin Panel</a>
+                                    <a href="<?=base_url().'Dashboard/logout_email'?>" class="dropdown-item">Logout</a>
+                              </div>
+                              <?php } ?>
+                           </div>
                         </div>
 
                         <div class="cart_icon mr-4 mr-sm-0">
@@ -311,11 +340,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    }
 ?>
 
-<?php //isset($_SESSION['sid_web']) { ?>
-   <p>Session: <?php //echo '<pre>'; 
-                  print_r($_SESSION); ?></p>
-<?php //} ?>
-
 <div class="wrapper">
 
 <script type="text/javascript">
@@ -341,6 +365,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
  $(document).ready(() => {
   var urlVars = getUrlVars();
   var searchText = urlVars["q"];
+  $(".dropdown").hover(function(){
+      var dropdownMenu = $(this).children(".dropdown-menu");
+      if(dropdownMenu.is(":visible")){
+         dropdownMenu.parent().toggleClass("open");
+      }
+   });
   if(searchText){
     $("#q").val(searchText.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ' '));
   }
