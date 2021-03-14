@@ -5,7 +5,7 @@
     }
     .wrapper {
       margin-top: 0px;
-   }
+    }
 </style>
 
 <section class="main-content" >
