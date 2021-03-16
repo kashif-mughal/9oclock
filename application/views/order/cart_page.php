@@ -141,23 +141,49 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       display: inline-block;
       vertical-align: middle;
     }
+    .prodName {
+      font-size: 14px;
+      line-height: 20px;
+      color: #666666;
+      font-weight: 500;
+      font-family: "Work Sans";
+      margin-bottom: 0px;
+    }
+    .unitText {
+      font-size: 12px;
+      color: #999999;
+      font-weight: 400;
+      font-family: "Work Sans";
+    }
+    .quantityCount {
+      font-size: 18px;
+      color: #000000;
+      font-weight: 400;
+      font-family: "Work Sans";
+    }
+    .priceText {
+      font-size: 16px;
+      color: #000000;
+      font-weight: 500;
+      font-family: "Work Sans";
+    }
 </style>
 
 <div id="main-page">
     <!-- Bread Crumb -->
-    <div class="bread_crumb">
+    <!-- <div class="bread_crumb">
         <div class="container">
             <div class="row d-block">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?=base_url()?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?php //echo base_url()?>">Home</a></li>
                         <li class="breadcrumb-item">Cart</li>
                     </ol>
                 </nav>
                 <h3 class="mb-0">Shopping Cart</h3>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Bread Crumb -->
 
@@ -214,7 +240,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
             <i class="fas fa-arrow-left" style="font-size: 20px;"></i>
          </button>
-         <h3>Cart</h3>
+         <h3 style="font-size: 24px;color: #000000;font-weight: 600;font-family: 'Work Sans';">Cart</h3>
       </div>
       <div style="background-color: #ffffff;" id="main_cart">      
         <table class="table table-hover table-responsive-md table-condensed">
@@ -326,7 +352,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
           </td>
           <td colspan="3" class="prod_name">{prodName}</td>
-          <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
+          <td class="" style="text-align: center;" colspan="2"><b class="priceText">{price}</b></td>
           <td>
             <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
               <div kashif class="quantity-area d-flex justify-content-center align-items-center mt-2">
@@ -338,7 +364,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   </span>
                </div>
             </td>
-        <td class="" style="text-align: center;"><b>{totalPrice}</b></td>
+        <td class="" style="text-align: center; padding-right:30px;"><b>{totalPrice}</b></td>
           <td class="" style="text-align: center;">
           <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
           <i class="fas fa-times" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
@@ -349,21 +375,21 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                 <td class="text-center">
                   <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
                 </td>
-                  <td colspan="3">{prodName}<br><small>{unit}</small></td>
-                  <td class="" style="text-align: center;" colspan="2"><b>{price}</b></td>
+                  <td colspan="3"><p class="prodName">{prodName}</p><small class="unitText">{unit}</small></td>
+                  <td class="" style="text-align: center;" colspan="2"><b class="priceText">{price}</b></td>
                   <td>
                     <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
                       <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                           <span class="d-flex justify-content-between align-items-center px-2 py-2" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
                             <a href="javascript:void(0)">-</a>
-                            <p class="m-0 p-0">2</p>
+                            <p class="m-0 p-0" class="quantityCount">2</p>
                             <a href="javascript:void(0)">+</a>
                           </span>
                       </div>
                     </td>
-                    <td class="" style="text-align: center;">
+                    <td class="" style="text-align: center; padding-right:30px;">
                     <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
-                    <i class="fas fa-trash-alt" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
+                    <i class="fas fa-trash-alt" data-id="{pId}" data-name="{prodName}" style="font-size:20px; color:red;"></i>
                     </a>
                   </td>
               </tr>`;
@@ -381,12 +407,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                       <span class="d-flex justify-content-between align-items-center px-2 py-2 px-sm-1 py-sm-1 quantity-btn" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
                         <a href="javascript:void(0)">-</a>
-                        <p class="m-0 p-0">2</p>
+                        <p class="m-0 p-0" class="quantityCount">2</p>
                         <a href="javascript:void(0)">+</a>
                       </span>
                   </div>
                   <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
-                    <i class="fas fa-trash-alt" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
+                    <i class="fas fa-trash-alt" data-id="{pId}" data-name="{prodName}" style="font-size:20px; color:red;"></i>
                   </a>
                 </div>
               </div>

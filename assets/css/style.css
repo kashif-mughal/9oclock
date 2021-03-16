@@ -65,14 +65,18 @@
 
 
 #mobile_cart .each-prod-top p {
-   height: 2.6em !important;
+   height: 1.4em !important;
    line-height: 1.2em !important;
    width: 100% !important;
    overflow: hidden !important;
    display: -webkit-box;
    text-overflow: ellipsis !important;
-   -webkit-line-clamp: 2;
+   -webkit-line-clamp: 1;
    -webkit-box-orient: vertical;
+   font-family: "Work Sans";
+   font-weight: 500;
+   font-size: 14px;
+   color: #666666;
 }
 
 #checkout_text {
@@ -4643,6 +4647,9 @@ a#newAddressCancelBtn {
 
    #mobile_cart .cart-price {
       font-size: 14px !important;
+      color: #000000;
+      font-weight: 500;
+      font-family: "Work Sans";
    }
 
    #mobile_cart .remove-item-from-cart i {
