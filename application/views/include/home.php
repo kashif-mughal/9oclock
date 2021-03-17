@@ -186,7 +186,7 @@
 </section>
 
    <!-- Website Note -->
-   <div id="websiteNote" style="z-index: 2000; display: block; position: fixed; top: 0vh; margin-left: 23%;">
+   <!-- <div id="websiteNote" style="z-index: 2000; display: block; position: fixed; top: 0vh; margin-left: 23%;">
        <div style="width: 70%; margin-top:35vh; animation-name: moveInUp;animation-duration: 0.5s; box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;">
           <div class="p-0" style=" border-radius: 5px; border:1px solid #ffc107; background-color: #fff;">
              <div class="modal-body p-5">
@@ -203,7 +203,7 @@
              </div>
           </div>
        </div>
-    </div>
+    </div> -->
    
     <!-- Website Note -->
 
@@ -219,17 +219,20 @@ html{
    var assistantJsonArray;
    var isCatButtonSearch = false;
    $(document).ready(function() {
+      $('.bg-overlay').hide();
+      $("body").css({"height": "100%", "overflow-y": "none"});
+      $("html").css({"overflow": "auto"});
       // Website Note
-      if($(window).width() < 770)
-         $("#dryr").trigger("click");
-      $("body").css({"height": "100vh", "overflow-y": "hidden"});
+      // if($(window).width() < 770)
+      //    $("#dryr").trigger("click");
+      // $("body").css({"height": "100vh", "overflow-y": "hidden"});
       
-      $('#websiteNoteDismiss').click(function() {
-         $('#websiteNote').hide();
-         $("body").css({"height": "100%", "overflow-y": "none"});
-          $("html").css({"overflow": "auto"});
-         $('.bg-overlay').hide();
-      });
+      // $('#websiteNoteDismiss').click(function() {
+      //    $('#websiteNote').hide();
+      //    $("body").css({"height": "100%", "overflow-y": "none"});
+      //     $("html").css({"overflow": "auto"});
+      //    $('.bg-overlay').hide();
+      // });
      // Website Note Ends
       $(document).on('click', '#popup-checkout', function () {
          checkout($(this));

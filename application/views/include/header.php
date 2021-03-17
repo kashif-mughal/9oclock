@@ -248,7 +248,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
                   <div class="col-lg-2 col-md-3 col-sm-5 mb-sm-2 order-lg-3 order-2 col-4 pr-sm-3" id="header-buttons">
-                     <div class="d-flex justify-content-sm-around align-items-center justify-content-sm-end justify-content-start">
+                     <div class="d-flex justify-content-sm-between align-items-center justify-content-sm-end justify-content-start">
 
                         <div class="phone_cart mr-4 mr-sm-0">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
@@ -289,7 +289,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                            aria-controls="navbarSupportedContent"
                            aria-expanded="false" 
                            aria-label="Toggle navigation"
-                           style="padding:0px; margin-left: 8px;">
+                           style="padding:0px;">
                                  <!-- <i class="fa fa-bars"></i> -->
                                  <img src="<?php echo base_url() ?>assets/img/Menu-icon.png" alt="">
                            </button>
@@ -335,7 +335,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
  }
  $(document).ready(() => {
-    var isWebNoteAvailable = $('body').find($('#websiteNote'));
+   //  var isWebNoteAvailable = $('body').find($('#websiteNote'));
     if(isWebNoteAvailable.length == 0) {
       $('.bg-overlay').hide();
     }

@@ -1343,7 +1343,7 @@ button.category-button:active {
    font-size: 12px;
    position: relative;
    bottom: -12px;
-   left: 15px;
+   left: 11px;
    background-color: #ffffff;
    color: var(--secondary-color);
    width: 18px;
@@ -3867,10 +3867,10 @@ a#newAddressCancelBtn {
       font-size: calc(0.2rem + 0.4vw);
    }
 
-   .logo .logo_content img {
+   /* .logo .logo_content img {
       max-width: 130px !important;
       width: 130px !important;
-   }
+   } */
 }
 
 
@@ -4135,10 +4135,10 @@ a#newAddressCancelBtn {
       display: none;
    }
 
-   .logo .logo_content img {
+   /* .logo .logo_content img {
       max-width: 130px !important;
       width: 130px !important;
-   }
+   } */
 
    /* top bar */
    .top-bar .navbar {
@@ -4478,7 +4478,7 @@ a#newAddressCancelBtn {
    .logo-container,
    .phone_cart {
       justify-content: left !important;
-      margin-bottom: 8px !important;
+      /* margin-bottom: 8px !important; */
    }
 
    #clearFilter .clearFilterText {
@@ -4708,9 +4708,9 @@ a#newAddressCancelBtn {
       width: 177px;
    }
 
-   .phone_cart {
+   /* .phone_cart {
       width: 15px !important;
-   }
+   } */
 
    .sidebar-button {
       width: 15px !important;
@@ -4767,8 +4767,12 @@ a#newAddressCancelBtn {
       max-width: 63.666667%;
    }
 
-   #header-buttons {
+   /* #header-buttons {
       padding-left: 0px;
+   } */
+
+   .btn-sidebar {
+      margin-left: 2px;
    }
 
    .cart_icon .cart_icon_text #add_to_cart_items {
