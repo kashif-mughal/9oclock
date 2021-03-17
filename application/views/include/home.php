@@ -11,7 +11,7 @@
 <section class="main-content" >
    <div class="container">
       <div class="row">
-         <div class="col-xl-12 col-lg-12 col-md-12 pr-md-0">
+         <div class="col-xl-12 col-lg-12 col-md-12">
             <div class="featured-products panel-min-height">
                <div class="header">
                   <h2 class="d-inline">FEATURED PRODUCTS</h2>
@@ -19,7 +19,7 @@
                      <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon.png?>" class="float-right" alt="">
                   </a>
                   <a class="d-none d-md-inline" href="javascript:void(0)">
-                     <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" style="right: 65px;position:absolute;top: 30px;" alt="">
+                     <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" style="right: 90px;position:absolute;top: 50px;" alt="">
                   </a>
                   <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                </div>
@@ -45,11 +45,12 @@
                                              </a>-->
                                          </div>
                                      </div>
-                                     <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
+                                     <img class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
+                                     <p class="product-card-discount-banner">20% OFF</p>
                                      <div class="product-info text-left px-2">
+                                          <p class="product-card-inner-subcategory">Vegetables</p>
                                          <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                                         <p class="card-text product-card-inner-weight">
-                                             <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
+                                         
                                          <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p> -->
                                          <?php if($discountPercentage != 0) { ?> 
                                              <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
@@ -64,14 +65,20 @@
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
-                                          <div class="input-group">
-                                             <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                                <option selected>Variant</option>
-                                                <option value="1">1kg</option>
+                                          <div class="input-group product-card-dropdown">
+                                             <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
+                                                <option value="1" selected>1kg</option>
                                                 <option value="2">1 Dozen</option>
                                                 <option value="3">500 grm</option>
                                              </select>
                                           </div>
+                                          <!-- <p class="card-text product-card-inner-weight">
+                                             <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
+                                          <div class="d-flex justify-content-start align-items-center product-card-inner-price">
+                                             <p class="mainPrice">£<?php echo $value['SalePrice']; ?></p>
+                                             <p class="originalPrice">£<?php echo $value['OriginalPrice']; ?></p>
+                                          </div>
+
                                          <div class="quantity-area d-flex justify-content-center align-items-center mt-2 text-center">
                                              <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                              <input type="text" class="d-inline-flex quantity-input quantity">
@@ -88,10 +95,10 @@
                                        <a href="javascript:void(0);" class="product-card-btn add-cart"
                                        data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                        >Add to Cart</a>
-                                       <a href="javascript:void(0);" style="display: none;" class="product-card-btn remove-cart"
-                                       data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
+                                       <!-- <a href="javascript:void(0);" style="display: none;" class="product-card-btn remove-cart"
+                                       data-json="<?php //echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                        >Remove From Cart</a>
-                                       <?php } ?>
+                                       <?php } ?> -->
                                     </div>
                                  </div>
                              </div>
@@ -299,6 +306,7 @@ html{
    }
    .cat-card{
       padding: 10px;
+      margin-bottom: 10px;
    }
    .cat-card, .cat-card img{
       border-radius: 2px;

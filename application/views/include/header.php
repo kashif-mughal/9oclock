@@ -229,10 +229,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <div class="header_search_content">
                         <div class="header_search_form_container">
                            <form id="searchform" action="<?=base_url('cproduct/products')?>" method="get">
-                              <div class="input-group mb-1">
+                              <div class="input-group mb-1"">
                                  <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="I'm Shopping for..." onfocus="this.value=''">
                                  <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" type="submit">
+                                    <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" style="border-radius: 0 0.25rem 0.25rem 0;" type="submit">
                                        Search
                                        <!-- <i class="fas fa-search"></i> -->
                                     </button>

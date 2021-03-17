@@ -834,7 +834,7 @@ input:focus {
    bottom: -18px;
    left: -26px;
    background-color: #ffffff;
-   color: var(--secondary-color);
+   color: var(--main-color);
 }
 
 .dropdown-toggle::after {
@@ -1235,7 +1235,7 @@ input:focus {
    background-color: #ffffff;
    margin-top: 20px;
    /* margin-bottom: 20px; */
-   border-radius: 10px 10px 0 0;
+   /* border-radius: 10px 10px 0 0; */
    padding: 35px 25px 20px 35px;
    border: 1px solid #cccccc;
 }
@@ -1243,7 +1243,7 @@ input:focus {
 .products-widget-heading {
    font-size: 24px;
    letter-spacing: -1px;
-   color: var(--secondary-color);
+   color: var(--main-color);
    font-weight: 600;
    font-family: "Work Sans";
    margin-bottom: 20px;
@@ -1297,6 +1297,10 @@ input:focus {
    margin: 0px !important;
 }
 
+.header_search .header_search_content {
+   width: 90%;
+}
+
 button.category-button {
    border-left: none;
    border-top: none;
@@ -1331,7 +1335,8 @@ button.category-button:active {
 
 #basket-img {
    position: absolute;
-   margin-left: 6px;
+   /* margin-left: 6px; */
+   top: -5px;
 }
 
 #add_to_cart_items {
@@ -1341,13 +1346,18 @@ button.category-button:active {
    left: 15px;
    background-color: #ffffff;
    color: var(--secondary-color);
+   width: 18px;
+   height: 18px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .main-content .featured-products {
    background-color: #ffffff;
    margin-top: 20px;
-   border-radius: 10px 10px 0 0;
-   padding: 8px 20px;
+   /* border-radius: 10px 10px 0 0; */
+   padding: 30px 20px;
    border: 1px solid #cccccc;
    min-height: 45px;
 }
@@ -1364,7 +1374,7 @@ button.category-button:active {
 .products-widget-heading a,
 #va-filter .heading-primary a,
 .innerPageMenu a {
-   color: var(--secondary-color);
+   color: var(--main-color);
    display: none;
 }
 
@@ -1501,7 +1511,7 @@ button.category-button:active {
 .main-content .featured-products h2 {
    font-size: 24px;
    letter-spacing: -1px;
-   color: var(--secondary-color);
+   color: var(--main-color);
    font-weight: 600;
    font-family: "Work Sans";
 }
@@ -1564,7 +1574,7 @@ button.category-button:active {
 .product-card-viewmore-btn {
    width: 100% !important;
    height: 32px;
-   background-color: var(--secondary-color);
+   background-color: var(--main-color);
    font-size: 15px;
    color: #ffffff;
    font-weight: 500;
@@ -1593,10 +1603,32 @@ button.category-button:active {
    margin-left: auto;
    margin-right: auto;
    margin-top: -4px;
+   height: 111.6px !important;
 }
 
 .main-content .featured-products .header {
    margin-bottom: 17px;
+   margin-left: 20px;
+}
+
+.product-card-dropdown select {
+   height: 28px;
+   border-radius: 0px;
+   padding: 4px 10px;
+   font-size: 14px;
+   letter-spacing: 0px;
+   color: #999999;
+   font-family: "Arial";
+
+   appearance: none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   -ms-appearance: none;
+   /* border: 2px solid #000; */
+   /* background: url('http://www.free-icons-download.net/images/small-down-arrow-icon-15593.png'); */
+   /* background-repeat: no-repeat;
+   
+   background-position: right 0px; */
 }
 
 .product-info {
@@ -1639,6 +1671,10 @@ button.category-button:active {
    max-width: 50px !important;
    text-align: center;
    height: 30px;
+   font-size: 18px;
+   color: #000000;
+   font-weight: 400;
+   font-family: "Work Sans";
 }
 
 /* Inner Page Product Card */
@@ -1677,34 +1713,83 @@ button.category-button:active {
 
 .product-card-inner-name {
    font-size: 15px;
-   letter-spacing: -0.3px;
+   /* letter-spacing: 0.3px; */
    color: #000000;
    margin-bottom: 0px;
-   font-weight: 600;
+   font-weight: bold;
    font-family: "Work Sans";
-   margin-bottom: 0px;
+   margin-bottom: 10px;
+}
+
+.product-card-inner-subcategory {
+   font-size: 12px;
+   letter-spacing: 0px;
+   color: #999999;
+   font-family: "Arial";
+   margin-bottom: 4px;
+   height: 17.6px;
+}
+
+.product-card-discount-banner {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   background-color: red;
+   color: #fff;
+   z-index: 100;
+   font-size: 13px;
+   letter-spacing: 0px;
+   font-weight: bold;
+   font-family: "Arial";
+   margin: 0px;
+   padding: 3px 6px;
 }
 
 .product-card-title,
 .product-card-inner-name {
-   height: 3.8em !important;
+   height: 1.4em !important;
    line-height: 1.3em !important;
    width: 100% !important;
    overflow: hidden !important;
    display: -webkit-box;
    text-overflow: ellipsis !important;
-   -webkit-line-clamp: 3;
+   -webkit-line-clamp: 1;
    -webkit-box-orient: vertical;
 }
 
 .product-card-inner-weight {
-   font-size: 16px;
+   font-size: 14px;
    color: #999999;
    margin-top: 0px;
    margin-bottom: 0px;
    font-weight: 500;
    font-family: "Work Sans";
    text-align: left;
+   height: 28px;
+}
+
+.product-card-inner-price {
+   margin-top: 10px;
+}
+
+.product-card-inner-price .mainPrice {
+   font-size: 16px;
+   letter-spacing: 0px;
+   color: #000000;
+   font-weight: bold;
+   font-family: "Arial";
+   margin-right: 10px;
+   margin-bottom: 0px;
+}
+
+.product-card-inner-price .originalPrice {
+   font-size: 13px;
+   letter-spacing: 0px;
+   color: #cccccc;
+   font-weight: bold;
+   font-family: "Arial";
+   text-decoration: line-through;
+   margin-bottom: 0px;
 }
 
 .product-card-inner-price {
@@ -1773,7 +1858,7 @@ button.category-button:active {
 .main-content .featured-products-content .card .product-card-btn {
    width: 88%;
    height: 29px;
-   background-color: var(--secondary-color);
+   background-color: var(--main-color);
    text-align: center;
    text-decoration: none;
    color: #ffffff;
@@ -3674,9 +3759,9 @@ a#newAddressCancelBtn {
    color: #fff;
 }
 
-.cart_icon img {
+/* .cart_icon img {
    width: 22px;
-}
+} */
 
 .phone_cart i {
    font-size: 22px;
@@ -4037,6 +4122,10 @@ a#newAddressCancelBtn {
       margin-top: 166px;
    }
 
+   .header_search .header_search_content {
+      width: 100% !important;
+   }
+
 }
 
 
@@ -4285,7 +4374,7 @@ a#newAddressCancelBtn {
    .products-widget-heading a,
    #va-filter .heading-primary a,
    .innerPageMenu a {
-      color: var(--secondary-color);
+      color: var(--main-color);
       display: block;
    }
 
@@ -4722,9 +4811,9 @@ a#newAddressCancelBtn {
       color: #fff;
    }
 
-   .cart_icon img {
+   /* .cart_icon img {
       width: 18px;
-   }
+   } */
 
    .phone_cart i {
       font-size: 18px;
