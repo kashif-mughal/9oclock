@@ -188,7 +188,7 @@ class Auth {
     }
     function check_auth($url = '') {
         if ($url == '') {
-            $url = base_url("Dashboard/user_authentication");
+            $url = base_url("Dashboard/user_authentication_email");
         }
         //print_r($url);die;
         $CI = & get_instance();

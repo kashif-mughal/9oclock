@@ -196,7 +196,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <div class="container">
             <div class="row">
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
-                  <ul style="animation: ticker 8s infinite linear;" class="navbar-nav">
+                  <ul style="animation: ticker 15s infinite linear;" class="navbar-nav">
                      <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" role="button">Get special discount of 10% on purchase min 10 items</a>
                      </li>
@@ -254,15 +254,17 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
                            
                            <div class="dropdown" id="profileDropdown">
-                              <a href="<?php echo base_url() ?>dashboard/user_login_email" >
+                              <a href="javascript:void(0)" >
                                  <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
                               </a>
                               <?php if(isset($_SESSION['user_id'])) { ?>
                               <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">My Account</a>
-                                    <a href="#" class="dropdown-item">Track your order</a>
-                                    <a href="#" class="dropdown-item">Order History</a>
-                                    <a href="#" class="dropdown-item">Admin Panel</a>
+                                    <a href="<?=base_url("User/edit_profile");?>" class="dropdown-item">My Account</a>
+                                    <a href="<?=base_url("Corder/track_order_form")?>" class="dropdown-item">Track your order</a>
+                                    <a href="<?=base_url("Corder/my_order")?>" class="dropdown-item">Order History</a>
+                                    <?php if($_SESSION['user_type'] == 1){?>
+                                        <a href="<?=base_url("Admin_dashboard")?>" class="dropdown-item">Admin Panel</a>
+                                    <?php } ?>
                                     <a href="<?=base_url().'Dashboard/logout_email'?>" class="dropdown-item">Logout</a>
                               </div>
                               <?php } ?>
@@ -624,10 +626,10 @@ function removeItemFromShoppingCart(currentElem){
       $(allTxt[i]).attr("data-toggle", "tooltip");
     }
     $('[data-toggle="tooltip"]').tooltip();
-    $("#q").click(function() {
-      if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
-        window.location.href = "<?php echo base_url('cproduct/products?q=&categoryId=');?>";
-    });
+    // $("#q").click(function() {
+    //   if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
+    //     window.location.href = "<?php echo base_url('cproduct/products?q=&categoryId=');?>";
+    // });
     $("#q").keydown(function() {
       if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
         $("#searchform").submit();

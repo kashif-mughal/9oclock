@@ -66,57 +66,30 @@ foreach($CatList as $key => $value) {
 <section class="main-footer">
 	<div class="container">
 		<div class="main-footer-content">
-			<p class="footer-text text-center text-md-left">
-				9o'Clock is not just another online grocery store. We at 9o'Clock aim at revolutionizing the whole thinking of online shopping by introducing latest technology into the arena and at the same retaining cultural traditions that are still revered by shoppers in Pakistan but are so easily abandoned by online shopping platforms focusing only on the technological aspect. We consistently work hard to:
-			</p>
+			
+	        <div class="categories my-4">
+				<h4>Categories</h4>
+				<div class="category-grid">
 
-			<div class="best_features">
-				<div class="grid-container">
-					<div class="feature-img">
-						<h4 class="feature-img-text m-0">Rs.</h4>  
-					</div>
-					<h4 class="feature-text my-2 py-1">Offer best quality at reasonable price</h4>                  
-				</div>
-			</div>
-			<div class="best_features">
-				<div class="grid-container">
-					<div class="feature-img">   
-						<img src="<?php echo base_url() ?>assets/img/footer/round-rectangle.png?>" alt="">
-					</div>
-					<h4 class="feature-text my-2 py-1">Present a wide range of grocery products to meet diversified needs of all our customers</h4>                  
-				</div>
-			</div>
-			<div class="best_features">
-				<div class="grid-container">
-					<div class="feature-img">
-						<img src="<?php echo base_url() ?>assets/img/footer/arrow-left.png?>" alt="">
-					</div>
-					<h4 class="feature-text my-2 py-1">Maintain very high level of satisfaction for all our customers - we offer cashback and return options without any questions asked</h4>                  
-				</div>
-			</div>
-			<div class="best_features">
-				<div class="grid-container">
-					<div class="feature-img">   
-						<img src="<?php echo base_url() ?>assets/img/footer/rocket.png?>" alt="">
-					</div>
-					<h4 class="feature-text my-2 py-1">Continuously innovate and improve out offerings to enhance the experience of our customers</h4>                  
-				</div>
-			</div>
-<!-- 
-			<div class="mission_vision my-4">
-				<h4>Mission & Vision</h4>
-				<div class="mission_vision_content">
-					<h6>Mission:</h6>
-					<p>To become the most customer-centric, technologically sound and practical online shopping platform which is highly respected for ethics and professionalism by customers and competition alike</p>
-				</div>
-				<div class="mission_vision_content">
-					<h6>Vision:</h6>
-					<p>Build strong understanding of customer needs fby carefully analyzing their shopping patterns and paying close attension to their stated expectations through intelligently carried out research and surverys. Use most suitable technology to create out of box solutions with the aim to acheiving optimum level of satisfaction for our customers and at the same time fullfilling our economic objectives. Attract best talent by offering competative remunerations and a healthy work environment that enables every team member to perform at his or her optimum level and at the same time achieve a perfect work-life balance.
-					</p>
-				</div>
-			</div> -->
+					<?php foreach($CatList as $key => $value) {?>
+						<div class="sub-category">
+							<div class="sub-category-content">
 
-	        <div class="feature-details my-4">
+								<h6><?=$key?></h6>
+								
+								<?php for ($i=0; $i < count($value->childCats); $i++) {?>
+									<a href="<?=base_url('Cproduct/products?categoryId=').$value->childCats[$i]['CategoryId']?>">
+										<span class="hyphen">-</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
+									</a>
+								<?php } ?>
+
+							</div>
+						</div>
+					<?php } ?>
+
+				</div>
+			</div>
+			<div class="feature-details my-4">
 				<h4>9o'Clock - the most customer-centeric online shopping platform</h4>
 				<div class="feature_details_content">
 					<h6>Wide Geographic Coverage</h6>
@@ -143,56 +116,7 @@ foreach($CatList as $key => $value) {
 					<p>At present we are offering “cash-on-delivery” (COD) option only. However, we are working hard to add digital payment options.</p>
 				</div>
 			</div>
-
-			<div class="categories my-4">
-				<h4>Categories</h4>
-				<div class="category-grid">
-
-					<?php foreach($CatList as $key => $value) {?>
-						<div class="sub-category">
-							<div class="sub-category-content">
-
-								<h6><?=$key?></h6>
-								
-								<?php for ($i=0; $i < count($value->childCats); $i++) {?>
-									<a href="<?=base_url('Cproduct/products?categoryId=').$value->childCats[$i]['CategoryId']?>">
-										<span class="hyphen">-</span> <span class="category-text"><?=$value->childCats[$i]['Alias']?></span>
-									</a>
-								<?php } ?>
-
-							</div>
-						</div>
-					<?php } ?>
-
-				</div>
-			</div>
-
-			<div class="useful-links my-4">
-				<h4>Useful Links</h4>
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-2 pl-0">
-							<a href="<?=base_url("cpage/vision");?>">Mission & Vision</a>
-						</div>
-						<div class="col-md-2 pl-0">
-							<a href="<?=base_url("cpage/privacy");?>">Privacy Policy</a>
-						</div>
-						<div class="col-md-2 pl-0">
-							<a href="<?=base_url("cpage");?>">Terms & Conditions</a>
-						</div>
-						
-						<div class="w-100"></div>
-
-						<div class="col-md-2 pl-0">
-							<a href="<?=base_url("cpage/faq");?>">FAQs</a>
-						</div>
-						<div class="col-md-2 pl-0">
-							<a href="<?=base_url("cpage/returnandrefund");?>">Return & Refund</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			
 			<div class="top-brands my-4">
 				<h4>Top Brands</h4>
 				<?php foreach($TopBrandList as $key => $value)  { ?>
@@ -212,8 +136,8 @@ foreach($CatList as $key => $value) {
 				<div class="container">
 					<div class="row" style="font-size: 10px;">
 						<div class="col-6" style="letter-spacing: 10px;">
-							<a href="https://www.facebook.com/saudaexpresspk"><i class="fab fa-facebook fa-2x" style="color:#666666;"></i></a>
-							<a href="https://twitter.com/saudaexpresspk"><i class="fab fa-twitter fa-2x" style="color:#666666;"></i></a>
+							<a href="https://www.facebook.com/9oclockpk"><i class="fab fa-facebook fa-2x" style="color:#666666;"></i></a>
+							<a href="https://twitter.com/9oclockpk"><i class="fab fa-twitter fa-2x" style="color:#666666;"></i></a>
 							<a href="#"><i class="fab fa-whatsapp fa-2x" style="color:#666666;"></i></a>
 						</div>
 						<div class="col-6 text-right">
