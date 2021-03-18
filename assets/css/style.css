@@ -1482,6 +1482,10 @@ button.category-button:active {
    display: none;
 }
 
+.featured-products-content a {
+   text-align: center;
+}
+
 .slider {
    display: none;
 }
@@ -1607,7 +1611,6 @@ button.category-button:active {
    margin-top: -4px;
    height: 115px !important;
    padding-top: 4px;
-   width: 100%;
 }
 
 .main-content .featured-products .header {
