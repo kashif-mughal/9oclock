@@ -84,21 +84,30 @@
                                 <a href="{productId}">
                                 <img class="img-fluid text-center" src="{imgUrl}" alt="Card image cap">
                                 </a>
-                                <div class="product-info text-center">
-                                    <div class="text-left mx-2">
-                                        <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
-                                        <p class="card-text product-card-inner-weight text-left">{unitName}</p>
-                                        <p class="card-text product-card-inner-price d-inline text-left">{salePrice}</p>
-                                    </div>
-                                    {priceString}
-                                    <div class="input-group justify-content-center">
-                                        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                        <option selected>Variant</option>
-                                        <option value="1">1kg</option>
+                                <div class="product-info text-left">
+                                    <p class="product-card-inner-subcategory">Vegetables</p>
+                                    <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
+                                    
+                                    <div class="input-group product-card-dropdown">
+                                        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
+                                        <option value="1" selected>1kg</option>
                                         <option value="2">1 Dozen</option>
                                         <option value="3">500 grm</option>
                                         </select>
                                     </div>
+                                    <!-- <p class="card-text product-card-inner-weight">
+                                        <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
+                                    
+                                    <div class="text-left mx-2">
+                                        <p class="card-text product-card-inner-price d-inline text-left">{salePrice}</p>
+                                    </div>
+                                    {priceString}
+
+                                    <div class="d-flex justify-content-start align-items-center product-card-inner-price">
+                                        <p class="mainPrice">{salePrice}</p>
+                                        <!-- <p class="originalPrice"></p> -->
+                                    </div>
+
                                     <div class="quantity-area d-flex justify-content-center align-items-center mt-2 ml-3">
                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                         <input type="text" class="d-inline-flex quantity-input quantity">
@@ -112,7 +121,7 @@
                                 <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
                                 data-json="{pjsonString}"
                                 >Add to Cart</a>
-                                <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                                <a href="javascript:void(0);" style="display: none; opacity:0;" class="product-card-btn mx-auto remove-cart"
                                 data-json="{pjsonString}"
                                 >Remove From Cart</a>
                         </div>
@@ -179,10 +188,11 @@
                                                 </a>
                                                 <div class="product-info text-center" style="    margin-left: auto; width: 98%;">
                                                     <div class="text-left mx-2">
+                                                        <p class="product-card-inner-subcategory">Vegetables</p>
                                                         <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
-                                                        <p class="card-text product-card-inner-weight text-left px-2">
-                                                            <?= empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
-                                                        <p class="card-text product-card-inner-price d-inline px-2"><script type="text/javascript">document.write(formatCurrency("<?php echo $value['SalePrice']; ?>",0)); </script></p>
+                                                        <!-- <p class="card-text product-card-inner-weight text-left px-2">
+                                                            <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p>
+                                                        <p class="card-text product-card-inner-price d-inline px-2"><script type="text/javascript">document.write(formatCurrency("<?php //echo $value['SalePrice']; ?>",0)); </script></p> -->
                                                     </div>
                                                     <?php if($discountPercentage != 0) { ?> 
                                                         <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
@@ -197,14 +207,21 @@
                                                 ];
                                                 ?>
                                                 <?php if($value['stock'] == '1') { ?>
-                                                    <div class="input-group justify-content-center">
-                                                        <select class="custom-select mx-2" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                                            <option selected>Variant</option>
-                                                            <option value="1">1kg</option>
+                                                    <div class="input-group product-card-dropdown">
+                                                        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
+                                                            <option value="1" selected>1kg</option>
                                                             <option value="2">1 Dozen</option>
                                                             <option value="3">500 grm</option>
                                                         </select>
                                                     </div>
+
+                                                    <!-- <p class="card-text product-card-inner-weight">
+                                                        <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
+                                                    <div class="d-flex justify-content-start align-items-center product-card-inner-price">
+                                                        <p class="mainPrice">£<?php echo $value['SalePrice']; ?></p>
+                                                        <p class="originalPrice">£<?php echo $value['Price']; ?></p>
+                                                    </div>
+
                                                     <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                         <input type="text" class="d-inline-flex quantity-input quantity">
@@ -222,7 +239,7 @@
                                             <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
                                             data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                             >Add to Cart</a>
-                                            <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart"
+                                            <a href="javascript:void(0);" style="display: none; opacity:0;" class="product-card-btn mx-auto remove-cart"
                                             data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                                             >Remove From Cart</a>
                                             <?php } ?>

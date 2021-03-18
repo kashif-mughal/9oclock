@@ -1634,6 +1634,7 @@ button.category-button:active {
 .product-info {
    margin-top: 4px;
    /* padding: 8px 4px 0px 4px; */
+   padding: 0 10px;
 }
 
 .product-name {
@@ -4421,10 +4422,10 @@ a#newAddressCancelBtn {
       margin-bottom: 12px !important;
    }
 
-   .logo .logo_content img {
+   /* .logo .logo_content img {
       max-width: 130px !important;
       width: 140px !important;
-   }
+   } */
 
    #btn-sidebar img {
       width: 35px;

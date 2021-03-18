@@ -1,4 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function () {
+   $('.bg-overlay').hide();
+      $("body").css({"height": "100%", "overflow-y": "none"});
+      $("html").css({"overflow": "auto"});
   // $(".featured-product-slider").slick({
   //   dots: true,
   //   infinite: true,
