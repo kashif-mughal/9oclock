@@ -98,10 +98,7 @@
                                     <!-- <p class="card-text product-card-inner-weight">
                                         <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
                                     
-                                    <div class="text-left mx-2">
-                                        <p class="card-text product-card-inner-price d-inline text-left">{salePrice}</p>
-                                    </div>
-                                    {priceString}
+                                   
 
                                     <div class="d-flex justify-content-start align-items-center product-card-inner-price">
                                         <p class="mainPrice">{salePrice}</p>
@@ -112,9 +109,9 @@
                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                         <input type="text" class="d-inline-flex quantity-input quantity">
                                         <span class="d-block quantity-button">
-                                            <a href="javascript:void(0);" class="qty-pls d-block">+</a>
+                                            <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
                                             <div class="separator"></div>
-                                            <a href="javascript:void(0);" class="qty-mns d-block">-</a>
+                                            <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
                                         </span>
                                     </div>
                                 </div>
@@ -226,9 +223,9 @@
                                                         <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                                         <input type="text" class="d-inline-flex quantity-input quantity">
                                                         <span class="d-block quantity-button">
-                                                            <a href="javascript:void(0);" class="qty-pls d-block">+</a>
+                                                            <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
                                                             <div class="separator"></div>
-                                                            <a href="javascript:void(0);" class="qty-mns d-block">-</a>
+                                                            <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
                                                         </span>
                                                     </div>
                                                     <?php } ?>
