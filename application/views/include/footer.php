@@ -80,7 +80,7 @@ foreach($CatList as $key => $value) {
 						<div class="col-md-8">
 							<?php if (isset($Web_settings[0]['footer_text'])) { echo $Web_settings[0]['footer_text']; }?>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-4" style="text-align: end; padding: 0px;">
 							<img src="<?php echo base_url('assets/img/payment_images.png'); ?>" alt="">
 						</div>
 					</div>

@@ -95,17 +95,22 @@
     }
 </style>
 
-<div class="bread_crumb">
+<div class="bread_crumb" style="padding-bottom:0px;">
     <div class="container">
         <div class="row d-block">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
-                    <!--<li class="breadcrumb-item"><a href="#"><?php echo $categoryName; ?></a></li>-->
-                    <li class="breadcrumb-item"><?php echo $categoryName; ?></li>
-                </ol>
-            </nav>
-            <h3 class="mb-0 d-inline"><?php echo $categoryName; ?><?php if($CurrentBrandName){echo " (".$CurrentBrandName.")";}?></h3>
+            <div class="d-flex justify-content-start align-items-center">
+               <i class="fas fa-arrow-left" style="font-size: 20px; padding-left: 10px;"></i>
+               <div>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                        <!--<li class="breadcrumb-item"><a href="#"><?php echo $categoryName; ?></a></li>-->
+                        <li class="breadcrumb-item"><?php echo $categoryName; ?></li>
+                     </ol>
+                  </nav>
+                  <h3 class="mb-0 d-inline"><?php echo $categoryName; ?><?php if($CurrentBrandName){echo " (".$CurrentBrandName.")";}?></h3>
+               </div>
+            </div>
         </div>
     </div>
 </div>

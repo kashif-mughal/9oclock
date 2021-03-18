@@ -2472,9 +2472,9 @@ button.category-button:active {
 
 /* Bread Crumb */
 .bread_crumb {
-   background-color: #ffffff;
+   /* background-color: #ffffff; */
    padding: 15px 0;
-   border: 1px solid #cccccc;
+   /* border: 1px solid #cccccc; */
    padding-top: 10px;
 }
 
@@ -2494,7 +2494,7 @@ button.category-button:active {
 }
 
 .bread_crumb .breadcrumb {
-   background-color: #ffffff !important;
+   background-color: transparent !important;
    margin-bottom: 0px;
    padding: 0px 0px 0px 40px;
 }
