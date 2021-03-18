@@ -166,25 +166,25 @@
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_name.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText">Muhammad Aamir</p>
+                    <p class="checkoutCartText"><?=$_SESSION["user_name"]?></p>
                 </div>
                 <div class="d-flex justify-content-start align-items-sm-end align-items-center checkoutItem">
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_email.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText">aamir@malejol.com</p>
+                    <p class="checkoutCartText"><?=$_SESSION["email"]?></p>
                 </div>
                 <div class="d-flex justify-content-start align-items-sm-end align-items-center checkoutItem">
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_phone.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText">+44 8867 881256</p>
+                    <p class="checkoutCartText">+923460030581</p>
                 </div>
                 <div class="d-flex justify-content-start align-items-sm-end align-items-center checkoutItem">
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_address.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText">Street No. #89, North London, United Kingdom</p>
+                    <p class="checkoutCartText"><?=$_SESSION["address"]?></p>
                 </div>
             </div>
         </div>

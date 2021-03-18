@@ -271,7 +271,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                 <input name="copun" type="text" class="form-control coupon" placeholder="Enter coupon code here..." autocomplete="off">
                 <input type="hidden" name="ov" id="ov">
                 <div class="input-group-append">
-                    <button class="btn" style="width:100%; margin-top:5px; margin-bottom: 2px; background-color:var(--secondary-color); color:white;" type="submit">Apply</button>
+                    <button class="btn" style="width:100%; margin-top:5px; margin-bottom: 2px; background-color:var(--main-color); color:white;" type="submit">Apply</button>
                 </div>
             </form>
         </div>

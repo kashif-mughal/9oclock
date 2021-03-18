@@ -13,59 +13,9 @@ foreach($CatList as $key => $value) {
 }
 ?>
 </div>
-<div id="main-page">
+<section class="main-footer" style="margin-top: 10px;">
 	<div class="container">
-
-		<section >
-			<div class="row my-4">
-				<div class="col-md-4 col-lg-4 col-sm-12 footer-padding">
-
-					<div class="call_to_action_grid border-right-full">
-						<div class="call_to_action_image">
-							<img src="<?php echo base_url() ?>assets/img/footer/call_to_action/SameNextDayDelivery_icon.png?>" alt="Icon">
-						</div>
-						<div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
-							<h5 class="call_to_action_title">Same/Next Day Delivery</h5>
-							<h6 class="call_to_action_content">Free delivery on all orders over Rs. 4,000 Rs 100 for orders below Rs. 4,000
-							</h6>
-						</div>
-					</div>
-					
-				</div>
-				<div class="col-md-4 col-lg-4 col-sm-12 footer-padding">
-					
-					<div class="call_to_action_grid border-right-full">
-						<div class="call_to_action_image">
-							<h4 class="call_to_action_custom_img m-0">Rs.</h4>
-						</div>
-						<div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
-							<h5 class="call_to_action_title">Cash On Delivery</h5>
-							<h6 class="call_to_action_content">You pay when rider comes at your address.</h6>
-						</div>
-					</div>
-					
-				</div>
-				<div class="col-md-4 col-lg-4 col-sm-12 footer-padding">
-					
-					<div class="call_to_action_grid">
-						<div class="call_to_action_image">
-							<img src="<?php echo base_url() ?>assets/img/footer/call_to_action/OnlineSupport_icon.png?>" alt="Icon">
-						</div>
-						<div class="call_to_action_content text-center text-md-left mb-4 mb-md-0">
-							<h5 class="call_to_action_title">Online Support</h5>
-							<h6 class="call_to_action_content">Customer support from 9AM - 9PM +92 318 2294472
-							</h6>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</section>
-	</div>
-</div>
-<section class="main-footer">
-	<div class="container">
-		<div class="main-footer-content">
+		<div class="main-footer-content" style="padding-top: 10px;">
 			
 	        <div class="categories my-4">
 				<h4>Categories</h4>

@@ -72,7 +72,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     <div id="mySidenav" class="sidenav">
         <div class="sidenav-content">
             <a href="javascript:void(0)" class="closebtn" id="btn-close-sidebar">&times;</a>
-            <h3 class="sidebar-heading"><?php echo !is_null($users) ? "Welcome, ".$users['first_name'].'&nbsp;'.$users['last_name'] : "<a href='".base_url()."account/login'>Login or Register</a>"?></h3>
+            <h3 class="sidebar-heading"><?php echo !is_null($users) ? "Welcome, ".$users['first_name'].'&nbsp;'.$users['last_name'] : "<a href='".base_url()."Dashboard/user_authentication_email'>Login or Register</a>"?></h3>
 
             <div class="sidebar-menu">
                 <div class="accordion border-b-primary" id="accordionExample">
@@ -148,7 +148,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                     <div class="card border-none">
                         <div class="card-header p-2" id="headingTwo">
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <a href="<?= is_null($users) ? base_url('Dashboard/user_authentication') : base_url('Dashboard/logout') ; ?>" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                <a href="<?= is_null($users) ? base_url('Dashboard/user_authentication_email') : base_url('Dashboard/logout') ; ?>" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
                                     data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <img src="<?php echo base_url() ?>assets/img/sign-in.png" class="d-inline pr-4" alt="">
                                     <?php if(is_null($users)){?>
@@ -164,9 +164,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <h4>Follow Us</h4>
                   </div>
                   <div class="row" style=" margin-left: 0px;">
-                     <a href="https://www.facebook.com/saudaexpresspk"><i class="fab fa-facebook-square fa-1x"></i></a>
+                     <a href="https://www.facebook.com/9oClockpk"><i class="fab fa-facebook-square fa-1x"></i></a>
                      <div class="socialmedia-footer">|</div>
-                     <a href="https://twitter.com/saudaexpresspk"><i class="fab fa-twitter-square fa-1x"></i></a>
+                     <a href="https://twitter.com/9oClockpk"><i class="fab fa-twitter-square fa-1x"></i></a>
                       <div class="socialmedia-footer">|</div>
                      <a href="#"><i class="fab fa-whatsapp-square fa-1x"></i></a>
                   </div>
@@ -184,11 +184,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
   <style type="text/css">
     @keyframes ticker {
   from {
-    transform: translate(50%, 0);
+    transform: translate(70vw, 0);
   }
 
   to {
-    transform: translate(-280%, 0);
+    transform: translate(-90vw, 0);
   }
 }
   </style>
@@ -198,7 +198,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul style="animation: ticker 15s infinite linear;" class="navbar-nav">
                      <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)" role="button">Get special discount of 10% on purchase min 10 items</a>
+                        <a class="nav-link" href="javascript:void(0)" role="button">Get special discount of 10% on 10 items</a>
                      </li>
                   </ul>
                </nav>
@@ -252,9 +252,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
                         <div class="phone_cart mr-4 mr-sm-0">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
-                           
                            <div class="dropdown" id="profileDropdown">
-                              <a href="javascript:void(0)" >
+                              <a href="<?php echo is_null($users) ? base_url('dashboard/user_login_email') : "javascript:void(0)";?>">
                                  <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
                               </a>
                               <?php if(isset($_SESSION['user_id'])) { ?>
@@ -336,9 +335,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
  }
  $(document).ready(() => {
    //  var isWebNoteAvailable = $('body').find($('#websiteNote'));
-   //  if(isWebNoteAvailable.length == 0) {
-   //    $('.bg-overlay').hide();
-   //  }
+
   var urlVars = getUrlVars();
   var searchText = urlVars["q"];
   $(".dropdown").hover(function(){
