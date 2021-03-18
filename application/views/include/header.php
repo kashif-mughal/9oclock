@@ -62,7 +62,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    .button-primary:hover{
     background-color: #0c0792;
 </style>
-<div class="bg-overlay" style="display: block; position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.8;"></div>
+<div class="bg-overlay" style="display: none; position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.8;"></div>
 <!-- Script for the use of auto complete search START-->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -336,9 +336,9 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
  }
  $(document).ready(() => {
    //  var isWebNoteAvailable = $('body').find($('#websiteNote'));
-    if(isWebNoteAvailable.length == 0) {
-      $('.bg-overlay').hide();
-    }
+   //  if(isWebNoteAvailable.length == 0) {
+   //    $('.bg-overlay').hide();
+   //  }
   var urlVars = getUrlVars();
   var searchText = urlVars["q"];
   $(".dropdown").hover(function(){
