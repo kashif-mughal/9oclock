@@ -77,7 +77,12 @@ foreach($CatList as $key => $value) {
 			<div class="company-address">
 				<div class="container">
 					<div class="row">
-						<?php if (isset($Web_settings[0]['footer_text'])) { echo $Web_settings[0]['footer_text']; }?>
+						<div class="col-md-8">
+							<?php if (isset($Web_settings[0]['footer_text'])) { echo $Web_settings[0]['footer_text']; }?>
+						</div>
+						<div class="col-md-4">
+							<img src="<?php echo base_url('assets/img/payment_images.png'); ?>" alt="">
+						</div>
 					</div>
 				</div>
 			</div>

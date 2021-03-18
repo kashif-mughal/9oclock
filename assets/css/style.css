@@ -30,16 +30,18 @@
    /* margin-right: auto !important; */
    /* margin-left: auto !important; */
    /* height: 65vh; */
-   height: 100%;
+   width: 100%;
    margin-left: 0px !important;
    margin-right: 0px !important;
-   width: auto;
+   /* height: auto; */
+   max-height: 500px;
 }
 
 #main-banner img {
    /* height: 65vh; */
-   height: 100%;
-   width: auto;
+   width: 100%;
+   /* height: auto; */
+   max-height: 500px;
 }
 
 #main-banner .carousel-indicators li {
