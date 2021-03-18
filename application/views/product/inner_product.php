@@ -95,7 +95,7 @@
     }
 </style>
 
-<div class="bread_crumb" style="padding-bottom:0px;">
+<div class="bread_crumb bread_crumb_inner" style="padding-bottom:0px;">
     <div class="container">
         <div class="row d-block">
             <div class="d-flex justify-content-start align-items-center">
