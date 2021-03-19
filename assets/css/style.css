@@ -1355,6 +1355,11 @@ button.category-button:active {
    justify-content: center;
 }
 
+#add_to_cart_items.cartAnimate {
+   background-color: #fdcb6e;
+   transition: 1s ease;
+}
+
 .main-content .featured-products {
    background-color: #ffffff;
    margin-top: 20px;

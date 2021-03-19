@@ -363,10 +363,16 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 //       loadShoppingCart();
 //   });
    $(document).on('click', '.remove-cart', function () {
+      $('#add_to_cart_items').addClass('cartAnimate');
       var productJson = $(this).data('json');
       removeAndUpdateFromCart(productJson, $(this));
+      setTimeout(() => {
+         $('#add_to_cart_items').removeClass('cartAnimate');
+      }, 1000);
+
    });
    $(document).on('click', '.add-cart', function () {
+      $('#add_to_cart_items').addClass('cartAnimate');
        var productJson = $(this).data('json');
        var quantity = parseInt($(this).parent().parent().parent().find('.quantity')[0].value);
        if(!isNaN(quantity) && quantity > 0){
@@ -374,16 +380,28 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          if(cart)
             cart = JSON.parse(cart);
          addOrUpdateCart(cart && cart.length > 0 ? cart : [], productJson, quantity, $(this))
-
+         setTimeout(() => {
+            $('#add_to_cart_items').removeClass('cartAnimate');
+         }, 1000);
       }else{
          $.notify("Select a valid quantity, quantity must be greater then 0", "error");
+         $('#add_to_cart_items').removeClass('cartAnimate');
       }
    });
    $(document).on('click', '.qty-pls', function () {
-      changeQtyOfProductAndPutInCart($(this), 'plus');
+      changeQtyOfProductAndPutInCart($(this), 'plus');      
    });
    $(document).on('click', '.qty-mns', function () {
       changeQtyOfProductAndPutInCart($(this), 'minus');
+
+      var prodCountValue = $($(this).closest('.each-prod')[0]).find('.quantity')[0].value;
+      if(prodCountValue == 0) {
+         $('#add_to_cart_items').addClass('cartAnimate');
+         setTimeout(() => {
+            $('#add_to_cart_items').removeClass('cartAnimate');
+         }, 1000);
+      }
+      
    });
 });
  function addOrUpdateCart(cart, productJson, quantity, addCartObj){
