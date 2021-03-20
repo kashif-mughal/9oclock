@@ -96,18 +96,18 @@
     </section>
 
     <section class="upload_area">
-        <?php echo form_open('Cbanner/insert_banner_image', array('class' => 'form-vertical', 'enctype' => 'multipart/form-data', 'id' => 'insert_banner_image')) ?>
+        <?php echo form_open('Cbanner/insert_banner_image', array('class' => 'form-vertical', 
+            'enctype' => 'multipart/form-data', 'id' => 'insert_banner_image', 'method' => 'post')) ?>
+
+<!-- 'enctype' => 'multipart/form-data',  -->
+
             <input type="text" name="image_url" class="dropzone-image-url form-control" placeholder="Image Redirect Url Here">
             <div class="dropzone">    
                 <span class="dropzone_text">Drop banner image here or click to upload</span>
-                <input type="file" name="image" class="dropzone-input">
+                <input type="file" name="image" id="image" class="dropzone-input">
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col text-center">
-                        <input type="submit" id="add-banner" class="btn btn-success btn-large" name="add-banner" value="Click to Upload" />
-                    </div>
-                </div>
+            <div class="col text-center" style="width:100%;">
+                <input type="submit" id="add-banner" class="btn btn-success btn-large" name="add-banner" value="Click to Upload" />
             </div>
         <?php echo form_close() ?>
     </section>

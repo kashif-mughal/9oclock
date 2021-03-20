@@ -44,7 +44,7 @@ class Cbanner extends CI_Controller {
       $id = json_decode($image_id['id']);
       $this->Banner->soft_delete_by_key("id", $id);
       $this->session->set_userdata(array('message' => display('successfully_delete')));
-      redirect(base_url('Cbanner'));
+      //redirect(base_url('Cbanner'));
       return true;
     }
 
@@ -54,10 +54,12 @@ class Cbanner extends CI_Controller {
       $post_data = $this->input->post();
 
       if(!$post_data["image_url"]) {
-        return false;
+        redirect(base_url('Cbanner'));
       }
-      if ($_FILES['image']['name']) {
+
+      if ($_FILES["image"]["name"]) {
         $image_path = '/assets/img/banner/' . $_FILES['image']['name'];
+        // print_r($image_path);die;
         $image_exist = $this->Banner->get_image($image_path);
         if($image_exist == 0) {
           //Chapter add start
@@ -70,31 +72,32 @@ class Cbanner extends CI_Controller {
 
           $this->load->library('upload', $config);
           if (!$this->upload->do_upload('image')) {
-              $error = array('error' => $this->upload->display_errors());
-              $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
-              redirect(base_url('Cbanner'));
+            $error = array('error' => $this->upload->display_errors());
+            $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+            redirect(base_url('Cbanner'));
           } else {
               $image = $this->upload->data();
               $image_url = "assets/img/banner/" . $image['file_name'];
           }
-        }
-
-        $last_image_order = $this->Banner->get_last_image_order();
-
-        $data = array(
-          'image_path' => '/assets/img/banner/' . $_FILES['image']['name'],
-          'image_url' => $post_data["image_url"],
-          'image_order' => ($last_image_order[0]['image_order'])+1,
-          'Status' => 1
-        );
-        
-          $this->db->insert('banner_images', $data);
-          redirect(base_url('Cbanner'));
+          $last_image_order = $this->Banner->get_last_image_order();
+          $data = array(
+            'image_path' => $image_url,
+            'image_url' => $post_data["image_url"],
+            'image_order' => ($last_image_order[0]['image_order'])+1,
+            'status' => 1
+          );
+            $this->db->insert('grocery_banner', $data);
+            redirect(base_url('Cbanner'));
         }
         else {
-          $this->Banner->update_status($image_exist["id"], 1);
+          $this->Banner->update_status($image_exist[0]["id"], 1);
+          redirect(base_url('Cbanner'));
         }
-    }
+        
+        
+      } // $_FILES["image"]["name"] Ends
+        
+    } // Insert Banner Image End
 
     //Update Banner Image
     public function update_edited_banner_image() {

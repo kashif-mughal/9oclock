@@ -63,9 +63,10 @@ class Banner extends CI_Model {
     }
 
     public function get_image($image_path) {
-        $result = $this->db->like('image_path',$image_path)->get($this->tableName);
+        $actual_path = ltrim($image_path,'/');
+        $result = $this->db->like('image_path',$actual_path)->get($this->tableName);
         if ($result->num_rows() > 0) {
-            return 1;
+            return $result->result_array();
         }
         return 0;
     }
