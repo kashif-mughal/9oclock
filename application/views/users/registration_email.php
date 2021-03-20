@@ -4,7 +4,12 @@
    }
 </style>
 
-<!-- Login New  -->
+<!-- alert-info -->
+
+ <div id="alertBox" class="alert alert-danger alert-dismissable" style="position: absolute;width: 100%; display: none;">
+     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+     <span></span>
+ </div>
 <section id="otpForm" style="display:none;">
    <div class="container">
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
@@ -75,46 +80,6 @@
       </div>
    </div>
 </section>
-<!-- Login New Ends -->
-
-<!-- OTP FORM -->
-<!-- <section id="otpForm">
-   <div class="container-fluid">
-
-      <div class="row" style="height: 35vh; background-color: #EFF3F6;">
-         <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
-            <div class="pl-2">
-               <p style="color: #000; font-size: 18px; margin-bottom: 8px; font-weight: 600;">Verifiy OTP</p>
-               <p style="color: #ccc;">Enter OTP Code to verify</p>
-            </div>
-            <div class="pr-2">
-               <img src="<?php //echo base_url() ?>assets/img/Logo.png" alt="">
-            </div>
-         </div>
-      </div>
-
-      <div class="row align-items-center justify-content-center" style="height: 65vh; background-color: #FFF;">
-         <div class="sign-in d-flex justify-content-start align-items-start">
-            <div class="sign-in-content ml-4">
-               <h4 class="mb-5">Email address Verification</h4>
-               <span class="d-block mb-3 currentPhoneMessage">Enter 4 digit code sent to your email address</span>
-               <div class="form-inline">
-                  <form class="digit-group" id="inputOtp">
-                     <input type="number" name="digit-1" id="digit-1" autocomplete="off" autofocus>
-                     <input type="number" name="digit-2" id="digit-2" autocomplete="off">
-                     <input type="number" name="digit-3" id="digit-3" autocomplete="off">
-                     <input type="number" name="digit-4" id="digit-4" autocomplete="off" last="true">
-                  </form>
-               </div>
-               <a href="javascript:void(0)" id="resendCode" class="d-block mb-4">Resend Code again</a>
-               <button href="javascript:void(0)" class="btn btn-dark px-5 py-2" id="otpSubmit" type="submit">Next</button>
-            </div>
-         </div>
-      </div>
-
-   </div>
-</section> -->
-
 
 <!-- TESTING SIGN UP -->
 
@@ -172,7 +137,7 @@
 
 
 <!-- Login New  -->
-<section id="login_new" style="display:none;">
+<section id="login_new">
    <div class="container">
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
@@ -206,13 +171,20 @@
 
             </form>
          </div>
+         <div>
+            <div><span>Forgot your password? <a href="javascript:void(0)">Click to reset</a></span></div>
+            <div><span>New Customer? <a href="javascript:void(0)" onclick="
+            document.getElementById('login_new').style.display = 'none';
+            document.getElementById('sign_up').style.display = 'block';
+            ">Create New Account</a></span></div>
+         </div>
       </div>
    </div>
 </section>
 <!-- Login New Ends -->
 
 
-<section id="sign_up">
+<section id="sign_up" style="display:none;">
    <div class="container">
       <div class="row d-flex justify-content-start align-items-center" style="margin-top: 115px;">
          <button onclick="window.history.back()" class="d-inline" style="height: 60px; width: 60px; border-radius: 0px 30px 30px 0px; background-color: transparent; border:none; color: #333;">
@@ -242,58 +214,16 @@
 </section>
 <!-- Login New Ends -->
 
-
-<!-- TESTING SIGN IN -->
-<!-- <section id="sign_up">
-   <div class="container-fluid">
-      <div class="row" style="height: 35vh; background-color: #EFF3F6;">
-
-         <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
-            <div class="pl-2">
-               <p style="color: #000; font-size: 18px; margin-bottom: 8px; font-weight: 600;">SIGN UP</p>
-               <p style="color: #ccc;">Enter your Email to proceed</p>
-            </div>
-            <div class="pr-2">
-               <img src="<?php //echo base_url() ?>assets/img/Logo.png" alt="">
-            </div>
-         </div>
-      </div>
-      <div class="row text-center" style="height: 65vh; background-color: #FFF;">
-         <div style="height:100%; width: 100%;" class="text-center">
-
-            <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 98%; padding: 8px;">
-               <i class="fas fa-envelope" style="position: absolute; top:21px; left: 12px; color: #B6B6B6;"></i>
-               <input type="email" class="form-control" placeholder="Email Address" id="sign_up_email" style="padding: 6px 6px 6px 34px; border:none; width: 98%; font-weight: 600;" autocomplete="off" autofocus>
-            </div>
-            <button href="javascript:void(0)" id="registerationContinue" style="color: #fff; background-color: #1BAB32; font-size: 17px; font-weight: 500; border-color: #1BAB32; padding:16px 60px;">CONTINUE REGISTERATION</button>
-         </div>
-
-
-      </div>
-   </div>
-<section> -->
-<!-- TESTING SIGN IN ENDS -->
-
-
 <!-- Scripts -->
 <script>
-   // $(document).ready(funciton() {
-   //    $('#registerationContinue').on('click', funtion() {
-   //       alert('Continue to registration');
-   //       $('#sign_up').css('display','none');
-   //       $('#registration').css('display','block');
-   //    });
-   // });
-
    $(document).ready(function() {
       $('#otpForm').hide();
       //$('#otpForm').show();
 
       $('#registerationContinue').on('click', function(e) {
          e.preventDefault();
-         debugger;
          // call to verify provided email
-         if($('#sign_up_email').val().length > 0) {debugger;
+         if($('#sign_up_email').val().length > 0) {
             try {
             $.ajax({
                 url: "<?php echo base_url();?>Dashboard/email_exist",
@@ -302,7 +232,7 @@
                 data: {
                   email: $('#sign_up_email').val()
                 },
-                success: function( data ) {debugger;
+                success: function( data ) {
                   if(data.status == 'userAvailable') { // 0 = otp email is verified
                      $('#sign_up').hide();
                      $('#login_new').show(); // to login page
@@ -320,24 +250,24 @@
                 }
              });
             }
-            catch(err) {debugger;
+            catch(err) {
                console.log(err);
             }
 
          }
          else {
-            //$.notify("Please enter email to continue", "error");
+            showNoti("Please enter email to continue", "error");
          }
    
       });
 
       // Submit OTP
-		$('#otpSubmit').click(function() {debugger;
+		$('#otpSubmit').click(function() {
 			var otpCode = $('#digit-1').val() + $('#digit-2').val() + $('#digit-3').val() + $('#digit-4').val();
 			var otpRegEx = /^[0-9]{4}$/;
          var email_address = $('#sign_up_email').val();
 			if(!otpCode.match(otpRegEx)) {
-				//$.notify("OTP should be 4 digit number", "error");
+				showNoti("OTP should be 4 digit number", "error");
 			}
 			else {
 				$.ajax({
@@ -345,10 +275,10 @@
 					method: "POST",
 					data: { code: otpCode, email: email_address },
 					dataType: "json",
-					success: function(data) {debugger;
+					success: function(data) {
                   console.log(data);
 						if(data.status == 'Error') {
-                        //$.notify(data.responseMessage, "error");
+                        showNoti(data.response, "error");
                   }
                   else {
                      if(data.status) { // && data.redirectURL == false) {
@@ -362,7 +292,7 @@
                   }
 					},
 					error: function(data) {
-						//$.notify(data.responseMessage, "error");
+						showNoti(data.response, "error");
 				   }
 				});
 			}
@@ -379,7 +309,7 @@
 			else { $('#inputLoginPasswordContainer').css("border", "1px solid green"); }
 
          if(!$('#inputLoginEmail').val() && !$('#inputLoginPassword').val()) {
-            //$.notify("Error! Please fill all fields", "error");
+            showNoti("Error! Please fill all fields", "error");
          }
          else {
 
@@ -390,11 +320,11 @@
 					dataType: "json",
 					success: function(data) {
 						if(data.status == 'Error') {
-							//$.notify(data.responseMessage, 'error');
+							showNoti(data.response, 'error');
                      console.log('Error is True');
 						}
 						else {
-							//$.notify(data.responseMessage, 'success');
+							showNoti(data.response, 'success');
 							setTimeout(function() {
 								if(!data.redirectUrl) {
 									$("#userLoginForm").trigger("reset");
@@ -409,7 +339,7 @@
 						}
 					},
 					error: function(data) {
-						//$.notify(data.responseMessage, 'success');
+						showNoti(data.response, 'success');
 					}
 				});
          }
@@ -433,7 +363,7 @@
 
       
       // Register User
-		$('#userRegistrationForm_new').on('submit', function(event) {debugger;
+		$('#userRegistrationForm_new').on('submit', function(event) {
 			event.preventDefault();
 			$('#userId').val(localStorage.getItem('UserId'));
 			
@@ -458,12 +388,11 @@
 
             console.log('Error');
 
-            //$.notify("Please fill all the required fields", "error");
+            showNoti("Please fill all the required fields", "error");
 				
 				
 			}
 			else {
-            console.log("Ajax");
 				$.ajax({
 					url: "<?php echo base_url(); ?>Auth2/updateUserRegistrationByEmail",
 					method: "POST",
@@ -471,10 +400,10 @@
 					dataType: "json",
 					success: function(data) {
 						if(data.status == 'Error') {
-                     //$.notify(data.responseMessage, "error");
+                     showNoti(data.responseMessage, "error");
 						}
 						else {
-                     //$.notify(data.responseMessage, "success");
+                     showNoti(data.responseMessage, "success");
 							
 							$('#registrationForm_new').hide();
 							$('#registrationForm_new').css('display', 'none');
@@ -486,7 +415,7 @@
 						}
 					},
 					error: function(data) {
-                  //$.notify(data.responseMessage, "error");
+                  showNoti(data.response, "error");
 
 					}
 				});
@@ -523,5 +452,21 @@
 		});	
 
    });
-
+function showNoti(message, type){
+   var notiElem = $('#alertBox');
+   notiElem.find('span').html(message);
+   if(type.toLowerCase() == 'error'){
+      notiElem.removeClass('alert-info');
+      notiElem.addClass('alert-danger');
+   }
+   else{
+      notiElem.addClass('alert-info');
+      notiElem.removeClass('alert-danger');
+   }
+   notiElem.show();
+   window.location.href = '#';
+   setTimeout(function(){
+      notiElem.hide();
+   }, 5000);
+}
 </script>

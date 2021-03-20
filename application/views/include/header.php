@@ -416,10 +416,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       cart.push(productJson);
    }
    document.cookie = `baskit=${JSON.stringify(cart)};path=/;`;
-   if(currentProduct.length > 0)
-      $.notify(`${productJson.pName} quantity updated from ${oldQty} to ${currentProduct[0].quantity}`, "success");
-   else
-      $.notify(`${productJson.pName} added into cart`, "success");
+   // if(currentProduct.length > 0)
+   //    $.notify(`${productJson.pName} quantity updated from ${oldQty} to ${currentProduct[0].quantity}`, "success");
+   // else
+   //    $.notify(`${productJson.pName} added into cart`, "success");
    $('#add_to_cart_items').html(cart.length);
    $(addCartObj.parent().find('.remove-cart')[0]).show();
    addCartObj.html('Update to Cart');
@@ -646,8 +646,12 @@ function removeItemFromShoppingCart(currentElem){
     //     window.location.href = "<?php echo base_url('cproduct/products?q=&categoryId=');?>";
     // });
     $("#q").keydown(function() {
-      if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
-        $("#searchform").submit();
+      var code = event.keyCode;
+      if(code >= 65 && code <= 90  || code >= 97 && code <= 122 || code >= 48 && code <= 57)
+      {
+        if(window.location.href.toLocaleLowerCase().indexOf("cproduct") == -1)
+          $("#searchform").submit();
+      }
     });
   });
 
