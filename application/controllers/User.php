@@ -121,4 +121,77 @@ class User extends CI_Controller {
             exit();
         }
     }
+
+    // Verify reset password link
+    public function resetpassword() {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+        $token = $_GET["token"];
+        $uid = $_GET["uid"];
+        if(!isset($token) && !isset($uid)) {
+            $result['status'] = 0;
+            $result['message'] = "Plese provide correct reset link";
+            print_r(json_encode($result));
+            exit();
+        }
+        else {
+            // Check email exist 
+            $userDetail = $CI->Auths->check_user_detail($uid);
+            if(!$userDetail) {
+                $result['status'] = 0;
+                $result['message'] = "Please provide corrct user detail";
+                print_r(json_encode($result));
+                exit();
+            }
+            else {
+                $userTokenString = json_encode($userDetail);
+                $userTokenHash = hash('sha256', $userTokenString);
+
+                if($userTokenHash == $token) {
+                    $data['title'] = '9oClock | Buy each and everything home grocery';
+                    $data['email'] = $uid;
+                    $content = $this->parser->parse('users/reset_password_form', $data, true);
+
+                    $this->template->full_html_view($content);
+                }
+                else {
+                    $result['status'] = 0;
+                    $result['message'] = "Reset Password link is not valid";
+                    print_r(json_encode($result));
+                    exit();
+                }
+            }
+        }
+    }
+
+    // Update user password
+    public function updatePassword() {
+        print_r('Hello');die;
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        if(!isset($email) && !isset($password)) {
+            $result['status'] = 0;
+            $result['message'] = "Please provide email and password";
+            echo json_encode($result);
+            exit();
+        }
+        else {
+            $insertedIds = $this->Users->update_address($this->input->post('selectedAddress'));
+            $updateResult = $this->Users->updateUserPassword($email, $password);
+            if($updateResult) {
+                $result['status'] = 1;
+                $result['message'] = "Password Updated Successfully";
+                echo json_encode($result);
+                exit();
+            }
+            else {
+                $result['status'] = 0;
+                $result['message'] = "Something went wrong password is not updated";
+                print_r(json_encode($result));
+                exit();
+            }
+        }
+
+    }
+
 }

@@ -277,4 +277,12 @@ class Users extends CI_Model {
         }
         return false;
     }
+
+    public function updateUserPassword($email, $password) {
+        // $this->db->where('user_id', $user_id);
+        $this->db->set('username',$email);
+        $this->db->set('password',md5($password));
+        $this->db->update('user_login');
+        return TRUE;        
+    }
 }

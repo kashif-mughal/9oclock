@@ -241,6 +241,75 @@ class Dashboard extends CI_Controller {
         $this->template->full_html_view($content);
     }
 
+    //:::::: Reset Password by Email Address :::::::::
+    public function user_password_reset() {
+        $data['title'] = '9oClock | Buy each and everything home grocery';
+        $content = $this->parser->parse('users/password_reset_email', $data, true);
+
+        $this->template->full_html_view($content);
+    }
+
+    public function reset_password_email() {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+        $email_address = $this->input->Post('email');
+        if(!isset($email_address)) {
+            $result['response'] = 'Email address is not valid';
+            $result['status'] = 'error';
+            echo json_encode($result);
+            return;
+        }
+
+        // Check email exist 
+        $isEmailExist = $CI->Auths->is_email_exist($email_address);
+        if(!$isEmailExist) {
+            $result['response'] = 'Please provide valid email address';
+            $result['status'] = 'error';
+            echo json_encode($result);
+            return;
+        }
+        else { // Email exist
+            // if exist then check is Active or not
+            if($isEmailExist[0]['status'] == 0) {
+                $result['response'] = 'User is inactive, Please contact support';
+                $result['status'] = 'error';
+                echo json_encode($result);
+                return;
+            }
+            else {
+                // send reset password link to it's provided email address.
+                // Generate Link for this user for password reset
+
+                // step 1: Get complete data from user table using email address
+                $userDetail = $CI->Auths->check_user_detail($email_address);
+                if(!$userDetail) {
+                    $result['response'] = 'Please provided complete user detail';
+                    $result['status'] = 'error';
+                    echo json_encode($result);
+                    return;
+                }
+                else {
+                    $userTokenString = json_encode($userDetail);
+                    $userTokenHash = hash('sha256', $userTokenString);
+
+                    $userResetLink = base_url().'user/resetpassword?token='.$userTokenHash.'&uid='.$email_address;
+
+                    // send above link to user email address.
+                    $message = "Please click on the below link to reset your password</br>".
+                        "<p><a href='.$userResetLink.'>".$userResetLink."</a></p>";
+                    //$CI->Auths->sendemail($to_email, $message);
+
+                    $result['response'] = 'We have sent you a reset password link on your email address.'.$message;
+                    $result['status'] = 'success';
+                    echo json_encode($result);
+                    return;
+                }
+            }
+        }
+    }
+
+    // Reset Password by Email Address [END]
+
     public function email_exist() {
         $CI = & get_instance();
         $CI->load->model('Auths');
