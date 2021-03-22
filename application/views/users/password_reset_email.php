@@ -2,6 +2,15 @@
    #registration, #login, #otpForm {
       display:none;
    }
+   .resetEmailUserText {
+      color: #000;
+      font-size: 20px;
+      font-weight: 600;
+   }
+   .resetEmailText {
+      color: var(--main-color);
+      font-size: 16px;
+   }
 </style>
 
 <!-- alert-info -->
@@ -114,12 +123,10 @@
 </section>
 <!-- Login New Ends -->
 
-<section id="reset_email_message" style="display:none;">
-   <div class="container">
-      <div style="background-color: #ffffff; border-radius: 2px; padding: 35px; border: 1px solid #cccccc; height: 400px;">      
-         <div class="row d-flex justify-content-center align-items-center">
-            <p id="emailResetMessageBox"></p>
-         </div>
+<section id="reset_email_message" style="display:none; margin-top: 133px;">
+   <div class="container"> 
+      <div class="row text-left" style="background-color: #ffffff; border-radius: 2px; padding: 35px; border: 1px solid #cccccc; height: 400px;">
+         <p id="emailResetMessageBox d-flex align-items-center justify-content-center"></p>
       </div>
    </div>
 </section>
@@ -144,15 +151,14 @@
                     data: {
                         email: $('#inputEmail').val()
                     },
-                    success: function(data) {
+                    success: function(data) {debugger;
                         if(data.status == 'error') {
                             showNoti("Error!" + data.response, "error");
-                            alert(data.response);
                         }
                         else {
                             $('#reset_email').hide();
                             $('#reset_email_message').show();
-                            $('#emailResetMessageBox').val(data.resonse);
+                            $('#emailResetMessageBox').html(data.response);
                         }
                     }
                 });
@@ -166,83 +172,83 @@
         }
       });
 
-      $('#registerationContinue').on('click', function(e) {
-         e.preventDefault();
-         // call to verify provided email
-         if($('#sign_up_email').val().length > 0) {
-            try {
-            $.ajax({
-                url: "<?php echo base_url();?>Dashboard/email_exist",
-                type: 'post',
-                dataType: "json",
-                data: {
-                  email: $('#sign_up_email').val()
-                },
-                success: function( data ) {
-                  if(data.status == 'userAvailable') { // 0 = otp email is verified
-                     $('#sign_up').hide();
-                     $('#login_new').show(); // to login page
-                     $('#digit-1').focus();
-                  }
-                  else if(data.status == 'userNotRegister') {
-                     $('#sign_up').hide();
-                     $('#registration_new').show(); // to register page
-                  }
-                  else if(data.status == "OTPsend"){
-                     $('#otpForm').show(); // to otp page
-                     $('#sign_up').hide();
-                  }
+      // $('#registerationContinue').on('click', function(e) {
+      //    e.preventDefault();
+      //    // call to verify provided email
+      //    if($('#sign_up_email').val().length > 0) {
+      //       try {
+      //       $.ajax({
+      //           url: "<?php //echo base_url();?>Dashboard/email_exist",
+      //           type: 'post',
+      //           dataType: "json",
+      //           data: {
+      //             email: $('#sign_up_email').val()
+      //           },
+      //           success: function( data ) {
+      //             if(data.status == 'userAvailable') { // 0 = otp email is verified
+      //                $('#sign_up').hide();
+      //                $('#login_new').show(); // to login page
+      //                $('#digit-1').focus();
+      //             }
+      //             else if(data.status == 'userNotRegister') {
+      //                $('#sign_up').hide();
+      //                $('#registration_new').show(); // to register page
+      //             }
+      //             else if(data.status == "OTPsend"){
+      //                $('#otpForm').show(); // to otp page
+      //                $('#sign_up').hide();
+      //             }
 
-                }
-             });
-            }
-            catch(err) {
-               console.log(err);
-            }
+      //           }
+      //        });
+      //       }
+      //       catch(err) {
+      //          console.log(err);
+      //       }
 
-         }
-         else {
-            showNoti("Please enter email to continue", "error");
-         }
+      //    }
+      //    else {
+      //       showNoti("Please enter email to continue", "error");
+      //    }
    
-      });
+      // });
 
       // Submit OTP
-		$('#otpSubmit').click(function() {
-			var otpCode = $('#digit-1').val() + $('#digit-2').val() + $('#digit-3').val() + $('#digit-4').val();
-			var otpRegEx = /^[0-9]{4}$/;
-         var email_address = $('#sign_up_email').val();
-			if(!otpCode.match(otpRegEx)) {
-				showNoti("OTP should be 4 digit number", "error");
-			}
-			else {
-				$.ajax({
-					url: "<?php echo base_url(); ?>Auth2/otpVerifyEmail",
-					method: "POST",
-					data: { code: otpCode, email: email_address },
-					dataType: "json",
-					success: function(data) {
-                  console.log(data);
-						if(data.status == 'Error') {
-                        showNoti(data.response, "error");
-                  }
-                  else {
-                     if(data.status) { // && data.redirectURL == false) {
-                        $('#otpForm').hide(); // to otp page
-                        $('#login_new').show();
-                     }
-                     else {
-                        $('#otpForm').hide(); // to otp page
-                        $('#registration_new').show(); // to register page
-                     }
-                  }
-					},
-					error: function(data) {
-						showNoti(data.response, "error");
-				   }
-				});
-			}
-		});
+		// $('#otpSubmit').click(function() {
+		// 	var otpCode = $('#digit-1').val() + $('#digit-2').val() + $('#digit-3').val() + $('#digit-4').val();
+		// 	var otpRegEx = /^[0-9]{4}$/;
+      //    var email_address = $('#sign_up_email').val();
+		// 	if(!otpCode.match(otpRegEx)) {
+		// 		showNoti("OTP should be 4 digit number", "error");
+		// 	}
+		// 	else {
+		// 		$.ajax({
+		// 			url: "<?php //echo base_url(); ?>Auth2/otpVerifyEmail",
+		// 			method: "POST",
+		// 			data: { code: otpCode, email: email_address },
+		// 			dataType: "json",
+		// 			success: function(data) {
+      //             console.log(data);
+		// 				if(data.status == 'Error') {
+      //                   showNoti(data.response, "error");
+      //             }
+      //             else {
+      //                if(data.status) { // && data.redirectURL == false) {
+      //                   $('#otpForm').hide(); // to otp page
+      //                   $('#login_new').show();
+      //                }
+      //                else {
+      //                   $('#otpForm').hide(); // to otp page
+      //                   $('#registration_new').show(); // to register page
+      //                }
+      //             }
+		// 			},
+		// 			error: function(data) {
+		// 				showNoti(data.response, "error");
+		// 		   }
+		// 		});
+		// 	}
+		// });
 
       $('#userLoginForm_new').on('submit',function(event) {
          event.preventDefault();
@@ -297,15 +303,15 @@
 			window.location = "<?= base_url(); ?>Auth2/logout_email";
 		});
 
-      $('#resendCode').click(function() {
-			$('#digit-1').val('');
-			$('#digit-2').val('');
-			$('#digit-3').val('');
-			$('#digit-4').val('');
+      // $('#resendCode').click(function() {
+		// 	$('#digit-1').val('');
+		// 	$('#digit-2').val('');
+		// 	$('#digit-3').val('');
+		// 	$('#digit-4').val('');
 
-			$('#otpForm').hide();
-			$('#phoneForm').show();
-		});
+		// 	$('#otpForm').hide();
+		// 	$('#phoneForm').show();
+		// });
 
       // Private Functions
 		function validateEmail() {

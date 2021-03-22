@@ -21,7 +21,8 @@
                   <a class="d-none d-md-inline" href="javascript:void(0)">
                      <img src="<?php echo base_url() ?>assets/img/featured_product_arrow_icon_left.png?>" style="right: 90px;position:absolute;top: 50px;" alt="">
                   </a>
-                  <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                  <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                  </div>
                </div>
                <div class="slider featured-product-slider">
                      <?php foreach($ProdList as $value) { 

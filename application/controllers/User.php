@@ -166,7 +166,6 @@ class User extends CI_Controller {
 
     // Update user password
     public function updatePassword() {
-        print_r('Hello');die;
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         if(!isset($email) && !isset($password)) {
@@ -176,7 +175,7 @@ class User extends CI_Controller {
             exit();
         }
         else {
-            $insertedIds = $this->Users->update_address($this->input->post('selectedAddress'));
+            //$insertedIds = $this->Users->update_address($this->input->post('selectedAddress'));
             $updateResult = $this->Users->updateUserPassword($email, $password);
             if($updateResult) {
                 $result['status'] = 1;

@@ -62,7 +62,13 @@
                             password: $password
                         },
                         success: function(data) {
-                            alert(data.message);
+                            if(data.status == 0) {
+                                $.notify(data.message, 'error');
+                            }
+                            else {
+                                $.notify(data.message, 'success');
+                                window.location = '<?php echo base_url(); ?>' + 'dashboard/user_login_email';
+                            }
                         }
                     });
                 }
@@ -71,6 +77,6 @@
                 }
             }
         });
-    }
+    });
 </script>
 
