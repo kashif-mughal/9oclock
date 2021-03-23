@@ -417,7 +417,67 @@
 <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/amcharts.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/serial.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>assets/js/custom-dashboard.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/script2.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/pcoded.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/js/demo-12.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	'use strict';
+$(document).ready(function() {
+
+    /*Area chart*/
+    	var months = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    	var graphData = '<?=$SaleByMonth?>';
+    	if(graphData)
+    		graphData = JSON.parse(graphData);
+    	for (var i = 0; i < graphData.length; i++) {
+    		graphData[i].year = months[graphData[i].year];
+    	}
+        var chart = AmCharts.makeChart("statestics-chart", {
+            "type": "serial",
+            "marginTop": 0,
+            "hideCredits": true,
+            "marginRight": 0,
+            "dataProvider": graphData,
+            "valueAxes": [{
+                "axisAlpha": 0,
+                "dashLength": 6,
+                "gridAlpha": 0.1,
+                "position": "left"
+            }],
+            "graphs": [{
+                "id": "g1",
+                "bullet": "round",
+                "bulletSize": 9,
+                "lineColor": "#4680ff",
+                "lineThickness": 2,
+                "negativeLineColor": "#4680ff",
+                "type": "smoothedLine",
+                "valueField": "value"
+            }],
+            "chartCursor": {
+                "cursorAlpha": 0,
+                "valueLineEnabled": false,
+                "valueLineBalloonEnabled": true,
+                "valueLineAlpha": false,
+                "color": '#fff',
+                "cursorColor": '#FC6180',
+                "fullWidth": true
+            },
+            "categoryField": "year",
+            "categoryAxis": {
+                "gridAlpha": 0,
+                "axisAlpha": 0,
+                "fillAlpha": 1,
+                "fillColor": "#FAFAFA",
+                "minorGridAlpha": 0,
+                "minorGridEnabled": true
+            },
+            "export": {
+                "enabled": true
+            }
+        });
+        /*donut chart*/
+
+});
+</script>

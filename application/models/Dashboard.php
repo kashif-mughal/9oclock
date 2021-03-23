@@ -17,7 +17,7 @@ class Dashboard extends CI_Model {
         $q5 = $this->db->query('SELECT count(1) InActiveUsers FROM user_login WHERE status <> 1');
         $q6 = $this->db->query('SELECT (SELECT count(1) from grocery_products WHERE Status <> 1) InActive, (SELECT count(1) FROM grocery_products where Status = 1) Active, (SELECT count(1) FROM grocery_products) Total');
         $q7 = $this->db->query('SELECT count(1) TotalCategories FROM grocery_category where status = 1');
-        $q8 = $this->db->query('SELECT SUM(OrderValue) Amount, MONTH(DeliveryDate) Month from grocery_order WHERE DeliveryDate BETWEEN DATE_SUB(NOW(), INTERVAL 365 DAY) AND NOW() GROUP BY MONTH(DeliveryDate)');
+        $q8 = $this->db->query('SELECT SUM(OrderValue) value, MONTH(DeliveryDate) year from grocery_order WHERE DeliveryDate BETWEEN DATE_SUB(NOW(), INTERVAL 365 DAY) AND NOW() GROUP BY MONTH(DeliveryDate)');
         $q9 = $this->db->query('SELECT count(1) TotalBrands FROM grocery_brand where status = 1');
         $q10 = $this->db->query('SELECT count(1) Featured FROM grocery_products where status = 1 AND IsFeatured = 1');
 
@@ -31,7 +31,7 @@ class Dashboard extends CI_Model {
             'ActiveProducts' => $q6->result_array()[0]['Active'],
             'InActiveProducts' => $q6->result_array()[0]['InActive'],
             'TotalCategories' => $q7->result_array()[0]['TotalCategories'],
-            'SaleByMonth' => $q8->result_array(),
+            'SaleByMonth' => json_encode($q8->result_object()),
             'TotalBrands' => $q9->result_array()[0]['TotalBrands'],
             'Featured' => $q10->result_array()[0]['Featured']
         );

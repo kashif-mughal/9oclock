@@ -14,8 +14,8 @@ class Admin_dashboard extends CI_Controller {
         $CI = & get_instance();
         $CI->load->library('lpage');
         $data = $CI->lpage->dashboard();
-        //echo '<pre>';
-        //print_r($data);die;
+        // echo '<pre>';
+        // print_r($data);die;
         $this->load->view('test', $data);
     }
     public function index() {
