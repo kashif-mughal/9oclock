@@ -67,5 +67,10 @@ class Lpage {
         $brandList = $CI->parser->parse('pages/categories', $data, true);
         return $brandList;
     }
+    public function dashboard() {
+        $CI = & get_instance();
+        $CI->load->model('Dashboard');
+        return $CI->Dashboard->get_dashboard_stats();
+    }
 }
 ?>

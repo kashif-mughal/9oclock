@@ -172,7 +172,7 @@
             </form>
          </div>
          <div>
-            <div><span>Forgot your password? <a href="javascript:void(0)">Click to reset</a></span></div>
+            <div><span>Forgot your password? <a href="<?=base_url("dashboard/user_password_reset")?>">Click to reset</a></span></div>
             <div><span>New Customer? <a href="javascript:void(0)" onclick="
             document.getElementById('login_new').style.display = 'none';
             document.getElementById('sign_up').style.display = 'block';
