@@ -1,25 +1,26 @@
 <style>
 #bannerWrapper {
-   margin-top: 113px;
+   margin-top: 105px;
+}
+
+@media (max-width: 1139px) {
+   #bannerWrapper {
+      margin-top: 98px;
+   }  
 }
 
 @media (max-width: 991px) {
    #bannerWrapper {
-      margin-top: 166px;
+      margin-top: 157px;
    }
 }
 
 @media (max-width: 576px) {
    #bannerWrapper {
-      margin-top: 154px;
+      margin-top: 137px;
    }
 }
 
-@media (max-width: 320px) {
-   #bannerWrapper {
-      margin-top: 172px;
-   }
-}
 </style>
 
 <div class="container-fluid" style="padding:0px;" id="bannerWrapper">

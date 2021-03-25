@@ -215,7 +215,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <div class="logo ml-2">
                         <div style="cursor: pointer;" class="logo_content text-center" onclick="window.location.href = '<?=base_url();?>'">
                            <!-- <img src="<?php //echo base_url() ?>assets/img/logo-white.png" alt="9o'Clock" class="img-fluid d-block"> -->
-                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="img-fluid d-block" style="height:60px; width:auto;">
+                           <img src="<?php echo base_url() ?>assets/img/Logo.png" alt="9oClock" class="d-block" style="max-width: 156px; width:100%; height: auto;">
 
                            <!-- <p class="text-white tag-line mb-0">Inventing Tomorrow</p>  -->
                         </div>
