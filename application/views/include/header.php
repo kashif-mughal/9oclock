@@ -196,7 +196,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          <div class="container">
             <div class="row">
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
-                  <ul style="animation: ticker 15s infinite linear;" class="navbar-nav">
+                  <ul style="animation: ticker 25s infinite linear;" class="navbar-nav">
                      <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" role="button">Get special discount of 10% on 10 items</a>
                      </li>
@@ -470,7 +470,7 @@ function loadCartData(){
          }
       }else{
          $($(allProducts[i]).find('.remove-cart')[0]).hide();
-         $($(allProducts[i]).find('.quantity')[0]).val('');
+         $($(allProducts[i]).find('.quantity')[0]).val('1');
          $($(allProducts[i]).find('.add-cart')[0]).html('Add to Cart');
          if($($(allProducts[i]).find('.remove-cart')[0]).hasClass('remove-cart-main')){
             $($(allProducts[i]).find('.add-cart')[0]).show();
@@ -519,7 +519,8 @@ function changeQtyOfProductAndPutInCart(targetElem, operation){
           dataJson = dataJson[0];
       }
       if(qty == 0){
-        prodContainer.remove();
+        if(window.location.href.toLocaleLowerCase().indexOf('corder/cart_page') != -1)
+          prodContainer.remove();
         removeAndUpdateFromCart(dataJson, $(prodContainer.find('.remove-cart')[0]));
         return true;
       }else{

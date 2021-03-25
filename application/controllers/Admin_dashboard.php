@@ -10,20 +10,27 @@ class Admin_dashboard extends CI_Controller {
         $this->template->current_menu = 'home';
         //$this->load->database();
     }
-
+    public function test(){
+        $CI = & get_instance();
+        $CI->load->library('lpage');
+        $data = $CI->lpage->dashboard();
+        // echo '<pre>';
+        // print_r($data);die;
+        $this->load->view('test', $data);
+    }
     public function index() {
         $this->auth->check_admin_auth();
-        redirect(base_url("Corder"));
-        return;
-        // $CI = & get_instance();
-        // if (!$this->auth->is_logged()) {
-        //     $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
-        // }
-        // $data = array(
-        //     'title' => display('dashboard')
-        // );
-        // $content = $CI->parser->parse('include/admin_home', $data, true);
-        // $this->template->full_admin_html_view($content);
+        //redirect(base_url("Corder"));
+        //return;
+         $CI = & get_instance();
+         if (!$this->auth->is_logged()) {
+             $this->output->set_header("Location: " . base_url() . 'Admin_dashboard/login', TRUE, 302);
+         }
+         $data = array(
+             'title' => display('dashboard')
+         );
+         $content = $CI->parser->parse('include/admin_home', $data, true);
+         $this->template->full_admin_html_view($content);
     }
 
     public function login() {

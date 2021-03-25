@@ -359,31 +359,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           $(cartBody).show();
           $($('.emptyCart')[0]).hide();
           $(document).off('click', '.checkout-btn', handleCheckout(event));
-          var eachProdTemplate2 = `<tr class="each-prod">
-          <td class="text-center">
-          <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
-          </td>
-          <td colspan="3" class="prod_name">{prodName}</td>
-          <td class="" style="text-align: center;" colspan="2"><b class="priceText">{price}</b></td>
-          <td>
-            <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
-              <div kashif class="quantity-area d-flex justify-content-center align-items-center mt-2">
-                  <input type="number" min="0" class="d-inline-flex quantity quantity-input" value="{qty}">
-                  <span class="d-block quantity-button">
-                     <a href="javascript:void(0);" class="qty-pls d-block text-center">+</a>
-                     <div class="separator"></div>
-                     <a href="javascript:void(0);" class="qty-mns d-block text-center">-</a>
-                  </span>
-               </div>
-            </td>
-        <td class="" style="text-align: center; padding-right:30px;"><b>{totalPrice}</b></td>
-          <td class="" style="text-align: center;">
-          <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">
-          <i class="fas fa-times" data-id="{pId}" data-name="{prodName}" style="font-size:25px; color:red;"></i>
-          </a>
-          </td>
-          </tr>`;
-          var eachProdTemplate1 = `<tr class="each-prod">
+          var eachProdTemplate1 = `<tr class="each-prod cart-single-elem">
                 <td class="text-center">
                   <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
                 </td>
@@ -406,7 +382,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   </td>
               </tr>`;
 
-            var mobileProdTemp = `<div class="d-flex justify-content-start align-items-center mb-3">
+            var mobileProdTemp = `<div class="cart-single-elem d-flex justify-content-start align-items-center mb-3">
               <img style="width: 90px;" src="{imgValue}" alt="">  
               <div class="ml-3" style="width: 100%;">
                 <div class="each-prod-top">
