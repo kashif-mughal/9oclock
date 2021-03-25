@@ -124,7 +124,7 @@
                                             <div class="col-md-8 col-xl-8">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h5>Statestics</h5>
+                                                        <h5>Sales by Month</h5>
                                                         <div class="card-header-left ">
                                                         </div>
                                                         <div class="card-header-right">

@@ -614,7 +614,7 @@ function removeItemFromShoppingCart(currentElem){
  <!-- Auto Complete search script START-->
 <script type='text/javascript'>
   $(document).ready(function(){
-    $('#q').focus();
+    //$('#q').focus();
      // $("#q").autocomplete({
      //    source: function( request, response )
      //    {
