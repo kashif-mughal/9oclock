@@ -38,7 +38,7 @@ class Auths extends CI_Model {
         $CI = & get_instance();
         $CI->load->model('Users');
         $check_user_login = $CI->Users->check_valid_user_phone($phone_number);
-        
+
         if($check_user_login) {
             return $this->auth->login_phone($phone_number);
         }
@@ -48,15 +48,15 @@ class Auths extends CI_Model {
     }
 
     // Login user by Email Address
-    public function user_login_email($email_address, $password) {
+    public function user_login_email($email_address, $password, $isRegister = false) {
         $CI = & get_instance();
         $CI->load->library('auth');
-        $check_user_login = $CI->auth->login_email($email_address, $password);
-        
+        $check_user_login = $CI->auth->login_email($email_address, $password, $isRegister);
+
         if($check_user_login) {
             return $check_user_login;
         }
-        return false; 
+        return false;
     }
 
     // Login user by Email Address
@@ -64,11 +64,11 @@ class Auths extends CI_Model {
         $CI = & get_instance();
         $CI->load->model('Users');
         $check_user_login = $CI->Users->check_valid_user_email_otp($email_address);
-        
+
         if($check_user_login) {
             return $check_user_login;
         }
-        return false; 
+        return false;
     }
 
     // Get user from user_login table by user id
@@ -87,9 +87,9 @@ class Auths extends CI_Model {
         $this->db->where('a.user_id', $user_id);
         $query = $this->db->get();
         if($query->num_rows() > 0) {
-            return $query->result_array();    
+            return $query->result_array();
         }
-        return false;   
+        return false;
     }
 
     public function get_user_detail_by_phone($phone_number) {
@@ -98,9 +98,9 @@ class Auths extends CI_Model {
         $this->db->where('phone', $phone_number);
         $query = $this->db->get();
         if($query->num_rows() > 0) {
-            return $query->result_array();    
+            return $query->result_array();
         }
-        return false;     
+        return false;
     }
 
     public function get_user_detail_by_email($email_address) {
@@ -109,9 +109,9 @@ class Auths extends CI_Model {
         $this->db->where('email', $email_address);
         $query = $this->db->get();
         if($query->num_rows() > 0) {
-            return $query->result_array();    
+            return $query->result_array();
         }
-        return false;        
+        return false;
     }
 
     public function get_otp_by_phone_number($phone_number) {
@@ -340,7 +340,7 @@ class Auths extends CI_Model {
         $message = "Your OTP is " . $fourRandomDigit;
         //$messageStatus = $this->sendemail($to_email, $message);
         return $message;
-     
+
     }
 
     public function is_email_exist($email_address) {
@@ -348,9 +348,9 @@ class Auths extends CI_Model {
         $db_email = $this->db->get('user_login');
 
         if($db_email->num_rows() > 0) {
-            return $db_email->result_array();    
+            return $db_email->result_array();
         }
-        return false; 
+        return false;
     }
 
     public function is_otp_verified($email_address) {
@@ -358,9 +358,9 @@ class Auths extends CI_Model {
         $db_email = $this->db->get('grocery_otp');
 
         if($db_email->num_rows() > 0) {
-            return $db_email->result_array();    
+            return $db_email->result_array();
         }
-        return false; 
+        return false;
     }
 
     public function check_user_detail($email_address) {
@@ -368,9 +368,9 @@ class Auths extends CI_Model {
         $db_email = $this->db->get('users');
 
         if($db_email->num_rows() > 0) {
-            return $db_email->result_array();    
+            return $db_email->result_array();
         }
-        return false; 
+        return false;
     }
 
     // ================================================================================
@@ -414,7 +414,7 @@ class Auths extends CI_Model {
             $To = $to_phone_number; ///Recepient Mobile Number
             $sender = "9o'Clock";
             // $code = $otp_code;
-        
+
             // sending sms
             // $message = "Your OTP Code is ". $code;
             $post = "sender=".urlencode($sender)."&mobile=".urlencode($To)."&message=".urlencode($message)."";
@@ -426,12 +426,12 @@ class Auths extends CI_Model {
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS,$post);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);        
-        
+            curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+
             $result['response'] = curl_exec($ch);
             $result['status'] = 'Success';
             /*Print Responce*/
-            return json_encode($result); 
+            return json_encode($result);
         }
         else {
             $result['status'] = 'Failed';
@@ -464,16 +464,54 @@ class Auths extends CI_Model {
 
         $this->email->initialize($config);
 
-        
+
         $this->email->from('mumtaz.alam.home@gmail.com', '9oClock Admin');
         $this->email->to($to_email);
         // $this->email->cc('another@another-example.com');
         // $this->email->bcc('them@their-example.com');
-        
+
         $this->email->subject('9oClock - User Email Verification');
         $this->email->message('Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: ' . $otp_code);
-        
+
         print_r($this->email->send());die;
         return $this->email->send();
+    }
+
+    // Email Verify
+    public function send_registeration_email($email_address) {
+        $CI = & get_instance();
+        $CI->load->model('Auths');
+
+        if(!isset($email_address)) {
+            $result['response'] = 'Email address is not valid';
+            $result['status'] = 'Error';
+            return $result;
+        }
+
+        // step 1: add an entry in otp table
+        $fourRandomDigit = mt_rand(1000,9999);
+        $dateTime = new DateTime();
+        $date = $dateTime->format('Y-m-d H:i:s');
+        $currentDate = strtotime($date);
+        $futureDate = $currentDate+(400);
+        $formatDate = date("Y-m-d H:i:s", $futureDate);
+        // print_r($currentDate . "||");
+        // print_r($formatDate);die;
+
+        $result = $CI->Auths->insert_otp_data_email($email_address, $fourRandomDigit, $formatDate);
+        if($result) {
+            $returnobj = (object)[
+                'success' => TRUE,
+                'responseMessage' => 'We have sent you a 4-digit code on you phone, Please Verify'
+            ];
+            return $returnobj;
+        }
+        else {
+            $returnobj = (object)[
+                'success' => FALSE,
+                'responseMessage' => 'Something went wrong, Please resend code'
+            ];
+            return $returnobj;
+        }
     }
 }

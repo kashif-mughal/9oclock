@@ -105,37 +105,98 @@ class Auth2 extends CI_Controller {
         $this->form_validation->set_rules('inputConfirmPassword', 'Confirm Password', 'required|matches[inputPassword]');
 
         if($this->form_validation->run()) {
-            // insert user in user login and user Detail table
-            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $userId = Sha1(substr(str_shuffle($permitted_chars), 0, 10));
-            $user_id = substr($userId, 0, 20);
-            // - Store User with UserId and phone number in table:(user_login)
-            $this->auths->insert_user_login_email($user_id, $email, $password);
 
-            // Insert record in users table
-            $this->auths->insert_user_email($user_id, $name, $email, $phone, $address);
-
-            // logged in user
-            $userStatus = $this->auths->user_login_email($email, $password);
-
-            if($userStatus) {
-                $result['responseMessage'] = 'User Logged in successfully';
-                $result['loggedInStatus'] = true;
-                $result['redirectURL'] = $returnURL;
-                $result['status'] = 'Success';
-                echo json_encode($result);
-                return;
+            // get user from db and if verified send to login page else send otp page
+            $userDetail = $this->auths->user_login_email_otp($email);
+            if($userDetail) {
+                if($userDetail[0]['verified'] == 1) {
+                    // send it to login page
+                    $result['responseMessage'] = 'User is already available, Please login';
+                    $result['loggedInStatus'] = true;
+                    $result['redirectURL'] = $returnURL;
+                    $result['status'] = 'Success';
+                    echo json_encode($result);
+                    return;
+                }
+                else {
+                    // send it to otp page
+                    $otpTableResponse = $this->auths->send_registeration_email($email);
+                    $result['responseMessage'] = 'User is available, We have send you an email with otp code, Please verify';
+                    $result['loggedInStatus'] = false;
+                    $result['redirectURL'] = $returnURL;
+                    $result['status'] = 'Success';
+                    echo json_encode($result);
+                    return;
+                }
             }
             else {
-                $result['responseMessage'] = 'Something went wrong, Please Verify your phone number again (User Details Not Available)';
-                $result['loggedInStatus'] = false;
-                $result['redirectURL'] = $returnURL;
-                $result['status'] = 'Error';
-                echo json_encode($result);
-                return;
+                // if user is not available then create user
+                print_r("Inside Insert User");die;
+
+                // insert user in user login and user Detail table
+                $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+                $userId = Sha1(substr(str_shuffle($permitted_chars), 0, 10));
+                $user_id = substr($userId, 0, 20);
+                // - Store User with UserId and phone number in table:(user_login)
+                $this->auths->insert_user_login_email($user_id, $email, $password);
+
+                // Insert record in users table
+                $this->auths->insert_user_email($user_id, $name, $email, $phone, $address);
+
+                // Insert otp record and send otp
+                $isEmailExist = $this->auths->is_email_exist($email);
+                if($isEmailExist) {
+
+                    // Otp is verified
+                    $isOtpVerified = $this->auths->is_otp_verified($email);
+                    if($isOtpVerified[0]["verified"] == "1") {
+                        $result['responseMessage'] = 'User is verified, Please login';
+                        $result['loggedInStatus'] = true;
+                        $result['redirectURL'] = $returnURL;
+                        $result['status'] = 'Success';
+                        echo json_encode($result);
+                        return;
+                    }
+                    else {
+                        $otpTableResponse = $this->auths->send_registeration_email($email);
+                        $result['responseMessage'] = 'Please verify Otp';
+                        $result['loggedInStatus'] = false;
+                        $result['redirectURL'] = $returnURL;
+                        $result['status'] = 'Success';
+                        echo json_encode($result);
+                        return;
+                    }
+                    // logged in user
+                    //$userStatus = $this->auths->user_login_email($email, $password, true);
+
+                    // if($userStatus['verified'] == 1) {
+                    //     $result['responseMessage'] = 'User Logged in successfully, User is verified';
+                    //     $result['loggedInStatus'] = true;
+                    //     $result['redirectURL'] = $returnURL;
+                    //     $result['status'] = 'Success';
+                    //     echo json_encode($result);
+                    //     return;
+                    // }
+                    // else {
+                    //     // $result['responseMessage'] = 'Something went wrong, Please Verify your phone number again (User Details Not Available)';
+                    //     $result['responseMessage'] = 'Please verify Otp';
+                    //     $result['loggedInStatus'] = false;
+                    //     $result['redirectURL'] = $returnURL;
+                    //     $result['status'] = 'Error';
+                    //     echo json_encode($result);
+                    //     return;
+                    // }
+                }
+                else {
+                    $result['responseMessage'] = 'Something went wrong, Please contact service provider.';
+                    $result['loggedInStatus'] = false;
+                    $result['redirectURL'] = $returnURL;
+                    $result['status'] = 'Error';
+                    echo json_encode($result);
+                    return;
+                }
             }
-
-
+            
         }
         else {
             $result['response'] = validation_errors();
@@ -438,30 +499,33 @@ class Auth2 extends CI_Controller {
                     $userStatus = $this->auths->user_login_email_otp($email);
                     if(!$userStatus) { // otp verified, user login data is not available (Goto Register Page)
                         $result['responseMessage'] = 'User is not available in db';
-                        $result['loggedInStatus'] = "register"; // login, register, stay
+                        $result['loggedInStatus'] = "stay"; // login, register, stay
                         $result['redirectURL'] = $returnURL;
                         $result['status'] = FALSE;
+                        // print_r('Login Detail is not available');die;
                         echo json_encode($result);
                         return;
                     }
                     else { // login data is available
-                        $userDetails = $this->auths->get_user_detail_by_email($email);
-                        if($userDetails) { // otp verified, user loign data is avaiable and user details is also available (Goto Login Page)
-                            $result['responseMessage'] = 'User is available in db';
+                        // $userDetails = $this->auths->get_user_detail_by_email($email);
+                        // if($userDetails) { // otp verified, user loign data is avaiable and user details is also available (Goto Login Page)
+                            $result['responseMessage'] = 'User is available in db, Please Login';
                             $result['loggedInStatus'] = "login"; // login, register, stay
                             $result['redirectURL'] = $returnURL;
                             $result['status'] = TRUE;
+                            // print_r('All is Good ');die;
                             echo json_encode($result);
                             return;
-                        }
-                        else { // otp verified, user login data is available but user details is unavailable (Goto Register Page)
-                            $result['responseMessage'] = 'User is not fully registered';
-                            $result['loggedInStatus'] = "register"; // login, register, stay
-                            $result['redirectURL'] = $returnURL;
-                            $result['status'] = FALSE;
-                            echo json_encode($result);
-                            return;
-                        }
+                        // }
+                        // else { // otp verified, user login data is available but user details is unavailable (Goto Register Page)
+                        //     $result['responseMessage'] = 'User is not fully registered';
+                        //     $result['loggedInStatus'] = "register"; // login, register, stay
+                        //     $result['redirectURL'] = $returnURL;
+                        //     $result['status'] = FALSE;
+                        //     print_r('User Detail is not available');die;
+                        //     echo json_encode($result);
+                        //     return;
+                        // }
 
                     }
                 }
@@ -470,40 +534,50 @@ class Auth2 extends CI_Controller {
                     $date = new DateTime();
                     $currDate = $date->format('Y-m-d H:i:s');
                     $expiryDate = $userData[0]['expiry_date'];
-
+                    
                     if($expiryDate > $currDate) {
                         if($otp_code == '5555' || $userData[0]['code'] == $otp_code) { // verify otp success
                             $userStatus = $this->auths->user_login_email_otp($email);
                             if($userStatus) { // user login is available
-                                $userDetails = $this->auths->get_user_detail_by_email($email);
-                                if($userDetails) { // user login data and user details are available (Goto Login Page)
-                                    $result['responseMessage'] = 'User is available in db';
-                                    $result['loggedInStatus'] = "login"; // login, register, stay
-                                    $result['redirectURL'] = $returnURL;
-                                    $result['status'] = TRUE;
-                                    echo json_encode($result);
-                                    return;
-                                }
-                                else { // user login data is available but user detail is unavailable (Goto Register Page)
-                                    // Update grocery_otp to verified
-                                    $this->auths->update_otp_verified_email($email);
+
+                                $this->auths->update_otp_verified_email($email);
+                                $result['responseMessage'] = 'User is verified, Please Login';
+                                $result['loggedInStatus'] = "login"; // login, register, stay
+                                $result['redirectURL'] = $returnURL;
+                                $result['status'] = TRUE;
+                                echo json_encode($result);
+                                return;
+
+
+                                // $userDetails = $this->auths->get_user_detail_by_email($email);
+                                // if($userDetails) { // user login data and user details are available (Goto Login Page)
+                                //     $result['responseMessage'] = 'User is available in db';
+                                //     $result['loggedInStatus'] = "login"; // login, register, stay
+                                //     $result['redirectURL'] = $returnURL;
+                                //     $result['status'] = TRUE;
+                                //     echo json_encode($result);
+                                //     return;
+                                // }
+                                // else { // user login data is available but user detail is unavailable (Goto Register Page)
+                                //     // Update grocery_otp to verified
+                                //     $this->auths->update_otp_verified_email($email);
                                     
-                                    $result['responseMessage'] = 'User is not registered';
-                                    $result['loggedInStatus'] = "register"; // login, register, stay
-                                    $result['redirectURL'] = $returnURL;
-                                    $result['status'] = FALSE;
-                                    echo json_encode($result);
-                                    return;
-                                }
+                                //     $result['responseMessage'] = 'User is not registered';
+                                //     $result['loggedInStatus'] = "register"; // login, register, stay
+                                //     $result['redirectURL'] = $returnURL;
+                                //     $result['status'] = FALSE;
+                                //     echo json_encode($result);
+                                //     return;
+                                // }
                             }
                             else { // user login data is unavailable (Goto Register Page)
                                 // Update grocery_otp to verified
-                                $this->auths->update_otp_verified_email($email);
+                                //$this->auths->update_otp_verified_email($email);
 
                                 $result['responseMessage'] = 'User is not registered';
-                                $result['loggedInStatus'] = "register"; // login, register, stay
+                                $result['loggedInStatus'] = "login"; // login, register, stay
                                 $result['redirectURL'] = $returnURL;
-                                $result['status'] = FALSE;
+                                $result['status'] = TRUE;
                                 echo json_encode($result);
                                 return;
                             }
@@ -537,6 +611,44 @@ class Auth2 extends CI_Controller {
                 return;
             }
         }
+
+     }
+
+
+     public function resendOtp() {
+        $email = $this->input->Post('email');
+
+        if(!$email) {
+            $result['responseMessage'] = 'Please provide email address';
+            $result['loggedInStatus'] = true;
+            $result['redirectURL'] = $returnURL;
+            $result['status'] = 'Error';
+            echo json_encode($result);
+            return;
+        }
+
+        // check if user is available or not
+        // if available send otp to its email address
+        $userStatus = $this->auths->user_login_email_otp($email);
+        if(!$userStatus) { // user is not available
+            $result['responseMessage'] = 'User is not available in db';
+            $result['loggedInStatus'] = true;
+            $result['redirectURL'] = $returnURL;
+            $result['status'] = 'Error';
+            echo json_encode($result);
+            return;
+        }
+        else { // user is available
+            // send otp on email address
+            $otpTableResponse = $this->auths->send_registeration_email($email);
+            $result['responseMessage'] = 'We have send you an email with otp code, Please verify';
+            $result['loggedInStatus'] = false;
+            $result['redirectURL'] = $returnURL;
+            $result['status'] = 'Success';
+            echo json_encode($result);
+            return;
+        }
+        // else send it to registration page
 
      }
 

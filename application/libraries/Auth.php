@@ -81,11 +81,11 @@ class Auth {
     }
 
      //Login....
-     public function login_email($email_address, $password) {
+     public function login_email($email_address, $password, $isRegister = false) {
         $CI = & get_instance();
         $CI->load->model('Users');
 
-        $result = $CI->Users->check_valid_user_email($email_address, $password);
+        $result = $CI->Users->check_valid_user_email($email_address, $password, $isRegister);
         if ($result) {
             $key = md5(time());
             $key = str_replace("1", "z", $key);

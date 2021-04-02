@@ -1,5 +1,5 @@
 <style>
-   #registration, #login, #otpForm {
+   #registration, #login, #otpForm, #sign_up {
       display:none;
    }
 </style>
@@ -175,7 +175,9 @@
             <div><span>Forgot your password? <a href="<?=base_url("dashboard/user_password_reset")?>">Click to reset</a></span></div>
             <div><span>New Customer? <a href="javascript:void(0)" onclick="
             document.getElementById('login_new').style.display = 'none';
-            document.getElementById('sign_up').style.display = 'block';
+            // document.getElementById('sign_up').style.display = 'block';
+            document.getElementById('registration_new').style.display = 'block';
+            
             ">Create New Account</a></span></div>
          </div>
       </div>
@@ -265,7 +267,7 @@
 		$('#otpSubmit').click(function() {
 			var otpCode = $('#digit-1').val() + $('#digit-2').val() + $('#digit-3').val() + $('#digit-4').val();
 			var otpRegEx = /^[0-9]{4}$/;
-         var email_address = $('#sign_up_email').val();
+         var email_address = $('#inputEmail').val();
 			if(!otpCode.match(otpRegEx)) {
 				showNoti("OTP should be 4 digit number", "error");
 			}
@@ -281,14 +283,12 @@
                         showNoti(data.response, "error");
                   }
                   else {
-                     if(data.status) { // && data.redirectURL == false) {
+                     if(data.loggedInStatus == "login") { // && data.redirectURL == false) {
                         $('#otpForm').hide(); // to otp page
                         $('#login_new').show();
+                        $("#userRegistrationForm_new").trigger("reset");
                      }
-                     else {
-                        $('#otpForm').hide(); // to otp page
-                        $('#registration_new').show(); // to register page
-                     }
+                     showNoti(data.response, "success");
                   }
 					},
 					error: function(data) {
@@ -339,7 +339,7 @@
 						}
 					},
 					error: function(data) {
-						showNoti(data.response, 'success');
+						showNoti(data.response, 'error');
 					}
 				});
          }
@@ -357,13 +357,33 @@
 			$('#digit-3').val('');
 			$('#digit-4').val('');
 
-			$('#otpForm').hide();
-			$('#phoneForm').show();
+         var email_address = $('#inputEmail').val();
+         $.ajax({
+            url: "<?php echo base_url(); ?>Auth2/resendOtp",
+					method: "POST",
+					data: { email: email_address },
+					dataType: "json",
+					success: function(data) {
+                  if(data.status == 'Error') {
+                     showNoti(data.responseMessage, "error");
+						}
+                  else {
+                     showNoti(data.responseMessage, 'success');
+                     if(!data.loggedInStatus) {
+                        $('#digit-1').select().focus();
+                     }
+                  }
+               },
+               error: function(data) {
+                  showNoti(data.responseMessage, 'error');
+               }
+         });
+
 		});
 
       
       // Register User
-		$('#userRegistrationForm_new').on('submit', function(event) {
+		$('#userRegistrationForm_new').on('submit', function(event) {debugger;
 			event.preventDefault();
 			$('#userId').val(localStorage.getItem('UserId'));
 			
@@ -404,18 +424,29 @@
 						}
 						else {
                      showNoti(data.responseMessage, "success");
-							
-							$('#registrationForm_new').hide();
-							$('#registrationForm_new').css('display', 'none');
+                     $('#registration_new').hide();
+							$('#registration_new').css('display', 'none');
 							$('#userId').val(localStorage.removeItem('UserId'));
-							if(!data.redirectUrl)
-								window.location = "<?php echo base_url(); ?>Dashboard";
-							else
-								window.location.href = decodeURIComponent(data.redirectURL);
+
+                     if(data.loggedInStatus) {
+                        $('#login_new').show();
+                        $('#login_new').css('display', 'block');
+                     }
+                     else {
+                        $('#otpForm').show();
+                        $('#otpForm').css('display', 'block');
+                        $('#digit-1').select().focus();
+                     }
+                     
+                     showNoti(data.responseMessage, "success");
+							// if(!data.redirectUrl)
+							// 	window.location = "<?php //echo base_url(); ?>Dashboard";
+							// else
+							// 	window.location.href = decodeURIComponent(data.redirectURL);
 						}
 					},
 					error: function(data) {
-                  showNoti(data.response, "error");
+                  showNoti(data.responseMessage, "error");
 
 					}
 				});

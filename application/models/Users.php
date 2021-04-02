@@ -48,7 +48,7 @@ class Users extends CI_Model {
     }
 
     // validate user using email address 
-    function check_valid_user_email($email_address, $password) {
+    function check_valid_user_email($email_address, $password, $isRegister = false) {
         // $dateTime = new DateTime();
         // $currDate = $dateTime->format('Y-m-d H:i:s');
 
@@ -59,7 +59,9 @@ class Users extends CI_Model {
         $this->db->where('a.email_address', $email_address);
         $this->db->where('c.password', md5($password));
         $this->db->where('c.status', 1);
-        $this->db->where('a.verified', 1);
+        if($isRegister == false) {
+            $this->db->where('a.verified', 1);
+        }
         $this->db->order_by('c.uid', 'desc');
         $this->db->limit(1);
         // $this->db->where('a.expiry_date > ', $currDate);
@@ -71,6 +73,7 @@ class Users extends CI_Model {
         return false;
     }
 
+
     function check_valid_user_email_otp($email_address) {
         $dateTime = new DateTime();
         $currDate = $dateTime->format('Y-m-d H:i:s');
@@ -80,10 +83,10 @@ class Users extends CI_Model {
         $this->db->join('users b', 'b.email = a.email_address');
         $this->db->join('user_login c', 'c.username = a.email_address');
         $this->db->where('a.email_address', $email_address);
-        $this->db->where('c.password', md5($password));
+        // $this->db->where('c.password', md5($password));
         $this->db->where('c.status', 1);
-        $this->db->where('a.verified', 1);
-        $this->db->where('a.expiry_date > ', $currDate);
+        // $this->db->where('a.verified', 1);
+        // $this->db->where('a.expiry_date > ', $currDate);
         $query = $this->db->get();
 
         if($query->num_rows() > 0) {

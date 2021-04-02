@@ -359,8 +359,7 @@ class Dashboard extends CI_Controller {
         return;
 
     }
-   
-    
+
     // Verify Phone Number
     public function phoneVerify() {
         
