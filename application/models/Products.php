@@ -14,34 +14,74 @@ class Products extends CI_Model {
         return $this->db->count_all("product_information");
     }
 
+    private function product_data_after_varient_sort($returnData){
+        $tempProducts = array();
+        for ($i=0; $i < count($returnData); $i++) { 
+            $key = array_search($returnData[$i]['ProductId'], array_column($tempProducts, 'ProductId'));
+            //echo '<pre>';print_r($key);
+            if(!$key){
+                $returnData[$i]['VarientData'] = null;
+                if(!empty($returnData[$i]['VName'])){
+                    $returnData[$i]['VarientData'] = array();
+                    array_push($returnData[$i]['VarientData'], array(
+                        'VId' => $returnData[$i]['Id'],
+                        'VName' => $returnData[$i]['VName'],
+                        'VType' => $returnData[$i]['VType'],
+                        'VImage' => $returnData[$i]['VImage'],
+                        'VValue' => $returnData[$i]['VValue'],
+                        'VPId' => $returnData[$i]['ProductId']
+                    ));
+                }
+                array_push($tempProducts, $returnData[$i]);
+            }else{
+                array_push($tempProducts[$key]['VarientData'], array(
+                    'VId' => $returnData[$i]['Id'],
+                    'VName' => $returnData[$i]['VName'],
+                    'VType' => $returnData[$i]['VType'],
+                    'VImage' => $returnData[$i]['VImage'],
+                    'VValue' => $returnData[$i]['VValue'],
+                    'VPId' => $returnData[$i]['ProductId']
+                ));
+            }
+        }
+        $returnData = $tempProducts;
+        return $returnData;
+    }
+
     //Product List
     public function product_list() {
 
-        $query = "SELECT p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
+        $query = "SELECT gpv.*, p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
                         CASE WHEN p.IsFeatured = 0 THEN 'No' ELSE 'YES' END AS IsFeatured,
                         CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot, 
                         -- p.IsFeatured, p.IsHot,
-                        p.ProductImg from grocery_products p join grocery_category c on p.Category = c.CategoryId 
+                        p.ProductImg from grocery_products p 
+                        join grocery_category c on p.Category = c.CategoryId 
+                        LEFT JOIN grocery_product_varient gpv on gpv.ProductId = p.ProductId
                         where c.Status = 1 AND p.Status = 1 order by p.ModifiedOn desc";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            //echo '<pre>';print_r($this->product_data_after_varient_sort($query->result_array()));die;
+            return $this->product_data_after_varient_sort($query->result_array());
+            //return $query->result_array();
         }
         return false;
     }
 
     public function get_featured_products() {
-        $query = "SELECT p.ProductId, p.ProductName, p.Unit, u.UnitName, p.Price, p.SalePrice, p.ModifiedOn,
-                        CASE WHEN p.IsFeatured = 0 THEN 'No' ELSE 'YES' END AS IsFeatured,
-                        CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot,
-                        p.ProductImg from grocery_products p join grocery_category c on p.Category = c.CategoryId
-                        join grocery_unit u on p.UnitId = u.Unit
-                        where c.Status = 1 AND p.Status = 1 AND p.IsFeatured = 1 order by p.ModifiedOn DESC LIMIT 8";
+        $query = "SELECT gpv.*, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
+        from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId 
+        left join grocery_unit gu on gp.Unit = gu.UnitId 
+        left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
+        LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
+        where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by gp.ModifiedOn DESC Limit 20";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            return $this->product_data_after_varient_sort($query->result_array());
+            //echo '<pre>kashif';print_r($this->product_data_after_varient_sort($query->result_array()));die;
+            //return $query->result_array();
         }
         return false;
     }
@@ -136,12 +176,18 @@ class Products extends CI_Model {
             return FALSE;
         } else {
             $this->db->insert($this->tableName, $data);
-            return $this->db->insert_id();;
+            return $this->db->insert_id();
         }
     }
     //Adding product varient
     public function insert_grocery_product_varient($data){
         $this->db->insert('grocery_product_varient', $data);
+    }
+    //Removing product varient
+    public function remove_grocery_product_varient($ProductId){
+        $this->db->where('ProductId', $ProductId);
+        $this->db->delete('grocery_product_varient');
+        return true;
     }
 
     // Supplier product information

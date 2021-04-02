@@ -158,13 +158,14 @@ class Categories extends CI_Model {
             $whereString .= "AND gp.Brand = $brand ";
         }
         $query = "SELECT 
-                        gpv.*, gp.*, gu2.UnitName SaleUnitName, 
+                        gpv.*, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, 
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
+                    join grocery_category gc on gp.Category = gc.CategoryId 
                     LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
                     LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
                     left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
-                    WHERE gp.Status = 1 $whereString AND 
+                    WHERE gp.Status = 1 $whereString AND  gc.Status = 1 AND
                     gp.Category IN(
                         $inCats
                     )
@@ -173,10 +174,11 @@ class Categories extends CI_Model {
         $countQuery = "SELECT 
                         count(1) total
                     FROM grocery_products gp
+                    join grocery_category gc on gp.Category = gc.CategoryId 
                     LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
                     LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
                     left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
-                    WHERE gp.Status = 1 $whereString AND 
+                    WHERE gp.Status = 1 $whereString AND gc.Status = 1 AND
                     gp.Category IN(
                         $inCats
                     )";
@@ -192,8 +194,6 @@ class Categories extends CI_Model {
         if ($query->num_rows() > 0) {
             $returnData["products"] = $query->result_array();
             return $this->product_data_after_varient_sort($returnData);
-            echo '<pre>'; print_r($returnData);die;
-            return $returnData;
         }
         else{
             return false;

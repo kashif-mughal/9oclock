@@ -116,7 +116,7 @@
                             <h4>Product Edit </h4>
                         </div>
                     </div>
-                  <?php echo form_open_multipart('Cproduct/product_update',array('class' => 'form-vertical', 'id' => 'product_update'))?>
+                  <?php echo form_open_multipart('Cproduct/product_update',array('class' => 'form-vertical', 'enctype' => 'multipart/form-data', 'id' => 'product_update'))?>
                     <div class="panel-body">
 
                     	<div class="form-group row">
@@ -143,7 +143,7 @@
                         <div class="form-group row">
                             <label for="salePrice" class="col-sm-3 col-form-label">Sale Price</label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="salePrice" id="salePrice" type="text" placeholder="Sale Price"  required="" value="{sale_price}">
+                                <input class="form-control" name ="SalePrice" id="SalePrice" type="text" placeholder="Sale Price" value="{sale_price}">
                             </div>
                         </div>
 

@@ -21,15 +21,18 @@ class Dashboard extends CI_Controller {
         $CI->load->model('Banner');
         
         
-        $query = $this->db->query("SELECT gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
-        from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId 
-        left join grocery_unit gu on gp.Unit = gu.UnitId 
-        left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
-        where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
-        $product_list;
-        if ($query->num_rows() > 0) {
-            $product_list =  $query->result_array();
-        }
+        // $query = $this->db->query("SELECT gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
+        // from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId 
+        // left join grocery_unit gu on gp.Unit = gu.UnitId 
+        // left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
+        // where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by ModifiedOn DESC Limit 20");
+        // $product_list;
+        // if ($query->num_rows() > 0) {
+        //     $product_list =  $query->result_array();
+        // }
+
+        $product_list = $CI->Products->get_featured_products();
+
         //$catArray = $CI->lcategory->get_category_hierarchy();
         $catArray = $CI->lcategory->get_category_hierarchy_in();
         //echo '<pre>'; print_r($catArray);die;

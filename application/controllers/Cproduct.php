@@ -99,7 +99,7 @@ class Cproduct extends CI_Controller {
             'Unit' => $this->input->post('Unit'),
             'OriginalPrice' => $this->input->post('OriginalPrice'),
             'Price' => $this->input->post('Price'),
-            'SalePrice' => $this->input->post('SalePrice'),
+            'SalePrice' => empty($this->input->post('SalePrice')) ? $this->input->post('Price') : $this->input->post('SalePrice'),
             'IsFeatured' => $isFeatured,
             'IsHot' => $isHot,
             'Category' => $this->input->post('CategoryId'),
@@ -120,7 +120,6 @@ class Cproduct extends CI_Controller {
             $varientsData = array();
             $j = -1;
             for ($i=0; $i < $cpt; $i++) {
-                echo '<br>step3_' . $i;
                 if(empty($this->input->post('vNames')[$i]))
                     continue;
                 $j++;
@@ -143,7 +142,6 @@ class Cproduct extends CI_Controller {
                         redirect(base_url('Cproduct'));
                     } else {
                         $varientsData[$j]['VImage'] = "assets/img/products/" . $this->upload->data()['file_name'];
-                        echo 'kashif '.$varientsData[$j]['VImage']. '<br>';
                     }
                 }
             }
@@ -203,7 +201,7 @@ class Cproduct extends CI_Controller {
             'Unit' => $this->input->post('Unit'),
             'OriginalPrice' => $this->input->post('OriginalPrice'),
             'Price' => $this->input->post('price'),
-            'SalePrice' => $this->input->post('salePrice'),
+            'SalePrice' => empty($this->input->post('SalePrice')) ? $this->input->post('Price') : $this->input->post('SalePrice'),
             'IsFeatured' => $isFeatured,
             'IsHot' => $isHot,
             'Category' => $this->input->post('CategoryId'),
@@ -222,7 +220,54 @@ class Cproduct extends CI_Controller {
         if($_FILES['image']['name'])
             $data['ProductImg'] = (!empty($image_url) ? $image_url : 'assets/img/brand.jpg');
         $this->Products->update($data, 'ProductId', $product_id);
+        // if (is_numeric($product_id)) {
+        //     //adding varient images
+        //     $files = $_FILES;
+        //     $cpt = count($this->input->post('vNames'));
+        //     $varientsData = array();
+        //     $j = -1;
+        //     for ($i=0; $i < $cpt; $i++) {
+        //         if(empty($this->input->post('vNames')[$i]))
+        //             continue;
+        //         $j++;
+        //         $varientsData[$j] = array();
+        //         $varientsData[$j]['VName'] = $this->input->post('vNames')[$i];
+        //         $varientsData[$j]['VType'] = $this->input->post('vType')[$i];
+        //         $varientsData[$j]['VValue'] = $this->input->post('vValue')[$i];
+        //         $varientsData[$j]['Status'] = 1;
+        //         $varientsData[$j]['VImage'] = null;
+        //         if ($files['vImage']['name'][$i]) {
+        //             $_FILES['vImage']['name']= $files['vImage']['name'][$i];
+        //             $_FILES['vImage']['type']= $files['vImage']['type'][$i];
+        //             $_FILES['vImage']['tmp_name']= $files['vImage']['tmp_name'][$i];
+        //             $_FILES['vImage']['error']= $files['vImage']['error'][$i];
+        //             $_FILES['vImage']['size']= $files['vImage']['size'][$i];
 
+        //             if (!$this->upload->do_upload('vImage')) {
+        //                 $error = array('error' => $this->upload->display_errors());
+        //                 $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+        //                 redirect(base_url('Cproduct'));
+        //             } else {
+        //                 $varientsData[$j]['VImage'] = "assets/img/products/" . $this->upload->data()['file_name'];
+        //             }
+        //         }
+        //     }
+        //     $this->Products->remove_grocery_product_varient($product_id);
+        //     for ($i=0; $i < count($varientsData); $i++) {
+        //         if(is_null($varientsData[$i]['VImage'])){
+        //             $varientsData[$i]['VImage'] = $data['ProductImg'];
+        //         }
+        //         $varientsData[$i]['ProductId'] = $product_id;
+        //         //insert varient in db
+        //         $this->Products->insert_grocery_product_varient($varientsData[$i]);
+        //     }
+        //     $this->session->set_userdata(array('message' => 'Successfully Added'));
+        //     if (isset($_POST['add-product'])) {
+        //         redirect(base_url('Cproduct/manage_product'));
+        //     } elseif (isset($_POST['add-customer-another'])) {
+        //         redirect(base_url('Cproduct'));
+        //     }
+        // }
         $this->session->set_userdata(array('message' => display('successfully_updated')));
         redirect(base_url('Cproduct/manage_product'));
     }

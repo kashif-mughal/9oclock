@@ -145,7 +145,7 @@
                         <div class="form-group row">
                             <label for="SalePrice" class="col-sm-3 col-form-label">Sale Price </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="SalePrice" id="SalePrice" type="text" placeholder="Sale Price" required>
+                                <input class="form-control" name ="SalePrice" id="SalePrice" type="text" placeholder="Sale Price">
                             </div>
                         </div>
 

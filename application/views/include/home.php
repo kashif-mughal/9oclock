@@ -25,8 +25,9 @@
                   </div>
                </div>
                <div class="slider featured-product-slider">
-                     <?php foreach($ProdList as $value) { 
+                     <?php foreach($ProdList as $value) {
                          $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
+
                          ?>
                              <div class="featured-products-content d-flex align-items-center justify-content-start">
                                  <div class="card mr-2 each-prod product-card-inner" style="padding-top:5px; padding-bottom: 10px; height: unset !important;">
@@ -38,24 +39,23 @@
                                               echo '<h5>Out Of Season</h5>'; 
                                          }?>
                                          <div class="header">
-                                             <?php if($discountPercentage != 0) { ?> 
-                                                 <h5 class="card-title float-left"><?php echo round($discountPercentage)."% OFF"; ?></h5>
-                                             <?php } ?>
                                              <!--<a href="#" class="add_to_favorite">
                                                  <i class="fas fa-heart float-right"></i>
                                              </a>-->
                                          </div>
                                      </div>
-                                     <img class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
-                                     <p class="product-card-discount-banner">20% OFF</p>
+                                     <a href="<?php echo base_url() . 'Cproduct/viewProduct/' . $value['ProductId']; ?>"> 
+                                       <img class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
+                                       <?php if($discountPercentage > 0) { ?> 
+                                          <p class="product-card-discount-banner"><?php echo round($discountPercentage)."% OFF"; ?></p>
+                                       <?php } ?>
+                                     </a>
                                      <div class="product-info text-left px-2">
-                                          <p class="product-card-inner-subcategory">Vegetables</p>
+                                          <p class="product-card-inner-subcategory"><?php echo $value['catAlias']?></p>
                                          <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
                                          
                                          <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php //echo $value['SalePrice']; ?>",0)); </script></p> -->
-                                         <?php if($discountPercentage != 0) { ?> 
-                                             <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
-                                         <?php } 
+                                         <?php  
                                          $productObject = (object) [
                                             'id' => $value['ProductId'],
                                             'pName' => $value['ProductName'],
@@ -66,20 +66,36 @@
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
-                                          <div class="input-group product-card-dropdown">
-                                             <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
-                                                <option value="1" selected>1kg</option>
-                                                <option value="2">1 Dozen</option>
-                                                <option value="3">500 grm</option>
-                                             </select>
-                                          </div>
+                                          <?php if(count($value['VarientData']) > 0){?>
+                                            <div class="input-group product-card-dropdown">
+                                               <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
+                                                  <?php for ($i=0; $i < count($value['VarientData']); $i++) {?>
+                                                    <option value="<?php echo $value['VarientData'][$i]['VId']?>"><?php echo $value['VarientData'][$i]['VName']?></option>
+                                                  <?php } ?>
+                                                  <!-- <option value="2">1 Dozen</option>
+                                                  <option value="3">500 grm</option> -->
+                                               </select>
+                                            </div>
+                                          <?php } else{?>
+                                            <span><?php echo $value["SaleUnitQty"] . " " .$value["UnitName"]?></span>
+                                          <?php } ?>
                                           <!-- <p class="card-text product-card-inner-weight">
                                              <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
                                           <div class="d-flex justify-content-start align-items-center product-card-inner-price">
-                                             <p class="mainPrice">£<?php echo $value['SalePrice']; ?></p>
-                                             <p class="originalPrice">£<?php echo $value['OriginalPrice']; ?></p>
+                                             <p class="mainPrice c<?php echo $value['ProductId']?>"></p>
+                                             <?php if($discountPercentage > 0) { ?> 
+                                               <p class="originalPrice c<?php echo $value['ProductId']?>"></p>
+                                             <?php } ?>
                                           </div>
-
+                                          <script type="text/javascript">
+                                            $(document).ready(function(){
+                                              $('.mainPrice.c<?php echo $value['ProductId']?>').html(formatCurrency('<?=$value["SalePrice"];?>'));
+                                              var orgPrc = $('.originalPrice.c<?php echo $value['ProductId']?>');
+                                              if(orgPrc && orgPrc.length > 0){
+                                                orgPrc.html(formatCurrency('<?=$value["Price"];?>'));
+                                              }
+                                            });
+                                          </script>
                                          <div class="quantity-area d-flex justify-content-center align-items-center mt-2 text-center">
                                              <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                              <input type="text" class="d-inline-flex quantity-input quantity">
