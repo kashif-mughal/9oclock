@@ -263,7 +263,7 @@ class Auths extends CI_Model {
         $user_data = array(
             'user_id' => $user_id,
             'first_name' => $name,
-            'phone' => $phone,
+            'phone' => str_replace("-", "", $phone),
             'email' => $email,
             'address' => $address,
             'status' => 1,

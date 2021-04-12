@@ -19,7 +19,7 @@ class Products extends CI_Model {
         for ($i=0; $i < count($returnData); $i++) { 
             $key = array_search($returnData[$i]['ProductId'], array_column($tempProducts, 'ProductId'));
             //echo '<pre>';print_r($key);
-            if(!$key){
+            if($key === false){
                 $returnData[$i]['VarientData'] = null;
                 if(!empty($returnData[$i]['VName'])){
                     $returnData[$i]['VarientData'] = array();
@@ -69,13 +69,13 @@ class Products extends CI_Model {
         return false;
     }
 
-    public function get_featured_products() {
+    public function get_featured_and_products() {
         $query = "SELECT gpv.*, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
         from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId 
         left join grocery_unit gu on gp.Unit = gu.UnitId 
         left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
         LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
-        where IsFeatured = 1 and gc.Status = 1 and gp.Status = 1 order by gp.ModifiedOn DESC Limit 20";
+        where (IsFeatured = 1 OR IsHot = 1) and gc.Status = 1 and gp.Status = 1 order by gp.ModifiedOn DESC Limit 20";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {

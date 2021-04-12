@@ -2,6 +2,32 @@
    #registration, #login, #otpForm, #sign_up {
       display:none;
    }
+   #digits {
+      text-align:left !important;
+      padding-left: 15px;
+      letter-spacing: 42px;
+      border: 0;
+      background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+      background-position: bottom;
+      background-size: 50px 1px;
+      background-repeat: repeat-x;
+      background-position-x: 35px;
+      width: 220px;
+      min-width: 220px;
+   }
+
+   #divInner{
+    left: 0;
+    position: sticky;
+ }
+
+ #divOuter{
+    width: 190px; 
+    overflow: hidden;
+ }
+ #digits:focus{
+   outline: none;
+}  
 </style>
 
 <!-- alert-info -->
@@ -28,47 +54,18 @@
          <div class="row d-flex justify-content-start align-items-center">
             <div class="form-inline pl-3">
                <form class="digit-group" id="inputOtp">
-                  <input 
-                     type="number" 
-                     name="digit-1" 
-                     id="digit-1" 
-                     autocomplete="off" 
-                     autofocus
-                     style="font-size: 30px; width: 50px; margin-right: 8px; border: 1px solid #dcdcdc;
-                              border-radius: 2px; margin-bottom: 12px; align-items: center;"
-                  >
-                  <input 
-                     type="number" 
-                     name="digit-2" 
-                     id="digit-2" 
-                     autocomplete="off"
-                     style="font-size: 30px; width: 50px; margin-right: 8px; border: 1px solid #dcdcdc;
-                              border-radius: 2px; margin-bottom: 12px; align-items: center;"
-                  >
-                  <input 
-                     type="number" 
-                     name="digit-3" 
-                     id="digit-3" 
-                     autocomplete="off"
-                     style="font-size: 30px; width: 50px; margin-right: 8px; border: 1px solid #dcdcdc;
-                              border-radius: 2px; margin-bottom: 12px; align-items: center;"
-                  >
-                  <input 
-                     type="number" 
-                     name="digit-4" 
-                     id="digit-4" 
-                     autocomplete="off" 
-                     last="true"
-                     style="font-size: 30px; width: 50px; margin-right: 8px; border: 1px solid #dcdcdc;
-                              border-radius: 2px; margin-bottom: 12px; align-items: center;"
-                  >
+                  <div id="divOuter">
+                     <div id="divInner">
+                        <input id="digits" type="text" maxlength="4" />
+                     </div>
+                  </div>
                </form>
             </div>
             
          </div>
 
          <div class="row">
-            <div class="d-block">
+            <div class="d-block form-inline pl-3 pt-3">
                <a href="javascript:void(0)" id="resendCode" class="d-block mb-4 ml-2">Resend Code again</a>
             </div>
 
@@ -110,7 +107,7 @@
                </div>
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputPhoneContainer">
                   <i class="fas fa-mobile-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
-                  <input type="tel" name="inputPhone" id="inputPhone" class="form-control" placeholder="Phone Number" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
+                  <input type="tel" name="inputPhone" id="inputPhone" class="form-control simple-field-data-mask" data-mask="+44-000-0000000" placeholder="Phone Number" value="+44-" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputAddressContainer">
                   <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
@@ -217,6 +214,7 @@
 <!-- Login New Ends -->
 
 <!-- Scripts -->
+<script src="<?php echo base_url() ?>assets/js/jquery.mask.js" type="text/javascript"></script>
 <script>
    $(document).ready(function() {
       $('#otpForm').hide();
@@ -238,7 +236,7 @@
                   if(data.status == 'userAvailable') { // 0 = otp email is verified
                      $('#sign_up').hide();
                      $('#login_new').show(); // to login page
-                     $('#digit-1').focus();
+                     $('#digits').focus();
                   }
                   else if(data.status == 'userNotRegister') {
                      $('#sign_up').hide();
@@ -265,7 +263,7 @@
 
       // Submit OTP
 		$('#otpSubmit').click(function() {
-			var otpCode = $('#digit-1').val() + $('#digit-2').val() + $('#digit-3').val() + $('#digit-4').val();
+			var otpCode = $('#digits').val();
 			var otpRegEx = /^[0-9]{4}$/;
          var email_address = $('#inputEmail').val();
 			if(!otpCode.match(otpRegEx)) {
@@ -332,7 +330,7 @@
                             console.log('data redirect URL is FALSE');
 								}
 								else {
-									window.location = decodeURIComponent(data.redirectURL); 	
+									window.location = decodeURIComponent(data.redirectUrl);
                            console.log('data redirect URL is TRUE');
 								}
 							}, 2000);
@@ -352,10 +350,7 @@
 		});
 
       $('#resendCode').click(function() {
-			$('#digit-1').val('');
-			$('#digit-2').val('');
-			$('#digit-3').val('');
-			$('#digit-4').val('');
+			$('#digits').val('');
 
          var email_address = $('#inputEmail').val();
          $.ajax({
@@ -370,7 +365,7 @@
                   else {
                      showNoti(data.responseMessage, 'success');
                      if(!data.loggedInStatus) {
-                        $('#digit-1').select().focus();
+                        $('#digits').select().focus();
                      }
                   }
                },
@@ -383,7 +378,7 @@
 
       
       // Register User
-		$('#userRegistrationForm_new').on('submit', function(event) {debugger;
+		$('#userRegistrationForm_new').on('submit', function(event) {
 			event.preventDefault();
 			$('#userId').val(localStorage.getItem('UserId'));
 			
@@ -435,7 +430,7 @@
                      else {
                         $('#otpForm').show();
                         $('#otpForm').css('display', 'block');
-                        $('#digit-1').select().focus();
+                        $('#digits').select().focus();
                      }
                      
                      showNoti(data.responseMessage, "success");
@@ -459,28 +454,19 @@
 			var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 			return (reg.test(email)) ? true : false;
 		}
-      var allowKeys = ["0","1","2","3","4","5","6","7","8","9"];
+      var allowKeys = ["0","1","2","3","4","5","6","7","8","9","Backspace"];
 
-      $('input[name^=digit-]').keydown(function() {
+      $('#digits').keydown(function() {
 			// Check Character
 			if(allowKeys.indexOf(event.key) == -1) return false;
-			if(event.key.length <= 1) 
-			{
-				$("#inputOtp #" + event.target.id).val(event.key);
-				var nextElement = $("#inputOtp #" + event.target.id).next();
-				nextElement.focus();
-				if($("#inputOtp #" + event.target.id).attr('last') == "true"){
-					$('#otpSubmit').select().focus();
-					$('#otpSubmit').trigger('click');
-				}
-				return false;
-			}
-			else {
-				var str = event.key;
-				str = str.substring(0, str.length - 1);
-				$("#inputOtp #" + event.target.id).val(str);
-			}
-		});	
+		});
+      $('#digits').keyup(function() {
+         if(event.target.value.length == 4) 
+         {
+            $('#otpSubmit').select().focus();
+            $('#otpSubmit').trigger('click');
+         }
+      });	
 
    });
 function showNoti(message, type){
@@ -499,5 +485,34 @@ function showNoti(message, type){
    setTimeout(function(){
       notiElem.hide();
    }, 5000);
+}
+var obj = document.getElementById('digits');
+obj.addEventListener('keydown', stopCarret); 
+obj.addEventListener('keyup', stopCarret); 
+
+function stopCarret() {
+   if (obj.value.length > 3){
+      setCaretPosition(obj, 3);
+   }else{
+      setCaretPosition(obj, obj.value.length);
+   }
+}
+
+function setCaretPosition(elem, caretPos) {
+    if(elem != null) {debugger;
+        if(elem.createTextRange) {
+            var range = elem.createTextRange();
+            range.move('character', caretPos);
+            range.select();
+        }
+        else {
+            if(elem.selectionStart) {
+                elem.focus();
+                elem.setSelectionRange(caretPos, caretPos);
+            }
+            else
+                elem.focus();
+        }
+    }
 }
 </script>

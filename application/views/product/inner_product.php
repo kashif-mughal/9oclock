@@ -99,7 +99,7 @@
     <div class="container">
         <div class="row d-block">
             <div class="d-flex justify-content-start align-items-center">
-               <i class="fas fa-arrow-left" style="font-size: 20px; padding-left: 10px;"></i>
+               <i class="fas fa-arrow-left" style="font-size: 20px; padding-left: 10px;" onclick="window.history.back()"></i>
                <div>
                   <nav aria-label="breadcrumb">
                      <ol class="breadcrumb">

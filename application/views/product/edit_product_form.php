@@ -344,7 +344,7 @@
                                         </tr>
                                     <?php } ?>
                                 </table>
-                                <div class="addvarient btn btn-success btn-large" onclick="addVarient()">Add Varient</div>
+                                <div class="addvarient btn btn-success btn-large" style="float: left;" onclick="addVarient()">Add Varient</div>
                             </div>
                         </div>
 
@@ -386,7 +386,7 @@
                         <input type="hidden" value="{product_id}" name="product_id">
 
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label"></label>
+                            <label for="example-text-input" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-6">
                                 <input type="submit" id="edit-product" class="btn btn-success btn-large" name="edit-product" value="Save Changes" />
                             </div>

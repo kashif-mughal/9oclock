@@ -203,8 +203,8 @@ class Categories extends CI_Model {
         $tempProducts = array();
         for ($i=0; $i < count($returnData['products']); $i++) { 
             $key = array_search($returnData['products'][$i]['ProductId'], array_column($tempProducts, 'ProductId'));
-            //echo '<pre>';print_r($key);
-            if(!$key){
+            
+            if($key === false){
                 $returnData['products'][$i]['VarientData'] = null;
                 if(!empty($returnData['products'][$i]['VName'])){
                     $returnData['products'][$i]['VarientData'] = array();

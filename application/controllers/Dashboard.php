@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller {
         //     $product_list =  $query->result_array();
         // }
 
-        $product_list = $CI->Products->get_featured_products();
+        $product_list = $CI->Products->get_featured_and_products();
 
         //$catArray = $CI->lcategory->get_category_hierarchy();
         $catArray = $CI->lcategory->get_category_hierarchy_in();

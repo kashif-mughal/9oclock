@@ -369,9 +369,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                     <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
                       <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                           <span class="d-flex justify-content-between align-items-center px-2 py-2" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
-                            <a href="javascript:void(0)">-</a>
-                            <p class="m-0 p-0" class="quantityCount">2</p>
-                            <a href="javascript:void(0)">+</a>
+                            <a href="javascript:void(0)" class="qty-mns">-</a>
+                            <input type="text" style="border:none;" class="quantity-input quantity" value="{qty}" />
+                            
+                            <a href="javascript:void(0)" class="qty-pls">+</a>
                           </span>
                       </div>
                     </td>
@@ -394,9 +395,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   <b class="cart-price">{price}</b>
                   <div class="quantity-area d-flex justify-content-center align-items-center mt-2">
                       <span class="d-flex justify-content-between align-items-center px-2 py-2 px-sm-1 py-sm-1 quantity-btn" style="width: 80px; height: 40px; border: 1px solid #cccccc; border-radius: 2px;">
-                        <a href="javascript:void(0)">-</a>
-                        <p class="m-0 p-0" class="quantityCount">2</p>
-                        <a href="javascript:void(0)">+</a>
+                        <a href="javascript:void(0)" class="qty-mns">-</a>
+                        <input type="text" style="border:none;" class="quantity-input quantity" value="{qty}" />
+                        
+                        <a href="javascript:void(0)" class="qty-pls">+</a>
                       </span>
                   </div>
                   <a href="javascript:void(0)" data-id="{pId}" data-name="{prodName}" class="remove-item-from-cart">

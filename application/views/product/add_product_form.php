@@ -48,6 +48,8 @@
     }
     .times:hover{
         cursor: pointer;
+    }
+    .times{
         float: right;
         color: red;
         font-weight: 900;
@@ -271,7 +273,7 @@
                                         <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
                                     </tr>
                                 </table>
-                                <div style="float: right;margin-top: 10px;" class="addvarient btn btn-success btn-large" onclick="addVarient()">Add Varient</div>
+                                <div style="float: left;margin-top: 10px;" class="addvarient btn btn-success btn-large" onclick="addVarient()">Add Varient</div>
                             </div>
                         </div>
 
@@ -305,9 +307,9 @@
                         <input type="hidden" name="allTags" id="allTags" />
 
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-sm-4 col-form-label"></label>
+                            <label for="example-text-input" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-6">
-                                <input type="submit" id="add-product" class="btn btn-success btn-large" name="add-product" value="Save" />
+                                <input type="submit" id="add-product" class="btn btn-success btn-large" name="add-product" value="Save Product" />
                             </div>
                         </div>
                     </div>

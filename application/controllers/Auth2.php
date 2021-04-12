@@ -21,7 +21,8 @@ class Auth2 extends CI_Controller {
             if($user_login) {
                 $url = $_SERVER['HTTP_REFERER'];
                 if(strpos($url,"?ret_url=")) {
-                    $returnURL = substr($url,(strpos($url,"?ret_url=")+9));    
+
+                    $returnURL = substr($url,(strpos($url,"?ret_url=")+9));
                 }
                 else {
                     $returnURL = FALSE;
@@ -131,7 +132,6 @@ class Auth2 extends CI_Controller {
             }
             else {
                 // if user is not available then create user
-                print_r("Inside Insert User");die;
 
                 // insert user in user login and user Detail table
                 $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -166,26 +166,6 @@ class Auth2 extends CI_Controller {
                         echo json_encode($result);
                         return;
                     }
-                    // logged in user
-                    //$userStatus = $this->auths->user_login_email($email, $password, true);
-
-                    // if($userStatus['verified'] == 1) {
-                    //     $result['responseMessage'] = 'User Logged in successfully, User is verified';
-                    //     $result['loggedInStatus'] = true;
-                    //     $result['redirectURL'] = $returnURL;
-                    //     $result['status'] = 'Success';
-                    //     echo json_encode($result);
-                    //     return;
-                    // }
-                    // else {
-                    //     // $result['responseMessage'] = 'Something went wrong, Please Verify your phone number again (User Details Not Available)';
-                    //     $result['responseMessage'] = 'Please verify Otp';
-                    //     $result['loggedInStatus'] = false;
-                    //     $result['redirectURL'] = $returnURL;
-                    //     $result['status'] = 'Error';
-                    //     echo json_encode($result);
-                    //     return;
-                    // }
                 }
                 else {
                     $result['responseMessage'] = 'Something went wrong, Please contact service provider.';
@@ -199,7 +179,7 @@ class Auth2 extends CI_Controller {
             
         }
         else {
-            $result['response'] = validation_errors();
+            $result['responseMessage'] = validation_errors();
             $result['status'] = 'Error';
             echo json_encode($result); 
         }

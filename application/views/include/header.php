@@ -229,7 +229,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <div class="header_search_content">
                         <div class="header_search_form_container">
                            <form id="searchform" action="<?=base_url('cproduct/products')?>" method="get">
-                              <div class="input-group mb-1"">
+                              <div class="input-group mb-1">
                                  <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="I'm Shopping for..." onfocus="this.value=''">
                                  <div class="input-group-append">
                                     <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" style="border-radius: 0 0.25rem 0.25rem 0;" type="submit">
@@ -315,7 +315,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 <script type="text/javascript">
   //€  £
-   const currency = '€';
+   const currency = '£';
    function getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
@@ -388,6 +388,41 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          $('#add_to_cart_items').removeClass('cartAnimate');
       }
    });
+   var baseUrl = "<?php echo base_url();?>";
+   $(document).on('change', '.prodvari', function () {
+        var currentElem = $(this);
+        var eachProd = $(currentElem.closest('.each-prod')[0]);
+        var productJson = eachProd.find('.add-cart').data('json');
+        if(productJson){
+          if(currentElem.val() == -1){
+            var prodImg = $(eachProd.find('img')[0]);
+            prodImg.fadeOut(400, function() {
+              prodImg.attr('src', productJson.img);
+            })
+            .fadeIn(400);
+            $(eachProd.find('.mainPrice')[0]).html(formatCurrency(productJson.price));
+          }
+          else{
+            var selectedVarient = productJson.varient.filter(x=>{return x.VId == currentElem.val()});
+            if(selectedVarient.length > 0){
+              selectedVarient = selectedVarient[0];
+              var prodImg = $(eachProd.find('img')[0]);
+              if(selectedVarient.VImage){
+                prodImg.fadeOut(400, function() {
+                  prodImg.attr('src',baseUrl + selectedVarient.VImage);
+                })
+                .fadeIn(400);
+              }else{
+                prodImg.fadeOut(400, function() {
+                  prodImg.attr('src', productJson.img);
+                })
+                .fadeIn(400);
+              }
+              $(eachProd.find('.mainPrice')[0]).html(formatCurrency(selectedVarient.VValue));
+            }
+          }
+        }
+   });
    $(document).on('click', '.qty-pls', function () {
       changeQtyOfProductAndPutInCart($(this), 'plus');      
    });
@@ -404,7 +439,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
       
    });
 });
- function addOrUpdateCart(cart, productJson, quantity, addCartObj){
+var varientProducts = [];
+function setVarientProducts(obj){
+
+}
+function changeVarient(){
+
+}
+function addOrUpdateCart(cart, productJson, quantity, addCartObj){
    var currentProduct = cart.filter((each)=>{return each.id == productJson.id});
    var oldQty = 0;
    if(currentProduct.length > 0){
