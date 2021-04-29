@@ -383,7 +383,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                   </td>
               </tr>`;
 
-            var mobileProdTemp = `<div class="cart-single-elem d-flex justify-content-start align-items-center mb-3">
+            var mobileProdTemp = `<div class="cart-single-elem each-prod d-flex justify-content-start align-items-center mb-3">
               <img style="width: 90px;" src="{imgValue}" alt="">  
               <div class="ml-3" style="width: 100%;">
                 <div class="each-prod-top">
