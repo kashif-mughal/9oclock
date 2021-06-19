@@ -49,14 +49,14 @@ defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_ST
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 
-defined('PaymentStatus_0')      define('pts0', 'Invalid or Incomplete');
-defined('PaymentStatus_1')      define('pts1', 'Cancelled by customer');
-defined('PaymentStatus_2')      define('pts2', 'Authorisation declined');
-defined('PaymentStatus_5')      define('pts5', 'Authorised');
-defined('PaymentStatus_6')      define('pts6', 'Authorised and cancelled');
-defined('PaymentStatus_7')      define('pts7', 'Payment deleted');
-defined('PaymentStatus_8')      define('pts8', 'Refund');
-defined('PaymentStatus_9')      define('pts9', 'Payment requested');
+defined('PaymentStatus_0')    OR  define('pts0', 'Invalid or Incomplete');
+defined('PaymentStatus_1')    OR  define('pts1', 'Cancelled by customer');
+defined('PaymentStatus_2')    OR  define('pts2', 'Authorisation declined');
+defined('PaymentStatus_5')    OR  define('pts5', 'Authorised');
+defined('PaymentStatus_6')    OR  define('pts6', 'Authorised and cancelled');
+defined('PaymentStatus_7')    OR  define('pts7', 'Payment deleted');
+defined('PaymentStatus_8')    OR  define('pts8', 'Refund');
+defined('PaymentStatus_9')    OR  define('pts9', 'Payment requested');
 
 
 
