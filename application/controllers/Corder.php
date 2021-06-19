@@ -189,4 +189,9 @@ class Corder extends CI_Controller {
             exit();
         }
     }
+
+    public function place_order() {
+
+    }
+
 }

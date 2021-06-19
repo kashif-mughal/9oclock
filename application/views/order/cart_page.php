@@ -349,6 +349,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
        if(cart){
           cart = JSON.parse(cart);
+          var paymentObject;
           if(cart.length == 0)
           {
              //show empty response here
@@ -429,6 +430,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             mobileProdTempCopy = mobileProdTempCopy.replace('{qty}', cart[i].quantity);
             mobileProdTempCopy = mobileProdTempCopy.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
             mobileProdTempCopy = mobileProdTempCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));  
+
+            paymentObject = mobileProdTempCopy;
 
              //append newly created row in card body
              $(cartBody.find('tbody')).append(eachProdTemplateCopy1);

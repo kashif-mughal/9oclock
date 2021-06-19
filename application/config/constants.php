@@ -48,6 +48,18 @@ defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREA
 defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
+
+defined('PaymentStatus_0')      define('pts0', 'Invalid or Incomplete');
+defined('PaymentStatus_1')      define('pts1', 'Cancelled by customer');
+defined('PaymentStatus_2')      define('pts2', 'Authorisation declined');
+defined('PaymentStatus_5')      define('pts5', 'Authorised');
+defined('PaymentStatus_6')      define('pts6', 'Authorised and cancelled');
+defined('PaymentStatus_7')      define('pts7', 'Payment deleted');
+defined('PaymentStatus_8')      define('pts8', 'Refund');
+defined('PaymentStatus_9')      define('pts9', 'Payment requested');
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Exit Status Codes
@@ -83,3 +95,8 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+
+
+

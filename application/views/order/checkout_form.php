@@ -103,7 +103,7 @@
     display: flex;
 }
 #checkoutCartContainer .checkoutRadio {
-    border-bottom: 1px solid #cccccc;
+    /* border-bottom: 1px solid #cccccc; */
     padding-bottom: 20px;
     padding-top: 20px;
 }
@@ -257,6 +257,26 @@
    </div>
 </section>
 
+
+<script>
+
+$(document).ready(function() {
+    $('.placeOrderBtn').on('click', function() {
+        
+        $.ajax({
+            type: "POST",
+            url: '<?php echo base_url('Corder/proceed_to_checkout') ?>',
+            data: {order: getCookie('baskit')},
+            cache: false,
+            success: function (datas)
+            {
+                alert(datas);
+            }
+        });    
+    });
+});
+    
+</script>
 
 
 
