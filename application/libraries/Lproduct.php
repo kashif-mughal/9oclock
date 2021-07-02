@@ -76,6 +76,7 @@ class Lproduct {
             'title' => 'Product Edit',
             'product_id' => $product_detail[0]['ProductId'],
             'product_name' => $product_detail[0]['ProductName'],
+            'ParentProduct' => $product_detail[0]['ParentProduct'],
             'unit' => $product_detail[0]['Unit'],
             'OriginalPrice' => $product_detail[0]['OriginalPrice'],
             'price' => $product_detail[0]['Price'],
@@ -301,6 +302,7 @@ class Lproduct {
         $CI = & get_instance();
         $CI->load->library('lcategory');
         $product_list = $this->internal_products_by_category($catId, $productName, $page, $perpage, $brand);
+        //echo '<pre>'; print_r($product_list);die;
         $catArray = $CI->lcategory->get_category_hierarchy();
         foreach($catArray as $key => $value) {
             for ($i=0; $i < count($value->childCats); $i++) { 

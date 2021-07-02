@@ -120,9 +120,16 @@
                     <div class="panel-body">
 
                     	<div class="form-group row">
-                            <label for="product_name" class="col-sm-3 col-form-label">Product_name <i class="text-danger">*</i></label>
+                            <label for="product_name" class="col-sm-3 col-form-label">Product Name <i class="text-danger">*</i></label>
                             <div class="col-sm-6">
                                 <input class="form-control" name ="product_name" id="product_name" type="text" placeholder="Products Name"  required="" value="{product_name}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="ParentProduct" class="col-sm-3 col-form-label">Parent Product </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" name ="ParentProduct" id="ParentProduct" type="text" placeholder="Parent Product" value="{ParentProduct}">
                             </div>
                         </div>
 
@@ -292,7 +299,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="varient" class="col-sm-3 col-form-label">Varient </label>
                             <div class="col-sm-9">
                                 <table id="varientTable">
@@ -346,7 +353,7 @@
                                 </table>
                                 <div class="addvarient btn btn-success btn-large" style="float: left;" onclick="addVarient()">Add Varient</div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group row">
                             <label for="Img" class="col-sm-3 col-form-label">&nbsp; </label>
@@ -451,34 +458,34 @@
         }
         return false;
     }
-    function addVarient(){
-        var varientTable = $('#varientTable');
-        varientTable.append(`<tr>
-                                <td><img src="" class="vicon"></td>
-                                <td><input type='text' name='vNames[]' class="form-control"></td>
-                                <td><input type="file" name="vImage[]" class="form-control"></td>
-                                <td style="width: 15%">
-                                    <select name='vType[]' onchange='changeVarientType(this)' class="form-control">
-                                        <option>text</option>
-                                        <option>color</option>
-                                    </select>
-                                </td>
-                                <td class='val'><input type="text" class="form-control" name="vValue[]"/></td>
-                                <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
-                            </tr>`);
-    }
-    function removeVarient(currentElem){
-        $(currentElem).closest('tr').remove();
-    }
-    function changeVarientType(currentElem){
-        var currentVarientVal = $(currentElem).val();
-        if(currentVarientVal == 'text'){
-            $(currentElem).closest('tr').find('.val').html('<input type="text" class="form-control" name="vValue[]"/>');
-        }
-        else if(currentVarientVal == 'color'){
-            $(currentElem).closest('tr').find('.val').html('<input type="color" class="form-control" name="vValue[]"/>');
-        }
-    }
+    // function addVarient(){
+    //     var varientTable = $('#varientTable');
+    //     varientTable.append(`<tr>
+    //                             <td><img src="" class="vicon"></td>
+    //                             <td><input type='text' name='vNames[]' class="form-control"></td>
+    //                             <td><input type="file" name="vImage[]" class="form-control"></td>
+    //                             <td style="width: 15%">
+    //                                 <select name='vType[]' onchange='changeVarientType(this)' class="form-control">
+    //                                     <option>text</option>
+    //                                     <option>color</option>
+    //                                 </select>
+    //                             </td>
+    //                             <td class='val'><input type="text" class="form-control" name="vValue[]"/></td>
+    //                             <td><span class='times' onclick='removeVarient(this)'>&times;</span></td>
+    //                         </tr>`);
+    // }
+    // function removeVarient(currentElem){
+    //     $(currentElem).closest('tr').remove();
+    // }
+    // function changeVarientType(currentElem){
+    //     var currentVarientVal = $(currentElem).val();
+    //     if(currentVarientVal == 'text'){
+    //         $(currentElem).closest('tr').find('.val').html('<input type="text" class="form-control" name="vValue[]"/>');
+    //     }
+    //     else if(currentVarientVal == 'color'){
+    //         $(currentElem).closest('tr').find('.val').html('<input type="color" class="form-control" name="vValue[]"/>');
+    //     }
+    // }
 </script>
 
 

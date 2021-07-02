@@ -21,5 +21,5 @@
             </ol>
         </div>
     </section>
-    <iframe src="http://localhost/9oclock/admin_dashboard/test" style="width: 100%; height: 900px;border:none;"></iframe>
+    <iframe src="<?= base_url("admin_dashboard/test")?>"" style="width: 100%; height: 900px;border:none;"></iframe>
 </div>

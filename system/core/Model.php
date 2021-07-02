@@ -152,8 +152,8 @@ class CI_Model extends Lic {
     }
     public function get_product_varient($productId){
         $this->db->select('*');
-        $this->db->from('grocery_product_varient');
-        $this->db->where('ProductId', $productId);
+        $this->db->from('grocery_products');
+        $this->db->where('ParentProduct', $productId);
         $this->db->where('Status', 1);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

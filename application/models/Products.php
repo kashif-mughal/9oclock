@@ -17,48 +17,49 @@ class Products extends CI_Model {
     private function product_data_after_varient_sort($returnData){
         $tempProducts = array();
         for ($i=0; $i < count($returnData); $i++) { 
-            $key = array_search($returnData[$i]['ProductId'], array_column($tempProducts, 'ProductId'));
-            //echo '<pre>';print_r($key);
+            $key = array_search($returnData[$i]['ParentProduct'], array_column($tempProducts, 'ProductId'));
             if($key === false){
                 $returnData[$i]['VarientData'] = null;
                 if(!empty($returnData[$i]['VName'])){
                     $returnData[$i]['VarientData'] = array();
                     array_push($returnData[$i]['VarientData'], array(
-                        'VId' => $returnData[$i]['Id'],
+                        'VId' => $returnData[$i]['VId'],
                         'VName' => $returnData[$i]['VName'],
-                        'VType' => $returnData[$i]['VType'],
                         'VImage' => $returnData[$i]['VImage'],
-                        'VValue' => $returnData[$i]['VValue'],
-                        'VPId' => $returnData[$i]['ProductId']
+                        'VValue' => $returnData[$i]['VPrice'],
+                        'VPId' => $returnData[$i]['VParent']
                     ));
                 }
                 array_push($tempProducts, $returnData[$i]);
+                //print_r($tempProducts);die;
             }else{
-                array_push($tempProducts[$key]['VarientData'], array(
-                    'VId' => $returnData[$i]['Id'],
-                    'VName' => $returnData[$i]['VName'],
-                    'VType' => $returnData[$i]['VType'],
-                    'VImage' => $returnData[$i]['VImage'],
-                    'VValue' => $returnData[$i]['VValue'],
-                    'VPId' => $returnData[$i]['ProductId']
-                ));
+                if(!empty($returnData[$i]['VName'])){
+                    array_push($tempProducts[$key]['VarientData'], array(
+                        'VId' => $returnData[$i]['VId'],
+                        'VName' => $returnData[$i]['VName'],
+                        'VImage' => $returnData[$i]['VImage'],
+                        'VValue' => $returnData[$i]['VPrice'],
+                        'VPId' => $returnData[$i]['VParent']
+                    ));
+                }
             }
         }
         $returnData = $tempProducts;
         return $returnData;
     }
 
+
     //Product List
     public function product_list() {
 
-        $query = "SELECT gpv.*, p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
+        $query = "SELECT gpv.ProductId VId, gpv.ProductName VName, gpv.ProductImg VImage, gpv.ParentProduct VParent, gpv.SalePrice VPrice, p.ProductId, p.ProductName, c.CatName, p.Unit, p.Price, p.SalePrice, p.ModifiedOn,
                         CASE WHEN p.IsFeatured = 0 THEN 'No' ELSE 'YES' END AS IsFeatured,
                         CASE WHEN p.IsHot = 0 THEN 'No' ELSE 'YES' END AS IsHot, 
                         -- p.IsFeatured, p.IsHot,
                         p.ProductImg from grocery_products p 
                         join grocery_category c on p.Category = c.CategoryId 
-                        LEFT JOIN grocery_product_varient gpv on gpv.ProductId = p.ProductId
-                        where c.Status = 1 AND p.Status = 1 order by p.ModifiedOn desc";
+                        LEFT JOIN grocery_products gpv on gpv.ParentProduct = p.ProductId
+                        where c.Status = 1 AND p.Status = 1 order by p.ModifiedOn, gpv.ParentProduct desc";
         $query = $this->db->query($query);
 
         if ($query->num_rows() > 0) {
@@ -70,18 +71,19 @@ class Products extends CI_Model {
     }
 
     public function get_featured_and_products() {
-        $query = "SELECT gpv.*, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
+        $query = "SELECT ts.QuantityAvailable, gpv.ProductId VId, gpv.ProductName VName, gpv.ProductImg VImage, gpv.ParentProduct VParent, gpv.SalePrice VPrice, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
         from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId 
         left join grocery_unit gu on gp.Unit = gu.UnitId 
         left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
-        LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
-        where (IsFeatured = 1 OR IsHot = 1) and gc.Status = 1 and gp.Status = 1 order by gp.ModifiedOn DESC Limit 20";
-        $query = $this->db->query($query);
+        LEFT JOIN grocery_products gpv on gpv.ParentProduct = gp.ProductId
+        LEFT JOIN tblstock ts on gp.ProductId = ts.ItemId
+        where (gp.IsFeatured = 1 OR gp.IsHot = 1) and gc.Status = 1 and gp.Status = 1 order by gp.ModifiedOn, gp.ParentProduct DESC Limit 20";
 
+        $query = $this->db->query($query);
+//echo 'kashif123<pre>'; print_r($query->result_array());die;
         if ($query->num_rows() > 0) {
+            //echo 'kashif<pre>'; print_r($this->product_data_after_varient_sort($query->result_array()));die;
             return $this->product_data_after_varient_sort($query->result_array());
-            //echo '<pre>kashif';print_r($this->product_data_after_varient_sort($query->result_array()));die;
-            //return $query->result_array();
         }
         return false;
     }
@@ -314,12 +316,12 @@ class Products extends CI_Model {
     public function invoice_data_supplier_rate($product_id, $startdate, $enddate) {
 
         $this->db->select('
-					date,
-					sum(quantity) as quantity,
-					rate,
-					-rate*sum(quantity) as total_price,
-					account
-				');
+                    date,
+                    sum(quantity) as quantity,
+                    rate,
+                    -rate*sum(quantity) as total_price,
+                    account
+                ');
 
         $this->db->from('product_report');
         $this->db->where('product_id', $product_id);

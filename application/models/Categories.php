@@ -158,25 +158,25 @@ class Categories extends CI_Model {
             $whereString .= "AND gp.Brand = $brand ";
         }
         $query = "SELECT 
-                        gpv.*, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, 
+                        gpv.ProductId VId, gpv.ProductName VName, gpv.ProductImg VImage, gpv.ParentProduct VParent, gpv.SalePrice VPrice, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, 
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
                     join grocery_category gc on gp.Category = gc.CategoryId 
                     LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
-                    LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
+                    LEFT JOIN grocery_products gpv on gpv.ParentProduct = gp.ProductId
                     left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
                     WHERE gp.Status = 1 $whereString AND  gc.Status = 1 AND
                     gp.Category IN(
                         $inCats
                     )
-                    ORDER BY gp.sort DESC
+                    ORDER BY gp.sort, gp.ParentProduct DESC
                     LIMIT $startFrom, $limit";
         $countQuery = "SELECT 
                         count(1) total
                     FROM grocery_products gp
                     join grocery_category gc on gp.Category = gc.CategoryId 
                     LEFT JOIN grocery_unit gu ON gu.UnitId = gp.Unit
-                    LEFT JOIN grocery_product_varient gpv on gpv.ProductId = gp.ProductId
+                    LEFT JOIN grocery_products gpv on gpv.ParentProduct = gp.ProductId
                     left join grocery_unit gu2 on gp.SaleUnit = gu2.UnitId
                     WHERE gp.Status = 1 $whereString AND gc.Status = 1 AND
                     gp.Category IN(
@@ -193,7 +193,8 @@ class Categories extends CI_Model {
         $query = $this->db->query($query);
         if ($query->num_rows() > 0) {
             $returnData["products"] = $query->result_array();
-            return $this->product_data_after_varient_sort($returnData);
+            $returnData["products"] = $this->product_data_after_varient_sort($returnData["products"]);
+            return $returnData;
         }
         else{
             return false;
@@ -201,36 +202,37 @@ class Categories extends CI_Model {
     }
     private function product_data_after_varient_sort($returnData){
         $tempProducts = array();
-        for ($i=0; $i < count($returnData['products']); $i++) { 
-            $key = array_search($returnData['products'][$i]['ProductId'], array_column($tempProducts, 'ProductId'));
+        for ($i=0; $i < count($returnData); $i++) { 
+            $key = array_search($returnData[$i]['ParentProduct'], array_column($tempProducts, 'ProductId'));
             
             if($key === false){
-                $returnData['products'][$i]['VarientData'] = null;
-                if(!empty($returnData['products'][$i]['VName'])){
-                    $returnData['products'][$i]['VarientData'] = array();
-                    array_push($returnData['products'][$i]['VarientData'], array(
-                        'VId' => $returnData['products'][$i]['Id'],
-                        'VName' => $returnData['products'][$i]['VName'],
-                        'VType' => $returnData['products'][$i]['VType'],
-                        'VImage' => $returnData['products'][$i]['VImage'],
-                        'VValue' => $returnData['products'][$i]['VValue'],
-                        'VPId' => $returnData['products'][$i]['ProductId']
+                $returnData[$i]['VarientData'] = null;
+                if(!empty($returnData[$i]['VName'])){
+                    $returnData[$i]['VarientData'] = array();
+                    array_push($returnData[$i]['VarientData'], array(
+                        'VId' => $returnData[$i]['VId'],
+                        'VName' => $returnData[$i]['VName'],
+                        'VImage' => $returnData[$i]['VImage'],
+                        'VValue' => $returnData[$i]['VPrice'],
+                        'VPId' => $returnData[$i]['VParent']
                     ));
                 }
-                array_push($tempProducts, $returnData['products'][$i]);
+                array_push($tempProducts, $returnData[$i]);
             }else{
-                array_push($tempProducts[$key]['VarientData'], array(
-                    'VId' => $returnData['products'][$i]['Id'],
-                    'VName' => $returnData['products'][$i]['VName'],
-                    'VType' => $returnData['products'][$i]['VType'],
-                    'VImage' => $returnData['products'][$i]['VImage'],
-                    'VValue' => $returnData['products'][$i]['VValue'],
-                    'VPId' => $returnData['products'][$i]['ProductId']
-                ));
+                if(!empty($returnData[$i]['VName'])){
+                    array_push($tempProducts[$key]['VarientData'], array(
+                        'VId' => $returnData[$i]['VId'],
+                        'VName' => $returnData[$i]['VName'],
+                        'VImage' => $returnData[$i]['VImage'],
+                        'VValue' => $returnData[$i]['VPrice'],
+                        'VPId' => $returnData[$i]['VParent']
+                    ));
+                }
             }
         }
-        $returnData['products'] = $tempProducts;
-        return $returnData;
+        return $tempProducts;
+        //$returnData['products'] = $tempProducts;
+        //return $returnData;
     }
     function update_category_sort_order($catData){
         try {

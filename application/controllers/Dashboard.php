@@ -1,4 +1,10 @@
 <?php
+require_once 'vendor/autoload.php';
+use WindowsAzure\Common\ServicesBuilder;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
+
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -20,7 +26,6 @@ class Dashboard extends CI_Controller {
         $CI->load->model('Brands');
         $CI->load->model('Banner');
         
-        
         // $query = $this->db->query("SELECT gp.*, gu2.UnitName SaleUnitName, CASE WHEN gp.Unit > 0 THEN gu.UnitName ELSE 'KG' END AS UnitName 
         // from grocery_products gp join grocery_category gc on gp.Category = gc.CategoryId 
         // left join grocery_unit gu on gp.Unit = gu.UnitId 
@@ -35,7 +40,7 @@ class Dashboard extends CI_Controller {
 
         //$catArray = $CI->lcategory->get_category_hierarchy();
         $catArray = $CI->lcategory->get_category_hierarchy_in();
-        //echo '<pre>'; print_r($catArray);die;
+        //echo '<pre>'; print_r($product_list);die;
         foreach($catArray as $key => $value) {
             $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
             if($products)

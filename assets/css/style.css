@@ -3786,7 +3786,32 @@ a#newAddressCancelBtn {
    color: #fff;
 }
 
+.out_of_stock_btn{
+   background-color: red;
+}
+.out_of_stock_btn: hover{
+   background-color: red;
+}
 
+.main-content .featured-products-content .card .card-body h5{
+   width: 80%;
+   background: #ff2524d1;
+   color: #fff;
+   z-index: 1;
+   text-align: center;
+   font-size: 14px;
+   position: absolute;
+   top: 60px;
+   text-transform: uppercase;
+   margin: 0px 20px;
+   padding: 6px 0px;
+   border-radius: 0px 20px;
+ }
+
+.disabledAdd{
+   opacity: 0.4;
+   pointer-events: none;
+}
 
 /* ========== Timeline Ends ============ */
 /* ===================================== */

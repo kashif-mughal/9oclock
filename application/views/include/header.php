@@ -181,27 +181,19 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 
 <div class="section-head" style="position: fixed; top: 0; width: 100%; z-index: 21;">
-  <style type="text/css">
-    @keyframes ticker {
-  from {
-    transform: translate(70vw, 0);
-  }
 
-  to {
-    transform: translate(-90vw, 0);
-  }
-}
-  </style>
       <div class="top-bar">
          <div class="container">
             <div class="row">
+                <marquee>
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
-                  <ul style="animation: ticker 25s infinite linear;" class="navbar-nav">
+                  <ul class="navbar-nav">
                      <li class="nav-item">
                         <a class="nav-link" href="javascript:void(0)" role="button">Get special discount of 10% on 10 items</a>
                      </li>
                   </ul>
                </nav>
+                </marquee>
             </div>
          </div>
       </div>
