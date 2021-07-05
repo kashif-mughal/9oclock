@@ -128,6 +128,7 @@ class PaymentIntegration extends CI_Controller {
    //   // 3. Update order payment status 
       $this->lpayment->update_payment_status($responseData);
      
+      $this->load->view("include/top_menu");
       $this->load->view("include/header");
       $this->load->view("payment/success");
       $this->load->view("include/footer");
@@ -137,7 +138,7 @@ class PaymentIntegration extends CI_Controller {
       // 1. Get data from response ($_POST or $_GET)
       $url = current_url() . '?' . $_SERVER['QUERY_STRING'];
 
-      $responseData = array(
+      $responseDataDecline = array(
          'OrderId' =>  $_GET["orderID"], 
          'Currency' => $_GET["currency"],
          'Amount' => $_GET["amount"],
@@ -161,8 +162,9 @@ class PaymentIntegration extends CI_Controller {
      $this->SaveBankTransRecord($responseDataDecline);
 
       // 3. Update order payment status 
-      $this->lpayment->update_payment_status($responseData);
+      $this->lpayment->update_payment_status($responseDataDecline);
       
+      $this->load->view("include/top_menu");
       $this->load->view("include/header");
       $this->load->view("payment/decline");
       $this->load->view("include/footer");
@@ -172,7 +174,7 @@ class PaymentIntegration extends CI_Controller {
       // 1. Get data from response ($_POST or $_GET)
       $url = current_url() . '?' . $_SERVER['QUERY_STRING'];
 
-      $responseData = array(
+      $responseDataCancelled = array(
          'OrderId' =>  $_GET["orderID"], 
          'Currency' => $_GET["currency"],
          'Amount' => $_GET["amount"],
@@ -196,8 +198,9 @@ class PaymentIntegration extends CI_Controller {
      $this->SaveBankTransRecord($responseDataCancelled);
      
      // 3. Update order payment status 
-     $this->lpayment->update_payment_status($responseData);
-     
+     $this->lpayment->update_payment_status($responseDataCancelled);
+
+     $this->load->view("include/top_menu");
      $this->load->view("include/header");
      $this->load->view("payment/cancel");
      $this->load->view("include/footer");
