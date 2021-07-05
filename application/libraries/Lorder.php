@@ -57,19 +57,24 @@ class Lorder {
             'orderId' => $orderId,
             'OV' => $OV
         );
-        return $CI->parser->parse('order/proceed_to_checkout', $data, true);
+
+        $this->session->set_userdata(array('OV' => $OV));
+
+        //return $data;
+        //return $CI->parser->parse('order/proceed_to_checkout', $data, true);
     }
     
     public function place_order(){
+        
         $CI = & get_instance();
         $CI->load->model('Orders');
         $CI->load->model('SiteSettings');
-        date_default_timezone_set('Asia/Karachi');
+        date_default_timezone_set('Europe/London');
         $addressId = $CI->session->userdata("addressId");
-        $deliveryTime = $CI->session->userdata("deliveryTime");
+        //$deliveryTime = $CI->session->userdata("deliveryTime");
         $addressText = $CI->session->userdata("addressText");
-        $addressId = $CI->session->userdata("addressId");
-        if(!is_numeric($addressId) || empty($deliveryTime) || empty($addressText))
+        
+        if(!is_numeric($addressId) || empty($addressText))
             redirect(base_url("Corder/checkout_form"));
 
         $parts = explode("__" , $deliveryTime);
@@ -109,6 +114,7 @@ class Lorder {
         $orderId = $CI->Orders->place_order($data);
         if(is_numeric($orderId)){
             if($this->place_order_details($orderDetail, $orderId, $CI->Orders)){
+                $CI->session->set_userdata("order_id", $orderId);
                 $CI->session->set_userdata("OV", $OV);
                 $CI->session->set_userdata("deliveryCharges", $deliveryCharges);
                 $CI->session->set_userdata("discountedPrice", $copunDiscount);

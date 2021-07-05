@@ -53,10 +53,8 @@ class Corder extends CI_Controller {
                 'deliveryTime' => $deliveryTime,
                 'userDeliveryTime' =>  $t1 . " - " . $t2,
                 'userDeliveryDate' => $dt,
-                'paymentMode' => 'Cash On Delivery'
+                'paymentMode' => 'Credit Card'
             ));
-
-
 
         if(empty($this->input->post('order'))){
             $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
@@ -90,17 +88,17 @@ class Corder extends CI_Controller {
         $this->auth->check_auth(base_url('Dashboard/user_authentication'.$retString));
         if(empty($this->input->post('order'))){
             $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
-            redirect(base_url('Corder/checkout'));
+            echo 'Corder/checkout';
         }
         $result = $this->lorder->place_order();
-        
         if (is_numeric($result)) {
             $this->session->set_userdata(array('message' => 'Successfully Added'));
-            $content = $this->lorder->proceed_to_checkout($result);
-            $this->template->full_html_view($content);
+            //$content = $this->lorder->proceed_to_checkout($result);
+            //$this->template->full_html_view($content);
+            echo 'PaymentIntegration/index';
         } else {
             $this->session->set_userdata(array('error_message' => $result));
-            redirect(base_url('Corder/checkout'));
+            echo 'Corder/checkout';
         }
     }
     //User order form

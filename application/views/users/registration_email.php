@@ -113,6 +113,22 @@
                   <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="text" name="inputAddress" id="inputAddress" class="form-control" placeholder="Address" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
+
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputZipCodeContainer">
+                  <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
+                  <input type="text" name="inputZipCode" id="inputZipCode" class="form-control" placeholder="Zip Code" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
+               </div>
+
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputTownContainer">
+                  <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
+                  <input type="text" name="inputTown" id="inputTown" class="form-control" placeholder="Town" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
+               </div>
+
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputCityContainer">
+                  <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
+                  <input type="text" name="inputCity" id="inputCity" class="form-control" placeholder="City" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
+               </div>
+
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputPasswordContainer">
                   <i class="fas fa-lock" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
@@ -391,6 +407,15 @@
 			if(!$('#inputAddress').val()) { $('#inputAddressContainer').css("border-bottom", "0.13rem solid red"); }
 			else { $('#inputAddressContainer').css("border-bottom", "0.13rem solid green"); }
 
+         if(!$('#inputZipCode').val()) { $('#inputZipCodeContainer').css("border-bottom", "0.13rem solid red"); }
+			else { $('#inputZipCodeContainer').css("border-bottom", "0.13rem solid green"); }
+
+         if(!$('#inputTown').val()) { $('#inputTownContainer').css("border-bottom", "0.13rem solid red"); }
+			else { $('#inputTownContainer').css("border-bottom", "0.13rem solid green"); }
+
+         if(!$('#inputCity').val()) { $('#inputCityContainer').css("border-bottom", "0.13rem solid red"); }
+			else { $('#inputCityContainer').css("border-bottom", "0.13rem solid green"); }
+
 			if(!$('#inputPassword').val()) { $('#inputPasswordContainer').css("border-bottom", "0.13rem solid red"); }
 			else { $('#inputPasswordContainer').css("border-bottom", "0.13rem solid green"); }
 
@@ -399,7 +424,7 @@
 
          console.log("Status 1");
 
-			if(!$('#inputName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val()) {
+			if(!$('#inputName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val()) {
 
             console.log('Error');
 

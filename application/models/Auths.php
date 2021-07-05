@@ -259,7 +259,7 @@ class Auths extends CI_Model {
         return TRUE;
     }
 
-    public function insert_user_email($user_id, $name, $email, $phone, $address) {
+    public function insert_user_email($user_id, $name, $email, $phone, $address, $zip_code, $town, $city) {
         $user_data = array(
             'user_id' => $user_id,
             'first_name' => $name,
@@ -274,6 +274,9 @@ class Auths extends CI_Model {
 
         $user_address = array(
             'Address' => $address,
+            'zip_code' => $zip_code,
+            'town' => $town,
+            'city' => $city,
             'UserId' => $user_id,
             'Status' => 1
         );

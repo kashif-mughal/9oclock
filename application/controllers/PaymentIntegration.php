@@ -13,38 +13,51 @@ class PaymentIntegration extends CI_Controller {
   }
 
   public function index() {
-   $paymentPass = "d65e846a-c652-4f29-8780-9cdc4d9b8cd7"; // Test
-   //$paymentPass = 'qjIG61$UAo3A.I)tHsG'; // Production
+   //$paymentPass = "d65e846a-c652-4f29-8780-9cdc4d9b8cd7"; // Test
+   $paymentPass = 'qjIG61$UAo3A.I)tHsG'; // Production
+
+   $phone_number = $this->session->userdata('phone');
+   if(strlen($phone_number) < 5) {
+      $phone_number = "";
+   }
+
+   $orderId = $this->session->userdata('order_id');
+   $phone = $phone_number;
+   $zip_code = $this->session->userdata('zip_code');
+   $town = $this->session->userdata('town');
+   $city = $this->session->userdata('city');
+   $address = $this->session->userdata('address');
+   $OV = $this->session->userdata('OV');
 
    // Test
-   $barclayCardModel = new stdClass();
-   $barclayCardModel->AMOUNT = "100";
-   $barclayCardModel->CURRENCY = "GBP";
-   $barclayCardModel->LANGUAGE = "en_uk";
-   $barclayCardModel->ORDERID = uniqid();
-   $barclayCardModel->PSPID = "Test2A2zgrocery";
-   $barclayCardModel->Email = "enceladus.works@gmail.com";
-   $barclayCardModel->CN = "Enclaudes";
-   $barclayCardModel->OWNERZIP = "75300";
-   $barclayCardModel->OWNERADDRESS = "Test Address";
-   $barclayCardModel->OWNERCTY = "Karachi";
-   $barclayCardModel->OWNERTOWN = "Gulshan-e-Iqbal";
-   $barclayCardModel->OWNERTELNO = "03001111111";
+   // $barclayCardModel = new stdClass();
+   // $barclayCardModel->AMOUNT = ($OV * 100);
+   // $barclayCardModel->CURRENCY = "GBP";
+   // $barclayCardModel->LANGUAGE = "en_uk";
+   // $barclayCardModel->ORDERID = $orderId;
+   // $barclayCardModel->PSPID = "Test2A2zgrocery";
+   // $barclayCardModel->Email = "enceladus.works@gmail.com";
+   // $barclayCardModel->CN = "Enclaudes";
+   // $barclayCardModel->OWNERZIP = $zip_code;
+   // $barclayCardModel->OWNERADDRESS = $address;
+   // $barclayCardModel->OWNERCTY = $city;
+   // $barclayCardModel->OWNERTOWN = $town;
+   // $barclayCardModel->OWNERTELNO = $phone;
 
    // Production
-   // $barclayCardModel = new stdClass();
-   // $barclayCardModel->Amount = "100";
-   // $barclayCardModel->Currency = "GBP";
-   // $barclayCardModel->Language = "en_uk";
-   // $barclayCardModel->OrderId = uniqid();
-   // $barclayCardModel->Pspid = "epdq1553511";
-   // $barclayCardModel->Email = "adil.aman40@gmail.com";
-   // $barclayCardModel->CN = "9 o'clock shop";
-   // $barclayCardModel->OWNERZIP = "SN25 2AX";
-   // $barclayCardModel->OWNERADDRESS = "Test Address";
-   // $barclayCardModel->OWNERCTY = "Swindon";
-   // $barclayCardModel->OWNERTOWN = "Swindon";
-   // $barclayCardModel->OWNERTELNO = "01793960194";
+   $barclayCardModel = new stdClass();
+   $barclayCardModel->AMOUNT = ($OV * 100);
+   $barclayCardModel->CURRENCY = "GBP";
+   $barclayCardModel->LANGUAGE = "en_uk";
+   $barclayCardModel->ORDERID = $orderId;
+   $barclayCardModel->PSPID = "epdq1553511";
+   $barclayCardModel->Email = "adil.aman40@gmail.com";
+   $barclayCardModel->CN = "9 o'clock shop";
+   $barclayCardModel->OWNERZIP = $zip_code;
+   $barclayCardModel->OWNERADDRESS = $address;
+   $barclayCardModel->OWNERCTY = $city;
+   $barclayCardModel->OWNERTOWN = $town;
+   $barclayCardModel->OWNERTELNO = $phone;
 
    // $flatPaymentData = "AMOUNT=" . $barclayCardModel->Amount . $paymentPass . "CN=" . $barclayCardModel->CN . $paymentPass . "CURRENCY=" . $barclayCardModel->Currency . $paymentPass . "EMAIL=" . $barclayCardModel->Email . $paymentPass . "LANGUAGE=" . $barclayCardModel->Language . $paymentPass . "ORDERID=" . $barclayCardModel->OrderId . $paymentPass . "OWNERZIP=" . $barclayCardModel->OWNERZIP . $paymentPass . "OWNERADDRESS=" . $barclayCardModel->OWNERADDRESS . $paymentPass . "OWNERCTY=" . $barclayCardModel->OWNERCTY . $paymentPass . "OWNERTOWN=" . $barclayCardModel->OWNERTOWN . $paymentPass . "OWNERTELNO=" . $barclayCardModel->OWNERTELNO . $paymentPass . "PSPID=" . $barclayCardModel->Pspid . $paymentPass;
 
@@ -65,6 +78,24 @@ class PaymentIntegration extends CI_Controller {
   // 0 - pending
   // 1 - paid
   // 2 - decline
+
+  // testing
+// public function testSuccess() {
+//    $this->load->view("include/header");
+//    $this->load->view("payment/success");
+//    $this->load->view("include/footer");
+// }
+
+// public function testcancel() {
+//    $this->load->view("payment/cancel");
+// }
+// public function testdecline() {
+//    $this->load->view("payment/decline");
+// }
+
+// testing
+
+
 
    public function Success() {
       // 1. Get data from response ($_POST or $_GET)
@@ -97,7 +128,9 @@ class PaymentIntegration extends CI_Controller {
    //   // 3. Update order payment status 
       $this->lpayment->update_payment_status($responseData);
      
-     $this->load->view("payment/success");
+      $this->load->view("include/header");
+      $this->load->view("payment/success");
+      $this->load->view("include/footer");
    }
 
    public function Decline() {
@@ -129,8 +162,10 @@ class PaymentIntegration extends CI_Controller {
 
       // 3. Update order payment status 
       $this->lpayment->update_payment_status($responseData);
-
+      
+      $this->load->view("include/header");
       $this->load->view("payment/decline");
+      $this->load->view("include/footer");
    }
 
    public function Cancelled() {
@@ -163,7 +198,9 @@ class PaymentIntegration extends CI_Controller {
      // 3. Update order payment status 
      $this->lpayment->update_payment_status($responseData);
      
+     $this->load->view("include/header");
      $this->load->view("payment/cancel");
+     $this->load->view("include/footer");
    }
 
    private function SaveBankTransRecord($responseData) {

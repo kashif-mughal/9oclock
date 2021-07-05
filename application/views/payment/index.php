@@ -1,6 +1,6 @@
 <!-- Production -->
 <form method="POST" action="https://payments.epdq.co.uk/ncol/prod/orderstandard.asp"
-id="form" name="form">
+id="paymentForm" name="paymentForm">
 
 <!-- Test -->
 <!-- <form method="POST" action="https://mdepayments.epdq.co.uk/ncol/test/orderstandard.asp"
@@ -25,10 +25,18 @@ id="form" name="form"> -->
 
    <!-- $ShaPass; ?>"> -->
 
-   <input type="hidden" name="ACCEPTURL" value="<?php echo base_url() ?>/PaymentIntegration/Success">
-   <input type="hidden" name="DECLINEURL" value="<?php echo base_url() ?>/PaymentIntegration/Decline">
-   <input type="hidden" name="EXCEPTIONURL" value="<?php echo base_url() ?>/PaymentIntegration/Cancelled">
-   <input type="hidden" name="CANCELURL" value="<?php echo base_url() ?>/PaymentIntegration/Cancelled">
+   <input type="hidden" name="ACCEPTURL" value="<?php echo base_url("PaymentIntegration/Success") ?>">
+   <input type="hidden" name="DECLINEURL" value="<?php echo base_url("PaymentIntegration/Decline") ?>">
+   <input type="hidden" name="EXCEPTIONURL" value="<?php echo base_url("PaymentIntegration/Cancelled") ?>">
+   <input type="hidden" name="CANCELURL" value="<?php echo base_url("PaymentIntegration/Cancelled") ?>">
 
-   <input type="submit" value="Submit" class="placeOrderBtn" id="submit" name="submit">
+   <!-- <input type="submit" value="Submit" class="placeOrderBtn" id="submit" name="submit"> -->
 </form>
+
+<script>
+   function onloadSubmit() {
+      document.paymentForm.submit();
+   }
+
+   onloadSubmit();
+</script>

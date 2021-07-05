@@ -32,7 +32,10 @@ class Auth {
                 'user_type' => $result[0]['user_type'],
                 'user_name' => $result[0]['first_name'] . " " . $result[0]['last_name'],
                 'user_email' => $result[0]['username'],
-                'address' => $result[0]['address']
+                'address' => $result[0]['address'],
+                'zip_code' => $result[0]['zip_code'],
+                'town' => $result[0]['town'],
+                'city' => $result[0]['city'],
             );
 
             $CI->session->set_userdata($user_data);
@@ -99,7 +102,7 @@ class Auth {
             $key = str_replace("9", "Uf", $key);
             $key = str_replace("0", "eXnyiKFj", $key);
             $sid_web = substr($key, rand(0, 3), rand(28, 32));
-
+            
             // codeigniter session stored data          
             $user_data = array(
                 'sid_web' => $sid_web,
@@ -108,9 +111,14 @@ class Auth {
                 'user_name' => $result[0]['first_name'] . " " . $result[0]['last_name'],
                 'user_email' => $result[0]['username'],
                 'address' => $result[0]['address'],
-                'email' => $result[0]['email']
+                'addressText' => $result[0]['address'],
+                'zip_code' => $result[0]['zip_code'],
+                'town' => $result[0]['town'],
+                'city' => $result[0]['city'],
+                'phone' => $result[0]['phone'],
+                'email' => $result[0]['email'],
+                'addressId' => $result[0]['AddressId']
             );
-
             $CI->session->set_userdata($user_data);
             return TRUE;
         } else {

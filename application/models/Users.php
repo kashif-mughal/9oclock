@@ -21,6 +21,7 @@ class Users extends CI_Model {
             $this->db->select('a.*,b.*');
             $this->db->from('user_login a');
             $this->db->join('users b', 'b.user_id = a.user_id');
+            $this->db->join('grocery_user_address ua', 'ua.UserId = a.user_id');
             $this->db->where('a.user_id', $user_id);
             $query = $this->db->get();
             return $query->result_array();
@@ -52,10 +53,11 @@ class Users extends CI_Model {
         // $dateTime = new DateTime();
         // $currDate = $dateTime->format('Y-m-d H:i:s');
 
-        $this->db->select('a.*,b.*');
+        $this->db->select('a.*,b.*,ua.*');
         $this->db->from('grocery_otp a');
         $this->db->join('users b', 'b.email = a.email_address');
         $this->db->join('user_login c', 'c.username = a.email_address');
+        $this->db->join('grocery_user_address ua', 'ua.UserId = c.user_id');
         $this->db->where('a.email_address', $email_address);
         $this->db->where('c.password', md5($password));
         $this->db->where('c.status', 1);

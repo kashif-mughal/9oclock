@@ -294,7 +294,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         <div class="d-flex justify-content-between align-items-center px-3 py-2" style="color:#fff;">
           <p class="p-0 m-0" id="checkout_text" style="cursor: pointer;" 
             <?php
-              echo 'onClick=\'window.location.href="'.base_url("corder/checkout_form").'"\'';
+                echo 'onClick=\'window.location.href="'.base_url("corder/checkout_form").'"\'';
             ?>
             >
             <?php

@@ -234,20 +234,6 @@
                         </label>
                         <span>Credit Card</span>
                     </div>
-                    <div class="mRadio checkoutRadio">
-                        <label class="custom-radio-btn">
-                            <input type="radio" name="sample">
-                            <span class="checkmark"></span>
-                        </label>
-                        <span>PayPal</span>
-                    </div>
-                    <div class="mRadio checkoutRadio">
-                        <label class="custom-radio-btn">
-                            <input type="radio" name="sample">
-                            <span class="checkmark"></span>
-                        </label>
-                        <span>Google Play</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -261,16 +247,17 @@
 <script>
 
 $(document).ready(function() {
-    $('.placeOrderBtn').on('click', function() {
-        
+
+    $('.placeOrderBtn').on('click', function(e) {
+        e.preventDefault();
         $.ajax({
             type: "POST",
             url: '<?php echo base_url('Corder/proceed_to_checkout') ?>',
-            data: {order: getCookie('baskit')},
+            data: {order: getCookie('baskit') },
             cache: false,
-            success: function (datas)
+            success: function (pageLocation)
             {
-                alert(datas);
+                window.location.href = '<?=base_url();?>' + pageLocation;
             }
         });    
     });
