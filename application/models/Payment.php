@@ -23,7 +23,6 @@ class Payment extends CI_Model {
 
     public function save_bank_trans_log($data) {
         $this->db->insert($this->tableName, $data);
-        $this->db->insert_id();
     }
 
     public function update_order_trans_status($data) {

@@ -128,10 +128,8 @@ class PaymentIntegration extends CI_Controller {
    //   // 3. Update order payment status 
       $this->lpayment->update_payment_status($responseData);
      
-      $this->load->view("include/top_menu");
-      $this->load->view("include/header");
-      $this->load->view("payment/success");
-      $this->load->view("include/footer");
+     $content = $this->lpayment->success();
+     $this->template->full_html_view($content);
    }
 
    public function Decline() {
@@ -156,18 +154,16 @@ class PaymentIntegration extends CI_Controller {
          'AddedOn' => date("Y-m-d H:i:s"),
          'TransactionDate' => $_GET["TRXDATE"],
          'ResponseData' => $url
-     );
+      );
 
      // 2. Save response in bankTransLog table
      $this->SaveBankTransRecord($responseDataDecline);
 
       // 3. Update order payment status 
       $this->lpayment->update_payment_status($responseDataDecline);
-      
-      $this->load->view("include/top_menu");
-      $this->load->view("include/header");
-      $this->load->view("payment/decline");
-      $this->load->view("include/footer");
+
+      $content = $this->lpayment->decline();
+      $this->template->full_html_view($content);
    }
 
    public function Cancelled() {
@@ -199,11 +195,9 @@ class PaymentIntegration extends CI_Controller {
      
      // 3. Update order payment status 
      $this->lpayment->update_payment_status($responseDataCancelled);
-
-     $this->load->view("include/top_menu");
-     $this->load->view("include/header");
-     $this->load->view("payment/cancel");
-     $this->load->view("include/footer");
+     
+     $content = $this->lpayment->cancelled();
+     $this->template->full_html_view($content);
    }
 
    private function SaveBankTransRecord($responseData) {

@@ -35,6 +35,27 @@ class Lpayment {
         return TRUE;
     }
 
+    public function cancelled(){
+        $data = array(
+            'title' => '9o\'Clock | Buy each and everything home grocery'
+        );
+        $CI = & get_instance();
+        return $CI->parser->parse('payment/cancel', $data, true);
+    }
+    public function success(){
+        $data = array(
+            'title' => '9o\'Clock | Buy each and everything home grocery'
+        );
+        $CI = & get_instance();
+        return $CI->parser->parse('payment/success', $data, true);
+    }
+    public function decline(){
+        $data = array(
+            'title' => '9o\'Clock | Buy each and everything home grocery'
+        );
+        $CI = & get_instance();
+        return $CI->parser->parse('payment/decline', $data, true);
+    }
 
 //     public function payement_form() {
 
