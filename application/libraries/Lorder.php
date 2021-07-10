@@ -33,11 +33,11 @@ class Lorder {
         $CI->load->model('Users');
         $CI->load->model('SiteSettings');
         $userAddress = $CI->Users->get_user_address();
-            // print_r($userAddress);die;
+            // print_r($userAddress);die;   
         $data = array(
             'title' => 'Cart Page',
             'userAddress' => $userAddress,
-            // 'deliveryCharges' => $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"]
+            'deliveryCharges' => $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"]
         );
         return $CI->parser->parse('order/cart_page', $data, true);
     }

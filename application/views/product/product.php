@@ -137,6 +137,9 @@
                 });
         }
     });
+    $(document).ready(function(){
+        $("#dataTableExample3").dataTable();
+    });
 </script>
 
 

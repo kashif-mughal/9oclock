@@ -21,17 +21,17 @@ class Cepos extends CI_Controller {
 
     public function calldata(){
 
-        // $query = $this->db->query("SELECT DISTINCT json_object('abc',DataReceived) as dt FROM `service_bus_consumption_log` WHERE TblName like '%tblTax%'");
-        // echo '<pre>';
-        // $res = array();
-        // $dts = $query->result_array();
-        // for ($i=0; $i < count($dts); $i++) { 
-        //     $jsnDt = json_decode($dts[$i]["dt"]);
-        //     echo(json_encode($jsnDt->abc));
-        //     print_r(",");
-        // }
-        // die;
-        
+         /*$query = $this->db->query("SELECT DISTINCT json_object('abc',DataReceived) as dt FROM `service_bus_consumption_log` WHERE TblName like '%tblitem%'");
+         echo '<pre>';
+         $res = array();
+         $dts = $query->result_array();
+         for ($i=0; $i < count($dts); $i++) { 
+             $jsnDt = json_decode($dts[$i]["dt"]);
+             echo(json_encode($jsnDt->abc));
+             print_r(",");
+         }
+         die;
+        */
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($this->connectionString);
 
         try{
@@ -43,7 +43,7 @@ class Cepos extends CI_Controller {
             for ($i=0; $i < 5000; $i++) {
                 $message = $serviceBusRestProxy->receiveQueueMessage("epostooms", $options);
 
-                // $message ="{\"table\":\"tblTax\",\"data\":[{\"Id\":1,\"TaxName\":\"Default Tax\",\"TaxPercentage\":20,\"IsActive\":true},{\"Id\":2,\"TaxName\":\"Bright ProductsTax\",\"TaxPercentage\":20},{\"Id\":3,\"TaxName\":\"\",\"TaxPercentage\":1,\"IsActive\":false},{\"Id\":4,\"TaxName\":\"\",\"TaxPercentage\":5,\"IsActive\":true},{\"Id\":5,\"TaxName\":\"\",\"TaxPercentage\":21,\"IsActive\":true}],\"mode\":\"setup\"}";
+                //$message ="{\"table\":\"tblItem\",\"data\":[{\"Id\":3268,\"CategoryName\":\"Baby Care\",\"CompanyId\":1,\"OutletId\":1,\"ParentId\":59,\"IsShowOnTill\":true,\"IsActive\":true,\"Slug\":\"baby-care\"}],\"mode\":\"setup\"}";
                 echo '<pre>';
                 if(!empty($message)){
                     $incomingMessage = json_decode($message->getBody());
@@ -170,7 +170,7 @@ class Cepos extends CI_Controller {
                     'IsTaxInclusive'    =>  $tblData[$i]->IsTaxInclusive
                 );
                 //$this->db->insert('tblCompany',$data);
-                $sql = $this->db->insert_string('tblCompany',$data). " ON DUPLICATE KEY UPDATE Name = '".$tblData[$i]->Name."', IsActive = ".$tblData[$i]->IsActive.", IsTaxInclusive = ".$tblData[$i]->IsTaxInclusive;
+                $sql = $this->db->insert_string('tblcompany',$data). " ON DUPLICATE KEY UPDATE Name = '".$tblData[$i]->Name."', IsActive = ".$tblData[$i]->IsActive.", IsTaxInclusive = ".$tblData[$i]->IsTaxInclusive;
                 $this->db->query($sql);
             }
             catch(Exception $ex){
@@ -234,6 +234,16 @@ class Cepos extends CI_Controller {
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
             try{
+                if(empty($tblData[$i]->Tax))
+                    $tblData[$i]->Tax = 0;
+                if(empty($tblData[$i]->ItemBarCode))
+                    $tblData[$i]->ItemBarCode = '';
+                if(!$tblData[$i]->IsActive)
+                    $tblData[$i]->IsActive = 0;
+                else
+                    $tblData[$i]->IsActive = 1;
+                if(empty($tblData[$i]->ItemPurchasePrice))
+                    $tblData[$i]->ItemPurchasePrice = 0;
                 $data = array(
                     'ProductId'     =>  $tblData[$i]->Id,
                     'ProductName'   =>  $tblData[$i]->ItemName,
@@ -328,7 +338,7 @@ class Cepos extends CI_Controller {
                 );
 
                 $this->db->where('Id', $tblData[$i]["Id"]);
-                $this->db->update('tblCompany',$data);
+                $this->db->update('tblcompany',$data);
             }
             catch(Exception $ex){
                 $currentExceptionMessage = $ex->getMessage();
@@ -390,6 +400,16 @@ class Cepos extends CI_Controller {
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
             try{
+                if(empty($tblData[$i]->Tax))
+                    $tblData[$i]->Tax = 0;
+                if(empty($tblData[$i]->ItemBarCode))
+                    $tblData[$i]->ItemBarCode = '';
+                if(!$tblData[$i]->IsActive)
+                    $tblData[$i]->IsActive = 0;
+                else
+                    $tblData[$i]->IsActive = 1;
+                if(empty($tblData[$i]->ItemPurchasePrice))
+                    $tblData[$i]->ItemPurchasePrice = 0;
                 $data = array(
                     'ProductName'   =>  $tblData[$i]->ItemName,
                     'Category'      =>  $tblData[$i]->ItemCategoryId,

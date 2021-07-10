@@ -35,7 +35,7 @@ class Lproduct {
         $CI->load->model('Categories');
         $CI->load->model('Brands');
         $CI->load->model('Units');
-        $categories = $CI->Categories->customSelect('CategoryId, CatName', 'ParentId <> 0');
+        $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $brands = $CI->Brands->customSelect('BrandId, BrandName');
         $units = $CI->Units->customSelect('UnitId, UnitName');
         $data = array(
@@ -69,7 +69,7 @@ class Lproduct {
         $CI->load->model('Units');
 
         $product_detail = $CI->Products->retrieve_editdata('ProductId', $product_id);
-        $categories = $CI->Categories->customSelect('CategoryId, CatName', 'ParentId <> 0');
+        $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $brands = $CI->Brands->customSelect('BrandId, BrandName');
         $units = $CI->Units->customSelect('UnitId, UnitName');
         $data = array(

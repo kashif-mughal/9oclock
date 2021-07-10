@@ -278,15 +278,15 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         <div class="d-flex justify-content-between align-items-center px-3 py-3" style="border-bottom: 1px solid #ececec;">
           <div>
             <h6 style="color: orange; font-weight: 600; margin-bottom: 0px;">Delivery Charges</h6>
-            <p style="font-size:12px; font-weight: 600; margin-bottom: 0px;" class="delivery-charges-text">Free delivery on order above Rs.45</p>
+            <p style="font-size:12px; font-weight: 600; margin-bottom: 0px;" class="delivery-charges-text">Free delivery on order above <script>document.write(formatCurrency(50,0));</script></p>
           </div>
-          <p style="font-weight: 600;" class="grand-amount">
-            <script type="text/javascript">document.write(formatCurrency(0));</script>
+          <p style="font-weight: 600;" class="delivery-charges">
+            <script type="text/javascript">document.write(formatCurrency('<?=$deliveryCharges?>'));</script>
           </p>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3">
           <h6 style="color: green; font-weight: 600; margin-bottom: 0px;">Total Amount</h6>
-          <h5 style="color: green; font-weight: 600; margin-bottom: 0px;" class="grand-amount"></h5>
+          <h5 style="color: green; font-weight: 600; margin-bottom: 0px;" class="final-amount"></h5>
         </div>
       </div>
 
@@ -306,7 +306,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             ?>
           </p>
           <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0 pr-2 grand-amount" style="border-right: 1px solid #fff;"></p>
+            <p class="mb-0 pr-2 final-amount" style="border-right: 1px solid #fff;"></p>
             <i class="fas fa-chevron-right ml-3 grand-amount-icon" style="font-size: 1.25rem;"></i>
           </div>
         </div>
@@ -324,6 +324,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
     var step2Verified = false;
     var step3Verified = false;
     var step4Verified = true;
+    var deliveryCharges = parseFloat('<?=$deliveryCharges?>');
+    var freeAboveAmount = 50;
     if(!baskit || JSON.parse(baskit).length == 0){
         //window.location.href = '<?=base_url();?>';
         $(".cart_page_new").hide();
@@ -413,14 +415,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           var sum = 0;
           for (var i = 0; i < cart.length; i++) {
              var eachProdTemplateCopy1 = eachProdTemplate1;
-             sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+             sum += parseInt(cart[i].quantity) * parseFloat(cart[i].price);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{pId}/g, cart[i].id);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{imgValue}', cart[i].img);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, `${cart[i].pName}`);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{price}', formatCurrency(cart[i].price));
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
-             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseFloat(cart[i].price)));
 
             var mobileProdTempCopy = mobileProdTemp;
             mobileProdTempCopy = mobileProdTempCopy.replace(/{pId}/g, cart[i].id);
@@ -429,7 +431,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             mobileProdTempCopy = mobileProdTempCopy.replace('{price}', formatCurrency(cart[i].price));
             mobileProdTempCopy = mobileProdTempCopy.replace('{qty}', cart[i].quantity);
             mobileProdTempCopy = mobileProdTempCopy.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
-            mobileProdTempCopy = mobileProdTempCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));  
+            mobileProdTempCopy = mobileProdTempCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseFloat(cart[i].price)));  
 
             paymentObject = mobileProdTempCopy;
 
@@ -458,17 +460,18 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             cart = JSON.parse(cart);
             var sum = 0;
             for (var i = 0; i < cart.length; i++) {
-               sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+               sum += parseFloat(cart[i].quantity) * parseFloat(cart[i].price);
             }
             subTotal = sum;
             $('#copun-form #ov').val(subTotal);
             $('.subtotal-price').html(formatCurrency(sum));
             $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
+            $('.final-amount').html(formatCurrency(parseFloat(subTotal)));
         }
 
         if(copun){
             if(copun.copunMinPurchase > subTotal){
-                $('.grand-amount').html(formatCurrency(parseFloat(subTotal)));
+                $('.final-amount').html(formatCurrency(parseFloat(subTotal)));
                 $('#cDiscountValue').html("");
                 $('#cDiscount').removeClass('d-flex');
                 $('#cDiscount').hide();
@@ -482,17 +485,23 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           var discountedValue = 0.00;
           if(copun.copunDiscountType == "Amount"){
             $('#cDiscountValue').html(formatCurrency(-copun.copunDiscountValue));
-            $('.grand-amount').html(formatCurrency(parseFloat(subTotal) - parseFloat(copun.copunDiscountValue)));
+            subTotal = parseFloat(subTotal) - parseFloat(copun.copunDiscountValue);
+            $('.final-amount').html(formatCurrency(subTotal));
           }else{
             $('#cDiscountValue').html(copun.copunDiscountValue + "%");
-            $('.grand-amount').html(formatCurrency(subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue))));
+            subTotal = subTotal - ((parseFloat(subTotal) / 100) * parseFloat(copun.copunDiscountValue));
+            $('.final-amount').html(formatCurrency(subTotal));
           }
-          $('#cDiscount').addClass('d-flex');
         }else{
           $('#cDiscountValue').html("");
           $('#cDiscount').removeClass('d-flex');
           $('#cDiscount').hide();
         }
+        if(subTotal <= freeAboveAmount){
+            subTotal = subTotal + deliveryCharges;
+            $('.final-amount').html(formatCurrency(subTotal));
+        }
+        $('#cDiscount').addClass('d-flex');
       }
 
       $(document).ready(function(){

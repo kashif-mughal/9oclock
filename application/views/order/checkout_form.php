@@ -172,19 +172,19 @@
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_email.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText"><?=$_SESSION["email"]?></p>
+                    <p class="checkoutCartText"><?=empty($_SESSION["email"]) ? 'N/A' : $_SESSION["email"]?></p>
                 </div>
                 <div class="d-flex justify-content-start align-items-sm-end align-items-center checkoutItem">
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_phone.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText">+923460030581</p>
+                    <p class="checkoutCartText"><?=empty($_SESSION["phone"]) ? 'N/A' : $_SESSION["phone"]?></p>
                 </div>
                 <div class="d-flex justify-content-start align-items-sm-end align-items-center checkoutItem">
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_address.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText"><?=$_SESSION["address"]?></p>
+                    <p class="checkoutCartText"><?=$_SESSION["address"] . " " . $_SESSION["town"] . " " . $_SESSION["city"] . " "?></p>
                 </div>
             </div>
         </div>

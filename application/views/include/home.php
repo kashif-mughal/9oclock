@@ -9,6 +9,18 @@
 </style>
 <section class="main-content" >
    <div class="container">
+      <?php 
+      $featuredCount = 0;
+      $hotCount = 0;
+      foreach ($ProdList as $value)
+         {
+            if ($value['IsFeatured'] != 1)
+               $featuredCount ++;
+            if ($value['IsHot'] != 1)
+               $hotCount ++;
+         }
+      ?>
+   <?php if($featuredCount > 0){?>
    <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12">
          <div class="featured-products panel-min-height">
@@ -155,6 +167,8 @@
          </div>
       </div>
    </div>
+   <?php } ?>
+   <?php if($hotCount > 0){?>
    <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12">
          <div class="featured-products panel-min-height">
@@ -301,6 +315,7 @@
          </div>
       </div>
    </div>
+   <?php } ?>
    <?php
       foreach ($CatList as $key => $value)
       { ?>
