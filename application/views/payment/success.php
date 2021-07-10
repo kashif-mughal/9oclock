@@ -1,99 +1,8 @@
-<!-- <style>
-   label {
-  position: relative;
-  height: 125px;
-  width: 125px;
-  display: inline-block;
-  border: 2px solid rgba(255,255,255,0.2);
-  border-radius: 50%;
-  border-left-color: #10ac84;
-  animation: circleRotate 1.2s linear infinite;
-}
-
-label .check-icon {
-  display: none;
-}
-
-label .check-icon:after {
-  position: absolute;
-  content: "";
-  height: 56px;
-  width: 28px;
-  top: 50%;
-  left: 28px;
-  transform: scaleX(-1) rotate(135deg);
-  border-top: 4px solid #10ac84;
-  border-right: 4px solid #10ac84;
-  transform-origin: left top;
-  animation: check_icon 0.8s ease;
-}
-
-@keyframes circleRotate {
-  50% {
-    border-left-color: #1dd1a1;
-  }
-  75% {
-    border-left-color: #4cd137;
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframe check_icon {
-  0% {
-    height: 0px;
-    width: 0px;
-    opacity: 1;
-  }
-  20% {
-    height: 0px;
-    width: 28px;
-    opacity: 1;
-  }
-  40% {
-    height: 56px;
-    width: 28px;
-    opacity: 1;
-  }
-  100% {
-    height: 56px;
-    width: 28px;
-    opacity: 1;
-  }
-}
-
-#check-control:checked ~ label .check-icon {
-  display: block;
-}
-
-#check-control:checked ~ label {
-  animation: none;
-  border-color: #10ac84;
-  transition: border 0.5s ease-out;
-}
-
-#check-control {
-  display: none;
-}
-</style>
-
-
-<section class="content">
-   <div class="transactionComplete">
-      <input type="checkbox" id="check-control" />
-      <label for="check-control">
-         <div class="check-icon"></div>
-      </label>
-   </div>
-</section>
-
- -->
 
 <style>
  .checkmark__circle {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
   stroke-width: 50;
   stroke-miterlimit: 20;
   stroke: #7ac142;
@@ -102,14 +11,14 @@ label .check-icon:after {
 }
 
 .checkmark {
-  width: 200px;
-  height: 200px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   display: block;
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
-  margin: 10% auto;
+  margin: 2% auto 44px auto;
   box-shadow: inset 0px 0px 0px #7ac142;
   animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
 }
@@ -140,10 +49,67 @@ label .check-icon:after {
   }
 }
 
-
+.PaymentResponseMessageContainer {
+  background-color: #fff;
+  border-radius:4px;
+  width: 70%;
+  margin-top: 3%;
+  padding: 40px;
+}
+.paymentButton {
+  background-color: var(--main-color);
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: 0.1s ease-in-out;
+}
+.paymentButton:hover {
+  background-color: var(--secondary-color);
+  color: #fff;
+  text-decoration: none;
+}
+#secondsDisplay {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
 </style>
- <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-  <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-  <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-</svg>
+
+
+<script type="text/javascript">
+  var seconds = 5;
+  var secondText = seconds;
+  var redirectSeconds = (seconds*1000);
+  function displaySeconds() {
+    seconds -= 1;
+    document.getElementById("secondsDisplay").innerText = seconds;
+    if(seconds == secondText-1) {
+      document.getElementById("redirectText").append(" seconds");  
+    }
+    if(seconds == 0) {
+      redirectToPage();
+    }
+  }
+  setInterval(displaySeconds,1000);
+
+  function redirectToPage() {
+    window.location.href = "<?php echo base_url('Dashboard/index'); ?>";
+  }
+  //setTimeout("redirectToPage()", redirectSeconds);
+</script>  
+
+
+<div class="d-flex justify-content-center">
+  <div class="flex d-flex flex-column justify-content-center align-items-center mb-5 PaymentResponseMessageContainer">
+   <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+  </svg>
+    <h2 class="paymentMainText">Payment Processing was Successful</h2>
+    <p class="paymentSubText" id="redirectText" style="margin-bottom:0px;">You will be redirected to Homepage in <span id="secondsDisplay"></p>
+    <hr style="border-top:1px solid #ccc;width:100%;">
+    <p class="paymentSubText">Click link below to redirect to homepage</p>
+    <a class="paymentButton" href="<?php echo base_url('Dashboard/index'); ?>"><< Back To Homepage</a>
+  </div>  
+</div>
 
