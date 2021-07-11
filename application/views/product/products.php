@@ -51,7 +51,7 @@
                            <?php for ($i = 0;$i < count($value->childCats);$i++)
                               { ?>
                            <a href="<?php echo base_url(); ?>Cproduct/products?categoryId=<?=$value->childCats[$i]['CategoryId'] ?>">
-                           <span class="hyphen">&#8212;</span> <span class="category-text"><?=$value->childCats[$i]['Alias'] ?></span>
+                           <span class="hyphen">&#8212;</span> <span class="category-text"><?=$value->childCats[$i]['CatName'] ?></span>
                            </a>
                            <?php
                               } ?>

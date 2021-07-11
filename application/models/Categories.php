@@ -19,6 +19,8 @@ class Categories extends CI_Model {
         $this->db->order_by('a.sort', 'ASC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
+            echo '<pre>';
+            print_r($query->result_array());die;
             return $query->result_array();
         }
         return false;
@@ -158,7 +160,7 @@ class Categories extends CI_Model {
             $whereString .= "AND gp.Brand = $brand ";
         }
         $query = "SELECT 
-                        gpv.ProductId VId, gpv.ProductName VName, gpv.ProductImg VImage, gpv.ParentProduct VParent, gpv.SalePrice VPrice, gc.Alias catAlias, gp.*, gu2.UnitName SaleUnitName, 
+                        gpv.ProductId VId, gpv.ProductName VName, gpv.ProductImg VImage, gpv.ParentProduct VParent, gpv.SalePrice VPrice, gc.Alias catAlias, gc.CatName catName, gp.*, gu2.UnitName SaleUnitName, 
                         CASE WHEN gu.UnitName = NULL THEN 'Piece' ELSE gu.UnitName END AS UnitName 
                     FROM grocery_products gp
                     join grocery_category gc on gp.Category = gc.CategoryId 
