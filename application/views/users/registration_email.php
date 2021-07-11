@@ -97,9 +97,13 @@
          </div>
          <div class="row d-flex justify-content-center align-items-center">
             <form id="userRegistrationForm_new" method="post" style="width:100%;">
-               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputNameContainer">
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputFirstNameContainer">
                   <i class="fas fa-user" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
-                  <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Name" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off" autofocus>
+                  <input type="text" name="inputFirstName" id="inputFirstName" class="form-control" placeholder="First Name" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off" autofocus>
+               </div>
+               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputLastNameContainer">
+                  <i class="fas fa-user" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
+                  <input type="text" name="inputLastName" id="inputLastName" class="form-control" placeholder="Last Name" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off" autofocus>
                </div>
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputEmailContainer">
                   <i class="fas fa-envelope" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
@@ -398,8 +402,11 @@
 			event.preventDefault();
 			$('#userId').val(localStorage.getItem('UserId'));
 			
-         if(!$('#inputName').val()) { $('#inputNameContainer').css("border-bottom", "0.13rem solid red"); }
-			else { $('#inputNameContainer').css("border-bottom", "0.13rem solid green"); }
+         if(!$('#inputFirstName').val()) { $('#inputFirstNameContainer').css("border-bottom", "0.13rem solid red"); }
+			else { $('#inputFirstNameContainer').css("border-bottom", "0.13rem solid green"); }
+
+         if(!$('#inputLastName').val()) { $('#inputLastNameContainer').css("border-bottom", "0.13rem solid red"); }
+			else { $('#inputLastNameContainer').css("border-bottom", "0.13rem solid green"); }
 
 			if(!$('#inputEmail').val()) { $('#inputEmailContainer').css("border-bottom", "0.13rem solid red"); }
 			else { $('#inputEmailContainer').css("border-bottom", "0.13rem solid green"); }
@@ -424,7 +431,7 @@
 
          console.log("Status 1");
 
-			if(!$('#inputName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val()) {
+			if(!$('#inputFirstName').val() || !$('#inputLastName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val()) {
 
             console.log('Error');
 

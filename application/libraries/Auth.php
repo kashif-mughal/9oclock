@@ -120,6 +120,7 @@ class Auth {
                 'addressId' => $result[0]['AddressId']
             );
             $CI->session->set_userdata($user_data);
+
             return TRUE;
         } else {
             return FALSE;

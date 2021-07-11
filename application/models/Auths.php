@@ -163,9 +163,10 @@ class Auths extends CI_Model {
         return TRUE;
     }
 
-    public function update_user($user_id, $full_name, $email, $city, $country, $address, $address_details) {
+    public function update_user($user_id, $first_name, $last_name, $email, $city, $country, $address, $address_details) {
         $this->db->where('user_id', $user_id);
-        $this->db->set('first_name',$full_name);
+        $this->db->set('first_name',$first_name);
+        $this->db->set('last_name',$last_name);
         $this->db->set('email', $email);
         $this->db->set('city', $city);
         $this->db->set('country', $country);
@@ -259,10 +260,11 @@ class Auths extends CI_Model {
         return TRUE;
     }
 
-    public function insert_user_email($user_id, $name, $email, $phone, $address, $zip_code, $town, $city) {
+    public function insert_user_email($user_id, $first_name, $last_name, $email, $phone, $address, $zip_code, $town, $city) {
         $user_data = array(
             'user_id' => $user_id,
-            'first_name' => $name,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
             'phone' => str_replace("-", "", $phone),
             'email' => $email,
             'address' => $address,
@@ -476,7 +478,7 @@ class Auths extends CI_Model {
         $this->email->subject('9oClock - User Email Verification');
         $this->email->message('Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: ' . $otp_code);
 
-        print_r($this->email->send());die;
+        // print_r($this->email->send());die;
         return $this->email->send();
     }
 

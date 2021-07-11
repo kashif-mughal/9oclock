@@ -91,7 +91,8 @@ class Auth2 extends CI_Controller {
     public function updateUserRegistrationByEmail() {
         $this->load->helper(array('form', 'url'));
 
-        $name = $this->input->Post('inputName');
+        $firstName = $this->input->Post('inputFirstName');
+        $lastName = $this->input->Post('inputLastName');
         $email = $this->input->Post('inputEmail');
         $phone = $this->input->Post('inputPhone');
         $address = $this->input->Post('inputAddress');
@@ -102,7 +103,8 @@ class Auth2 extends CI_Controller {
         $confirm_password = $this->input->Post('inputConfirmPassword');
 
         // Validation
-        $this->form_validation->set_rules('inputName', 'Name', 'required');
+        $this->form_validation->set_rules('inputFirstName', 'First Name', 'required');
+        $this->form_validation->set_rules('inputLastName', 'Last Name', 'required');
         $this->form_validation->set_rules('inputEmail', 'Email Address', 'required');
         $this->form_validation->set_rules('inputAddress', 'Address', 'required');
         $this->form_validation->set_rules('inputZipCode', 'ZipCode', 'required');
@@ -147,7 +149,7 @@ class Auth2 extends CI_Controller {
                 $this->auths->insert_user_login_email($user_id, $email, $password);
 
                 // Insert record in users table
-                $this->auths->insert_user_email($user_id, $name, $email, $phone, $address, $zip_code, $town, $city);
+                $this->auths->insert_user_email($user_id, $firstName, $lastName, $email, $phone, $address, $zip_code, $town, $city);
 
                 // Insert otp record and send otp
                 $isEmailExist = $this->auths->is_email_exist($email);
@@ -196,7 +198,8 @@ class Auth2 extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         
         // Get Post Data
-        $full_name = $this->input->Post('inputName');
+        $first_name = $this->input->Post('inputFirstName');
+        $last_name = $this->input->Post('inputLastName');
         $email = $this->input->Post('inputEmail');
         $address = $this->input->Post('inputAddress');
         $country = $this->input->Post('selectCountry');
@@ -206,7 +209,8 @@ class Auth2 extends CI_Controller {
         $confirm_password = $this->input->Post('inputConfirmPassword');
         $user_id = $this->input->Post('userId');
 
-        $this->form_validation->set_rules('inputName', 'Full Name', 'required');
+        $this->form_validation->set_rules('inputFirstName', 'First Name', 'required');
+        $this->form_validation->set_rules('inputLastName', 'Last Name', 'required');
         $this->form_validation->set_rules('inputEmail', 'Email Address', 'required');
         $this->form_validation->set_rules('inputAddress', 'Address', 'required');
         $this->form_validation->set_rules('selectCountry', 'Country', 'required');
@@ -235,7 +239,7 @@ class Auth2 extends CI_Controller {
                 //--------------------------------------- 
                 $this->auths->update_user_login($user_id, $email, $password);
                 // Update users [firstname, email, city, country, address, address_details]
-                $this->auths->update_user($user_id, $full_name, $email, $city, $country, $address, $address_details);
+                $this->auths->update_user($user_id, $first_name, $last_name, $email, $city, $country, $address, $address_details);
                 // Instant login user
                 $this->auths->user_login($email, $password);
             }
@@ -260,7 +264,7 @@ class Auth2 extends CI_Controller {
                 $this->auths->update_user_login($email_user['user_id'], $email, $password);
 
                 // Update users [firstname, email, city, country, address, address_details]
-                $this->auths->update_user($email_user['user_id'], $full_name, $email, $city, $country, $address, $address_details);  
+                $this->auths->update_user($email_user['user_id'], $first_name, $last_name, $email, $city, $country, $address, $address_details);  
 
                 $result['response'] = 'User by Email is Available, Logging in';
                 $result['user_details_available'] = false;
