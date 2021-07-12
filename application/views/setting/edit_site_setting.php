@@ -94,6 +94,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="footer_text" class="col-sm-3 col-form-label">Promotion Text </label>
+                            <div class="col-sm-9">
+                                <input class="form-control" name ="promotion_text" id="promotion_text" type="text" value="<?=$SettingData['promotion_text']?>" placeholder="Promotion Text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="example-text-input" class="col-sm-4 col-form-label"></label>
                             <div class="col-sm-12">
                                 <input type="submit" style="float: right;width: 10%;" class="btn btn-success btn-large" value="Save" />

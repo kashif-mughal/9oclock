@@ -23,6 +23,8 @@ class Csettings extends CI_Controller {
         $data = Array();
         $delivery_charges = $this->input->post('delivery_charges');
         $footer_text = $this->input->post('footer_text');
+        $promotion_text = $this->input->post('promotion_text');
+        
         //$home_page_cat = $this->input->post('home_page_cat');
         
         
@@ -30,6 +32,8 @@ class Csettings extends CI_Controller {
             $data["delivery_charges"] = $delivery_charges;
         if(!empty($footer_text))
             $data["footer_text"] = trim($footer_text);
+        if(!empty($promotion_text))
+            $data["promotion_text"] = trim($promotion_text);
         /*if(!empty($home_page_cat))
             $h_cat= Array("0");
             foreach($home_page_cat as $home_page_ca){

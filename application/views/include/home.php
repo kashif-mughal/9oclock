@@ -345,7 +345,7 @@
                            <?php for ($i = 0;$i < count($value->childCats);$i++)
                               { ?>
                            <div>
-                              <a href="<?='Cproduct/products?categoryId=' . $value->childCats[$i]['CategoryId'] ?>"><?=$value->childCats[$i]['Alias'] ?></a>
+                              <a href="<?='Cproduct/products?categoryId=' . $value->childCats[$i]['CategoryId'] ?>"><?=$value->childCats[$i]['CatName'] ?></a>
                            </div>
                            <?php
                               } ?>
