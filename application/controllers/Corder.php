@@ -53,7 +53,7 @@ class Corder extends CI_Controller {
                 'deliveryTime' => $deliveryTime,
                 'userDeliveryTime' =>  $t1 . " - " . $t2,
                 'userDeliveryDate' => $dt,
-                'paymentMode' => 'Credit Card'
+                'paymentMode' => 'Debit/Credit Card'
             ));
 
         if(empty($this->input->post('order'))){

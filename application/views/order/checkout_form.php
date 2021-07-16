@@ -232,7 +232,7 @@
                             <input type="radio" name="sample" checked>
                             <span class="checkmark"></span>
                         </label>
-                        <span>Credit Card</span>
+                        <span>Debit/Credit Card</span>
                     </div>
                 </div>
             </div>

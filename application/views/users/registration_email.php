@@ -120,7 +120,7 @@
 
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputZipCodeContainer">
                   <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
-                  <input type="text" name="inputZipCode" id="inputZipCode" class="form-control" placeholder="Zip Code" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
+                  <input type="text" name="inputZipCode" id="inputZipCode" class="form-control" placeholder="Postal Code" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
 
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputTownContainer">

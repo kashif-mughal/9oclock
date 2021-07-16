@@ -179,7 +179,6 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 <!-- Sidebar Ends -->
 
-
 <div class="section-head" style="position: fixed; top: 0; width: 100%; z-index: 21;">
 
       <div class="top-bar">
@@ -189,7 +188,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                <nav class="navbar navbar-expand-sm ml-md-auto px-2 px-md-0">
                   <ul class="navbar-nav">
                      <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)" role="button">Get special discount of 10% on 10 items</a>
+                        <a class="nav-link" href="javascript:void(0)" id="promotionText" role="button"><?=$Web_settings[0]["promotion_text"]?></a>
                      </li>
                   </ul>
                </nav>
