@@ -180,11 +180,16 @@
                     </div>
                     <p class="checkoutCartText"><?=empty($_SESSION["phone"]) ? 'N/A' : $_SESSION["phone"]?></p>
                 </div>
-                <div class="d-flex justify-content-start align-items-sm-end align-items-center checkoutItem">
+                <div class="d-flex justify-content-start align-items-sm-start align-items-center checkoutItem">
                     <div class="imageContainer">
                         <img src="<?=base_url('assets/img/Checkout/new_icons/user_address.png') ?>" alt="">
                     </div>
-                    <p class="checkoutCartText"><?=$_SESSION["address"] . " " . $_SESSION["town"] . " " . $_SESSION["city"] . " "?></p>
+                    <div class="checkoutCartText">
+                        <p class="mb-0"><?=$_SESSION["address"] ?></p>
+                        <p class="mb-0"><?=$_SESSION["town"] ?></p>
+                        <p class="mb-3"><?=$_SESSION["city"] ?></p>
+                        <p class="mb-0"><?=$_SESSION["zip_code"] ?></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,9 +220,9 @@
                     </div>
                     <div class="input-group checkoutDropdown">
                         <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day">
-                            <option value="today" selected>10:00 am to 07:00 pm</option>
-                            <option value="tomorrow">08:00 am to 10:00 pm</option>
-                            <option value="nextweek">09:00 pm to 03:00 pm</option>
+                            <option value="today" selected>10.00 am - 12.00 pm</option>
+                            <option value="tomorrow">04.00 pm - 06.00 Pm</option>
+                            <option value="nextweek">08.00 pm - 10.00 Pm</option>
                         </select>
                     </div>
                 </div>
