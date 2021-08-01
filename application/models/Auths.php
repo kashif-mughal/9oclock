@@ -455,31 +455,52 @@ class Auths extends CI_Model {
     //=================================================================================
 
     public function sendemail($to_email, $otp_code) {
-        $this->load->library('email');
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'ssl://smtp.gmail.com';
-        $config['smtp_port'] = '465';
-        $config['smtp_timeout'] = '7';
-        $config['smtp_user'] = 'mumtaz.alam.home@gmail.com';
-        $config['smtp_pass'] = 'Foosball@1';
-        $config['charset'] = 'utf-8';
-        $config['newline'] = '\r\n';
-        $config['mailtype'] = 'text';
-        $config['validation'] = TRUE;
+        // $this->load->library('email');
+        // $config['protocol'] = 'smtp';
+        // $config['smtp_host'] = 'ssl://smtp.gmail.com';
+        // $config['smtp_port'] = '465';
+        // $config['smtp_timeout'] = '7';
+        // $config['smtp_user'] = 'mumtaz.alam.home@gmail.com';
+        // $config['smtp_pass'] = 'Foosball@1';
+        // $config['charset'] = 'utf-8';
+        // $config['newline'] = '\r\n';
+        // $config['mailtype'] = 'text';
+        // $config['validation'] = TRUE;
 
-        $this->email->initialize($config);
+        // $this->email->initialize($config);
 
 
-        $this->email->from('mumtaz.alam.home@gmail.com', '9oClock Admin');
-        $this->email->to($to_email);
+        // $this->email->from('mumtaz.alam.home@gmail.com', '9oClock Admin');
+        // $this->email->to($to_email);
         // $this->email->cc('another@another-example.com');
         // $this->email->bcc('them@their-example.com');
 
-        $this->email->subject('9oClock - User Email Verification');
-        $this->email->message('Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: ' . $otp_code);
+        // $this->email->subject('9oClock - User Email Verification');
+        // $this->email->message('Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: ' . $otp_code);
+
+
+        $from = "admin@9oclockshop.co.uk";
+        $subject = "9oClock - User Email Verification";
+        $message = "Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: " . $otp_code;
+        $headers = "From : " . $from;
+
+        mail($to_email, $subject, $message, $headers);
+
 
         // print_r($this->email->send());die;
-        return $this->email->send();
+        //return $this->email->send();
+    }
+
+    public function sendemailgeneral($to_email, $body) {
+        $from = "admin@9oclockshop.co.uk";
+        $subject = "9oClock - User Email Verification";
+        $message = $body;
+
+        mail($to_email, $subject, $message, $headers);
+
+
+        // print_r($this->email->send());die;
+        //return $this->email->send();
     }
 
     // Email Verify

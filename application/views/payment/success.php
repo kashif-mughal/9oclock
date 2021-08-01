@@ -77,7 +77,7 @@
 
 
 <script type="text/javascript">
-  var seconds = 5;
+  var seconds = 10;
   var secondText = seconds;
   var redirectSeconds = (seconds*1000);
   function displaySeconds() {

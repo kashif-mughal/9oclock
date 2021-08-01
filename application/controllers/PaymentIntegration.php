@@ -28,6 +28,10 @@ class PaymentIntegration extends CI_Controller {
    $city = $this->session->userdata('city');
    $address = $this->session->userdata('address');
    $OV = $this->session->userdata('OV');
+   $delivery_charges = $this->session->userdata('deliveryCharges');
+   $delivery_price = $this->session->userdata('discountedPrice');
+
+   $Final_Amount = (($OV + $delivery_charges) - $delivery_price);
 
    // Test
    // $barclayCardModel = new stdClass();
@@ -46,7 +50,7 @@ class PaymentIntegration extends CI_Controller {
 
    // Production
    $barclayCardModel = new stdClass();
-   $barclayCardModel->AMOUNT = ($OV * 100);
+   $barclayCardModel->AMOUNT = ($Final_Amount * 100);
    $barclayCardModel->CURRENCY = "GBP";
    $barclayCardModel->LANGUAGE = "en_uk";
    $barclayCardModel->ORDERID = $orderId;
@@ -204,4 +208,15 @@ class PaymentIntegration extends CI_Controller {
       $content = $this->lpayment->save_record($responseData);
       return $content;
    }
+
+
+
+
+
+
+
+
+
+
+
 }

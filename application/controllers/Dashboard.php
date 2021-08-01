@@ -307,9 +307,12 @@ class Dashboard extends CI_Controller {
                         "<p><a href='.$userResetLink.'>".$userResetLink."</a></p>";
                     //$CI->Auths->sendemail($to_email, $message);
 
-                    $result['response'] = '<p class="resetEmailUserText">Dear User</p></br><p class="resetEmailText">We have sent you a reset password link on your email address</p>';
+                    $result['response'] = 'We have sent you a reset password link on your email address';
                     $result['status'] = 'success';
                     $result['resetlink'] = $userResetLink;
+
+                    $CI->Auths->sendemailgeneral($email_address,$message);
+
                     echo json_encode($result);
                     return;
                 }

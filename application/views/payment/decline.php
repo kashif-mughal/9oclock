@@ -72,10 +72,11 @@
 
 
 <script type="text/javascript">
-  var seconds = 5;
+  var seconds = 10;
   var secondText = seconds;
   var redirectSeconds = (seconds*1000);
   function displaySeconds() {
+    setInterval(displaySeconds,1000);
     seconds -= 1;
     document.getElementById("secondsDisplay").innerText = seconds;
     if(seconds == secondText-1) {
@@ -85,7 +86,7 @@
       redirectToPage();
     }
   }
-  setInterval(displaySeconds,1000);
+  
 
   function redirectToPage() {
     window.location.href = "<?php echo base_url('Dashboard/index'); ?>";

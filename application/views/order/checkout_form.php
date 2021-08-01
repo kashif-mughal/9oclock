@@ -255,10 +255,11 @@ $(document).ready(function() {
 
     $('.placeOrderBtn').on('click', function(e) {
         e.preventDefault();
+        var deliveryCharges =  <?php echo $deliveryCharges?>;
         $.ajax({
             type: "POST",
             url: '<?php echo base_url('Corder/proceed_to_checkout') ?>',
-            data: {order: getCookie('baskit') },
+            data: {order: getCookie('baskit'), delivery_charges: deliveryCharges },
             cache: false,
             success: function (pageLocation)
             {

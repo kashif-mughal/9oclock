@@ -2,14 +2,24 @@
    #registration, #login, #otpForm {
       display:none;
    }
+   #emailResetMessageBox {
+      width: 100% !important;
+      margin: 0px;
+   }
    .resetEmailUserText {
-      color: #000;
+      color: var(--main-color);
       font-size: 20px;
       font-weight: 600;
+      margin-bottom: 9px;
    }
    .resetEmailText {
+      color: var(--secondary-color);
+      font-size: 18px;
+   }
+   .forgotPasswordIcon {
       color: var(--main-color);
-      font-size: 16px;
+      font-size: 130px;
+      margin-bottom: 50px;
    }
 </style>
 
@@ -123,10 +133,14 @@
 </section>
 <!-- Login New Ends -->
 
-<section id="reset_email_message" style="display:none; margin-top: 133px;">
+<section id="reset_email_message" style="display:none; margin-top: 133px; width: 100%;">
    <div class="container"> 
       <div class="row text-left" style="background-color: #ffffff; border-radius: 2px; padding: 35px; border: 1px solid #cccccc; height: 400px;">
-         <p id="emailResetMessageBox d-flex align-items-center justify-content-center"></p>
+         <div id="emailResetMessageBox" class="d-flex flex-column align-items-center justify-content-center">
+            <div class="forgotPasswordIcon"><i class="fas fa-shield-alt"></i></div>
+            <div class="resetEmailUserText">Dear User</div>
+            <div id="resetEmailText"></div>
+         </div>
       </div>
    </div>
 </section>
@@ -158,7 +172,8 @@
                         else {
                             $('#reset_email').hide();
                             $('#reset_email_message').show();
-                            $('#emailResetMessageBox').html(data.response);
+                            var txtValue = data.response;
+                            $('#resetEmailText').text(txtValue);
                         }
                     }
                 });
