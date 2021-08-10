@@ -119,17 +119,18 @@
                </div>
 
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputZipCodeContainer">
-                  <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
+               
+                  <i class="fas fa-map-pin" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="text" name="inputZipCode" id="inputZipCode" class="form-control" placeholder="Postal Code" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
 
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputTownContainer">
-                  <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
+                  <i class="fas fa-building" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="text" name="inputTown" id="inputTown" class="form-control" placeholder="Town" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
 
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputCityContainer">
-                  <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
+                  <i class="fas fa-city" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="text" name="inputCity" id="inputCity" class="form-control" placeholder="City" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
 
@@ -141,9 +142,14 @@
                   <i class="fas fa-lock" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="password" name="inputConfirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
+               <div class="my-3 ml-4">
+                  <input type="checkbox" name="chbxTermsAndConditions" id="chbxTermsAndConditions"><span class="ml-4">By creating an account, I accept the terms & conditions.</span> <a href="www.google.com" style="font-weight: 500; color: #333;" target="_blank"><i class="fas fa-external-link-alt"></i> read</a>
+               </div>
+               <div class="my-3 ml-4">
+                  <input type="checkbox" names="chbxReceiveOffers" id="chbxReceiveOffers"><span class="ml-4">I want to receive news about offer and deals.</span>
+               </div>
                <div class="text-center" style="width:100%; margin-top: 40px; margin-bottom: 20px;">
                   <input type="submit" value="Sign Up" name="registerForm" style="width:97%; background-color: var(--main-color); border-radius:2px; color: #fff; border: none; font-size: 18px;" class="py-2">
-                  <p class="mt-2" style="font-weight: 500; color: #cccccc;">By creating an account, I accept the terms & conditions</p>
                </div>
 
             </form>
@@ -431,7 +437,7 @@
 
          console.log("Status 1");
 
-			if(!$('#inputFirstName').val() || !$('#inputLastName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val()) {
+			if(!$('#inputFirstName').val() || !$('#inputLastName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val() || !$('#chbxTermsAndConditions').is(":checked") || !$('#chbxReceiveOffers').is(":checked") ) {
 
             console.log('Error');
 
