@@ -95,6 +95,21 @@ class Corder extends CI_Controller {
             $this->session->set_userdata(array('message' => 'Successfully Added'));
             //$content = $this->lorder->proceed_to_checkout($result);
             //$this->template->full_html_view($content);
+
+            $username = $this->session->userdata("user_name");
+            $to_email = $this->session->userdata("email");
+            $order_id = $this->session->userdata("order_id");
+            $OV = $this->session->userdata('OV');
+            $delivery_charges = $this->session->userdata('deliveryCharges');
+            $delivery_price = $this->session->userdata('discountedPrice');
+            $total_amount = (($OV + $delivery_charges) - $delivery_price);
+            $from = "admin@9oclockshop.co.uk";
+            $subject = "9oClock - Order placed";
+            $message = "Hi ". $username . " <br />Your orderId is " . $order_id . " and your payable amount is " . $total_amount . ".";
+            $headers = "From : " . $from;
+
+            mail($to_email, $subject, $message, $headers);
+
             echo 'PaymentIntegration/index';
         } else {
             $this->session->set_userdata(array('error_message' => $result));
