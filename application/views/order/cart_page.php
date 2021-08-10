@@ -285,8 +285,16 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           </p>
         </div>
         <div class="d-flex justify-content-between align-items-center px-3 py-3">
-          <h6 style="color: green; font-weight: 600; margin-bottom: 0px;">Total Amount</h6>
+          <h6 style="color: green; font-weight: 600; margin-bottom: 0px;">
+            Total Amount
+          </h6>
           <h5 style="color: green; font-weight: 600; margin-bottom: 0px;" class="final-amount"></h5>
+        </div>
+        <div class="d-flex flex-column justify-content-between align-items-start px-3 pb-3">
+          <div style="color:red;font-weight: 600; margin-bottom:0px;">Delivery Postcodes: SN1, SN2, SN3, SN4, SN5, SN6, SN25, SN26
+          </div>
+          <div style="font-weight: 600; margin-bottom:0px;">Note: <span style="color:red;">We are growing 9oclock Shop's delivery network please register your interest and we will notify you when we start delivery in your area</span>
+          </div>
         </div>
       </div>
 
