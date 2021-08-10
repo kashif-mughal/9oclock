@@ -30,8 +30,27 @@
 }  
 </style>
 
-<!-- alert-info -->
+<!-- Modal -->
+<div class="modal fade" id="TandCModal" tabindex="-1" role="dialog" aria-labelledby="TandCModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius:2px;">
+    <div class="modal-content" style="border-radius:2px;">
+      <div class="modal-header" style="padding-top:8px;padding-bottom:8px;font-size:18px;">
+        <h5 class="modal-title" id="TandCModalLabel">Terms & Conditions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer" style="padding-top:8px;padding-bottom:8px;">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="padding-top:4px;padding-bottom:4px;background-color: var(--main-color);">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- alert-info -->
  <div id="alertBox" class="alert alert-danger alert-dismissable" style="position: absolute;width: 100%; display: none;">
      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
      <span></span>
@@ -143,7 +162,9 @@
                   <input type="password" name="inputConfirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
                <div class="my-3 ml-4">
-                  <input type="checkbox" name="chbxTermsAndConditions" id="chbxTermsAndConditions"><span class="ml-4">By creating an account, I accept the terms & conditions.</span> <a href="www.google.com" style="font-weight: 500; color: #333;" target="_blank"><i class="fas fa-external-link-alt"></i> read</a>
+                  <input type="checkbox" name="chbxTermsAndConditions" id="chbxTermsAndConditions"><span class="ml-4">By creating an account, I accept the terms & conditions.</span> <button style="border:none;    background-color:transparent;color: #333;font-size: 14px;padding:0px;margin:0px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#TandCModal"><i class="fas fa-external-link-alt"></i> read</button>
+<!-- <a href="www.google.com" style="font-weight: 500; color: #333;" target="_blank"> -->
+</a>
                </div>
                <div class="my-3 ml-4">
                   <input type="checkbox" names="chbxReceiveOffers" id="chbxReceiveOffers"><span class="ml-4">I want to receive news about offer and deals.</span>
