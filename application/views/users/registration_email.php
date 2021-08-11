@@ -161,18 +161,31 @@
                   <i class="fas fa-lock" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="password" name="inputConfirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
-               <div class="my-3 ml-4">
-                  <input type="checkbox" name="chbxTermsAndConditions" id="chbxTermsAndConditions"><span class="ml-4">By creating an account, I accept the terms & conditions.</span> <button style="border:none;    background-color:transparent;color: #333;font-size: 14px;padding:0px;margin:0px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#TandCModal"><i class="fas fa-external-link-alt"></i> read</button>
-<!-- <a href="www.google.com" style="font-weight: 500; color: #333;" target="_blank"> -->
-</a>
-               </div>
-               <div class="my-3 ml-4">
-                  <input type="checkbox" names="chbxReceiveOffers" id="chbxReceiveOffers"><span class="ml-4">I want to receive news about offer and deals.</span>
-               </div>
-               <div class="text-center" style="width:100%; margin-top: 40px; margin-bottom: 20px;">
-                  <input type="submit" value="Sign Up" name="registerForm" style="width:97%; background-color: var(--main-color); border-radius:2px; color: #fff; border: none; font-size: 18px;" class="py-2">
-               </div>
-
+                  <div style="margin-top: 46px; margin-bottom:20px;">
+                     <div class="ml-4 d-flex justify-content-start align-items-center">
+                        <div>
+                           <input type="checkbox" name="chbxTermsAndConditions" 
+                           id="chbxTermsAndConditions">
+                        </div>
+                        <div class="ml-4">
+                           <span>By creating an account, I accept the terms & conditions.</span> <button style="border:none;    background-color:transparent;color: #333;font-size: 14px;padding:0px;margin:0px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#TandCModal"><i class="fas fa-external-link-alt"></i> read</button>
+      <!-- <a href="www.google.com" style="font-weight: 500; color: #333;" target="_blank"> -->
+      </a>
+                        </div>
+                     </div>
+                     <div class="my-2 ml-4 d-flex justify-content-start align-items-center">
+                        <div>
+                           <input type="checkbox" names="chbxReceiveOffers" id="chbxReceiveOffers">
+                        </div>
+                        <div class="ml-4">
+                           <span>I want to receive news about offer and deals.</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="text-center" style="width:100%; margin-top: 40px; margin-bottom: 20px;">
+                     <input type="submit" value="Sign Up" name="registerForm" style="width:97%; background-color: var(--main-color); border-radius:2px; color: #fff; border: none; font-size: 18px;" class="py-2">
+                  </div>
+               
             </form>
          </div>
       </div>
@@ -456,16 +469,23 @@
 			if(!$('#inputConfirmPassword').val()) { $('#inputConfirmPasswordContainer').css("border-bottom", "0.13rem solid red"); }
 			else { $('#inputConfirmPasswordContainer').css("border-bottom", "0.13rem solid green"); }
 
+         if($('#inputPhone').val() == "" || $('#inputPhone').val() == "+44-") {
+            $('#inputPhoneContainer').css("border-bottom", "0.13rem solid red");
+         } else { $('#inputPhoneContainer').css("border-bottom", "0.13rem solid green"); }
+
          console.log("Status 1");
 
-			if(!$('#inputFirstName').val() || !$('#inputLastName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val() || !$('#chbxTermsAndConditions').is(":checked") || !$('#chbxReceiveOffers').is(":checked") ) {
+			if(!$('#inputFirstName').val() || !$('#inputLastName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val() ) {
 
             console.log('Error');
 
             showNoti("Please fill all the required fields", "error");
 				
-				
 			}
+         else if(!$('#chbxTermsAndConditions').is(":checked")) {
+            // !$('#chbxReceiveOffers').is(":checked") 
+            showNoti("Please accept terms and conditions to register.", "error");
+         }
 			else {
 				$.ajax({
 					url: "<?php echo base_url(); ?>Auth2/updateUserRegistrationByEmail",
