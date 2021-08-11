@@ -212,7 +212,7 @@
                         <div class="form-group row">
                             <label for="SaleUnitQty" class="col-sm-3 col-form-label">Sale Unit Quantity </label>
                             <div class="col-sm-6">
-                                <input class="form-control" name ="SaleUnitQty" id="SaleUnitQty" type="number" required placeholder="SaleUnitQty">
+                                <input class="form-control" name ="SaleUnitQty" id="SaleUnitQty" type="number" placeholder="SaleUnitQty">
                             </div>
                         </div>
 

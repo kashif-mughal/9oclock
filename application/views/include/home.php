@@ -14,9 +14,9 @@
       $hotCount = 0;
       foreach ($ProdList as $value)
          {
-            if ($value['IsFeatured'] != 1)
+            if ($value['IsFeatured'] == 1)
                $featuredCount ++;
-            if ($value['IsHot'] != 1)
+            if ($value['IsHot'] == 1)
                $hotCount ++;
          }
       ?>

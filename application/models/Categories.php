@@ -19,8 +19,6 @@ class Categories extends CI_Model {
         $this->db->order_by('a.sort', 'ASC');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            echo '<pre>';
-            print_r($query->result_array());die;
             return $query->result_array();
         }
         return false;

@@ -21,7 +21,7 @@ class Cepos extends CI_Controller {
 
     public function calldata(){
 
-         /*$query = $this->db->query("SELECT DISTINCT json_object('abc',DataReceived) as dt FROM `service_bus_consumption_log` WHERE TblName like '%tblitem%'");
+         /*$query = $this->db->query("SELECT DISTINCT json_object('abc',DataReceived) as dt FROM `service_bus_consumption_log` WHERE TblName = 'tblitem'");
          echo '<pre>';
          $res = array();
          $dts = $query->result_array();
@@ -30,8 +30,8 @@ class Cepos extends CI_Controller {
              echo(json_encode($jsnDt->abc));
              print_r(",");
          }
-         die;
-        */
+         die;*/
+       
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($this->connectionString);
 
         try{
@@ -40,12 +40,15 @@ class Cepos extends CI_Controller {
 
             $options = new ReceiveMessageOptions();
             $options->setPeekLock();
-            for ($i=0; $i < 5000; $i++) {
+            for ($i=0; $i < 500; $i++) {
+                echo $i;
+                echo '<<kashif>>';
                 $message = $serviceBusRestProxy->receiveQueueMessage("epostooms", $options);
 
-                //$message ="{\"table\":\"tblItem\",\"data\":[{\"Id\":3268,\"CategoryName\":\"Baby Care\",\"CompanyId\":1,\"OutletId\":1,\"ParentId\":59,\"IsShowOnTill\":true,\"IsActive\":true,\"Slug\":\"baby-care\"}],\"mode\":\"setup\"}";
+                // $message ="{\"table\":\"tblItem\",\"data\":[{\"ItemName\":\"Tomatoes 1 kg\",\"ItemCode\":\"\",\"CompanyId\":1,\"OutletId\":1,\"ItemCategoryId\":50,\"ItemPurchasePrice\":0,\"ItemSalesPrice\":1.79,\"Tax\":1,\"UnitOfSaleId\":2,\"ItemBarCode\":\"\",\"Description\":\"Bunch of Corriander\",\"Id\":2910,\"IsActive\":true,\"IsShowOnWeb\":\"\", \"Brand\": 2, \"IsAddOn\": false}],\"mode\":\"setup\"}";
+                // $message ="{\"table\":\"tblItem\",\"data\":{\"ItemName\":\"Tomatoes 1 kg\",\"ItemCode\":\"\",\"CompanyId\":1,\"OutletId\":1,\"ItemCategoryId\":50,\"ItemPurchasePrice\":0,\"ItemSalesPrice\":1.79,\"Tax\":1,\"UnitOfSaleId\":2,\"ItemBarCode\":\"\",\"Description\":\"Bunch of Corriander\",\"Id\":2910,\"IsActive\":true,\"IsShowOnWeb\":\"\", \"Brand\": 2, \"IsAddOn\": false},\"mode\":\"update\"}";
                 echo '<pre>';
-                if(!empty($message)){
+                if(!empty($message)){echo 'abc';
                     $incomingMessage = json_decode($message->getBody());
                     //$incomingMessage = json_decode($message);
                     echo '<br>';print_r($incomingMessage);
@@ -53,6 +56,7 @@ class Cepos extends CI_Controller {
                     $value = $incomingMessage->data;
                     $mode = $incomingMessage->mode;
                     if($mode == 'update'){
+                        echo 'updateCase';
                         if($tblName == 'tblStock'){
                             $result = $this->UpdateTblStock($value);
                         }
@@ -66,7 +70,9 @@ class Cepos extends CI_Controller {
                             $result = $this->UpdateTblItemCategory($value);
                         }
                         else if($tblName == 'tblItem'){
+                            echo 'tblItem';
                             $result = $this->UpdateTblItem($value);
+                            echo 'tblItemDone';
                         }
                         else if($tblName == 'tblTax'){
                             $result = $this->UpdateTblTax($value);
@@ -102,9 +108,12 @@ class Cepos extends CI_Controller {
                     }
                 }
                 else{
-                    break;
+                    echo 'abc1';
+                    //break;
+                    //continue;
                 }
             }
+            die;
             //>>>>>>>>>>>> End Receive Message From Queue epostooms <<<<<<<<<<<<<<<<<<
 
             //>>>>>>>>>>>> Send Message To omstoepos Queue Start <<<<<<<<<<<<<<<<<<
@@ -117,10 +126,10 @@ class Cepos extends CI_Controller {
             //>>>>>>>>>>>> End Send Message To omstoepos Queue <<<<<<<<<<<<<<<<<<
         }
         catch(ServiceException $e){
+            echo 'Mughal';die;
             $code = $e->getCode();
             $error_message = $e->getMessage();
             echo $code.": ".$error_message."<br />";
-            die;
         }
 
         $CI = & get_instance();
@@ -135,7 +144,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'Id'                    =>  $tblData[$i]->Id,
                     'ItemCategoryId'        =>  $tblData[$i]->ItemCategoryId,
@@ -154,7 +164,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblstock", $currentExceptionMessage, json_encode($tblData[$i]), '', 'rs');
+                $this->LogServiceBusConsumption("tblstock", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'rs');
             }
         }
     }
@@ -162,7 +172,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'Id'                =>  $tblData[$i]->Id,
                     'Name'              =>  $tblData[$i]->Name,
@@ -178,7 +189,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblCompany", $currentExceptionMessage, json_encode($tblData[$i]), '', 'rs');
+                $this->LogServiceBusConsumption("tblCompany", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'rs');
             }
         }
     }
@@ -186,7 +197,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'UnitId'            =>  $tblData[$i]->Id,
                     'UnitName'          =>  $tblData[$i]->Symbol,
@@ -200,7 +212,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblUnitOfSale", $currentExceptionMessage, json_encode($tblData[$i]), '', 'rs');
+                $this->LogServiceBusConsumption("tblUnitOfSale", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'rs');
             }
         }
     }
@@ -208,7 +220,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'CategoryId'    =>  $tblData[$i]->Id,
                     'CatName'       =>  $tblData[$i]->CategoryName,
@@ -225,7 +238,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblItemCategory", $currentExceptionMessage, json_encode($tblData[$i]), '', 'rs');
+                $this->LogServiceBusConsumption("tblItemCategory", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'rs');
             }
         }
     }
@@ -233,7 +246,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 if(empty($tblData[$i]->Tax))
                     $tblData[$i]->Tax = 0;
                 if(empty($tblData[$i]->ItemBarCode))
@@ -244,10 +258,11 @@ class Cepos extends CI_Controller {
                     $tblData[$i]->IsActive = 1;
                 if(empty($tblData[$i]->ItemPurchasePrice))
                     $tblData[$i]->ItemPurchasePrice = 0;
+                $catId = empty($tblData[$i]->ItemSubCategoryId) ? $tblData[$i]->ItemCategoryId : $tblData[$i]->ItemSubCategoryId;
                 $data = array(
                     'ProductId'     =>  $tblData[$i]->Id,
                     'ProductName'   =>  $tblData[$i]->ItemName,
-                    'Category'      =>  $tblData[$i]->ItemCategoryId,
+                    'Category'      =>  $catId,
                     'Unit'          =>  $tblData[$i]->UnitOfSaleId,
                     'SaleUnit'      =>  $tblData[$i]->UnitOfSaleId,
                     'UnitId'        =>  $tblData[$i]->UnitOfSaleId,
@@ -261,7 +276,7 @@ class Cepos extends CI_Controller {
                     'ItemBarCode'   =>  $tblData[$i]->ItemBarCode
                 );
                 //$this->db->insert('tblstock',$data);
-                $sql = $this->db->insert_string('grocery_products',$data). " ON DUPLICATE KEY UPDATE ProductName = '".$tblData[$i]->ItemName."', Category = ".$tblData[$i]->ItemCategoryId.", Unit = ".$tblData[$i]->UnitOfSaleId.", SaleUnit = ".$tblData[$i]->UnitOfSaleId.", UnitId = ".$tblData[$i]->UnitOfSaleId.", OriginalPrice = ".$tblData[$i]->ItemPurchasePrice.", Price = ".$tblData[$i]->ItemSalesPrice.", SalePrice = ".$tblData[$i]->ItemSalesPrice.", Status = ".$tblData[$i]->IsActive.", CompanyId = ".$tblData[$i]->CompanyId.", OutletId = ".$tblData[$i]->OutletId.", ItemBarCode = '".$tblData[$i]->ItemBarCode."', Tax = ".$tblData[$i]->Tax;
+                $sql = $this->db->insert_string('grocery_products',$data). " ON DUPLICATE KEY UPDATE ProductName = '".$tblData[$i]->ItemName."', Category = ".$catId.", Unit = ".$tblData[$i]->UnitOfSaleId.", SaleUnit = ".$tblData[$i]->UnitOfSaleId.", UnitId = ".$tblData[$i]->UnitOfSaleId.", OriginalPrice = ".$tblData[$i]->ItemPurchasePrice.", Price = ".$tblData[$i]->ItemSalesPrice.", SalePrice = ".$tblData[$i]->ItemSalesPrice.", Status = ".$tblData[$i]->IsActive.", CompanyId = ".$tblData[$i]->CompanyId.", OutletId = ".$tblData[$i]->OutletId.", ItemBarCode = '".$tblData[$i]->ItemBarCode."', Tax = ".$tblData[$i]->Tax;
                 $this->db->query($sql);
             }
             catch(Exception $ex){
@@ -269,7 +284,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblItem", $currentExceptionMessage, json_encode($tblData[$i]), '', 'rs');
+                $this->LogServiceBusConsumption("tblItem", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'rs');
             }
         }
     }
@@ -277,7 +292,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'Id'            =>  $tblData[$i]->Id,
                     'TaxName'       =>  $tblData[$i]->TaxName,
@@ -292,7 +308,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblTax", $currentExceptionMessage, json_encode($tblData[$i]), '', 'rs');
+                $this->LogServiceBusConsumption("tblTax", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'rs');
             }
         }
     }
@@ -304,7 +320,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'ItemCategoryId'        =>  $tblData[$i]->ItemCategoryId,
                     'ItemId'                =>  $tblData[$i]->ItemId,
@@ -322,7 +339,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblstock", $currentExceptionMessage, json_encode($tblData[$i]), '', 'ru');
+                $this->LogServiceBusConsumption("tblstock", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'ru');
             }
         }
     }
@@ -330,7 +347,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'Name'              =>  $tblData[$i]->Name,
                     'IsActive'          =>  $tblData[$i]->IsActive,
@@ -345,7 +363,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblCompany", $currentExceptionMessage, json_encode($tblData[$i]), '', 'ru');
+                $this->LogServiceBusConsumption("tblCompany", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'ru');
             }
         }
     }
@@ -353,7 +371,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'UnitName'          =>  $tblData[$i]->Symbol,
                     'Status'            =>  $tblData[$i]->IsActive
@@ -367,15 +386,17 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblUnitOfSale", $currentExceptionMessage, json_encode($tblData[$i]), '', 'ru');
+                $this->LogServiceBusConsumption("tblUnitOfSale", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'ru');
             }
         }
     }
     private function UpdateTblItemCategory($tblData){
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
-            $currentExceptionMessage = "";
+            $currentExceptionMessage = "Object found, expected an array";
             try{
+                if(!is_array($tblData))
+                    throw new CustomException('Exception message');
                 $data = array(
                     'CatName'       =>  $tblData[$i]->CategoryName,
                     'ParentId'      =>  $tblData[$i]->ParentId,
@@ -391,7 +412,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblItemCategory", $currentExceptionMessage, json_encode($tblData[$i]), '', 'ru');
+                $this->LogServiceBusConsumption("tblItemCategory", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'ru');
             }
         }
     }
@@ -400,6 +421,8 @@ class Cepos extends CI_Controller {
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
             try{
+                if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 if(empty($tblData[$i]->Tax))
                     $tblData[$i]->Tax = 0;
                 if(empty($tblData[$i]->ItemBarCode))
@@ -410,9 +433,10 @@ class Cepos extends CI_Controller {
                     $tblData[$i]->IsActive = 1;
                 if(empty($tblData[$i]->ItemPurchasePrice))
                     $tblData[$i]->ItemPurchasePrice = 0;
+                $catId = empty($tblData[$i]->ItemSubCategoryId) ? $tblData[$i]->ItemCategoryId : $tblData[$i]->ItemSubCategoryId;
                 $data = array(
                     'ProductName'   =>  $tblData[$i]->ItemName,
-                    'Category'      =>  $tblData[$i]->ItemCategoryId,
+                    'Category'      =>  $catId,
                     'Unit'          =>  $tblData[$i]->UnitOfSaleId,
                     'SaleUnit'      =>  $tblData[$i]->UnitOfSaleId,
                     'UnitId'        =>  $tblData[$i]->UnitOfSaleId,
@@ -423,9 +447,9 @@ class Cepos extends CI_Controller {
                     'CompanyId'     =>  $tblData[$i]->CompanyId,
                     'OutletId'      =>  $tblData[$i]->OutletId,
                     'Tax'           =>  $tblData[$i]->Tax,
-                    'ItemBarCode'   =>  $tblData[$i]->ItemBarCode
+                    'ItemBarCode'   =>  $tblData[$i]->ItemBarCode,
+                    'Brand'         =>  $tblData[$i]->Brand
                 );
-
                 $this->db->where('ProductId', $tblData[$i]["Id"]);
                 $this->db->update('grocery_products',$data);
             }
@@ -434,7 +458,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblItem", $currentExceptionMessage, json_encode($tblData[$i]), '', 'ru');
+                $this->LogServiceBusConsumption("tblItem", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'ru');
             }
         }
     }
@@ -442,7 +466,8 @@ class Cepos extends CI_Controller {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         for ($i=0; $i < count($tblData); $i++) {
             $currentExceptionMessage = "";
-            try{
+            try{if(!is_array($tblData))
+                    throw new Exception("Object found, expected an array");
                 $data = array(
                     'TaxName'       =>  $tblData[$i]->TaxName,
                     'TaxPercentage' =>  $tblData[$i]->TaxPercentage,
@@ -457,7 +482,7 @@ class Cepos extends CI_Controller {
             }
             finally{
                 // tblName, exception, dataReceived, dataSend, type
-                $this->LogServiceBusConsumption("tblTax", $currentExceptionMessage, json_encode($tblData[$i]), '', 'ru');
+                $this->LogServiceBusConsumption("tblTax", is_array($tblData) ? $currentExceptionMessage : "Object found, expected an array", is_array($tblData) ? json_encode($tblData[$i]) : json_encode($tblData), '', 'ru');
             }
         }
     }

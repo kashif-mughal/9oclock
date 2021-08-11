@@ -50,7 +50,6 @@ class Dashboard extends CI_Controller {
         $banner = $CI->Banner->get_banners();
 
         //print_r($banner[0]['image_path']);die;
-
         $data = array(
             'title' => '9o\'Clock | Buy all your grocery here',
             'CatList' => $catArray,

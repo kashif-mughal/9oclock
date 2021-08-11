@@ -100,6 +100,7 @@ class Lcategory
         $CI =& get_instance();
         $CI->load->model('Categories');
         $category_list = $CI->Categories->category_list();
+        
         for ($i = 0; $i < count($category_list); $i++)
           {
               //echo '<pre>';print_r($category_list[$i]['ParentId']);
