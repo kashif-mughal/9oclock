@@ -290,11 +290,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           </h6>
           <h5 style="color: green; font-weight: 600; margin-bottom: 0px;" class="final-amount"></h5>
         </div>
-        <div class="d-flex flex-column justify-content-between align-items-start px-3 pb-3">
-          <div style="color:red;font-weight: 600; margin-bottom:0px;">Delivery Postcodes: SN1, SN2, SN3, SN4, SN5, SN6, SN25, SN26
-          </div>
-          <div style="font-weight: 600; margin-bottom:0px;">Note: <span style="color:red;">We are growing 9oclock Shop's delivery network please register your interest and we will notify you when we start delivery in your area</span>
-          </div>
+      </div>
+
+      <div class="d-flex flex-column justify-content-between align-items-start px-3 pb-3 mt-4">
+        <div style="font-weight: 600; margin-bottom:0px;"><span style="color:gray;">Delivery Postcodes: </span> <span style="color:red;">SN1, SN2, SN3, SN4, SN5, SN6, SN25, SN26</span>
+        </div>
+        <div style="font-weight: 600; margin-bottom:0px;margin-top:10px;"><span style="color:gray;">Note:</span> <span style="color:red;">We are growing 9oclock Shop's delivery network please register your interest and we will notify you when we start delivery in your area</span>
         </div>
       </div>
 
