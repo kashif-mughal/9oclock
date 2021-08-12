@@ -223,7 +223,7 @@
                                  }
                                  else
                                  { ?>
-                              <span><?php echo $value["SaleUnitQty"] ?></span>
+                              <!-- <span><?php //echo $value["SaleUnitQty"] ?></span> -->
                               <?php
                                  } ?>
                               <!-- <p class="card-text product-card-inner-weight">

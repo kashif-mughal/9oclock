@@ -371,7 +371,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                 <td class="text-center">
                   <img style="width: 110px;" src="{imgValue}" alt="" class="img-fluid">
                 </td>
-                  <td colspan="3"><p class="prodName">{prodName}</p><small class="unitText">{unit}</small></td>
+                  <td colspan="3"><p class="prodName">{prodName}</p><small class="unitText"></small></td>
                   <td class="" style="text-align: center;" colspan="2"><b class="priceText">{price}</b></td>
                   <td>
                     <span class="add-cart" pId="{pId}" style="display:none;">remove from cart</span>
