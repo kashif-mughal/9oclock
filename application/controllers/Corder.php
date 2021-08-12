@@ -105,8 +105,10 @@ class Corder extends CI_Controller {
             $total_amount = (($OV + $delivery_charges) - $delivery_price);
             $from = "admin@9oclockshop.co.uk";
             $subject = "9oClock - Order placed";
-            $message = "Hi ". $username . " <br />Your orderId is " . $order_id . " and your payable amount is " . $total_amount . ".";
-            $headers = "From : " . $from;
+            $message = "<br/>Hi ". $username . ",<br/><br/>Your order detail listed below<br/>OrderId: " . $order_id . "<br/>Payable amount: £" . $total_amount . ".";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+			$headers .= 'From: ' . '<' . $from .'>' . "\r\n";
 
             mail($to_email, $subject, $message, $headers);
 

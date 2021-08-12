@@ -481,8 +481,10 @@ class Auths extends CI_Model {
 
         $from = "admin@9oclockshop.co.uk";
         $subject = "9oClock - User Email Verification";
-        $message = "Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: " . $otp_code;
-        $headers = "From : " . $from;
+        $message = "<br/>Hi User, </br></br>This is your 4 digit OTP to verify your acccount, Please enter in the application to register yourself.</br></br>OTP Code: " . $otp_code;
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: ' . '<' . $from .'>' . "\r\n";
 
         mail($to_email, $subject, $message, $headers);
 
@@ -495,6 +497,9 @@ class Auths extends CI_Model {
         $from = "admin@9oclockshop.co.uk";
         $subject = "9oClock - User Email Verification";
         $message = $body;
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: ' . '<' . $from .'>' . "\r\n";
 
         mail($to_email, $subject, $message, $headers);
 
