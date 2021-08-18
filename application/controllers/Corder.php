@@ -103,14 +103,14 @@ class Corder extends CI_Controller {
             $delivery_charges = $this->session->userdata('deliveryCharges');
             $delivery_price = $this->session->userdata('discountedPrice');
             $total_amount = (($OV + $delivery_charges) - $delivery_price);
-            $from = "admin@9oclockshop.co.uk";
-            $subject = "9oClock - Order placed";
-            $message = "<br/>Hi ". $username . ",<br/><br/>Your order detail listed below<br/>OrderId: " . $order_id . "<br/>Payable amount: £" . $total_amount . ".";
-            $headers = "MIME-Version: 1.0" . "\r\n";
-			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-			$headers .= 'From: ' . '<' . $from .'>' . "\r\n";
+            // $from = "admin@9oclockshop.co.uk";
+            // $subject = "9oClock - Order placed";
+            // $message = "<br/>Hi ". $username . ",<br/><br/>Your order detail listed below<br/>OrderId: " . $order_id . "<br/>Payable amount: £" . $total_amount . ".";
+            // $headers = "MIME-Version: 1.0" . "\r\n";
+			// $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+			// $headers .= 'From: ' . '<' . $from .'>' . "\r\n";
 
-            mail($to_email, $subject, $message, $headers);
+            // mail($to_email, $subject, $message, $headers);
 
             echo 'PaymentIntegration/index';
         } else {

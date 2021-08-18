@@ -132,6 +132,17 @@ class PaymentIntegration extends CI_Controller {
    //   // 3. Update order payment status 
       $this->lpayment->update_payment_status_updated($responseData);
      
+      $username = $this->session->userdata("user_name");
+      $to_email = $this->session->userdata("email");
+      $from = "admin@9oclockshop.co.uk";
+      $subject = "9oClock - Order placed";
+      $message = "<br/>Hi ". $username . ",<br/><br/>Your order detail listed below<br/>OrderId: " . $orderId . "<br/>Payable amount: £" . $Final_Amount . ".";
+      $headers = "MIME-Version: 1.0" . "\r\n";
+      $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+      $headers .= 'From: ' . '<' . $from .'>' . "\r\n";
+
+      mail($to_email, $subject, $message, $headers);
+
       $content = $this->lpayment->success();
       $this->template->full_html_view($content);
    }
