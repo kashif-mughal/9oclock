@@ -342,9 +342,9 @@ class Auths extends CI_Model {
         );
 
         $this->db->insert('grocery_otp', $otp_data);
-        $message = "Your OTP is " . $fourRandomDigit;
-        //$messageStatus = $this->sendemail($to_email, $message);
-        return $message;
+        //$message = "Your OTP is " . $fourRandomDigit;
+        $messageStatus = $this->sendemail($to_email, $fourRandomDigit);
+        return TRUE;
 
     }
 
