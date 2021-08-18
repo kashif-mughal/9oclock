@@ -65,6 +65,9 @@
 
 }
 
+.phone_cart {
+   margin-right: 0px;
+}
 
 #mobile_cart .each-prod-top p {
    height: 1.4em !important;
@@ -1343,9 +1346,9 @@ button.category-button:active {
 
 #add_to_cart_items {
    font-size: 12px;
-   position: relative;
-   bottom: -12px;
-   left: 11px;
+   position: absolute;
+   bottom: -5px;
+   left: 13px;
    background-color: #ffffff;
    color: var(--secondary-color);
    width: 18px;
@@ -2899,6 +2902,17 @@ button.category-button:active {
 
 .cart_icon {
    position: relative !important;
+   color: #fff !important;
+   text-decoration: none !important;
+   color: inherit !important;
+}
+
+.cart_icon a:hover,
+.cart_icon a:focus,
+.cart_icon a:active {
+   color: #fff !important;
+   text-decoration: none !important;
+   color: inherit !important;
 }
 
 #shoppingCartModal .modal-dialog {
@@ -3786,14 +3800,20 @@ a#newAddressCancelBtn {
    color: #fff;
 }
 
-.out_of_stock_btn{
-   background-color: red;
+.cart_icon i {
+   font-size: 20px;
+   color: #fff;
 }
-.out_of_stock_btn: hover{
+
+.out_of_stock_btn {
    background-color: red;
 }
 
-.main-content .featured-products-content .card .card-body h5{
+.out_of_stock_btn:hover {
+   background-color: red;
+}
+
+.main-content .featured-products-content .card .card-body h5 {
    width: 80%;
    background: #ff2524d1;
    color: #fff;
@@ -3806,9 +3826,9 @@ a#newAddressCancelBtn {
    margin: 0px 20px;
    padding: 6px 0px;
    border-radius: 0px 20px;
- }
+}
 
-.disabledAdd{
+.disabledAdd {
    opacity: 0.4;
    pointer-events: none;
 }
@@ -4335,6 +4355,11 @@ a#newAddressCancelBtn {
       width: 24px !important;
    }
 
+   #header-buttons {
+      padding-right: 6px;
+      padding-left: 0px;
+   }
+
 }
 
 
@@ -4444,6 +4469,10 @@ a#newAddressCancelBtn {
    .phone_cart {
       width: 24px;
    }
+
+   #header-buttons {
+      padding-right: 13px;
+   }
 }
 
 
@@ -4461,7 +4490,7 @@ a#newAddressCancelBtn {
 @media (max-width: 576px) {
 
    .phone_cart {
-      margin-bottom: 12px !important;
+      margin-bottom: 0px;
    }
 
    /* .logo .logo_content img {
@@ -4474,7 +4503,8 @@ a#newAddressCancelBtn {
    }
 
    .cart_icon {
-      margin-bottom: 20px;
+      margin-bottom: 0px;
+      margin-left: 0px;
    }
 
    .search-helper-text {
@@ -4638,6 +4668,10 @@ a#newAddressCancelBtn {
       margin-top: 154px;
    }
 
+   #header-buttons {
+      padding-right: 12px;
+   }
+
 }
 
 
@@ -4751,9 +4785,10 @@ a#newAddressCancelBtn {
       width: 177px;
    }
 
-   /* .phone_cart {
-      width: 15px !important;
-   } */
+   .phone_cart {
+      width: 15px;
+      margin-right: 5px;
+   }
 
    .sidebar-button {
       width: 15px !important;
@@ -4819,7 +4854,7 @@ a#newAddressCancelBtn {
    }
 
    .cart_icon .cart_icon_text #add_to_cart_items {
-      top: 19px;
+      top: 12px;
    }
 }
 
@@ -4865,6 +4900,14 @@ a#newAddressCancelBtn {
    .phone_cart i {
       font-size: 18px;
       color: #fff;
+   }
+
+   .cart_icon {
+      margin-left: -6px;
+   }
+
+   .cart_icon i {
+      font-size: 18px;
    }
 
    .cart_icon .cart_icon_text #add_to_cart_items {
@@ -4923,6 +4966,7 @@ a#newAddressCancelBtn {
    #header-buttons {
       padding-left: 0px;
    }
+
 }
 
 @media (max-width: 360px) {
@@ -4962,6 +5006,16 @@ a#newAddressCancelBtn {
    .order-history-card .quantity-area {
       padding-left: 20% !important;
       padding-right: 6% !important;
+   }
+
+   .cart_icon .cart_icon_text #add_to_cart_items {
+      top: 8px;
+      left: 12px;
+      font-size: 10px;
+   }
+
+   #header-buttons {
+      padding-right: 3px;
    }
 
 }
