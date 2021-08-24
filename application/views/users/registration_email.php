@@ -175,7 +175,7 @@
                      </div>
                      <div class="my-2 ml-4 d-flex justify-content-start align-items-center">
                         <div>
-                           <input type="checkbox" names="chbxReceiveOffers" id="chbxReceiveOffers">
+                           <input type="checkbox" name="chbxReceiveOffers" id="chbxReceiveOffers">
                         </div>
                         <div class="ml-4">
                            <span>I want to receive news about offer and deals.</span>
@@ -336,15 +336,21 @@
 					data: { code: otpCode, email: email_address },
 					dataType: "json",
 					success: function(data) {
-                  console.log(data);
+                  alert(data);
 						if(data.status == 'Error') {
                         showNoti(data.response, "error");
                   }
                   else {
                      if(data.loggedInStatus == "login") { // && data.redirectURL == false) {
-                        $('#otpForm').hide(); // to otp page
-                        $('#login_new').show();
-                        $("#userRegistrationForm_new").trigger("reset");
+                        //$('#otpForm').hide(); // to otp page
+                        //$('#login_new').show();
+                        //$("#userRegistrationForm_new").trigger("reset");
+
+                        if(!data.redirectURL) {
+								   window.location = "<?php echo base_url(); ?>Dashboard";
+                        } else {
+								   window.location.href = decodeURIComponent(data.redirectURL);
+                        }
                      }
                      showNoti(data.response, "success");
                   }
@@ -497,6 +503,7 @@
                      showNoti(data.responseMessage, "error");
 						}
 						else {
+                     alert(data.redirectURL);
                      showNoti(data.responseMessage, "success");
                      $('#registration_new').hide();
 							$('#registration_new').css('display', 'none');
