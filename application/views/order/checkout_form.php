@@ -194,6 +194,11 @@
             </div>
         </div>
         <div class="row">
+            <?php 
+                $date = new DateTime("now",null);
+                $curr_hour = $date->format('H');
+                $curr_min = $date->format('m');
+            ?>
             <div id="checkoutCartContainer">
                 <p class="heading">Schedule Delivery</p>
                 <div class="d-flex justify-content-start align-items-center checkoutItem">
@@ -205,9 +210,10 @@
                     </div>
                     <div class="input-group checkoutDropdown">
                         <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day">
-                            <option value="today" selected>Today</option>
+                            <?php if($curr_hour < 20) { ?>
+                                <option value="today" selected>Today</option>
+                            <?php } ?>
                             <option value="tomorrow">Tomorrow</option>
-                            <option value="nextweek">Next Week</option>
                         </select>
                     </div>
                 </div>
@@ -218,11 +224,20 @@
                     <div class="checkoutCartTextContainer">
                         <p class="checkoutCartText">Delivery Time:</p>
                     </div>
+                    
                     <div class="input-group checkoutDropdown">
-                        <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day">
-                            <option value="today" selected>10.00 am - 12.00 pm</option>
-                            <option value="tomorrow">04.00 pm - 06.00 Pm</option>
-                            <option value="nextweek">08.00 pm - 10.00 Pm</option>
+                        <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day"> 
+                                
+
+                            <?php if($curr_hour < 10 || $curr_hour >= 20) { ?>
+                                <option value="today" selected>10.00 AM - 12.00 PM</option>
+                            <?php } ?>
+                            <?php if($curr_hour < 16 || $curr_hour >= 20) { ?>
+                                <option value="tomorrow">04.00 PM - 06.00 PM</option>
+                            <?php } ?>
+                            <?php if($curr_hour < 20 || $curr_hour >= 20) { ?>
+                                <option value="nextweek">08.00 PM - 10.00 PM</option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
