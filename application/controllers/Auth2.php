@@ -101,6 +101,11 @@ class Auth2 extends CI_Controller {
         $city = $this->input->Post('inputCity');
         $password = $this->input->Post('inputPassword');
         $confirm_password = $this->input->Post('inputConfirmPassword');
+        $promotion_email = $this->input->Post('chbxReceiveOffers');
+
+        $isPromotion = false;
+
+        if($promotion_email == "on") { $isPromotion = true; }
 
         // Validation
         $this->form_validation->set_rules('inputFirstName', 'First Name', 'required');
@@ -149,7 +154,7 @@ class Auth2 extends CI_Controller {
                 $this->auths->insert_user_login_email($user_id, $email, $password);
 
                 // Insert record in users table
-                $this->auths->insert_user_email($user_id, $firstName, $lastName, $email, $phone, $address, $zip_code, $town, $city);
+                $this->auths->insert_user_email($user_id, $firstName, $lastName, $email, $phone, $address, $zip_code, $town, $city, $isPromotion);
 
                 // Insert otp record and send otp
                 $isEmailExist = $this->auths->is_email_exist($email);
@@ -529,6 +534,35 @@ class Auth2 extends CI_Controller {
                         if($otp_code == '5555' || $userData[0]['code'] == $otp_code) { // verify otp success
                             $userStatus = $this->auths->user_login_email_otp($email);
                             if($userStatus) { // user login is available
+
+                                // // codeigniter session stored data      
+                                
+                                $key = md5(time());
+                                $key = str_replace("1", "z", $key);
+                                $key = str_replace("2", "J", $key);
+                                $key = str_replace("3", "y", $key);
+                                $key = str_replace("4", "R", $key);
+                                $key = str_replace("5", "Kd", $key);
+                                $key = str_replace("6", "jX", $key);
+                                $key = str_replace("7", "dH", $key);
+                                $key = str_replace("8", "p", $key);
+                                $key = str_replace("9", "Uf", $key);
+                                $key = str_replace("0", "eXnyiKFj", $key);
+                                $sid_web = substr($key, rand(0, 3), rand(28, 32));
+                                
+                                $user_data = array(
+                                    'sid_web' => $sid_web,
+                                    'user_id' => $userStatus[0]['user_id'],
+                                    'user_type' => $userStatus[0]['user_type'],
+                                    'user_name' => $userStatus[0]['first_name'] . " " . $userStatus[0]['last_name'],
+                                    'user_email' => $userStatus[0]['username'],
+                                    'address' => $userStatus[0]['address'],
+                                    'zip_code' => $userStatus[0]['zip_code'],
+                                    'town' => $userStatus[0]['town'],
+                                    'city' => $userStatus[0]['city'],
+                                );
+
+                                $this->session->set_userdata($user_data);
 
                                 $this->auths->update_otp_verified_email($email);
                                 $result['responseMessage'] = 'User is verified, Please Login';
