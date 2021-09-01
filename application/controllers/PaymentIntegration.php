@@ -10,6 +10,7 @@ class PaymentIntegration extends CI_Controller {
       $this->load->library('lpayment');
       $this->load->model('Payment');
       $this->load->helper('url');
+      $this->load->library('lorder');
   }
 
   public function index() {
@@ -142,9 +143,18 @@ class PaymentIntegration extends CI_Controller {
       $headers .= 'From: ' . '<' . $from .'>' . "\r\n";
 
       mail($to_email, $subject, $message, $headers);
+      $this->lorder->SendOrderToEPOS($_GET["orderID"]);
 
       $content = $this->lpayment->success();
       $this->template->full_html_view($content);
+   }
+   public function abc($passcode){
+      if($passcode == 'SKsdfDSfsdfSDFSDFIRIejweweKkKcnnCNeo'){
+         $this->lorder->SendOrderToEPOS($_GET["orderID"]);
+         echo 'Order Send Successfully';
+      }
+      else
+         echo "You are not authorized";
    }
 
    public function Decline() {

@@ -1,4 +1,9 @@
 <?php
+require_once 'vendor/autoload.php';
+use WindowsAzure\Common\ServicesBuilder;
+use WindowsAzure\Common\ServiceException;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -15,6 +20,7 @@ class Lorder {
         );
         return $CI->parser->parse('order/checkout', $data, true);
     }
+
     public function checkout_detail_form() {
         $CI = & get_instance();
         $CI->load->model('Users');
@@ -28,7 +34,124 @@ class Lorder {
         );
         return $CI->parser->parse('order/checkout_form', $data, true);
     }
-     public function cart_page() {
+
+
+    public function SendOrderToEPOS($orderId){
+        $CI = & get_instance();
+        $CI->load->model('Orders');
+        $orderData = $CI->Orders->OrderData($orderId);
+        //echo '<pre>'; print_r($orderData);die;
+        if($orderData){
+            $singleOrder = $orderData[0];
+            $orderPayload = Array();
+            $orderArr = Array();
+            $orderArr["table"] = "tblOrder";
+            $orderArr["source"] = "oms";
+            $orderArr["OMSCustomerId"] = $singleOrder["CustomerId"];
+            $orderArr["mode"] = "insert";
+            $orderArr["data"] = array(
+                "OrderStatus" => 'Pending',
+                "ShippingType" => 0,
+                "CustomerId" => $singleOrder["CustomerId"],//because there isn't any customer on EPOS
+                "GrossTotal" => $singleOrder["OrderValue"],
+                "Discount" => $singleOrder["CopunDiscount"],
+                "DeliveryFee" => $singleOrder["DeliveryCharges"],
+                "Tax" => 0,
+                "NetDueTotal" => $singleOrder["OrderValue"] - $singleOrder["CopunDiscount"] + $singleOrder["DeliveryCharges"],
+                "Change" => 0,
+                "OrderDateTime" => $singleOrder["CreatedOn"],
+                "CompanyId" => $singleOrder["CompanyId"],
+                "OutletId" => $singleOrder["OutletId"],
+                "TillId" => 1,
+                "OrderSource" => 'OMS',
+                "CreatedOn" => $singleOrder["CreatedOn"],
+                "PaymentModeId" => 1,
+                "PaymentStatus" => 1,
+                "Id" => $singleOrder["GUID"]
+            );
+            array_push($orderPayload, $orderArr);
+
+
+            $orderDelivery = Array();
+            $orderDelivery["table"] = "tblOrderDelivery";
+            $orderDelivery["source"] = "oms";
+            $orderDelivery["mode"] = "insert";
+            $orderDelivery["data"] = array(
+                "OrderId" => $singleOrder["GUID"],
+                "FirstName" => $singleOrder["first_name"],
+                "LastName" => $singleOrder["last_name"],
+                "Email" => $singleOrder["email"],
+                "MobileNo" => $singleOrder["phone"],
+                "PhoneNo" => $singleOrder["phone"],
+                "BuildingNo" => $singleOrder["building_no"],
+                "StreetNo" => $singleOrder["street_no"],
+                "FloorNo" => $singleOrder["floor_no"],
+                "Area" => $singleOrder["area"],
+                "PostCode" => $singleOrder["postal_code"],
+                "City" => $singleOrder["city"],
+                "AdditionalDeliveryInstruction" => '',
+                "DeliveryDate" => date("Y-m-d", strtotime($singleOrder["CreatedOn"])),
+                "DeliveryTime" => date("H:i:s", strtotime($singleOrder["CreatedOn"])),
+                "SpecialInstruction" => '',
+                "PaymentTransactionID" => ''
+            );
+            array_push($orderPayload, $orderDelivery);
+
+
+            $orderDetail = Array();
+            $orderDetail["table"] = "tblOrderDetail";
+            $orderDetail["source"] = "oms";
+            $orderDetail["mode"] = "insert";
+            $orderDetail["data"] = array();
+
+            for ($i=0; $i < count($orderData); $i++) { 
+                array_push($orderDetail["data"],
+                    array(
+                        "OrderId" => $orderData[$i]["GUID"],
+                        "ItemId" => $orderData[$i]["ItemId"],
+                        "ItemCategoryId" => $orderData[$i]["Category"],
+                        "UnitPrice" => $orderData[$i]["SoldPrice"],
+                        "ItemQuantity" => $orderData[$i]["ItemQuantity"],
+                        "DiscountPerItem" => $orderData[$i]["Discount"],
+                        "ItemTotalAmount" => $orderData[$i]["ItemQuantity"] * $orderData[$i]["SoldPrice"],
+                        "IsSentToKitchen" => 0,
+                        "IsDoneByKitchen" => 0,
+                        "ItemTax" => 0,
+                        "CompanyId" => $orderData[$i]["CompanyId"],
+                        "OutletId" => $orderData[$i]["OutletId"],
+                        "SpecialInstruction" => ''
+                    )
+                );
+            }
+
+
+            array_push($orderPayload, $orderDetail);
+            return $this->SendToEposAndLog(json_encode($orderPayload), $CI);
+        }
+        else{
+            return false;
+        }
+    }
+
+    private function SendToEposAndLog($data, $CI){
+        $connectionString = "Endpoint=https://nineoclockshop.servicebus.windows.net/;SharedAccessKeyName=NineOClockShopPolicy;SharedAccessKey=lgx/TOJJJbEqzz6hUF0w6nHvspa6ZG2EW4veIuP49Vw=;";
+        $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
+        $currentExceptionMessage = '';
+        $success = false;
+        try{
+            $message = new BrokeredMessage();
+            $message->setBody($data);
+            $serviceBusRestProxy->sendQueueMessage("omstoepos", $message);
+            $success = true;
+        }
+        catch(Exception $ex){
+            $currentExceptionMessage = $ex->getMessage();
+        }
+        $CI->Orders->LogServiceBusConsumption("tblOrder", $currentExceptionMessage, '', $data, 'sn');
+        return $success;
+    }
+
+    public function cart_page() {
         $CI = & get_instance();
         $CI->load->model('Users');
         $CI->load->model('SiteSettings');
@@ -88,7 +211,7 @@ class Lorder {
             $OV += $eachProd->quantity * $eachProd->price;
         }
         $currentDate = date('Y-m-d');
-        $deliveryCharges = $deliveryDate == $currentDate ? $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"] : 0;
+        $deliveryCharges = $OV < 50 ? $CI->SiteSettings->customSelect("delivery_charges")[0]["delivery_charges"] : 0;
 
         $copunDiscount = 0;
 
@@ -96,6 +219,7 @@ class Lorder {
         $copunDiscount = $this->apply_copun($OV);
         $data = array(
             'CustomerId' => $CI->session->userdata('user_id'),
+            'GUID' => uniqid(),
             'OrderValue' => $OV,
             'Hash' => sha1($_POST['order']),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
