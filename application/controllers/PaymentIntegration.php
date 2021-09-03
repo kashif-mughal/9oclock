@@ -130,7 +130,7 @@ class PaymentIntegration extends CI_Controller {
       $this->SaveBankTransRecord($responseData);
       
    //   // 3. Update order payment status 
-      $this->lpayment->update_payment_status_updated($responseData);
+      $this->lpayment->update_payment_status($responseData);
      
       $username = $this->session->userdata("user_name");
       $to_email = $this->session->userdata("email");
