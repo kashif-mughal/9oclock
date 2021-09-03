@@ -70,6 +70,37 @@ class Orders extends CI_Model {
         return false;
     }
 
+    public function OrderData($orderId){
+        $this->db->select('a.*, b.*, c.ProductName, c.CompanyId, c.OutletId, c.Tax, c.Category, d.UnitName, u.*, gua.Address');
+        $this->db->from($this->tableName.' a');
+        $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
+        $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
+        $this->db->join('grocery_unit d', 'c.Unit = d.UnitId');
+        $this->db->join('users u', 'u.user_id = a.CustomerId');
+        $this->db->join('grocery_user_address gua', 'gua.AddressId = a.DeliveryAddress');
+        
+        //$this->db->join('grocery_user_address gua', 'gua.AddressId = a.DeliveryAddress');
+        $this->db->where('a.OrderId', $orderId);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $dt = array();
+            return $query->result_array();
+        }
+        return false;
+    }
+
+    public function LogServiceBusConsumption($tbl, $exMessage, $dataReceived, $dataSend, $type){
+        $data = array(
+            'TblName'         =>  $tbl,
+            'Exception'       =>  $exMessage,
+            'DataReceived'    =>  $dataReceived,
+            'DataSend'        =>  $dataSend,
+            'Type'            =>  $type
+        );
+        $this->db->insert('service_bus_consumption_log',$data);
+    }
+
     public function retrieve_user_orders_details($userId){
 
     }
