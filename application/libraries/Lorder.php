@@ -194,7 +194,7 @@ class Lorder {
         $CI->load->model('SiteSettings');
         date_default_timezone_set('Europe/London');
         $addressId = $CI->session->userdata("addressId");
-        //$deliveryTime = $CI->session->userdata("deliveryTime");
+        $deliveryTime = $CI->session->userdata("deliveryTime");
         $addressText = $CI->session->userdata("addressText");
         
         if(!is_numeric($addressId) || empty($addressText))
@@ -219,7 +219,7 @@ class Lorder {
         $copunDiscount = $this->apply_copun($OV);
         $data = array(
             'CustomerId' => $CI->session->userdata('user_id'),
-            'GUID' => GUIDv4(),
+            'GUID' => $this->GUIDv4(),
             'OrderValue' => $OV,
             'Hash' => sha1($_POST['order']),
             'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
