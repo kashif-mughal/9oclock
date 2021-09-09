@@ -61,6 +61,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    }
    .button-primary:hover{
     background-color: #0c0792;
+   }
 </style>
 <div class="bg-overlay" style="display: none; position: fixed; top: 0; background-color:#000; width: 100%; height: 100vh; z-index: 1999; opacity: 0.8;"></div>
 <!-- Script for the use of auto complete search START-->
@@ -238,14 +239,15 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
-                  <div class="col-lg-2 col-md-3 col-sm-5 mb-sm-2 order-lg-3 order-2 col-4 pr-sm-3" id="header-buttons">
-                     <div class="d-flex justify-content-sm-between align-items-center justify-content-sm-end justify-content-start">
+                  <div class="col-lg-2 col-md-3 col-sm-5 mb-sm-2 order-lg-3 order-2 col-4" id="header-buttons">
+                     <div class="d-flex align-items-center justify-content-between">
 
-                        <div class="phone_cart mr-4 mr-sm-0">
+                        <div class="phone_cart">
                            <!-- <i class="fas fa-user" id="user_icon"></i> -->
                            <div class="dropdown" id="profileDropdown">
                               <a href="<?php echo is_null($users) ? base_url('dashboard/user_login_email') : "javascript:void(0)";?>">
-                                 <img src="<?php echo base_url("assets/img/account-icon.png") ?>" alt="">
+                                 <!-- <img src="<?php //echo base_url("assets/img/account-icon.png") ?>" alt=""> -->
+                                 <i class="fas fa-user"></i>
                               </a>
                               <?php if(isset($_SESSION['user_id'])) { ?>
                               <div class="dropdown-menu">
@@ -261,10 +263,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                            </div>
                         </div>
 
-                        <div class="cart_icon mr-4 mr-sm-0">
+                        <div class="cart_icon">
                            <a href="<?php echo base_url() ?>corder/cart_page" id="cartBtn" data-toggle="">
                               <!-- <img src="<?php //echo base_url() ?>assets/img/basket.png" alt="" id="basket-img"> -->
-                              <img src="<?php echo base_url() ?>assets/img/basket.png" alt="" id="basket-img">
+                              <i class="fas fa-shopping-cart" ></i>
                               <div class="cart_icon_text">
                                  <span id="add_to_cart_items" class="badge badge-pill badge-light b-r-50">0</span>
                               </div>
@@ -280,8 +282,8 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                            aria-expanded="false" 
                            aria-label="Toggle navigation"
                            style="padding:0px;">
-                                 <!-- <i class="fa fa-bars"></i> -->
-                                 <img src="<?php echo base_url() ?>assets/img/Menu-icon.png" alt="">
+                              <!-- <img src="<?php //echo base_url() ?>assets/img/Menu-icon.png" alt=""> -->
+                              <i class="fas fa-bars"></i>
                            </button>
                         </div>
 
@@ -322,7 +324,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
        neg = true;
        total = Math.abs(total);
     }
-    return (neg ? `-${currency} ` : `${currency} `) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+    return (neg ? `-${currency} ` : `${currency}`) + parseFloat(total, 10).toFixed(toFixed).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
  }
  $(document).ready(() => {
    //  var isWebNoteAvailable = $('body').find($('#websiteNote'));

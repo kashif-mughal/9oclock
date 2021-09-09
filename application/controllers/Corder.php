@@ -105,14 +105,30 @@ class Corder extends CI_Controller {
             $total_amount = (($OV + $delivery_charges) - $delivery_price);
             $from = "admin@9oclockshop.co.uk";
             $subject = "9oClock - Order placed";
-            $message = "<br/>Hi ". $username . ",<br/><br/>Your order detail listed below<br/>OrderId: " . $order_id . "<br/>Payable amount: £" . $total_amount . ".";
+			
+			//echo $current_baskit;
+			//$object_id = array_column($current_baskit, 'id');
+			//echo $object_id;
+			//$test = (array)$current_baskit;
+			//echo var_dump($test[0]);
+			$year = date('Y');
+		  $purchased_items = '';
+	   	  foreach ($current_baskit as $key => $eachProd) {
+		  $purchased_items .= '<tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="75%">'. $eachProd->pName .'</td><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="25%">£'. $eachProd->price .'</td></tr>';
+	   }
+			//---------------------------------------------------------------
+	   
+	   $message = '<table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td style="background-color: #eeeeee;" align="center" bgcolor="#eeeeee"><table style="max-width: 600px; height: 600px; width: 100%;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center"><tbody><tr style="height: 535px;"><td style="padding: 35px 35px 20px; background-color: #ffffff; height: 535px;" align="center" bgcolor="#ffffff"><table style="max-width: 600px;" border="0" width="100%" cellspacing="0" cellpadding="0" align="center"><tbody><tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;" align="center"><img style="display: block; border: 0px;" src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" /><br /><h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">Thank You For Your Order!</h2></td></tr><tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;" align="center"><p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">Below is the detail of purchased items with grand total</p></td></tr><tr><td style="padding-top: 20px;" align="left"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;" align="left" bgcolor="#eeeeee" width="75%">Order Id #</td><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;" align="left" bgcolor="#eeeeee" width="25%">' . $order_id . '</td>'. $purchased_items .'</tbody></table></td></tr><tr><td style="padding-top: 20px;" align="left"><table border="0" width="100%" cellspacing="0" cellpadding="0"><tbody><tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;" align="left" width="75%">GRAND TOTAL</td><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;" align="left" width="25%">£' . $total_amount . '</td></tr></tbody></table></td></tr></tbody></table></td></tbody></table></td></tr></tbody></table><br/><br/><h3>Shipping Address:</h3>'.$_SESSION["address"].'<br/>'.$_SESSION["town"].'<br/>'.$_SESSION["city"].'<br/>'.$_SESSION["zip_code"].'<br/><br/><p style="align=center;">Contact@9oclockshop.co.uk</p><p style="align=center;">9oClock Shop ® '. $year .'</p>';
+	   
+	   //---------------------------------------------------------------			
+			
+			
             $headers = "MIME-Version: 1.0" . "\r\n";
 			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$headers .= 'From: ' . '<' . $from .'>' . "\r\n";
 
 
             mail($to_email, $subject, $message, $headers);
-
             echo 'PaymentIntegration/index';
         } else {
             $this->session->set_userdata(array('error_message' => $result));

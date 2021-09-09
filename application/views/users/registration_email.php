@@ -31,17 +31,63 @@
 </style>
 
 <!-- Modal -->
-<div class="modal fade" id="TandCModal" tabindex="-1" role="dialog" aria-labelledby="TandCModalLabel" aria-hidden="true">
+<div class="modal fade" id="TandCModal" tabindex="-1" role="dialog" aria-labelledby="TandCModalLabel" aria-hidden="true" style="height: 90%">
   <div class="modal-dialog modal-dialog-centered" role="document" style="border-radius:2px;">
-    <div class="modal-content" style="border-radius:2px;">
+    <div class="modal-content" style="border-radius:2px; height:90%;">
       <div class="modal-header" style="padding-top:8px;padding-bottom:8px;font-size:18px;">
         <h5 class="modal-title" id="TandCModalLabel">Terms & Conditions</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" style="overflow-y: scroll;">
+      <h6>Our details</h6>
+      <p>The data controller in respect of our website is A2Z GROCERY SWINDON LTD, 131 Beatrice Street, Swindon, United Kingdom, SN2 1BD. You can contact the data controller by writing to A2Z GROCERY SWINDON LTD, 131 Beatrice Street, Swindon, or sending an email to Contact@9oclockshop.co.uk</p>
+      <h6 class="mt-3">Contact Us</h6>
+      <p>If you have any questions/comments about our terms and conditions, you should contact us at Contact@9oclockshop.co.uk.
+         This site is owned and operated by 9 o'clock Shop. These terms and conditions tell you the rights and obligations you have. Please read these carefully before you use this website. You may have other rights granted by law, and these terms and conditions do not affect  these. This does not affect your statutory rights as a consumer. Should you have any questions complaints or comments, please email us at Contact@9oclockshop.co.uk.</p>
+      
+      <h6 class="mt-3">Ownership of Intellectual Property</h6>
+      <p>All rights, including trademarks and copyright, on this website are licensed to or
+owned by 9 o’ clock Shop. You acknowledge and agree that all rights are made available for your use while visiting this website. You also acknowledge that apart from your own personal non-commercial use, that any copying, storing of the website in whole or part, and display, distribution, reproduction or commercial use of material or content from this website is strictly prohibited without the permission of 9 ‘o clock Shop and A2Z Grocery Swindon Ltd.</p>
+
+   <h6 class="mt-3">Your Account Security</h6>
+      <p>9 ‘o clock Shop cannot be held responsible for any loss/damage of information which may arise as a result of failure by you to protect your account security.
+   Please do not divulge your password to anyone and keep account details confidential at all times.</p>
+
+   <h6 class="mt-3">Purchasing From Us</h6>
+      <p>By submitting your order you are offering to buy our goods and allowing us to use your personal details for the purposes of supplying products / services. We do not sell your details or pass them onto any other 3rd party companies that aren't operated by 9 ‘o clock Shop (Data Processor) in any circumstance, under the Data Protection Act 1998. We are not obliged to supply goods to you until we have confirmed acceptance of your order. At this point a contract is made.
+      You do not own the goods until we receive payment in full. If you discover you have made a mistake with your order please contact us immediately. Please do this before we confirm your order.</p>
+
+   <h6 class="mt-3">Marketing</h6>
+   <p>By notifying us that you would like to hear from us [Ticking a Checkbox at sign-up or checkout] you agree to opt in to our marketing mailing lists, which you can opt out of anytime by contacting us at Contact@9oclockshop.co.uk.Legal basis for processing: our legitimate interests (Article 6(1)(f) of the General Data Protection Regulation). Legitimate interests: direct marketing and advertising our products and services.</p>
+
+   <h6 class="mt-3">Online Prices</h6>
+   <p>We always ensure that the best possible prices are available online at this website. We do this through applying promotional pricing to our own website which may differ from our promotions in the shop.</p>
+
+   <h6 class="mt-3">For Out of Stock Items</h6>
+   <p>We will advise you should any food be out of stock and give you a call. At this point you can cancel your order if you wish.</p>
+
+   <h6 class="mt-3">Refusal of Transaction</h6>
+   <p>We reserve the right to withdraw any products from this website at any time
+and/or remove or edit any materials or content on this website. We may refuse
+to process a transaction for any reason or refuse service to anyone at any time at
+our sole discretion. We will not be liable to you or any third party by reason of
+our withdrawing any product from this website whether or not that product has
+been sold; removing or editing any materials or content on the website; refusing
+to process a transaction or unwinding or suspending any transaction after
+processing has begun.</p>
+
+   <h6 class="mt-3">Age Restricted Items</h6>
+   <p>Where Age restricted items Fire lighters, medicines or tobacco products are sold, we must comply with the law and restrict sale of these items to minors. 
+      You must be eighteen (18) years of age, to purchase tobacco or alcoholic products. 9 ‘o clock Shop reserves the right to cancel any transaction where it reasonably believes the purchaser is either not of the required legal age or purchasing products on behalf of a minor.</p>
+
+      <h6 class="mt-3">Delivery Time</h6>
+   <p>We aim to deliver your order within the quoted times, but please consider traffic and weather conditions. During busy periods your order may take longer. We may or may not have time to notify you but please be patient or feel free to call us to check-up on your order. Delivery times are approximate and cannot be guaranteed.</p>
+
+      <h6 class="my-3">Refunds</h6>
+   <p>We process the refund wherever it is needed as soon as possible. We aim to raise a refund for your money within 48 hours of the refund agreement, but please consider bank processing times and holidays, during such periods your refund may take longer. We may or may not have time to notify you but please be patient or feel free to call us to check-up on your refund</p>
+
       </div>
       <div class="modal-footer" style="padding-top:8px;padding-bottom:8px;">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="padding-top:4px;padding-bottom:4px;background-color: var(--main-color);">Close</button>

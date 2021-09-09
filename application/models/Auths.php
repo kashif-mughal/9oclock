@@ -260,7 +260,7 @@ class Auths extends CI_Model {
         return TRUE;
     }
 
-    public function insert_user_email($user_id, $first_name, $last_name, $email, $phone, $address, $zip_code, $town, $city) {
+    public function insert_user_email($user_id, $first_name, $last_name, $email, $phone, $address, $zip_code, $town, $city, $isPromotion) {
         $user_data = array(
             'user_id' => $user_id,
             'first_name' => $first_name,
@@ -270,7 +270,8 @@ class Auths extends CI_Model {
             'address' => $address,
             'status' => 1,
             'AddressId' => 0,
-            'address_details' => ''
+            'address_details' => '',
+            'is_promotion' => $isPromotion
         );
         $this->db->insert('users', $user_data);
 

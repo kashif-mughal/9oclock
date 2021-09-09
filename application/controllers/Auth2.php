@@ -555,14 +555,16 @@ class Auth2 extends CI_Controller {
                                     'user_id' => $userStatus[0]['user_id'],
                                     'user_type' => $userStatus[0]['user_type'],
                                     'user_name' => $userStatus[0]['first_name'] . " " . $userStatus[0]['last_name'],
-                                    'user_email' => $userStatus[0]['username'],
+                                    'user_email' => $userStatus[0]['email_address'],
+                                    'email' => $userStatus[0]['email_address'],
+                                    'phone' => $userStatus[0]['phone'],
                                     'address' => $userStatus[0]['address'],
                                     'zip_code' => $userStatus[0]['zip_code'],
                                     'town' => $userStatus[0]['town'],
                                     'city' => $userStatus[0]['city'],
                                 );
-
                                 $this->session->set_userdata($user_data);
+
 
                                 $this->auths->update_otp_verified_email($email);
                                 $result['responseMessage'] = 'User is verified, Please Login';

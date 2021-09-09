@@ -195,6 +195,8 @@
         </div>
         <div class="row">
             <?php 
+                date_default_timezone_set($_COOKIE["user_timezone"]);
+ 
                 $date = new DateTime("now",null);
                 $curr_hour = $date->format('H');
                 $curr_min = $date->format('m');
@@ -268,6 +270,22 @@
 
 $(document).ready(function() {
 
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    createCookie("user_timezone",tz, "1");
+    
+    // var x = document.getElementById("demo");
+    // function getLocation() {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(showPosition);
+    //     } else {
+    //         x.innerHTML = "Geolocation is not supported by this browser.";
+    //     }
+    // }
+
+    // function showPosition(position) {
+    //     x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+    // }
+
     $('.placeOrderBtn').on('click', function(e) {
         e.preventDefault();
         var deliveryCharges =  <?php echo $deliveryCharges?>;
@@ -283,6 +301,21 @@ $(document).ready(function() {
         });    
     });
 });
+
+// Function to create the cookie
+function createCookie(name, value, days) {
+    var expires;    
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }    
+    document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
+}
+
     
 </script>
 
