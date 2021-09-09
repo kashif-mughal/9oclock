@@ -114,7 +114,8 @@ class Corder extends CI_Controller {
 			$year = date('Y');
 		  $purchased_items = '';
 	   	  foreach ($current_baskit as $key => $eachProd) {
-		  $purchased_items .= '<tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="75%">'. $eachProd->pName .'</td><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="25%">£'. $eachProd->price .'</td></tr>';
+            $final_item_price = ($eachProd->price * $eachProd->quantity);
+		    $purchased_items .= '<tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="75%">'. $eachProd->pName .'</td><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="25%">£'. $final_item_price .'</td></tr>';
 	   }
 			//---------------------------------------------------------------
 	   
