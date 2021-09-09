@@ -77,6 +77,9 @@
 
 
 <script type="text/javascript">
+  $(document).ready(() => {
+    emptyCart();
+  });
   var seconds = 10;
   var secondText = seconds;
   var redirectSeconds = (seconds*1000);
