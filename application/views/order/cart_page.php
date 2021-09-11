@@ -280,7 +280,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             <h6 style="color: orange; font-weight: 600; margin-bottom: 0px;">Delivery Charges</h6>
             <p style="font-size:12px; font-weight: 600; margin-bottom: 0px;" class="delivery-charges-text">Free delivery on order above <script>document.write(formatCurrency(50,0));</script></p>
           </div>
-          <p style="font-weight: 600;" class="delivery-charges">
+          <p style="font-weight: 600;" class="delivery-charges" id="delivery-charges">
             <script type="text/javascript">document.write(formatCurrency('<?=$deliveryCharges?>'));</script>
           </p>
         </div>
@@ -505,6 +505,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
         if(subTotal <= freeAboveAmount){
             subTotal = subTotal + deliveryCharges;
             $('.final-amount').html(formatCurrency(subTotal));
+            $('#delivery-charges').show();
+        }
+        else
+        {
+            $('#delivery-charges').hide();
         }
         $('#cDiscount').addClass('d-flex');
       }
