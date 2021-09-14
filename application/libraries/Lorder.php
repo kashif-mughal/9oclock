@@ -195,15 +195,20 @@ class Lorder {
         date_default_timezone_set('Europe/London');
         $addressId = $CI->session->userdata("addressId");
         $deliveryTime = $CI->session->userdata("deliveryTime");
+        $deliveryTimeFrom = $CI->session->userdata("deliveryTimeFrom");
+        $deliveryTimeTo = $CI->session->userdata("deliveryTimeTo");
         $addressText = $CI->session->userdata("addressText");
         
         if(!is_numeric($addressId) || empty($addressText))
             redirect(base_url("Corder/checkout_form"));
 
-        $parts = explode("__" , $deliveryTime);
-        $deliveryDate = date('Y-m-d', strtotime($parts[0]));
-        $dtFrom = date('Y-m-d H:i a', strtotime($parts[0]));
-        $dtUpto = date('Y-m-d H:i a', strtotime($parts[1]));
+        //$parts = explode("__" , $deliveryTime);
+        $deliveryDate = date('Y-m-d', strtotime($deliveryTime));
+        //$dtFrom = date('Y-m-d H:i a', strtotime($parts[0]));
+        //$dtUpto = date('Y-m-d H:i a', strtotime($parts[1]));
+        $dtFrom = date('Y-m-d H:i a', strtotime($deliveryTimeFrom));
+        $dtUpto = date('Y-m-d H:i a', strtotime($deliveryTimeTo));
+
 
         $orderDetail = json_decode($_POST['order']);
         $OV = 0;
@@ -236,6 +241,7 @@ class Lorder {
         }
 
         $orderId = $CI->Orders->place_order($data);
+        return $orderId;
         if(is_numeric($orderId)){
             if($this->place_order_details($orderDetail, $orderId, $CI->Orders)){
                 $CI->session->set_userdata("order_id", $orderId);

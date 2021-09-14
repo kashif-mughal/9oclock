@@ -86,12 +86,16 @@ class Corder extends CI_Controller {
     public function proceed_to_checkout(){
         $retString = "?ret_url=".base_url('Corder/checkout');
         $this->auth->check_auth(base_url('Dashboard/user_authentication'.$retString));
+        $this->session->set_userdata(array('deliveryTime' => $this->input->post('delivery_date')));
+        $this->session->set_userdata(array('deliveryTimeFrom' => $this->input->post('delivery_date_from')));
+        $this->session->set_userdata(array('deliveryTimeTo' => $this->input->post('delivery_date_to')));
         if(empty($this->input->post('order'))){
             $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
             echo 'Corder/checkout';
         }
 		$current_baskit = json_decode($this->input->post('order'));
         $result = $this->lorder->place_order();
+        print_r($result);die;
         if (is_numeric($result)) {
             $this->session->set_userdata(array('message' => 'Successfully Added'));
             //$content = $this->lorder->proceed_to_checkout($result);

@@ -228,7 +228,7 @@
                     </div>
                     
                     <div class="input-group checkoutDropdown">
-                        <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day"> 
+                        <select class="custom-select" id="checkoutDeliveryDate" aria-label="Checkout Delivery Day"> 
                                 
 
                             <?php if($curr_hour < 10 || $curr_hour >= 20) { ?>
@@ -289,10 +289,51 @@ $(document).ready(function() {
     $('.placeOrderBtn').on('click', function(e) {
         e.preventDefault();
         var deliveryCharges =  <?php echo $deliveryCharges?>;
+        var deliveryDayText = $('#checkoutDeliveryDay').find(":selected").text();
+        var deliveryDateText = $('#checkoutDeliveryDate').find(":selected").text();
+        var deliveryDate = '';
+        var deliveryFrom = '';
+        var deliveryTo = '';
+        if(deliveryDayText == "Today") {
+            var today_date = new Date();    
+            deliveryDate = today_date.getFullYear().toString() + '-' + today_date.getMonth().toString() + '-' + today_date.getDay().toString();
+            if(deliveryDateText == "10.00 AM - 12.00 PM") {
+                deliveryFrom = deliveryDate + ' ' + '10:00:00';
+                deliveryTo = deliveryDate + ' ' + '12:00:00';
+            }
+            else if(deliveryDateText == "04.00 PM - 06.00 PM") {
+                deliveryFrom = deliveryDate + ' ' + '16:00:00';
+                deliveryTo = deliveryDate + ' ' + '18:00:00';
+            }
+            else if(deliveryDateText == "08.00 PM - 10.00 PM") {
+                deliveryFrom = deliveryDate + ' ' + '20:00:00';
+                deliveryTo = deliveryDate + ' ' + '22:00:00';
+            }
+        }
+        else if(deliveryDayText == "Tomorrow") {
+            var tomorrow_date = new Date();
+            tomorrow_date.setDate(tomorrow_date.getDate()+1);
+            deliveryDate = tomorrow_date.getFullYear().toString() + '-' + tomorrow_date.getMonth().toString() + '-' + tomorrow_date.getDay().toString();
+            if(deliveryDateText == "10.00 AM - 12.00 PM") {
+                deliveryFrom = deliveryDate + ' ' + '10:00:00';
+                deliveryTo = deliveryDate + ' ' + '12:00:00';
+            }
+            else if(deliveryDateText == "04.00 PM - 06.00 PM") {
+                deliveryFrom = deliveryDate + ' ' + '16:00:00';
+                deliveryTo = deliveryDate + ' ' + '18:00:00';
+            }
+            else if(deliveryDateText == "08.00 PM - 10.00 PM") {
+                deliveryFrom = deliveryDate + ' ' + '20:00:00';
+                deliveryTo = deliveryDate + ' ' + '22:00:00';
+            }
+        }
+
+        // YYYY-MM-DD HH:MM:SS
+
         $.ajax({
             type: "POST",
             url: '<?php echo base_url('Corder/proceed_to_checkout') ?>',
-            data: {order: getCookie('baskit'), delivery_charges: deliveryCharges },
+            data: {order: getCookie('baskit'), delivery_charges: deliveryCharges, delivery_date: deliveryDate, delivery_date_from: deliveryFrom, delivery_date_to: deliveryTo },
             cache: false,
             success: function (pageLocation)
             {

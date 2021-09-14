@@ -138,7 +138,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                     <div class="card border-none">
                         <div class="card-header p-2" id="headingTwo">
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <a href="tel:+92 318 2294472" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                <a href="tel:+44 01793 694088" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
                                     >
                                     <img src="<?php echo base_url() ?>assets/img/call_us.png" class="d-inline pr-4" alt="">
                                     <h4 class="d-inline">Call Us</h4>
@@ -165,7 +165,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      <h4>Follow Us</h4>
                   </div>
                   <div class="row" style=" margin-left: 0px;">
-                     <a href="https://www.facebook.com/9oClockpk"><i class="fab fa-facebook-square fa-1x"></i></a>
+                     <a href="https://www.facebook.com/pages/category/Shopping---Retail/9-Oclock-Shop-123238661844155/"><i class="fab fa-facebook-square fa-1x"></i></a>
                      <div class="socialmedia-footer">|</div>
                      <a href="https://twitter.com/9oClockpk"><i class="fab fa-twitter-square fa-1x"></i></a>
                       <div class="socialmedia-footer">|</div>
