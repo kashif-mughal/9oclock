@@ -323,6 +323,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
 
 <script type="text/javascript">
     var baskit = getCookie('baskit');
+    debugger;
     var selectedAddress = false;
     var deliveryTime = false;
     var step1Verified = true;
@@ -461,6 +462,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
        });
       function calculatePrice(){
         var cart = getCookie('baskit');
+        debugger;
          if(cart){
             cart = JSON.parse(cart);
             var sum = 0;
@@ -506,10 +508,12 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             subTotal = subTotal + deliveryCharges;
             $('.final-amount').html(formatCurrency(subTotal));
             $('#delivery-charges').show();
+            $('#delivery-charges').html(formatCurrency(deliveryCharges));
         }
         else
         {
-            $('#delivery-charges').hide();
+            $('#delivery-charges').html(formatCurrency(0));
+            //$('#delivery-charges').hide();
         }
         $('#cDiscount').addClass('d-flex');
       }

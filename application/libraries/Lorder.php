@@ -188,7 +188,6 @@ class Lorder {
     }
     
     public function place_order(){
-        
         $CI = & get_instance();
         $CI->load->model('Orders');
         $CI->load->model('SiteSettings');
@@ -198,7 +197,6 @@ class Lorder {
         $deliveryTimeFrom = $CI->session->userdata("deliveryTimeFrom");
         $deliveryTimeTo = $CI->session->userdata("deliveryTimeTo");
         $addressText = $CI->session->userdata("addressText");
-        
         if(!is_numeric($addressId) || empty($addressText))
             redirect(base_url("Corder/checkout_form"));
 
@@ -222,6 +220,7 @@ class Lorder {
 
         $copunId = $CI->session->userdata("copunId");
         $copunDiscount = $this->apply_copun($OV);
+
         $data = array(
             'CustomerId' => $CI->session->userdata('user_id'),
             'GUID' => $this->GUIDv4(),
@@ -239,9 +238,8 @@ class Lorder {
             $data['CopunId'] = $copunId;
             $data['CopunDiscount'] = $copunDiscount;
         }
-
         $orderId = $CI->Orders->place_order($data);
-        return $orderId;
+        //return $orderId;
         if(is_numeric($orderId)){
             if($this->place_order_details($orderDetail, $orderId, $CI->Orders)){
                 $CI->session->set_userdata("order_id", $orderId);

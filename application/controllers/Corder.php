@@ -89,13 +89,13 @@ class Corder extends CI_Controller {
         $this->session->set_userdata(array('deliveryTime' => $this->input->post('delivery_date')));
         $this->session->set_userdata(array('deliveryTimeFrom' => $this->input->post('delivery_date_from')));
         $this->session->set_userdata(array('deliveryTimeTo' => $this->input->post('delivery_date_to')));
+
         if(empty($this->input->post('order'))){
             $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
             echo 'Corder/checkout';
         }
 		$current_baskit = json_decode($this->input->post('order'));
         $result = $this->lorder->place_order();
-        print_r($result);die;
         if (is_numeric($result)) {
             $this->session->set_userdata(array('message' => 'Successfully Added'));
             //$content = $this->lorder->proceed_to_checkout($result);
@@ -117,7 +117,7 @@ class Corder extends CI_Controller {
 	   	  foreach ($current_baskit as $key => $eachProd) {
             $final_item_price = ($eachProd->price * $eachProd->quantity);
 		    $purchased_items .= '<tr><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="75%">'. $eachProd->pName .'</td><td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;" align="left" width="25%">£'. $final_item_price .'</td></tr>';
-	    }			
+	       }			
 			
 			//---------------------------------------------------------------
 	   
@@ -133,7 +133,7 @@ class Corder extends CI_Controller {
             mail($to_email, $subject, $message, $headers);
             echo 'PaymentIntegration/index';
         } else {
-            $this->session->set_userdata(array('error_message' => $result));
+            $this->session->set_userdata(array('error_message' => 'Already Exists'));
             echo 'Corder/checkout';
         }
     }

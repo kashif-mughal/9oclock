@@ -41,8 +41,10 @@
                   </a>
                </div>
                <div class="collapse show" id="InnerPageMenuContent" aria-labelledby="accordionCatInnerPage" data-parent="#accordionCatInnerPage">
-                  <?php foreach ($CatList as $key => $value)
-                     { ?>
+                  <?php 
+                  $countera = 0;
+                  foreach ($CatList as $key => $value)
+                     { if(++$countera == 1) continue; ?>
                   <div class="sidebar-inner-category-content">
                      <div class="sub-category">
                         <div class="sub-category-content">

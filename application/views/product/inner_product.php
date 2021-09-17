@@ -141,13 +141,13 @@
                         width:45%;
                      }
                   </style>
-                  <div class="input-group product-card-dropdown w-45">
+                  <!-- <div class="input-group product-card-dropdown w-45">
                      <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
                         <option value="1" selected>1kg</option>
                         <option value="2">1 Dozen</option>
                         <option value="3">500 grm</option>
                      </select>
-                  </div>
+                  </div> -->
                   <!-- <p class="card-text product-card-inner-weight">
                      <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
                </div>
@@ -192,14 +192,14 @@
       </div>
 
       <?php if($Description != null || $Description != '') { ?>
-         <div class="row inner-product-content">
+         <!-- <div class="row inner-product-content">
             <div class="inner-product-description">
                <h4>Description</h4>
                <div class="d-block mt-3">
                   <p><?php echo $Description; ?></p>
                </div>
             </div>
-         </div>
+         </div> -->
       <?php } ?>
 
    
@@ -260,7 +260,7 @@
                                          <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php //echo $value['SalePrice']; ?>",0)); </script></p> -->
 
                                          <?php if($discountPercentage != 0) { ?> 
-                                             <span class="product-discount"><del><script type="text/javascript">document.write(formatCurrency("<?php echo $value['Price']; ?>",0)); </script></del></span>
+                                             <span class="product-discount"><del><script type="text/javascript">formatCurrency("<?php echo $value['Price']; ?>",0); </script></del></span>
                                          <?php } 
                                          $productObject = (object) [
                                             'id' => $value['ProductId'],
@@ -272,13 +272,13 @@
                                         ];
                                         ?>
                                         <?php if($value['stock'] == '1') { ?>
-                                          <div class="input-group product-card-dropdown">
+                                          <!-- <div class="input-group product-card-dropdown">
                                              <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
                                                 <option value="1" selected>1kg</option>
                                                 <option value="2">1 Dozen</option>
                                                 <option value="3">500 grm</option>
                                              </select>
-                                          </div>
+                                          </div> -->
                                           <!-- <p class="card-text product-card-inner-weight">
                                              <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
                                           <div class="d-flex justify-content-start align-items-center product-card-inner-price">

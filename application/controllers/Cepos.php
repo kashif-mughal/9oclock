@@ -47,8 +47,11 @@ class Cepos extends CI_Controller {
 
                 // $message ="{\"table\":\"tblItem\",\"data\":[{\"ItemName\":\"Tomatoes 1 kg\",\"ItemCode\":\"\",\"CompanyId\":1,\"OutletId\":1,\"ItemCategoryId\":50,\"ItemPurchasePrice\":0,\"ItemSalesPrice\":1.79,\"Tax\":1,\"UnitOfSaleId\":2,\"ItemBarCode\":\"\",\"Description\":\"Bunch of Corriander\",\"Id\":2910,\"IsActive\":true,\"IsShowOnWeb\":\"\", \"Brand\": 2, \"IsAddOn\": false}],\"mode\":\"setup\"}";
                 // $message ="{\"table\":\"tblItem\",\"data\":{\"ItemName\":\"Tomatoes 1 kg\",\"ItemCode\":\"\",\"CompanyId\":1,\"OutletId\":1,\"ItemCategoryId\":50,\"ItemPurchasePrice\":0,\"ItemSalesPrice\":1.79,\"Tax\":1,\"UnitOfSaleId\":2,\"ItemBarCode\":\"\",\"Description\":\"Bunch of Corriander\",\"Id\":2910,\"IsActive\":true,\"IsShowOnWeb\":\"\", \"Brand\": 2, \"IsAddOn\": false},\"mode\":\"update\"}";
+                if(empty($message)){
+                    break;
+                }
                 if(!empty($message)){
-                $incomingMessage = json_decode($message->getBody());
+                    $incomingMessage = json_decode($message->getBody());
                     //$incomingMessage = json_decode($message);
                 echo 'Incoming Payload Start';print_r($incomingMessage);echo 'Incoming Payload End';
                 $tblName = $incomingMessage->table;
@@ -376,7 +379,7 @@ private function UpdateTblStock($tblData){
                 'IsActive'              =>  $tblData[$i]->IsActive
             );
 
-            $this->db->where('Id', $tblData[$i]["Id"]);
+            $this->db->where('Id', $tblData[$i]->Id);
             $this->db->update('tblstock',$data);
         }
         catch(Exception $ex){
@@ -404,7 +407,7 @@ private function UpdateTblCompany($tblData){
                 'IsTaxInclusive'    =>  $tblData[$i]->IsTaxInclusive
             );
 
-            $this->db->where('Id', $tblData[$i]["Id"]);
+            $this->db->where('Id', $tblData[$i]->Id);
             $this->db->update('tblcompany',$data);
         }
         catch(Exception $ex){
@@ -431,7 +434,7 @@ private function UpdateTblUnitOfSale($tblData){
                 'Status'            =>  $tblData[$i]->IsActive
             );
 
-            $this->db->where('UnitId', $tblData[$i]["Id"]);
+            $this->db->where('UnitId', $tblData[$i]->Id);
             $this->db->update('grocery_unit',$data);
         }
         catch(Exception $ex){
@@ -451,7 +454,7 @@ private function UpdateTblItemCategory($tblData){
         $tblData = $temp;
     }
     for ($i=0; $i < count($tblData); $i++) {
-        $currentExceptionMessage = "Object found, expected an array";
+        $currentExceptionMessage = "";
         try{
             if(!is_array($tblData))
                 throw new CustomException('Exception message');
@@ -461,8 +464,7 @@ private function UpdateTblItemCategory($tblData){
                 'Alias'         =>  $tblData[$i]->Slug,
                 'Status'        =>  $tblData[$i]->IsActive
             );
-
-            $this->db->where('CategoryId', $tblData[$i]["Id"]);
+            $this->db->where('CategoryId', $tblData[$i]->Id);
             $this->db->update('grocery_category',$data);
         }
         catch(Exception $ex){
@@ -513,7 +515,7 @@ private function UpdateTblItem($tblData){
                 'ItemBarCode'   =>  $tblData[$i]->ItemBarCode,
                 'Brand'         =>  $tblData[$i]->Brand
             );
-            $this->db->where('ProductId', $tblData[$i]["Id"]);
+            $this->db->where('ProductId', $tblData[$i]->Id);
             $this->db->update('grocery_products',$data);
         }
         catch(Exception $ex){
@@ -541,7 +543,7 @@ private function UpdateTblTax($tblData){
                 'IsActive'      =>  $tblData[$i]->IsActive
             );
 
-            $this->db->where('Id', $tblData[$i]["Id"]);
+            $this->db->where('Id', $tblData[$i]->Id);
             $this->db->update('tbltax',$data);
         }
         catch(Exception $ex){

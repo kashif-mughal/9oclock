@@ -316,9 +316,12 @@
       </div>
    </div>
    <?php } ?>
-   <?php
+   <?php $counter = 0;
       foreach ($CatList as $key => $value)
-      { ?>
+      { 
+         if(++$counter == 1)
+            continue;
+         ?>
    <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12">
          <section class="edibles-main products-widget">

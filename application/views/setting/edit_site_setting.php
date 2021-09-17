@@ -185,13 +185,15 @@
                 currentLiObj = $(all_lis[i]);
                 tempCatSortObj.id = currentLiObj.data("id");
                 tempCatSortObj.pso = currentLiObj.data("originalsort");
-                var uisortorder = currentLiObj.data("uisort");
-                var findElem = all_lis.filter(function(index, obj){
-                    return $(obj).data("uisort") == i+1;
-                });
-                if(findElem.length > 0){
-                    tempCatSortObj.nso = findElem.data("originalsort");
-                }
+                // var uisortorder = currentLiObj.data("uisort");
+                // var findElem = all_lis.filter(function(index, obj){
+                //     return $(obj).data("uisort") == i+1;
+                // });
+                // if(findElem.length > 0){
+                //     tempCatSortObj.nso = findElem.data("originalsort");
+                // }
+
+                tempCatSortObj.nso = i+1;
                 payload.push(tempCatSortObj);
             }
             postData(payload, currentElem.attr("action"), currentElem.attr("method"))
@@ -245,7 +247,7 @@
                data: {"catId": selectElem.val()},
                dataType: "JSON",
                success: function(resultCats)
-               {debugger;
+               {
                 if(resultCats){
                     var counter = 0
                     for (var i = 0; i < resultCats.length; i++) {

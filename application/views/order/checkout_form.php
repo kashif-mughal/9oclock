@@ -287,7 +287,7 @@ $(document).ready(function() {
     // }
 
     $('.placeOrderBtn').on('click', function(e) {
-        e.preventDefault();
+        e.preventDefault();debugger;
         var deliveryCharges =  <?php echo $deliveryCharges?>;
         var deliveryDayText = $('#checkoutDeliveryDay').find(":selected").text();
         var deliveryDateText = $('#checkoutDeliveryDate').find(":selected").text();
@@ -329,7 +329,7 @@ $(document).ready(function() {
         }
 
         // YYYY-MM-DD HH:MM:SS
-
+        debugger;
         $.ajax({
             type: "POST",
             url: '<?php echo base_url('Corder/proceed_to_checkout') ?>',
@@ -353,7 +353,8 @@ function createCookie(name, value, days) {
     }
     else {
         expires = "";
-    }    
+    }
+    debugger;
     document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
 }
 
