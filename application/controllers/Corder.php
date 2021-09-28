@@ -89,7 +89,6 @@ class Corder extends CI_Controller {
         $this->session->set_userdata(array('deliveryTime' => $this->input->post('delivery_date')));
         $this->session->set_userdata(array('deliveryTimeFrom' => $this->input->post('delivery_date_from')));
         $this->session->set_userdata(array('deliveryTimeTo' => $this->input->post('delivery_date_to')));
-
         if(empty($this->input->post('order'))){
             $this->session->set_userdata(array('error_message' => 'Missing Order Detail'));
             echo 'Corder/checkout';

@@ -47,11 +47,11 @@ class Cepos extends CI_Controller {
 
                 // $message ="{\"table\":\"tblItem\",\"data\":[{\"ItemName\":\"Tomatoes 1 kg\",\"ItemCode\":\"\",\"CompanyId\":1,\"OutletId\":1,\"ItemCategoryId\":50,\"ItemPurchasePrice\":0,\"ItemSalesPrice\":1.79,\"Tax\":1,\"UnitOfSaleId\":2,\"ItemBarCode\":\"\",\"Description\":\"Bunch of Corriander\",\"Id\":2910,\"IsActive\":true,\"IsShowOnWeb\":\"\", \"Brand\": 2, \"IsAddOn\": false}],\"mode\":\"setup\"}";
                 // $message ="{\"table\":\"tblItem\",\"data\":{\"ItemName\":\"Tomatoes 1 kg\",\"ItemCode\":\"\",\"CompanyId\":1,\"OutletId\":1,\"ItemCategoryId\":50,\"ItemPurchasePrice\":0,\"ItemSalesPrice\":1.79,\"Tax\":1,\"UnitOfSaleId\":2,\"ItemBarCode\":\"\",\"Description\":\"Bunch of Corriander\",\"Id\":2910,\"IsActive\":true,\"IsShowOnWeb\":\"\", \"Brand\": 2, \"IsAddOn\": false},\"mode\":\"update\"}";
-                if(empty($message)){
-                    break;
-                }
+				if(empty($message)){
+					break;
+				}
                 if(!empty($message)){
-                    $incomingMessage = json_decode($message->getBody());
+                	$incomingMessage = json_decode($message->getBody());
                     //$incomingMessage = json_decode($message);
                 echo 'Incoming Payload Start';print_r($incomingMessage);echo 'Incoming Payload End';
                 $tblName = $incomingMessage->table;
@@ -454,7 +454,7 @@ private function UpdateTblItemCategory($tblData){
         $tblData = $temp;
     }
     for ($i=0; $i < count($tblData); $i++) {
-        $currentExceptionMessage = "";
+		$currentExceptionMessage = "";
         try{
             if(!is_array($tblData))
                 throw new CustomException('Exception message');

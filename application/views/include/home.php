@@ -77,7 +77,7 @@
                      </a>
                      <div class="product-info text-left px-2">
                         <p class="product-card-inner-subcategory"><?php echo $value['catAlias'] ?></p>
-                        <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
+                        <p class="card-text product-card-inner-name" title="<?php echo ucwords($value['ProductName']); ?>"><?php echo ucwords($value['ProductName']); ?></p>
                         <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php //echo $value['SalePrice'];
                            ?>",0)); </script></p> -->
                         <?php
@@ -225,7 +225,7 @@
                      </a>
                      <div class="product-info text-left px-2">
                         <p class="product-card-inner-subcategory"><?php echo $value['catAlias'] ?></p>
-                        <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
+                        <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo ucwords($value['ProductName']); ?></p>
                         <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php //echo $value['SalePrice'];
                            ?>",0)); </script></p> -->
                         <?php
@@ -316,12 +316,12 @@
       </div>
    </div>
    <?php } ?>
-   <?php $counter = 0;
+   <?php
       foreach ($CatList as $key => $value)
       { 
          if(++$counter == 1)
             continue;
-         ?>
+	   ?>
    <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12">
          <section class="edibles-main products-widget">

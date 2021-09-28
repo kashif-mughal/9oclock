@@ -198,9 +198,10 @@
                 date_default_timezone_set($_COOKIE["user_timezone"]);
  
                 $date = new DateTime("now",null);
-                $curr_hour = $date->format('H');
-                $curr_min = $date->format('m');
+                $curr_hour = $_COOKIE["curr_hours"];
+                $curr_min = $_COOKIE["curr_minutes"];
             ?>
+			
             <div id="checkoutCartContainer">
                 <p class="heading">Schedule Delivery</p>
                 <div class="d-flex justify-content-start align-items-center checkoutItem">
@@ -212,10 +213,10 @@
                     </div>
                     <div class="input-group checkoutDropdown">
                         <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day">
-                            <?php if($curr_hour < 20) { ?>
-                                <option value="today" selected>Today</option>
-                            <?php } ?>
-                            <option value="tomorrow">Tomorrow</option>
+                            <?php if($curr_hour <= 19): ?>
+                                <option value="today" >Today</option>
+                            <?php endif; ?>
+                            <option value="tomorrow" selected>Tomorrow</option>
                         </select>
                     </div>
                 </div>
@@ -272,7 +273,16 @@ $(document).ready(function() {
 
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     createCookie("user_timezone",tz, "1");
+	
+	var curr_date = new Date();
+	var curr_hours = curr_date.getHours();
+	var curr_minutes = curr_date.getMinutes();
+	
+	console.log('Hours: ' + curr_hours + ", Minutes: " + curr_minutes);
     
+	createCookie("user_hours",curr_hours, "1");
+	createCookie("user_minutes",curr_minutes, "1");
+	
     // var x = document.getElementById("demo");
     // function getLocation() {
     //     if (navigator.geolocation) {
@@ -287,16 +297,17 @@ $(document).ready(function() {
     // }
 
     $('.placeOrderBtn').on('click', function(e) {
-        e.preventDefault();debugger;
+        e.preventDefault();
         var deliveryCharges =  <?php echo $deliveryCharges?>;
-        var deliveryDayText = $('#checkoutDeliveryDay').find(":selected").text();
+		var deliveryDayText = $('#checkoutDeliveryDay').find(":selected").text();
         var deliveryDateText = $('#checkoutDeliveryDate').find(":selected").text();
         var deliveryDate = '';
         var deliveryFrom = '';
         var deliveryTo = '';
         if(deliveryDayText == "Today") {
             var today_date = new Date();    
-            deliveryDate = today_date.getFullYear().toString() + '-' + today_date.getMonth().toString() + '-' + today_date.getDay().toString();
+            //deliveryDate = today_date.getFullYear().toString() + '-' + today_date.getMonth().toString() + '-' + today_date.getDay().toString();
+			deliveryDate = today_date.toISOString().split('T')[0];
             if(deliveryDateText == "10.00 AM - 12.00 PM") {
                 deliveryFrom = deliveryDate + ' ' + '10:00:00';
                 deliveryTo = deliveryDate + ' ' + '12:00:00';
@@ -313,7 +324,8 @@ $(document).ready(function() {
         else if(deliveryDayText == "Tomorrow") {
             var tomorrow_date = new Date();
             tomorrow_date.setDate(tomorrow_date.getDate()+1);
-            deliveryDate = tomorrow_date.getFullYear().toString() + '-' + tomorrow_date.getMonth().toString() + '-' + tomorrow_date.getDay().toString();
+            //deliveryDate = tomorrow_date.getFullYear().toString() + '-' + tomorrow_date.getMonth().toString() + '-' + tomorrow_date.getDay().toString();
+			deliveryDate = tomorrow_date.toISOString().split('T')[0];
             if(deliveryDateText == "10.00 AM - 12.00 PM") {
                 deliveryFrom = deliveryDate + ' ' + '10:00:00';
                 deliveryTo = deliveryDate + ' ' + '12:00:00';
@@ -329,7 +341,6 @@ $(document).ready(function() {
         }
 
         // YYYY-MM-DD HH:MM:SS
-        debugger;
         $.ajax({
             type: "POST",
             url: '<?php echo base_url('Corder/proceed_to_checkout') ?>',
@@ -353,8 +364,7 @@ function createCookie(name, value, days) {
     }
     else {
         expires = "";
-    }
-    debugger;
+    }    
     document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
 }
 

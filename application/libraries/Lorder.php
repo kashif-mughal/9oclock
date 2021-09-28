@@ -204,8 +204,8 @@ class Lorder {
         $deliveryDate = date('Y-m-d', strtotime($deliveryTime));
         //$dtFrom = date('Y-m-d H:i a', strtotime($parts[0]));
         //$dtUpto = date('Y-m-d H:i a', strtotime($parts[1]));
-        $dtFrom = date('Y-m-d H:i a', strtotime($deliveryTimeFrom));
-        $dtUpto = date('Y-m-d H:i a', strtotime($deliveryTimeTo));
+        $dtFrom = $deliveryTimeFrom;//date('Y-m-d H:i a', strtotime($deliveryTimeFrom));
+        $dtUpto = $deliveryTimeTo;//date('Y-m-d H:i a', strtotime($deliveryTimeTo));
 
 
         $orderDetail = json_decode($_POST['order']);

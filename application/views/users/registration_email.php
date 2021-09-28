@@ -382,7 +382,7 @@ processing has begun.</p>
 					data: { code: otpCode, email: email_address },
 					dataType: "json",
 					success: function(data) {
-                  alert(data);
+                  //alert(data);
 						if(data.status == 'Error') {
                         showNoti(data.response, "error");
                   }
@@ -549,7 +549,7 @@ processing has begun.</p>
                      showNoti(data.responseMessage, "error");
 						}
 						else {
-                     alert(data.redirectURL);
+                     //alert(data.redirectURL);
                      showNoti(data.responseMessage, "success");
                      $('#registration_new').hide();
 							$('#registration_new').css('display', 'none');

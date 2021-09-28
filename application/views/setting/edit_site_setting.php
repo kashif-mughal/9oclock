@@ -247,7 +247,7 @@
                data: {"catId": selectElem.val()},
                dataType: "JSON",
                success: function(resultCats)
-               {
+               {debugger;
                 if(resultCats){
                     var counter = 0
                     for (var i = 0; i < resultCats.length; i++) {
