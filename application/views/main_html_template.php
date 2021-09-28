@@ -45,6 +45,8 @@
         }
         ?>" type="image/x-icon">
         
+        <link rel="shortcut icon" href="<?php echo base_url("assets/img/favicn.jpeg");?>" type="image/jpeg">
+
         <!-- jquery-ui css -->
         <link href="<?php echo base_url() ?>assets/plugins/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 

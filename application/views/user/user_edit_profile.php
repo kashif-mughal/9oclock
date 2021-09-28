@@ -5,7 +5,7 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>/">Home</a></li>
                     <!--<li class="breadcrumb-item"><a href="javascript:void(0);">Order</a></li>-->
                     <li class="breadcrumb-item">User Edit Profile</li>
                 </ol>
@@ -73,9 +73,9 @@
                                 <div class="form-label-group mb-3">
                                     <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name" value="{last_name}" autocomplete="off" required>
                                 </div>
-                                <div class="form-label-group mb-3">
-                                    <input type="text" id="user_name" name="user_name" class="form-control" placeholder="User Name" value="{user_name}" autocomplete="off" required>
-                                </div>
+                                <!-- <div class="form-label-group mb-3">
+                                    <input type="text" id="user_name" name="user_name" class="form-control" placeholder="User Name" value="" autocomplete="off" required>
+                                </div> -->
                                 <div class="form-label-group mb-3">
                                     <input type="file" id="logo" name="logo" class="form-control">
                                     <input type="hidden" name="old_logo" value="{logo}" />

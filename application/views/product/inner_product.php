@@ -103,7 +103,7 @@
                <div>
                   <nav aria-label="breadcrumb">
                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>/">Home</a></li>
                         <!--<li class="breadcrumb-item"><a href="#"><?php echo $categoryName; ?></a></li>-->
                         <li class="breadcrumb-item"><?php echo $categoryName; ?></li>
                      </ol>
@@ -232,11 +232,11 @@
                   <div class="lds-roller" style="position:absolute; top:45%;right:45%;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                </div>
                <div class="slider featured-product-slider inner-product-slider">
-                     <?php foreach($similarProducts as $value) { 
+                     <?php foreach($similarProducts as $value) {
                          $discountPercentage = (($value['Price'] - $value['SalePrice'])/$value['Price']) * 100;
                          ?>
-                             <div class="featured-products-content d-flex align-items-center justify-content-start">
-                                 <div class="card mr-2 each-prod product-card-inner" style="padding-top:5px; padding-bottom: 10px; height: unset !important;">
+                             <div class="featured-products-content d-flex align-items-center justify-content-start" onclick="window.location.href='<?php echo base_url("Cproduct/viewProduct/").$value['ProductId']; ?>'">
+                                 <div class="card mr-2 each-prod product-card-inner" style="padding-top:5px; padding-bottom: 10px; height: unset !important;cursor: pointer;">
                                      <div class="card-body p-0">
                                          
                                          <?php if($value['stock'] == '0') { 

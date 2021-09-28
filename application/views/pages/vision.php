@@ -4,7 +4,7 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>/">Home</a></li>
                     <li class="breadcrumb-item">Mission & Vision</li>
                 </ol>
             </nav>

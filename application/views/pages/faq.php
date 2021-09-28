@@ -4,7 +4,7 @@
         <div class="row d-block">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="https://saudaexpress.com/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>/">Home</a></li>
                     <!--<li class="breadcrumb-item"><a href="#">Pages</a></li>-->
                     <li class="breadcrumb-item">FAQs</li>
                 </ol>
@@ -34,13 +34,13 @@
 
                         <b>3. What are the Terms &amp; Conditions applicable when using 9o'Clock website / Apps for
                         online purchasing?</b><br/>
-                        <li><a href="https://saudaexpress.com/cpage">Terms & Conditions</a></li><br/><br/>
+                        <li><a href="<?php echo base_url(); ?>/cpage">Terms & Conditions</a></li><br/><br/>
 
                         <b>4. What is the Privacy Policy followed by 9o'Clock?</b><br/>
-                        <li><a href="https://saudaexpress.com/cpage/privacy">Privacy Policy</a></li><br/><br/>
+                        <li><a href="<?php echo base_url(); ?>/cpage/privacy">Privacy Policy</a></li><br/><br/>
 
                         <b>5. What is the Return &amp; Refund policy of 9o'Clock?</b><br/>
-                        <li><a href="https://saudaexpress.com/cpage/returnandrefund">Return & Refund</a></li><br/><br/>
+                        <li><a href="<?php echo base_url(); ?>/cpage/returnandrefund">Return & Refund</a></li><br/><br/>
 
                         <b>6. Do I need to pay extra delivery charges if I return a product?</b><br/>
                         <li>If the product was damaged, used, worn out, incorrect or incomplete at the time of delivery
@@ -57,7 +57,7 @@
                         such as traffic jams, unfriendly weather conditions etc.</li><br/><br/>
 
                         <b>9. What if goods I received are damaged or are not according to my order specifications?</b><br/>
-                        <li><a href="https://saudaexpress.com/cpage/returnandrefund">Return & Refund</a></li><br/><br/>
+                        <li><a href="<?php echo base_url(); ?>/cpage/returnandrefund">Return & Refund</a></li><br/><br/>
 
                         <b>10. What are the payment options if I purchase goods on 9o'Clock?</b><br/>
                         <li>At present only Cash on Delivery and bank transfer options are available. However, company is

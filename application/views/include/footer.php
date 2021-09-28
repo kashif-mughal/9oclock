@@ -21,7 +21,11 @@ foreach($CatList as $key => $value) {
 				<h4>Categories</h4>
 				<div class="category-grid">
 
-					<?php foreach($CatList as $key => $value) {?>
+					<?php $counter = 0; foreach($CatList as $key => $value) {
+						if(++$counter == 1)
+            				continue;
+						?>
+
 						<div class="sub-category">
 							<div class="sub-category-content">
 
@@ -55,7 +59,7 @@ foreach($CatList as $key => $value) {
 				</div>
 				<div class="feature_details_content">
 					<h6>Best Value for your Money</h6>
-					<p>We understand that our customers have the right to get the best value for their money when they shop at 9 o'Clock and hence we make every effort to offer a wide range of quality products at the lowest possible prices.</p>
+					<p>We understand that our customers have the right to get the best value for their money when they shop at 9 o'Clock. Hence, we make every effort to offer a wide range of quality products at the lowest possible prices.</p>
 				</div>
 				<div class="feature_details_content">
 					<h6>Special features for members</h6>
@@ -90,7 +94,7 @@ foreach($CatList as $key => $value) {
 			<div class="company-address">
 				<div class="container">
 					<div class="row" style="font-size: 10px;">
-						<div class="col-6" style="letter-spacing: 10px;">
+						<div class="col-6" style="letter-spacing: 10px; display: none;">
 							<a href="https://www.facebook.com/9oclockpk"><i class="fab fa-facebook fa-2x" style="color:#666666;"></i></a>
 							<a href="https://twitter.com/9oclockpk"><i class="fab fa-twitter fa-2x" style="color:#666666;"></i></a>
 							<a href="#"><i class="fab fa-whatsapp fa-2x" style="color:#666666;"></i></a>

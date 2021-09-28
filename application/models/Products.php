@@ -421,9 +421,11 @@ class Products extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->tableName);
         $where1 = "Category = " . $categoryId . " OR Brand = " . $brandId;
-        $where2 = "Brand = " . $brandId . " OR Category = " . $categoryId;
+        //$where1 = "Category = " . $categoryId;
+        //$where2 = "Brand = " . $brandId . " OR Category = " . $categoryId;
         $this->db->where($where1);
-        $this->db->where($where2);
+        //$this->db->where($where2);
+        $this->db->limit(30);
         $response = $this->db->get();
 
         // $response = $this->db->query("SELECT * FROM " . $this->tableName . " WHERE Category = " . $categoryId . " OR Brand = " . $brandId . " AND Status = 1 ORDER BY DESC");
