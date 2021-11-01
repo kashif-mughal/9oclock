@@ -78,7 +78,9 @@
         }
         ?>
         <div class="row content-box pd-4" style="padding-left:0px; padding-right:10px;">
-            <h5 class="ml-4 mt-4 mb-2">My Orders History</h5>
+            <?php if($orderData && count($orderData) > 0){?>
+                <h5 class="ml-4 mt-4 mb-2">My Orders History</h5>
+            <?php } ?>
             <!-- <div class="col-xl-3 col-lg-3 col-md-12 pr-0 hidden-sm-down">
                 <div class="sidenav" style="position: relative;width: 100%;z-index: 0;height: auto;">
                     <div>
@@ -104,30 +106,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-
-                        if ($orderData) {
-                            ?>
-                            {orderData}
-                            <tr id="{Id}">
-                                <td class="text-center">{sl}</td>
-                                <td class="text-center">{OrderId}</td>
-                                <td class="text-center">{OrderValue}</td>
-                                <td class="text-center">{CreatedOn}</td>
-                                <td>
-                                    <center>
-                                        <?php echo form_open() ?>
-                                        <a href="<?php echo base_url() . 'Corder/order_detail_form/{OrderId}'; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="Track your order"><i class="fa fa-eye" aria-hidden="true"></i></a>
-
-                                        <a href="" class="DeleteOrder btn btn-danger btn-sm" name="{OrderId}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        <?php echo form_close() ?>
-                                    </center>
-                                </td>
-                            </tr>
-                            {/orderData}
-                            <?php
-                        }
-                        ?>
                     </tbody>
                     <tfoot>
                         <tr>
@@ -140,7 +118,7 @@
                     </tfoot>
                 </table> -->
 
-                <?php if($orderData){$orderCounter = -1;?>
+                <?php if($orderData && count($orderData) > 0){$orderCounter = -1;?>
                     
                     <?php foreach ($orderData as $key => $value) { $orderCounter++;?>
                         <div class="accordion" id="orderHistoryaccordion" style="margin-bottom: 10px;">
@@ -210,17 +188,17 @@
                                                         <img src="<?=base_url($value[$i]['ProductImg'])?>" alt="" class="product-image">
                                                         <div class="order-product-name order-item align-self-center text-center text-md-left">
                                                             <p class="order-name"><?=$value[$i]['ProductName']?></p>
-                                                            <p class="order-weight"><?=$value[$i]['ItemQuantity']?>&nbsp;<?=$value[$i]['UnitName']?></p>
+                                                            <!-- <p class="order-weight"><?=$value[$i]['ItemQuantity']?>&nbsp;<?=$value[$i]['UnitName']?></p> -->
                                                         </div>
                                                         <div class="order-product-price order-item text-center text=md-left">
                                                             <p class="order-price"><script type="text/javascript">
                                                                 document.write(formatCurrency('<?=$value[$i]["SoldPrice"]?>'));
                                                             </script></p>
-                                                            <?php if($discountPercentage != 0) { ?> 
+                                                            <!-- <?php if($discountPercentage != 0) { ?> 
                                                                 <p class="order-discount"><del><script type="text/javascript">
                                                                 document.write(formatCurrency('<?=$value[$i]["Price"]?>'));
                                                             </script></del></p>
-                                                            <?php } ?>
+                                                            <?php } ?> -->
                                                         </div>
                                                         <div class="quantity-area order-item">
                                                             <div class="d-flex justify-content-center align-items-center">
@@ -254,7 +232,9 @@
                            </div>
                         </div>
                     <?php } ?>
-                <?php } ?>
+                <?php }else{
+                    echo "<h5 class=\"ml-4 mt-4 mb-2\">Nothing to show!!<br>You didn't order at the first time yet </h5>";
+                } ?>
             </div>
 
         </div>

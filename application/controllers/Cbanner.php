@@ -50,9 +50,9 @@ class Cbanner extends CI_Controller {
 
     //Insert Banner Image
     public function insert_banner_image() {
-      $this->load->model('Banner');
+		$this->load->model('Banner');
       $post_data = $this->input->post();
-
+	
       if(!$post_data["image_url"]) {
         redirect(base_url('Cbanner'));
       }

@@ -213,23 +213,27 @@ class Users extends CI_Model {
     }
 
     //Change Password
-    public function change_password($email, $old_password, $new_password) {
-        $user_name = md5($new_password);
-        $password = md5($old_password);
-        $this->db->where(array('username' => $email, 'password' => $password, 'status' => 1));
-        $query = $this->db->get('user_login');
-        $result = $query->result_array();
+	public function change_password($email, $old_password, $new_password) {
+		$newpassword = md5($new_password);
+		$password = md5($old_password);
+		$this->db->where('username', $email);
+		$this->db->where('password', $password);
+		$this->db->where('status', 1);
+		$this->db->where(array('username' => $email, 'password' => $password, 'status' => 1));
+		$query = $this->db->get('user_login');
+		$result = $query->result_array();
+		
+		if (count($result) === 1) {
+			$this->db->set('password', $newpassword);
+			$this->db->where('password', $password);
+			$this->db->where('username', $email);
+			$this->db->where('status', 1);
+			$this->db->update('user_login');
 
-        if (count($result) == 1) {
-            $this->db->set('password', $user_name);
-            $this->db->where('password', $password);
-            $this->db->where('username', $email);
-            $this->db->update('user_login');
-
-            return true;
-        }
-        return false;
-    }
+			return true;
+		}
+		return false;
+	}
 
     public function get_user_address($userId = null){
         if(is_null($userId)){
@@ -285,9 +289,9 @@ class Users extends CI_Model {
 
     public function updateUserPassword($email, $password) {
         // $this->db->where('user_id', $user_id);
-        $this->db->set('username',$email);
+        $this->db->where('username',$email);
         $this->db->set('password',md5($password));
         $this->db->update('user_login');
-        return TRUE;        
+        return TRUE;    
     }
 }

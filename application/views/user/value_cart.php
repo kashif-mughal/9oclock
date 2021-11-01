@@ -133,11 +133,11 @@
                                                         <p class="order-price"><script type="text/javascript">
                                                             document.write(formatCurrency('<?=$value[$i]["SalePrice"]?>'));
                                                         </script></p>
-                                                        <?php if($discountPercentage != 0) { ?> 
+                                                        <!-- <?php if($discountPercentage != 0) { ?> 
                                                             <p class="order-discount"><del><script type="text/javascript">
                                                             document.write(formatCurrency('<?=$value[$i]["Price"]?>'));
                                                         </script></del></p>
-                                                        <?php } ?>
+                                                        <?php } ?> -->
                                                     </div>
                                                     <div class="quantity-area order-item" style="width: 125px;padding-top: 7px;padding-bottom: 7px;">
                                                         <div class="d-flex text-md-left text-center">

@@ -22,7 +22,6 @@
 }
 
 </style>
-
 <div class="container-fluid" style="padding:0px;" id="bannerWrapper">
    <div id="main-banner" class="carousel slide justify-item-center text-center" data-ride="carousel">
       <ol class="carousel-indicators">

@@ -96,8 +96,8 @@
     </section>
 
     <section class="upload_area">
-        <?php echo form_open('Cbanner/insert_banner_image', array('class' => 'form-vertical', 
-            'enctype' => 'multipart/form-data', 'id' => 'insert_banner_image', 'method' => 'post')) ?>
+        <?php //echo form_open('Cbanner/insert_banner_image', array('class' => 'form-vertical', 'enctype' => 'multipart/form-data', 'id' => 'insert_banner_image', 'method' => 'post')) ?>
+		<form action="https://9oclockshop.co.uk/Cbanner/insert_banner_image" method="post" class="form-vertical" enctype="multipart/form-data" id="insert_banner_image" accept-charset="utf-8">
 
 <!-- 'enctype' => 'multipart/form-data',  -->
 
@@ -109,7 +109,8 @@
             <div class="col text-center" style="width:100%;">
                 <input type="submit" id="add-banner" class="btn btn-success btn-large" name="add-banner" value="Click to Upload" />
             </div>
-        <?php echo form_close() ?>
+        <?php //echo form_close() ?>
+		</form>
     </section>
 
     <section>

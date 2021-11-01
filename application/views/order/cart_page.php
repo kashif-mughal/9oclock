@@ -420,14 +420,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
           var sum = 0;
           for (var i = 0; i < cart.length; i++) {
              var eachProdTemplateCopy1 = eachProdTemplate1;
-             sum += parseInt(cart[i].quantity) * parseFloat(cart[i].price);
+             sum += parseFloat(cart[i].quantity) * parseFloat(cart[i].price);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{pId}/g, cart[i].id);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{imgValue}', cart[i].img);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace(/{prodName}/g, `${cart[i].pName}`);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{price}', formatCurrency(cart[i].price));
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{qty}', cart[i].quantity);
              eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
-             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseFloat(cart[i].price)));
+             eachProdTemplateCopy1 = eachProdTemplateCopy1.replace('{totalPrice}', formatCurrency(parseFloat(cart[i].quantity) * parseFloat(cart[i].price)));
 
             var mobileProdTempCopy = mobileProdTemp;
             mobileProdTempCopy = mobileProdTempCopy.replace(/{pId}/g, cart[i].id);
@@ -436,7 +436,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
             mobileProdTempCopy = mobileProdTempCopy.replace('{price}', formatCurrency(cart[i].price));
             mobileProdTempCopy = mobileProdTempCopy.replace('{qty}', cart[i].quantity);
             mobileProdTempCopy = mobileProdTempCopy.replace('{unit}', `${cart[i].saleUnitQty} ${cart[i].saleUnit}`);
-            mobileProdTempCopy = mobileProdTempCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseFloat(cart[i].price)));  
+            mobileProdTempCopy = mobileProdTempCopy.replace('{totalPrice}', formatCurrency(parseFloat(cart[i].quantity) * parseFloat(cart[i].price)));  
 
             paymentObject = mobileProdTempCopy;
 

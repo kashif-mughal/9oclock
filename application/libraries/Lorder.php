@@ -86,8 +86,8 @@ class Lorder {
                 "BuildingNo" => $singleOrder["building_no"],
                 "StreetNo" => $singleOrder["street_no"],
                 "FloorNo" => $singleOrder["floor_no"],
-                "Area" => $singleOrder["area"],
-                "PostCode" => $singleOrder["postal_code"],
+                "Area" => $singleOrder["Address"],
+                "PostCode" => $singleOrder["zip_code"],
                 "City" => $singleOrder["city"],
                 "AdditionalDeliveryInstruction" => '',
                 "DeliveryDate" => date("Y-m-d", strtotime($singleOrder["CreatedOn"])),
@@ -198,7 +198,7 @@ class Lorder {
         $deliveryTimeTo = $CI->session->userdata("deliveryTimeTo");
         $addressText = $CI->session->userdata("addressText");
         if(!is_numeric($addressId) || empty($addressText))
-            redirect(base_url("Corder/checkout_form"));
+            return 0;
 
         //$parts = explode("__" , $deliveryTime);
         $deliveryDate = date('Y-m-d', strtotime($deliveryTime));
@@ -401,11 +401,17 @@ class Lorder {
                        ];
             $orderData[$key]['Jsn'] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
         }
-        $orderDetailFormattedArr = Array();
-        for ($i=0; $i < count($orderData); $i++) { 
-            if(!$orderDetailFormattedArr[$orderData[$i]["OrderId"]])
-                $orderDetailFormattedArr[$orderData[$i]["OrderId"]] = Array();
-            array_push($orderDetailFormattedArr[$orderData[$i]["OrderId"]], $orderData[$i]);
+        if($orderData)
+        {
+            $orderDetailFormattedArr = Array();
+            for ($i=0; $i < count($orderData); $i++) { 
+                if(!$orderDetailFormattedArr[$orderData[$i]["OrderId"]])
+                    $orderDetailFormattedArr[$orderData[$i]["OrderId"]] = Array();
+                array_push($orderDetailFormattedArr[$orderData[$i]["OrderId"]], $orderData[$i]);
+            }
+        }
+        else{
+            $orderDetailFormattedArr = null;
         }
         $data = array(
             'title' => 'Manage Order',

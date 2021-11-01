@@ -302,15 +302,14 @@ class Dashboard extends CI_Controller {
                     $userResetLink = base_url().'user/resetpassword?token='.$userTokenHash.'&uid='.$email_address;
 
                     // send above link to user email address.
-                    $message = "Please click on the below link to reset your password</br>".
-                        "<p><a href='.$userResetLink.'>".$userResetLink."</a></p>";
+                    $message = "Please click on the below link to reset your password<br/><br/><a href=".$userResetLink.">click here to reset your password</a>";
                     //$CI->Auths->sendemail($to_email, $message);
 
                     $result['response'] = 'We have sent you a reset password link on your email address';
                     $result['status'] = 'success';
                     $result['resetlink'] = $userResetLink;
 
-                    $CI->Auths->sendemailgeneral($email_address,$message);
+                    $CI->Auths->sendemailgeneral($email_address,$message,"9oClock - User Reset Password");
 
                     echo json_encode($result);
                     return;

@@ -300,7 +300,7 @@
                     $('#printhead2').text('Product Name');
                     $('#printhead3').text('Total Price');   
                     for(i = 0; i < data.length; i++) {
-                        grand_total += parseInt(data[i].total_price);
+                        grand_total += parseFloat(data[i].total_price);
                         content += `<tr>
                                         <td>${i+1}</td>
                                         <td class="text-left">${data[i].ItemId}</td>
@@ -327,7 +327,7 @@
                     $('#printhead2').text('Customer');
                     $('#printhead3').text('Total Amount');
                     for(i = 0; i < data.length; i++) {
-                        grand_total += parseInt(data[i].OrderValue);
+                        grand_total += parseFloat(data[i].OrderValue);
                         content += `<tr>
                                         <td>${i+1}</td>
                                         <td class="text-center">${data[i].OrderId}</td>

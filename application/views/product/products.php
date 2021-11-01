@@ -322,11 +322,11 @@
                        var productArea = $('#products-area');
                        productArea.empty();
                        for (var i = 0; i < data.length; i++) {
-                           var discountPercentage = parseInt(((data[i].Price - data[i].SalePrice)/data[i].Price) * 100);
+                           var discountPercentage = parseFloat(((data[i].Price - data[i].SalePrice)/data[i].Price) * 100);
                            var disText = null;
                            if(discountPercentage != 0){
                                var disString = `<h5 class="card-title float-left">${discountPercentage}% OFF</h5>`;
-                               var priceString = `<span class="product-discount"><del>${formatCurrency(data[i].Price,0)}</del></span>`;
+                               var priceString = '';//`<span class="product-discount"><del>${formatCurrency(data[i].Price,0)}</del></span>`;
                            }
                            var cartTemplateCopy = cartTemplate;
                            if(disString)

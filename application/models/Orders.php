@@ -72,7 +72,7 @@ class Orders extends CI_Model {
     }
 
     public function OrderData($orderId){
-        $this->db->select('a.*, b.*, c.ProductName, c.CompanyId, c.OutletId, c.Tax, c.Category, d.UnitName, u.*, gua.Address');
+        $this->db->select('a.*, b.*, c.ProductName, c.CompanyId, c.OutletId, c.Tax, c.Category, d.UnitName, u.*, gua.*');
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');

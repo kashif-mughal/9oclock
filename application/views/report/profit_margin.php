@@ -298,7 +298,7 @@
                 $('#printReportType').text(reportType);
                 if(reportType == 'Products') {
                     for(i = 0; i < data.length; i++) {
-                        grand_total += parseInt(data[i].total_sale_amount - data[i].total_purchase_amount);
+                        grand_total += parseFloat(data[i].total_sale_amount - data[i].total_purchase_amount);
                         content += `<tr>
                                         <td>${i+1}</td>
                                         <td class="text-center">${data[i].ProductName}</td>

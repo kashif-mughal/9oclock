@@ -198,8 +198,8 @@
                 date_default_timezone_set($_COOKIE["user_timezone"]);
  
                 $date = new DateTime("now",null);
-                $curr_hour = $_COOKIE["curr_hours"];
-                $curr_min = $_COOKIE["curr_minutes"];
+                $curr_hour = $_COOKIE["user_hours"];
+                $curr_min = $_COOKIE["user_minutes"];
             ?>
 			
             <div id="checkoutCartContainer">
@@ -348,7 +348,8 @@ $(document).ready(function() {
             cache: false,
             success: function (pageLocation)
             {
-                window.location.href = '<?=base_url();?>' + pageLocation;
+				var final_url = '<?=base_url();?>' + pageLocation;
+                window.location.href = final_url;
             }
         });    
     });
@@ -837,7 +838,7 @@ function createCookie(name, value, days) {
     //     timeSlotAreaElem.append(otherDTemplateHead);
     //     timeSlotAreaElem.append(otherDTemplateBody);
     // }
-    // var deliveryCharges = parseInt('<?php // echo $deliveryCharges?>');
+    // var deliveryCharges = parseFloat('<?php // echo $deliveryCharges?>');
     // var deliveryAdded = false;
     // function setTimeSlotInternal(currentElem){
     //     deliveryTime = $(currentElem).find('input').first().val();
@@ -944,12 +945,12 @@ function createCookie(name, value, days) {
     //         var sum = 0;
     //         for (var i = 0; i < cart.length; i++) {
     //            var eachProdTemplateCopy = eachProdTemplate;
-    //            sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+    //            sum += parseFloat(cart[i].quantity) * parseFloat(cart[i].price);
     //            eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
     //            eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
     //            eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, `${cart[i].pName} ( ${cart[i].saleUnitQty} ${cart[i].saleUnit} )`);
     //            eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-    //            eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', formatCurrency(parseInt(cart[i].quantity) * parseInt(cart[i].price)));
+    //            eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', formatCurrency(parseFloat(cart[i].quantity) * parseFloat(cart[i].price)));
     //            //append newly created row in card body
     //            cartBody.append(eachProdTemplateCopy);
     //         }
@@ -983,7 +984,7 @@ function createCookie(name, value, days) {
     //         cart = JSON.parse(cart);
     //         var sum = 0;
     //         for (var i = 0; i < cart.length; i++) {
-    //            sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+    //            sum += parseFloat(cart[i].quantity) * parseFloat(cart[i].price);
     //         }
     //         subTotal = sum;
     //         $('.subtotal-price').html(formatCurrency(sum));

@@ -494,9 +494,9 @@ class Auths extends CI_Model {
         //return $this->email->send();
     }
 
-    public function sendemailgeneral($to_email, $body) {
+    public function sendemailgeneral($to_email, $body, $subject_line = "9oClock - User Email Verification") {
         $from = "admin@9oclockshop.co.uk";
-        $subject = "9oClock - User Email Verification";
+        $subject = $subject_line;
         $message = $body;
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";

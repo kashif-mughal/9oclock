@@ -368,7 +368,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
    $(document).on('click', '.add-cart', function () {
       $('#add_to_cart_items').addClass('cartAnimate');
        var productJson = $(this).data('json');
-       var quantity = parseInt($(this).parent().parent().parent().find('.quantity')[0].value);
+       var quantity = parseFloat($(this).parent().parent().parent().find('.quantity')[0].value);
        if(!isNaN(quantity) && quantity > 0){
          var cart = getCookie('baskit');
          if(cart)
@@ -528,7 +528,7 @@ function changeQtyOfProductAndPutInCart(targetElem, operation){
    else{
       var qty = prodCountObj.value == "" ? 0 : prodCountObj.value;
       if(prodCountObj.tagName == 'P'){
-        var tempQty = parseInt(prodCountObj.innerHTML);
+        var tempQty = parseFloat(prodCountObj.innerHTML);
         if(!isNaN(tempQty)){
           qty = tempQty;
         }
@@ -573,7 +573,7 @@ function changeQtyOfProductAndPutInCart(targetElem, operation){
    }
 }
 function removeItemFromShoppingCart(currentElem){
-   var productId = parseInt(currentElem.data('id'));
+   var productId = parseFloat(currentElem.data('id'));
    var prodName = currentElem.data('name');
    var cart = getCookie('baskit');
    if(cart)
@@ -597,7 +597,7 @@ function removeItemFromShoppingCart(currentElem){
    else{
     var totalP = 0;
     for (var i = 0; i < cartExceptCurrentProduct.length; i++) {
-      totalP += parseInt(cartExceptCurrentProduct[i].price) * parseInt(cartExceptCurrentProduct[i].quantity);
+      totalP += parseFloat(cartExceptCurrentProduct[i].price) * parseFloat(cartExceptCurrentProduct[i].quantity);
     }
     $('#Grand-Total').html(totalP);
    }

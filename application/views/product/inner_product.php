@@ -130,12 +130,12 @@
             <div class="inner-product-content-info d-flex flex-column align-items-stretch justify-content-between">
                <div class="inner-product-top mb-5">
                   <h2 class="main-heading"><?php echo $product_name; ?></h2>
-                  <p><?php echo $sale_unit_qty . ' ' . $unitName; ?></p>
+                  <!-- <p><?php echo $sale_unit_qty . ' ' . $unitName; ?></p> -->
                </div>
 
                <div class="inner-product-mid my-5">
                   <?php $orignalPrice = ($OriginalPrice != $sale_price) ? $OriginalPrice : ''; ?>
-                  <span class="price">£<?php echo $sale_price; ?></span><span class="discount">£<?php echo $orignalPrice; ?></span>
+                  <!-- <span class="price">£<?php echo $sale_price; ?></span><span class="discount">£<?php echo $orignalPrice; ?></span> -->
                   <style>
                      .w-45 {
                         width:45%;
@@ -179,7 +179,7 @@
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Add to Cart
                      </a>
-                     <a href="javascript:void(0);" style="display: none; opacity: 0;" class="product-card-btn mx-auto remove-cart remove-cart-main"
+                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart remove-cart-main"
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Remove From Cart
                      </a>
@@ -255,13 +255,11 @@
                                      </div>
                                      <img class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
                                      <div class="product-info text-left">
-                                     <p class="product-card-inner-subcategory">Vegetables</p>
+                                     <p class="product-card-inner-subcategory"></p>
                                          <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>
                                          <!-- <p class="card-text product-card-inner-price d-inline"><script type="text/javascript">document.write(formatCurrency("<?php //echo $value['SalePrice']; ?>",0)); </script></p> -->
 
-                                         <?php if($discountPercentage != 0) { ?> 
-                                             <span class="product-discount"><del><script type="text/javascript">formatCurrency("<?php echo $value['Price']; ?>",0); </script></del></span>
-                                         <?php } 
+                                         <?php
                                          $productObject = (object) [
                                             'id' => $value['ProductId'],
                                             'pName' => $value['ProductName'],
@@ -282,10 +280,14 @@
                                           <!-- <p class="card-text product-card-inner-weight">
                                              <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ; ?></p> -->
                                           <div class="d-flex justify-content-start align-items-center product-card-inner-price">
-                                             <p class="mainPrice">£<?php echo $value['SalePrice']; ?></p>
-                                             <p class="originalPrice">£<?php echo $value['OriginalPrice']; ?></p>
+                                             <p class="mainPrice c<?php echo $value['ProductId'] ?>"></p>
+                                             <!-- <p class="originalPrice">£<?php echo $value['OriginalPrice']; ?></p> -->
                                           </div>
-
+                                          <script type="text/javascript">
+                                             $(document).ready(function(){
+                                               $('.mainPrice.c<?php echo $value['ProductId'] ?>').html(formatCurrency('<?=$value["SalePrice"]; ?>'));
+                                             });
+                                          </script>
                                          <div class="quantity-area d-flex justify-content-center align-items-center mt-2 px-0 text-center">
                                              <span class="d-inline-flex quantity-text mr-1">Qty</span>
                                              <input type="text" class="d-inline-flex quantity-input quantity">

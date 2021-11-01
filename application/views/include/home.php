@@ -101,7 +101,7 @@
                            }
                            else
                            { ?>
-                        <p class="card-text product-card-inner-weight"><?php echo $value["SaleUnitQty"] . " " . $value["UnitName"] ?></p>
+                        <!-- <p class="card-text product-card-inner-weight"><?php echo $value["SaleUnitQty"] . " " . $value["UnitName"] ?></p> -->
                         <?php
                            } ?>
                         <!-- <p class="card-text product-card-inner-weight">
@@ -109,19 +109,19 @@
                               ?></p> -->
                         <div class="d-flex justify-content-start align-items-center product-card-inner-price">
                            <p class="mainPrice c<?php echo $value['ProductId'] ?>"></p>
-                           <?php if ($discountPercentage > 0)
+                           <!-- <?php if ($discountPercentage > 0)
                               { ?> 
                            <p class="originalPrice c<?php echo $value['ProductId'] ?>"></p>
                            <?php
-                              } ?>
+                              } ?> -->
                         </div>
                         <script type="text/javascript">
                            $(document).ready(function(){
                              $('.mainPrice.c<?php echo $value['ProductId'] ?>').html(formatCurrency('<?=$value["SalePrice"]; ?>'));
-                             var orgPrc = $('.originalPrice.c<?php echo $value['ProductId'] ?>');
-                             if(orgPrc && orgPrc.length > 0){
-                               orgPrc.html(formatCurrency('<?=$value["Price"]; ?>'));
-                             }
+                             // var orgPrc = $('.originalPrice.c<?php echo $value['ProductId'] ?>');
+                             // if(orgPrc && orgPrc.length > 0){
+                             //   orgPrc.html(formatCurrency('<?=$value["Price"]; ?>'));
+                             // }
                            });
                         </script>
                         <div class="quantity-area d-flex justify-content-center align-items-center mt-2 text-center">
@@ -249,7 +249,7 @@
                            }
                            else
                            { ?>
-                        <p class="card-text product-card-inner-weight"><?php echo $value["SaleUnitQty"] . " " . $value["UnitName"] ?></p>
+                        <!-- <p class="card-text product-card-inner-weight"><?php echo $value["SaleUnitQty"] . " " . $value["UnitName"] ?></p> -->
                         <?php
                            } ?>
                         <!-- <p class="card-text product-card-inner-weight">

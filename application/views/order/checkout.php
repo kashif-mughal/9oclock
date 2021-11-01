@@ -212,12 +212,12 @@
             var sum = 0;
             for (var i = 0; i < cart.length; i++) {
                var eachProdTemplateCopy = eachProdTemplate;
-               sum += parseInt(cart[i].quantity) * parseInt(cart[i].price);
+               sum += parseFloat(cart[i].quantity) * parseFloat(cart[i].price);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{pId}', cart[i].id);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{imgValue}', cart[i].img);
                eachProdTemplateCopy = eachProdTemplateCopy.replace(/{prodName}/g, cart[i].pName);
                eachProdTemplateCopy = eachProdTemplateCopy.replace('{qty}', cart[i].quantity);
-               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseInt(cart[i].quantity) * parseInt(cart[i].price));
+               eachProdTemplateCopy = eachProdTemplateCopy.replace('{totalPrice}', parseFloat(cart[i].quantity) * parseFloat(cart[i].price));
                //append newly created row in card body
                cartBody.append(eachProdTemplateCopy);
             }
