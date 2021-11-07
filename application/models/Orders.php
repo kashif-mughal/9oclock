@@ -49,7 +49,6 @@ class Orders extends CI_Model {
             $CI = & get_instance();
             $userId = $CI->session->userdata('user_id');
         }
-
         $this->db->select('a.*, b.*, c.ProductName, c.ProductImg, c.Price, d.UnitName');
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');

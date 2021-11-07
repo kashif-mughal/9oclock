@@ -217,7 +217,7 @@
                            </td>
                            <td class="quantityData"><?=$products[$i]['ItemQuantity']?></td>
                            <td class="priceData">
-                              <script>document.write(formatCurrency('<?=$products[$i]['SoldPrice']?>', 0))</script>
+                              <script>document.write(formatCurrency('<?=$products[$i]['SoldPrice']?>'))</script>
                            </td>
                         </tr>
                         <?php }} ?>

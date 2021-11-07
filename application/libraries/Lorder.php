@@ -391,7 +391,6 @@ class Lorder {
         $CI = & get_instance();
         $CI->load->model('Orders');
         $orderData = $CI->Orders->retrieve_user_orders();
-        
         foreach ($orderData as $key => $value) {
             $productObject = (object) [
                            'id' => $value['ItemId'],
