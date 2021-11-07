@@ -3,6 +3,7 @@
 $CI = & get_instance();
 $CI->load->model('Users');
 $users = $CI->Users->profile_edit_data();
+
 if(is_array($users) && !empty($users[0])){
   $users = $users[0];
 }else{

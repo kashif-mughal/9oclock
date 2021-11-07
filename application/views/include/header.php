@@ -162,14 +162,14 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                         </div>
                     </div>
                       <div class="card-header sidebar-menu-title p-0 text-left" id="headingOne">
-                     <h4>Follow Us</h4>
+                     <!-- <h4>Follow Us</h4> -->
                   </div>
                   <div class="row" style=" margin-left: 0px;">
-                     <a href="https://www.facebook.com/pages/category/Shopping---Retail/9-Oclock-Shop-123238661844155/"><i class="fab fa-facebook-square fa-1x"></i></a>
+                     <!-- <a href="https://www.facebook.com/pages/category/Shopping---Retail/9-Oclock-Shop-123238661844155/"><i class="fab fa-facebook-square fa-1x"></i></a>
                      <div class="socialmedia-footer">|</div>
                      <a href="https://twitter.com/9oClockpk"><i class="fab fa-twitter-square fa-1x"></i></a>
                       <div class="socialmedia-footer">|</div>
-                     <a href="#"><i class="fab fa-whatsapp-square fa-1x"></i></a>
+                     <a href="#"><i class="fab fa-whatsapp-square fa-1x"></i></a> -->
                   </div>
 
             </div>

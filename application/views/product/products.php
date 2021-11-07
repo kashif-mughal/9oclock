@@ -88,22 +88,8 @@
                                    <p class="product-card-inner-subcategory">Vegetables</p>
                                    <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
                                    
-                                   <div class="input-group product-card-dropdown">
-                                       <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
-                                       <option value="1" selected>1kg</option>
-                                       <option value="2">1 Dozen</option>
-                                       <option value="3">500 grm</option>
-                                       </select>
-                                   </div>
-                                   <!-- <p class="card-text product-card-inner-weight">
-                                       <?php //echo empty($value['SaleUnitName']) ? $value['UnitName'] : $value['SaleUnitQty']. ' ' .$value['SaleUnitName'] ;
-                  ?></p> -->
-                                   
-                                  
-               
                                    <div class="d-flex justify-content-start align-items-center product-card-inner-price">
-                                       <p class="mainPrice">{salePrice}</p>
-                                       <!-- <p class="originalPrice"></p> -->
+                                       <p class="mainPrice mk">{salePrice}</p>
                                    </div>
                
                                    <div class="quantity-area d-flex justify-content-center align-items-center mt-2 ml-3">
@@ -119,7 +105,7 @@
                                <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
                                data-json="{pjsonString}"
                                >Add to Cart</a>
-                               <a href="javascript:void(0);" style="display: none; opacity:0;" class="product-card-btn mx-auto remove-cart"
+                               <a href="javascript:void(0);" style="display: none; opacity:0;" class="product-card-btn mx-auto remove-cart2"
                                data-json="{pjsonString}"
                                >Remove From Cart</a>
                        </div>
@@ -265,7 +251,7 @@
                            <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
                               data-json="<?php echo htmlentities(json_encode($productObject) , ENT_QUOTES, 'UTF-8'); ?>"
                               >Add to Cart</a>
-                           <a href="javascript:void(0);" style="display: none; opacity:0;" class="product-card-btn mx-auto remove-cart"
+                           <a href="javascript:void(0);" style="display: none; opacity:0;" class="product-card-btn mx-auto remove-cart2"
                               data-json="<?php echo htmlentities(json_encode($productObject) , ENT_QUOTES, 'UTF-8'); ?>"
                               >Remove From Cart</a>
                            <?php
@@ -340,7 +326,7 @@
                            cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].ProductImg);
                            cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
                            cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
-                           cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice,0));
+                           cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice));
                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
                            pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
                            cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);

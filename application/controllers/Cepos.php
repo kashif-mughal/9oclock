@@ -299,6 +299,10 @@ private function InsertTblItem($tblData){
             if(empty($tblData[$i]->ItemPurchasePrice))
                 $tblData[$i]->ItemPurchasePrice = 0;
             $catId = empty($tblData[$i]->ItemSubCategoryId) ? $tblData[$i]->ItemCategoryId : $tblData[$i]->ItemSubCategoryId;
+            $brandId = 1;
+            if(!empty($tblData[$i]->Brand)){
+                $brandId = $this->GetOrSetBrandId($tblData[$i]->Brand);
+            }
             $data = array(
                 'ProductId'     =>  $tblData[$i]->Id,
                 'ProductName'   =>  $tblData[$i]->ItemName,
@@ -313,7 +317,8 @@ private function InsertTblItem($tblData){
                 'CompanyId'     =>  $tblData[$i]->CompanyId,
                 'OutletId'      =>  $tblData[$i]->OutletId,
                 'Tax'           =>  $tblData[$i]->Tax,
-                'ItemBarCode'   =>  $tblData[$i]->ItemBarCode
+                'ItemBarCode'   =>  $tblData[$i]->ItemBarCode,
+                'Brand'         =>  $brandId
             );
                 //$this->db->insert('tblstock',$data);
             $sql = $this->db->insert_string('grocery_products',$data). " ON DUPLICATE KEY UPDATE ProductName = '".$tblData[$i]->ItemName."', Category = ".$catId.", Unit = ".$tblData[$i]->UnitOfSaleId.", SaleUnit = ".$tblData[$i]->UnitOfSaleId.", UnitId = ".$tblData[$i]->UnitOfSaleId.", OriginalPrice = ".$tblData[$i]->ItemPurchasePrice.", Price = ".$tblData[$i]->ItemSalesPrice.", SalePrice = ".$tblData[$i]->ItemSalesPrice.", Status = ".$tblData[$i]->IsActive.", CompanyId = ".$tblData[$i]->CompanyId.", OutletId = ".$tblData[$i]->OutletId.", ItemBarCode = '".$tblData[$i]->ItemBarCode."', Tax = ".$tblData[$i]->Tax;
@@ -476,6 +481,23 @@ private function UpdateTblItemCategory($tblData){
         }
     }
 }
+private function GetOrSetBrandId($BrandName){
+    $BrandName = urldecode($BrandName);
+    $brand = $this->db->get_where('grocery_brand', array('BrandName' => $BrandName))->result_array();
+    if($brand){
+        return $brand[0]["BrandId"];
+    }
+    else{
+        $data = array(
+            'BrandName' =>  $BrandName,
+            'Alias'     =>  $BrandName,
+            'CreatedOn' =>  date_format(new DateTime(), 'Y-m-d H:i:s'),
+            'Status'    =>  1
+        );
+        $this->db->insert('grocery_brand',$data);
+        return $this->db->insert_id();
+    }
+}
 private function UpdateTblItem($tblData){
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     if(!is_array($tblData)){
@@ -499,6 +521,10 @@ private function UpdateTblItem($tblData){
             if(empty($tblData[$i]->ItemPurchasePrice))
                 $tblData[$i]->ItemPurchasePrice = 0;
             $catId = empty($tblData[$i]->ItemSubCategoryId) ? $tblData[$i]->ItemCategoryId : $tblData[$i]->ItemSubCategoryId;
+            $brandId = 1;
+            if(!empty($tblData[$i]->Brand)){
+                $brandId = $this->GetOrSetBrandId($tblData[$i]->Brand);
+            }
             $data = array(
                 'ProductName'   =>  $tblData[$i]->ItemName,
                 'Category'      =>  $catId,
@@ -513,7 +539,7 @@ private function UpdateTblItem($tblData){
                 'OutletId'      =>  $tblData[$i]->OutletId,
                 'Tax'           =>  $tblData[$i]->Tax,
                 'ItemBarCode'   =>  $tblData[$i]->ItemBarCode,
-                'Brand'         =>  $tblData[$i]->Brand
+                'Brand'         =>  $brandId
             );
             $this->db->where('ProductId', $tblData[$i]->Id);
             $this->db->update('grocery_products',$data);

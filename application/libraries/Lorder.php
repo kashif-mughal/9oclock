@@ -78,21 +78,21 @@ class Lorder {
             $orderDelivery["mode"] = "insert";
             $orderDelivery["data"] = array(
                 "OrderId" => $singleOrder["GUID"],
-                "FirstName" => $singleOrder["first_name"],
+                "FirstName" => $singleOrder["first_name"][0],
                 "LastName" => $singleOrder["last_name"],
                 "Email" => $singleOrder["email"],
                 "MobileNo" => $singleOrder["phone"],
                 "PhoneNo" => $singleOrder["phone"],
                 "BuildingNo" => $singleOrder["building_no"],
-                "StreetNo" => $singleOrder["street_no"],
+                "StreetNo" => $singleOrder["Address"],
                 "FloorNo" => $singleOrder["floor_no"],
-                "Area" => $singleOrder["Address"],
+                "Area" => $singleOrder["town"],
                 "PostCode" => $singleOrder["zip_code"],
                 "City" => $singleOrder["city"],
                 "AdditionalDeliveryInstruction" => '',
-                "DeliveryDate" => date("Y-m-d", strtotime($singleOrder["CreatedOn"])),
-                "DeliveryTime" => date("H:i:s", strtotime($singleOrder["CreatedOn"])),
-                "SpecialInstruction" => '',
+                "DeliveryDate" => date("Y-m-d", strtotime($singleOrder["DeliveryDate"])),
+                "DeliveryTime" => date("H:i:s", strtotime($singleOrder["deliveryDate"])),
+                "SpecialInstruction" => $singleOrder["DeliveryFrom"] . '-' . $singleOrder["DeliveryUpto"],
                 "PaymentTransactionID" => ''
             );
             array_push($orderPayload, $orderDelivery);

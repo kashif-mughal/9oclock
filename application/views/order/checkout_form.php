@@ -194,14 +194,6 @@
             </div>
         </div>
         <div class="row">
-            <?php 
-                date_default_timezone_set($_COOKIE["user_timezone"]);
- 
-                $date = new DateTime("now",null);
-                $curr_hour = $_COOKIE["user_hours"];
-                $curr_min = $_COOKIE["user_minutes"];
-            ?>
-			
             <div id="checkoutCartContainer">
                 <p class="heading">Schedule Delivery</p>
                 <div class="d-flex justify-content-start align-items-center checkoutItem">
@@ -213,10 +205,6 @@
                     </div>
                     <div class="input-group checkoutDropdown">
                         <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day">
-                            <?php if($curr_hour <= 19): ?>
-                                <option value="today" >Today</option>
-                            <?php endif; ?>
-                            <option value="tomorrow" selected>Tomorrow</option>
                         </select>
                     </div>
                 </div>
@@ -230,17 +218,6 @@
                     
                     <div class="input-group checkoutDropdown">
                         <select class="custom-select" id="checkoutDeliveryDate" aria-label="Checkout Delivery Day"> 
-                                
-
-                            <?php if($curr_hour < 10 || $curr_hour >= 20) { ?>
-                                <option value="today" selected>10.00 AM - 12.00 PM</option>
-                            <?php } ?>
-                            <?php if($curr_hour < 16 || $curr_hour >= 20) { ?>
-                                <option value="tomorrow">04.00 PM - 06.00 PM</option>
-                            <?php } ?>
-                            <?php if($curr_hour < 20 || $curr_hour >= 20) { ?>
-                                <option value="nextweek">08.00 PM - 10.00 PM</option>
-                            <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -270,33 +247,27 @@
 <script>
 
 $(document).ready(function() {
+        var current_hour = new Date().getHours();
+        var optionString = '<option value="tomorrow" selected>Tomorrow</option>';
+        if(current_hour <= 19){
+            optionString = '<option value="today" >Today</option>' + optionString;
+        }
+        $("#checkoutDeliveryDay").html(optionString);
 
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    createCookie("user_timezone",tz, "1");
-	
-	var curr_date = new Date();
-	var curr_hours = curr_date.getHours();
-	var curr_minutes = curr_date.getMinutes();
-	
-	console.log('Hours: ' + curr_hours + ", Minutes: " + curr_minutes);
-    
-	createCookie("user_hours",curr_hours, "1");
-	createCookie("user_minutes",curr_minutes, "1");
-	
-    // var x = document.getElementById("demo");
-    // function getLocation() {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(showPosition);
-    //     } else {
-    //         x.innerHTML = "Geolocation is not supported by this browser.";
-    //     }
-    // }
+        var dtOptionString = "";
+        if(current_hour < 10 || current_hour >= 20)
+            dtOptionString = dtOptionString + '<option selected>10.00 AM - 12.00 PM</option>';
+        
+        if(current_hour < 16 || current_hour >= 20)
+            dtOptionString = dtOptionString + '<option>04.00 PM - 06.00 PM</option>';
+        
+        if(current_hour < 20 || current_hour >= 20)
+            dtOptionString = dtOptionString + '<option>08.00 PM - 10.00 PM</option>';
+        
+        $("#checkoutDeliveryDate").html(dtOptionString);
 
-    // function showPosition(position) {
-    //     x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-    // }
 
-    $('.placeOrderBtn').on('click', function(e) {
+        $('.placeOrderBtn').on('click', function(e) {
         e.preventDefault();
         var deliveryCharges =  <?php echo $deliveryCharges?>;
 		var deliveryDayText = $('#checkoutDeliveryDay').find(":selected").text();

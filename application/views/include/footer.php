@@ -95,9 +95,9 @@ foreach($CatList as $key => $value) {
 				<div class="container">
 					<div class="row" style="font-size: 10px;">
 						<div class="col-6" style="letter-spacing: 10px; display: none;">
-							<a href="https://www.facebook.com/9oclockpk"><i class="fab fa-facebook fa-2x" style="color:#666666;"></i></a>
+							<!-- <a href="https://www.facebook.com/9oclockpk"><i class="fab fa-facebook fa-2x" style="color:#666666;"></i></a>
 							<a href="https://twitter.com/9oclockpk"><i class="fab fa-twitter fa-2x" style="color:#666666;"></i></a>
-							<a href="#"><i class="fab fa-whatsapp fa-2x" style="color:#666666;"></i></a>
+							<a href="#"><i class="fab fa-whatsapp fa-2x" style="color:#666666;"></i></a> -->
 						</div>
 						<div class="col-6 text-right">
 							<p>Powered By: <span><a href="http://www.malejol.com" style="text-decoration:none; color:#3d3d3b">Malejol</a></span></p>

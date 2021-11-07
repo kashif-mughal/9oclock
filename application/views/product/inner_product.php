@@ -3,6 +3,9 @@
   .main-content .featured-products-content .product-card-inner{
     border-radius: unset;
   }
+  .w-45 {
+      width:45%;
+   }
   .zeroMarginLeft {
      margin-left: 0px !important;
   }
@@ -135,12 +138,12 @@
 
                <div class="inner-product-mid my-5">
                   <?php $orignalPrice = ($OriginalPrice != $sale_price) ? $OriginalPrice : ''; ?>
-                  <!-- <span class="price">£<?php echo $sale_price; ?></span><span class="discount">£<?php echo $orignalPrice; ?></span> -->
-                  <style>
-                     .w-45 {
-                        width:45%;
-                     }
-                  </style>
+                  <span class="price" id="single-product-price"></span>
+                  <script type="text/javascript">
+                     var productPrice = '<?php echo $sale_price; ?>';
+                     productPrice = formatCurrency(productPrice);
+                     $('#single-product-price').html(productPrice);
+                  </script>
                   <!-- <div class="input-group product-card-dropdown w-45">
                      <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">
                         <option value="1" selected>1kg</option>

@@ -73,9 +73,12 @@
                                 <div class="form-label-group mb-3">
                                     <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last Name" value="{last_name}" autocomplete="off" required>
                                 </div>
-                                <!-- <div class="form-label-group mb-3">
-                                    <input type="text" id="user_name" name="user_name" class="form-control" placeholder="User Name" value="" autocomplete="off" required>
-                                </div> -->
+                                <div class="form-label-group mb-3">
+                                    <input type="hidden" id="user_name" name="user_name" class="form-control" placeholder="User Name" value="{email}" autocomplete="off" required>
+                                </div>
+                                <div class="form-label-group mb-3">
+                                    <input type="hidden" id="user_email" name="user_email" class="form-control" placeholder="User Email" value="{email}" autocomplete="off" required>
+                                </div>
                                 <div class="form-label-group mb-3">
                                     <input type="file" id="logo" name="logo" class="form-control">
                                     <input type="hidden" name="old_logo" value="{logo}" />
