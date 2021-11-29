@@ -185,7 +185,7 @@ class PaymentIntegration extends CI_Controller {
      $this->SaveBankTransRecord($responseDataDecline);
 
       // 3. Update order payment status 
-      $this->lpayment->update_payment_status_updated($responseDataDecline);
+      $this->lpayment->update_payment_status($responseDataDecline);
       
       $content = $this->lpayment->decline();
       $this->template->full_html_view($content);
@@ -219,7 +219,7 @@ class PaymentIntegration extends CI_Controller {
      $insertionResponse = $this->SaveBankTransRecord($responseDataCancelled);
      
      // 3. Update order payment status 
-      $this->lpayment->update_payment_status_updated($responseDataCancelled);
+      $this->lpayment->update_payment_status($responseDataCancelled);
 
       $content = $this->lpayment->cancelled();
       $this->template->full_html_view($content);
@@ -229,15 +229,4 @@ class PaymentIntegration extends CI_Controller {
       $content = $this->lpayment->save_record($responseData);
       return $content;
    }
-
-
-
-
-
-
-
-
-
-
-
 }

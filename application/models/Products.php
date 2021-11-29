@@ -48,6 +48,30 @@ class Products extends CI_Model {
         return $returnData;
     }
 
+    public function get_product_and_image_by_name(){
+        $this->db->select("gp.ProductName, REPLACE(gp.ProductName, ' ', '') pName, gpi.Img, gpi.Size");
+        $this->db->from($this->tableName." gp");
+        $this->db->join("grocery_product_images gpi", "gpi.ProductId = gp.ProductId", 'left');
+        $this->db->where("gp.Status", 1);
+        $this->db->where("gpi.Status", 1);
+        
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
+
+    public function insert_with_last_day_previous_update($data, $productId, $dt){
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $this->db->insert('grocery_product_images', $data);
+        $st = array(
+            'Status' => 0
+        );
+        $this->db->where("ProductId", $productId);
+        $this->db->where("CreatedOn < '". $dt ."'");
+        $this->db->update('grocery_product_images', $st);
+    }
 
     //Product List
     public function product_list() {

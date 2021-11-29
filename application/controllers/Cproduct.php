@@ -22,6 +22,66 @@ class Cproduct extends CI_Controller {
         $this->template->full_admin_html_view($content);
     }
 
+    public function productandimage(){
+        $result = $this->Products->get_product_and_image_by_name();
+        $formated = [];
+        for ($i=0; $i < count($result); $i++) {
+            if(!$formated[$result[$i]["pName"]][$result[$i]["Size"]])
+                $formated[$result[$i]["pName"]][$result[$i]["Size"]] = [];
+            array_push($formated[$result[$i]["pName"]][$result[$i]["Size"]], $result[$i]["Img"]);
+        }
+        //print_r(json_encode($result));
+        print_r(json_encode($formated));
+    }
+
+    public function uploadimage(){
+        $productName = $this->input->post("prodName");
+        $imgSize = $this->input->post("imgSize");
+        $pInfo = $this->lproduct->product_by_name($productName);
+        $pId = 0;
+        if($pInfo){
+            $pId = $pInfo["ProductId"];
+        }
+        else{
+            echo json_encode(json_decode('{"success":0, "Message":"Product not found", "Code":1}'));
+            return;
+        }
+        $config['upload_path'] = './assets/img/products/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
+        $config['max_size'] = "*";
+        $config['max_width'] = "*";
+        $config['max_height'] = "*";
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+
+
+        if ($_FILES['image']['name']) {
+            if (!$this->upload->do_upload('image')) {
+                echo json_encode(json_decode('{"success":0, "Message":"Image upload error", "Code":2}'));
+                return;
+            } else {
+                $image = $this->upload->data();
+                $image_url = "assets/img/products/" . $image['file_name'];
+
+                //update product image by insert new entry
+                $data = array(
+                    'ProductId' => $pId,
+                    'Img' => $image_url,
+                    'Size' => $imgSize,
+                    'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+                    'Status' => 1
+                );
+                $this->Products->insert_with_last_day_previous_update($data, $pId, date_format(new DateTime(), 'Y-m-d'));
+                echo json_encode(json_decode('{"success":1, "Message":"'. $image_url .'", "Code":0}'));
+                return;
+            }
+        }
+        else{
+            echo json_encode(json_decode('{"success":0, "Message":"Image not found", "Code":3}'));
+            return;
+        }
+    }
+
     public function products($categoryId = null) {
         $catId = $this->input->get('categoryId');
         $name = $this->input->get('q');
@@ -220,7 +280,7 @@ class Cproduct extends CI_Controller {
             //'status' => $this->input->post('status')
         );
         if($_FILES['image']['name'])
-            $data['ProductImg'] = (!empty($image_url) ? $image_url : 'assets/img/brand.jpg');
+            $data['ProductImg'] = (!empty($image_url) ? $image_url : 'assets/img/product.png');
         $this->Products->update($data, 'ProductId', $product_id);
         // if (is_numeric($product_id)) {
         //     //adding varient images

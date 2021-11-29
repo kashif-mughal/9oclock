@@ -60,6 +60,17 @@ class Lproduct {
         }
     }
 
+    public function product_by_name($product_name){
+        $CI = & get_instance();
+        $CI->load->model('Products');
+        $result = $CI->Products->customSelect("ProductId", "REPLACE(ProductName, ' ', '') = '". $product_name ."'");
+        if ($result && count($result) > 0) {
+            return $result[0];
+        } else {
+            return FALSE;
+        }   
+    }
+
     //Product Edit Data
     public function product_edit_data($product_id) {
         $CI = & get_instance();
