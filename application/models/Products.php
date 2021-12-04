@@ -53,7 +53,6 @@ class Products extends CI_Model {
         $this->db->from($this->tableName." gp");
         $this->db->join("grocery_product_images gpi", "gpi.ProductId = gp.ProductId", 'left');
         $this->db->where("gp.Status", 1);
-        $this->db->where("gpi.Status", 1);
         
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

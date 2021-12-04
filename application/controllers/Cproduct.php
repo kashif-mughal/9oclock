@@ -26,14 +26,28 @@ class Cproduct extends CI_Controller {
         $result = $this->Products->get_product_and_image_by_name();
         $formated = [];
         for ($i=0; $i < count($result); $i++) {
-            if(!$formated[$result[$i]["pName"]][$result[$i]["Size"]])
-                $formated[$result[$i]["pName"]][$result[$i]["Size"]] = [];
-            array_push($formated[$result[$i]["pName"]][$result[$i]["Size"]], $result[$i]["Img"]);
+            if(!$formated[strtolower($result[$i]["pName"])]["thumb"])
+                $formated[strtolower($result[$i]["pName"])]["thumb"] = [];
+            if(!$formated[strtolower($result[$i]["pName"])]["large"])
+                $formated[strtolower($result[$i]["pName"])]["large"] = [];
+            if($result[$i]["Size"])
+                array_push($formated[strtolower($result[$i]["pName"])][$result[$i]["Size"]], $result[$i]["Img"]);
         }
+        //echo json_encode($formated);
         //print_r(json_encode($result));
         print_r(json_encode($formated));
     }
 
+    public function sendreportmail(){
+        $message = $this->input->post("report");
+        $to_email = $this->input->post("to_email");        
+        $from = "admin@9oclockshop.co.uk";
+        $subject = "Image upload utility Report";
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: ' . '<' . $from .'>' . "\r\n";
+        mail($to_email, $subject, $message, $headers);
+    }
     public function uploadimage(){
         $productName = $this->input->post("prodName");
         $imgSize = $this->input->post("imgSize");
@@ -43,41 +57,30 @@ class Cproduct extends CI_Controller {
             $pId = $pInfo["ProductId"];
         }
         else{
-            echo json_encode(json_decode('{"success":0, "Message":"Product not found", "Code":1}'));
+            echo json_encode(json_decode('{"Success":0, "Message":"Product not found", "Code":1}'));
             return;
         }
-        $config['upload_path'] = './assets/img/products/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
-        $config['max_size'] = "*";
-        $config['max_width'] = "*";
-        $config['max_height'] = "*";
-        $config['encrypt_name'] = TRUE;
-        $this->load->library('upload', $config);
 
+        try{
+            $fileNewName = 'assets2/img/products/' . md5(uniqid(mt_rand())) . '.jpg';
+            $imageData = base64_decode($_POST['image']);
+            $h = fopen('./' . $fileNewName , 'w');
+            fwrite($h, $imageData);
+            fclose($h);
 
-        if ($_FILES['image']['name']) {
-            if (!$this->upload->do_upload('image')) {
-                echo json_encode(json_decode('{"success":0, "Message":"Image upload error", "Code":2}'));
-                return;
-            } else {
-                $image = $this->upload->data();
-                $image_url = "assets/img/products/" . $image['file_name'];
-
-                //update product image by insert new entry
-                $data = array(
-                    'ProductId' => $pId,
-                    'Img' => $image_url,
-                    'Size' => $imgSize,
-                    'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
-                    'Status' => 1
-                );
-                $this->Products->insert_with_last_day_previous_update($data, $pId, date_format(new DateTime(), 'Y-m-d'));
-                echo json_encode(json_decode('{"success":1, "Message":"'. $image_url .'", "Code":0}'));
-                return;
-            }
+            $data = array(
+                'ProductId' => $pId,
+                'Img' => $fileNewName,
+                'Size' => $imgSize,
+                'CreatedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+                'Status' => 1
+            );
+            $this->Products->insert_with_last_day_previous_update($data, $pId, date_format(new DateTime(), 'Y-m-d'));
+            echo json_encode(json_decode('{"Success":1, "Message":"'. $fileNewName .'", "Code":0}'));
+            return;
         }
-        else{
-            echo json_encode(json_decode('{"success":0, "Message":"Image not found", "Code":3}'));
+        catch(Exception $ex){
+            echo json_encode(json_decode('{"Success":0, "Message":"Image Upload Error --> '. $ex->getMessage() .'", "Code":2}'));
             return;
         }
     }
