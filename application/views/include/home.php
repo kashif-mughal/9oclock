@@ -68,7 +68,7 @@
                         </div>
                      </div>
                      <a href="<?php echo base_url() . 'Cproduct/viewProduct/' . $value['ProductId']; ?>">
-                        <img class="img-fluid text-center" src="<?php echo base_url() . $value['ProductImg']; ?>" alt="Card image cap">
+                        <img class="img-fluid text-center" src="<?php echo base_url() . $value['Images']->Thumb[0]; ?>" alt="Card image cap">
                         <?php if ($discountPercentage > 0)
                            { ?> 
                         <p class="product-card-discount-banner"><?php echo round($discountPercentage) . "% OFF"; ?></p>

@@ -256,7 +256,7 @@
                                              </a>-->
                                          </div>
                                      </div>
-                                     <img class="img-fluid text-center" src="<?php echo base_url().$value['ProductImg']; ?>" alt="Card image cap">
+                                     <img class="img-fluid text-center" src="<?php echo base_url().$value['Images']->Thumb[0]; ?>" alt="Card image cap">
                                      <div class="product-info text-left">
                                      <p class="product-card-inner-subcategory"></p>
                                          <p class="card-text product-card-inner-name" title="<?php echo $value['ProductName']; ?>"><?php echo $value['ProductName']; ?></p>

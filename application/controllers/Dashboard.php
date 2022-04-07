@@ -41,12 +41,12 @@ class Dashboard extends CI_Controller {
         //$catArray = $CI->lcategory->get_category_hierarchy();
         $catArray = $CI->lcategory->get_category_hierarchy_in();
         //echo '<pre>'; print_r($product_list);die;
-        foreach($catArray as $key => $value) {
-            $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
-            if($products)
-                $products = $products['products'];
-            $value->products = $products;
-        }
+        // foreach($catArray as $key => $value) {
+        //     $products = $CI->Categories->getCatPrducts($value->catId, null, 0, 8);
+        //     if($products)
+        //         $products = $products['products'];
+        //     $value->products = $products;
+        // }
         $banner = $CI->Banner->get_banners();
 
         //print_r($banner[0]['image_path']);die;

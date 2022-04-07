@@ -49,7 +49,7 @@ class Orders extends CI_Model {
             $CI = & get_instance();
             $userId = $CI->session->userdata('user_id');
         }
-        $this->db->select('a.*, b.*, c.ProductName, c.ProductImg, c.Price, d.UnitName');
+        $this->db->select('a.*, b.*, c.ProductName, c.ProductId, c.ProductImg, c.Price, d.UnitName');
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');
@@ -65,7 +65,11 @@ class Orders extends CI_Model {
         $query = $this->db->get();
         $orderDetailObj = Array();
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            $products = $query->result_array();
+            $CI = & get_instance();
+            $CI->load->model('Products');
+            $products = $CI->Products->getAndAddProductImages($products);
+            return $products;
         }
         return false;
     }

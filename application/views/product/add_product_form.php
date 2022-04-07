@@ -250,12 +250,18 @@
                         </div>-->
                         
                         <div class="form-group row">
-                            <label for="Img" class="col-sm-3 col-form-label">Product Image </label>
+                            <label for="Img" class="col-sm-3 col-form-label">Icon </label>
                             <div class="col-sm-6">
                                 <input type="file" name="image" class="form-control" id="image">
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="multipleUpload" class="col-sm-3 col-form-label">Images </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="multipleUpload[]" multiple class="form-control">
+                            </div>
+                        </div>
                         <!-- <div class="form-group row">
                             <label for="varient" class="col-sm-3 col-form-label">Varient </label>
                             <div class="col-sm-9">

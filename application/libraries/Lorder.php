@@ -396,10 +396,11 @@ class Lorder {
                            'id' => $value['ItemId'],
                            'pName' => $value['ProductName'],
                            'price' => $value['Price'],
-                           'img' => base_url().$value['ProductImg']
+                           'img' => base_url().$value['Images']->Thumb[0]
                        ];
             $orderData[$key]['Jsn'] = htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8');
         }
+
         if($orderData)
         {
             $orderDetailFormattedArr = Array();
@@ -416,6 +417,7 @@ class Lorder {
             'title' => 'Manage Order',
             'orderData' => $orderDetailFormattedArr
         );
+
         return $CI->parser->parse('order/order_list', $data, true);
     }
 

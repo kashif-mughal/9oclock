@@ -129,7 +129,7 @@ class Corder extends CI_Controller {
 			$headers .= 'From: ' . '<' . $from .'>' . "\r\n";
 
 
-            mail($to_email, $subject, $message, $headers);
+            //mail($to_email, $subject, $message, $headers);
             echo 'PaymentIntegration/index';
         } else {
             $this->session->set_userdata(array('error_message' => 'Already Exists'));

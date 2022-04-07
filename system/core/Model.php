@@ -146,10 +146,49 @@ class CI_Model extends Lic {
         if ($query->num_rows() > 0) {
             $productData = $query->result_array();
             $productData[0]['varientData'] = $this->get_product_varient($value);
+            $productData = $this->getAndAddProductImages($productData);
             return $productData;
         }
         return false;
     }
+
+    private function getAndAddProductImages($products){
+        $pIds = [];
+        for ($i=0; $i < count($products); $i++) {
+            array_push($pIds, $products[$i]["ProductId"]);
+        }
+        if(count($pIds) == 0)
+            return $products;
+        $q2 = "SELECT ProductId, Img, Size from grocery_product_images WHERE ProductId in (". implode(',', $pIds) .") AND Status = '1' Order by Id DESC";
+        $q2 = $this->db->query($q2);
+        if ($q2->num_rows() == 0 || implode(',', $pIds) == '')
+            return $products;
+        $pImages = $q2->result_array();
+        for ($i=0; $i < count($products); $i++) {
+            $products[$i]["Images"] = new stdClass();
+            $products[$i]["Images"]->Large = [];
+            $products[$i]["Images"]->Thumb = [];
+            for ($j=0; $j < count($pImages); $j++) {
+                if($pImages[$j]["ProductId"] == $products[$i]["ProductId"]){
+                    if($pImages[$j]["Size"] == "large")
+                        array_push($products[$i]["Images"]->Large, $pImages[$j]["Img"]);
+                    if($pImages[$j]["Size"] == "thumb")
+                        array_push($products[$i]["Images"]->Thumb, $pImages[$j]["Img"]);
+                }
+            }
+        }
+        
+        for ($i=0; $i < count($products); $i++) {
+            if(count($products[$i]["Images"]->Large) == 0)
+                array_push($products[$i]["Images"]->Large, "assets/img/product.png");
+            if(count($products[$i]["Images"]->Thumb) == 0)
+                array_push($products[$i]["Images"]->Thumb, "assets/img/product.png");
+        }
+        return $products;
+    }
+
+
+
     public function get_product_varient($productId){
         $this->db->select('*');
         $this->db->from('grocery_products');

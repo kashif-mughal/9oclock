@@ -105,10 +105,46 @@ class Products extends CI_Model {
         $query = $this->db->query($query);
 //echo 'kashif123<pre>'; print_r($query->result_array());die;
         if ($query->num_rows() > 0) {
+
             //echo 'kashif<pre>'; print_r($this->product_data_after_varient_sort($query->result_array()));die;
-            return $this->product_data_after_varient_sort($query->result_array());
+            $products = $query->result_array();
+            $products = $this->getAndAddProductImages($products);
+            //echo '<pre>'; print_r($products);die;
+            return $this->product_data_after_varient_sort($products);
         }
         return false;
+    }
+
+    public function getAndAddProductImages($products){
+        $pIds = [];
+        for ($i=0; $i < count($products); $i++) {
+            array_push($pIds, $products[$i]["ProductId"]);
+        }
+        $q2 = "SELECT ProductId, Img, Size from grocery_product_images WHERE ProductId in (". implode(',', $pIds) .") AND Status = '1' Order by Id DESC";
+        $q2 = $this->db->query($q2);
+        $pImages = $q2->result_array();
+
+        for ($i=0; $i < count($products); $i++) {
+            $products[$i]["Images"] = new stdClass();
+            $products[$i]["Images"]->Large = [];
+            $products[$i]["Images"]->Thumb = [];
+            for ($j=0; $j < count($pImages); $j++) {
+                if($pImages[$j]["ProductId"] == $products[$i]["ProductId"]){
+                    if($pImages[$j]["Size"] == "large")
+                        array_push($products[$i]["Images"]->Large, $pImages[$j]["Img"]);
+                    if($pImages[$j]["Size"] == "thumb")
+                        array_push($products[$i]["Images"]->Thumb, $pImages[$j]["Img"]);
+                }
+            }
+        }
+        
+        for ($i=0; $i < count($products); $i++) {
+            if(count($products[$i]["Images"]->Large) == 0)
+                array_push($products[$i]["Images"]->Large, "assets/img/product.png");
+            if(count($products[$i]["Images"]->Thumb) == 0)
+                array_push($products[$i]["Images"]->Thumb, "assets/img/product.png");
+        }
+        return $products;
     }
 
     public function getProductFromCatAndAllSubCats($catID) {

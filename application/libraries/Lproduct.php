@@ -83,6 +83,7 @@ class Lproduct {
         $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $brands = $CI->Brands->customSelect('BrandId, BrandName');
         $units = $CI->Units->customSelect('UnitId, UnitName');
+        //echo '<pre>'; print_r($product_detail[0]);die;
         $data = array(
             'title' => 'Product Edit',
             'product_id' => $product_detail[0]['ProductId'],
@@ -108,7 +109,8 @@ class Lproduct {
             'season' => $product_detail[0]['season'],
             'sort' => $product_detail[0]['sort'],
             'Description' => $product_detail[0]['Description'],
-            'product_varient' => $product_detail[0]['varientData']
+            'product_varient' => $product_detail[0]['varientData'],
+            'Images' => $product_detail[0]['Images']
         );
         //var_dump($data);exit();
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
@@ -125,12 +127,13 @@ class Lproduct {
         $CI->load->model('Units');
 
         $product_detail = $CI->Products->retrieve_editdata('ProductId', $product_id);
+        $product_detail = $CI->Products->getAndAddProductImages($product_detail);
         $categories = $CI->Categories->customSelect('CategoryId, CatName');
         $brands = $CI->Brands->customSelect('BrandId, BrandName');
         $units = $CI->Units->customSelect('UnitId, UnitName');
         
         $similar_products = $CI->Products->similarProducts($product_detail[0]['Category'], $product_detail[0]['Brand']);
-
+        $similar_products = $CI->Products->getAndAddProductImages($similar_products);
         $unitItem = null;
         foreach($units as $unit) {
             if ($product_detail[0]['SaleUnit'] == $unit["UnitId"]) {
@@ -165,7 +168,7 @@ class Lproduct {
             'units' => $units,
             'sale_unit_qty' => $product_detail[0]['SaleUnitQty'],
             'sale_unit' => $product_detail[0]['SaleUnit'],
-            'ProductImg' => $product_detail[0]['ProductImg'],
+            'ProductImg' => $product_detail[0]['Images']->Large[0],
             'tags' => $product_detail[0]['tags'],
             'stock' => $product_detail[0]['stock'],
             'season' => $product_detail[0]['season'],

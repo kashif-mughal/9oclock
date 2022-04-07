@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Cproduct extends CI_Controller {
 
     public $product_id;
-    public $globaPerPageProducts = 100;
+    public $globaPerPageProducts = 20;
     function __construct() {
         parent::__construct();
         $this->load->database();
@@ -50,6 +50,7 @@ class Cproduct extends CI_Controller {
     }
     public function uploadimage(){
         $productName = $this->input->post("prodName");
+        $productName = str_replace("~~", "%", $productName);
         $imgSize = $this->input->post("imgSize");
         $pInfo = $this->lproduct->product_by_name($productName);
         $pId = 0;
@@ -88,6 +89,8 @@ class Cproduct extends CI_Controller {
     public function products($categoryId = null) {
         $catId = $this->input->get('categoryId');
         $name = $this->input->get('q');
+        $name = str_replace("~~", "%", $name);
+        //echo $name; die;
         $page = $this->input->get('page');
         $brand = $this->input->get('brand');
         if(empty($brand) || !is_numeric($brand))
@@ -105,6 +108,7 @@ class Cproduct extends CI_Controller {
     public function fetch(){
         $catId = $this->input->get('categoryId');
         $name = $this->input->get('q');
+        $name = str_replace("~~", "%", $name);
         $page = $this->input->get('page');
         $brand = $this->input->get('brand');
         if(empty($brand))
@@ -120,7 +124,7 @@ class Cproduct extends CI_Controller {
                            'id' => $products['products'][$i]['ProductId'],
                            'pName' => $products['products'][$i]['ProductName'],
                            'price' => $products['products'][$i]['SalePrice'],
-                           'img' => base_url().$products['products'][$i]['ProductImg'],
+                           'img' => base_url().$products['products'][$i]['Images']->Thumb[0],
                            'saleUnitQty' => $products['products'][$i]['SaleUnitQty'],
                            'saleUnit' => $products['products'][$i]['UnitName']
                        ];
@@ -178,45 +182,62 @@ class Cproduct extends CI_Controller {
         );
         $result = $this->Products->product_entry($data);
         if (is_numeric($result)) {
-            //adding varient images
-            // $files = $_FILES;
-            // $cpt = count($this->input->post('vNames'));
-            // $varientsData = array();
-            // $j = -1;
-            // for ($i=0; $i < $cpt; $i++) {
-            //     if(empty($this->input->post('vNames')[$i]))
-            //         continue;
-            //     $j++;
-            //     $varientsData[$j] = array();
-            //     $varientsData[$j]['VName'] = $this->input->post('vNames')[$i];
-            //     $varientsData[$j]['VType'] = $this->input->post('vType')[$i];
-            //     $varientsData[$j]['VValue'] = $this->input->post('vValue')[$i];
-            //     $varientsData[$j]['Status'] = 1;
-            //     $varientsData[$j]['VImage'] = null;
-            //     if ($files['vImage']['name'][$i]) {
-            //         $_FILES['vImage']['name']= $files['vImage']['name'][$i];
-            //         $_FILES['vImage']['type']= $files['vImage']['type'][$i];
-            //         $_FILES['vImage']['tmp_name']= $files['vImage']['tmp_name'][$i];
-            //         $_FILES['vImage']['error']= $files['vImage']['error'][$i];
-            //         $_FILES['vImage']['size']= $files['vImage']['size'][$i];
+            $fName = "";
+            $fNames = array();
+            $multipleUpload = array();
 
-            //         if (!$this->upload->do_upload('vImage')) {
-            //             $error = array('error' => $this->upload->display_errors());
-            //             $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
-            //             redirect(base_url('Cproduct'));
-            //         } else {
-            //             $varientsData[$j]['VImage'] = "assets/img/products/" . $this->upload->data()['file_name'];
-            //         }
-            //     }
-            // }
-            // for ($i=0; $i < count($varientsData); $i++) {
-            //     if(is_null($varientsData[$i]['VImage'])){
-            //         $varientsData[$i]['VImage'] = $data['ProductImg'];
-            //     }
-            //     $varientsData[$i]['ProductId'] = $result;
-            //     //insert varient in db
-            //     $this->Products->insert_grocery_product_varient($varientsData[$i]);
-            // }
+            $this->upload->initialize($config);
+            if (isset($_FILES['multipleUpload'])) {
+                $files = $_FILES;
+                $cpt = count($_FILES ['multipleUpload'] ['name']);
+
+                for ($i = 0; $i < $cpt; $i ++) {
+                    $name = time().$files ['multipleUpload'] ['name'] [$i];
+                    $_FILES ['multipleUpload'] ['name'] = $name;
+                    $_FILES ['multipleUpload'] ['type'] = $files ['multipleUpload'] ['type'] [$i];
+                    $_FILES ['multipleUpload'] ['tmp_name'] = $files ['multipleUpload'] ['tmp_name'] [$i];
+                    $_FILES ['multipleUpload'] ['error'] = $files ['multipleUpload'] ['error'] [$i];
+                    $_FILES ['multipleUpload'] ['size'] = $files ['multipleUpload'] ['size'] [$i];
+
+                    if(!($this->upload->do_upload('multipleUpload')) || $files ['multipleUpload'] ['error'] [$i] !=0) {
+                        $error = array('error' => $this->upload->display_errors());
+                        $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+                        redirect(base_url('Cproduct'));
+                    } else {
+                        $view = $this->upload->data();
+                        array_push($multipleUpload, "assets/img/products/" . $view['file_name']);
+                        array_push($fNames, $name);
+                    }
+                }
+            }
+            $imgUrl = !empty($image_url) ? $image_url : 'assets/img/product.png';
+            $data = array(
+                'ProductId'  => $result,
+                'Img'        => $imgUrl,
+                'Size'       => 'large',
+                'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+                'CreatedOn'  => date_format(new DateTime(), 'Y-m-d H:i:s'),
+                'Status'     => 1
+            );
+
+            $this->db->insert('grocery_product_images', $data);
+            
+            if(count($multipleUpload) > 0){
+                for ($i=0; $i < count($multipleUpload); $i++) { 
+                    $data = array(
+                        'ProductId'  => $result,
+                        'Img'        => $multipleUpload[$i],
+                        'Size'       => 'thumb',
+                        'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+                        'CreatedOn'  => date_format(new DateTime(), 'Y-m-d H:i:s'),
+                        'Status'     => 1
+                    );
+
+                    $this->db->insert('grocery_product_images', $data);
+                }
+            }
+
+
             $this->session->set_userdata(array('message' => 'Successfully Added'));
             if (isset($_POST['add-product'])) {
                 redirect(base_url('Cproduct/manage_product'));
@@ -236,16 +257,15 @@ class Cproduct extends CI_Controller {
     }
     // Product Update [POST]
     public function product_update() {
+        $product_id = $this->input->post('product_id');
+        $config['upload_path'] = './assets/img/products/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
+        $config['max_size'] = "*";
+        $config['max_width'] = "*";
+        $config['max_height'] = "*";
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
         if ($_FILES['image']['name']) {
-
-            $config['upload_path'] = './assets/img/products/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
-            $config['max_size'] = "*";
-            $config['max_width'] = "*";
-            $config['max_height'] = "*";
-            $config['encrypt_name'] = TRUE;
-
-            $this->load->library('upload', $config);
             if (!$this->upload->do_upload('image')) {
                 $error = array('error' => $this->upload->display_errors());
                 $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
@@ -255,8 +275,54 @@ class Cproduct extends CI_Controller {
                 $image_url = "assets/img/products/" . $image['file_name'];
             }
         }
+
+
+        $fName = "";
+        $fNames = array();
+        $multipleUpload = array();
+
+        $this->upload->initialize($config);
+        if (isset($_FILES['multipleUpload'])) {
+            $files = $_FILES;
+            $cpt = count($_FILES ['multipleUpload'] ['name']);
+
+            for ($i = 0; $i < $cpt; $i ++) {
+                if(empty($files ['multipleUpload'] ['name'] [$i]))
+                    continue;
+                $name = time().$files ['multipleUpload'] ['name'] [$i];
+                $_FILES ['multipleUpload'] ['name'] = $name;
+                $_FILES ['multipleUpload'] ['type'] = $files ['multipleUpload'] ['type'] [$i];
+                $_FILES ['multipleUpload'] ['tmp_name'] = $files ['multipleUpload'] ['tmp_name'] [$i];
+                $_FILES ['multipleUpload'] ['error'] = $files ['multipleUpload'] ['error'] [$i];
+                $_FILES ['multipleUpload'] ['size'] = $files ['multipleUpload'] ['size'] [$i];
+
+                if(!($this->upload->do_upload('multipleUpload')) || $files ['multipleUpload'] ['error'] [$i] !=0) {
+                    $error = array('error' => $this->upload->display_errors());
+                    $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
+                    redirect(base_url('Cproduct'));
+                } else {
+                    $view = $this->upload->data();
+                    array_push($multipleUpload, "assets/img/products/" . $view['file_name']);
+                    array_push($fNames, $name);
+                }
+            }
+        }
+
+        if(count($multipleUpload) > 0){
+            for ($i=0; $i < count($multipleUpload); $i++) { 
+                $data = array(
+                    'ProductId'  => $product_id,
+                    'Img'        => $multipleUpload[$i],
+                    'Size'       => 'thumb',
+                    'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+                    'Status'     => 1
+                );
+
+                $this->db->insert('grocery_product_images', $data);
+            }
+        }
+
         $this->load->model('Products');
-        $product_id = $this->input->post('product_id');
         $isFeatured = ($this->input->post('isFeatured') == 1) ? 1 : 0;
         $isHot = ($this->input->post('isHot') == 1) ? 1 : 0;
         $status = ($this->input->post('status') == 1) ? 1 : 0;
@@ -285,59 +351,31 @@ class Cproduct extends CI_Controller {
         if($_FILES['image']['name'])
             $data['ProductImg'] = (!empty($image_url) ? $image_url : 'assets/img/product.png');
         $this->Products->update($data, 'ProductId', $product_id);
-        // if (is_numeric($product_id)) {
-        //     //adding varient images
-        //     $files = $_FILES;
-        //     $cpt = count($this->input->post('vNames'));
-        //     $varientsData = array();
-        //     $j = -1;
-        //     for ($i=0; $i < $cpt; $i++) {
-        //         if(empty($this->input->post('vNames')[$i]))
-        //             continue;
-        //         $j++;
-        //         $varientsData[$j] = array();
-        //         $varientsData[$j]['VName'] = $this->input->post('vNames')[$i];
-        //         $varientsData[$j]['VType'] = $this->input->post('vType')[$i];
-        //         $varientsData[$j]['VValue'] = $this->input->post('vValue')[$i];
-        //         $varientsData[$j]['Status'] = 1;
-        //         $varientsData[$j]['VImage'] = null;
-        //         if ($files['vImage']['name'][$i]) {
-        //             $_FILES['vImage']['name']= $files['vImage']['name'][$i];
-        //             $_FILES['vImage']['type']= $files['vImage']['type'][$i];
-        //             $_FILES['vImage']['tmp_name']= $files['vImage']['tmp_name'][$i];
-        //             $_FILES['vImage']['error']= $files['vImage']['error'][$i];
-        //             $_FILES['vImage']['size']= $files['vImage']['size'][$i];
+        
+        if($_FILES['image']['name']){
+            $data = array(
+                'Img'        => (!empty($image_url) ? $image_url : 'assets/img/product.png'),
+                'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s')
+            );
+            $this->db->where('ProductId', $product_id);
+            $this->db->where('Size', 'large');
+            $this->db->update('grocery_product_images', $data);
+        }
 
-        //             if (!$this->upload->do_upload('vImage')) {
-        //                 $error = array('error' => $this->upload->display_errors());
-        //                 $this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
-        //                 redirect(base_url('Cproduct'));
-        //             } else {
-        //                 $varientsData[$j]['VImage'] = "assets/img/products/" . $this->upload->data()['file_name'];
-        //             }
-        //         }
-        //     }
-        //     $this->Products->remove_grocery_product_varient($product_id);
-        //     for ($i=0; $i < count($varientsData); $i++) {
-        //         if(is_null($varientsData[$i]['VImage'])){
-        //             $varientsData[$i]['VImage'] = $data['ProductImg'];
-        //         }
-        //         $varientsData[$i]['ProductId'] = $product_id;
-        //         //insert varient in db
-        //         $this->Products->insert_grocery_product_varient($varientsData[$i]);
-        //     }
-        //     $this->session->set_userdata(array('message' => 'Successfully Added'));
-        //     if (isset($_POST['add-product'])) {
-        //         redirect(base_url('Cproduct/manage_product'));
-        //     } elseif (isset($_POST['add-customer-another'])) {
-        //         redirect(base_url('Cproduct'));
-        //     }
-        // }
         $this->session->set_userdata(array('message' => display('successfully_updated')));
         redirect(base_url('Cproduct/manage_product'));
     }
 
-
+    public function del_img(){
+        $this->auth->check_admin_auth();
+        $imgUrl = $this->input->get("imgNm");
+        $data = array(
+            'Status' => 0
+        );
+        $this->db->where('Img', $imgUrl);
+        $this->db->update('grocery_product_images', $data);
+        echo '1';
+    }
     public function manage_product() {
         $CI = & get_instance();
         

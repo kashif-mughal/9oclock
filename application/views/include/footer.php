@@ -100,7 +100,7 @@ foreach($CatList as $key => $value) {
 							<a href="#"><i class="fab fa-whatsapp fa-2x" style="color:#666666;"></i></a> -->
 						</div>
 						<div class="col-6 text-right">
-							<p>Powered By: <span><a href="http://www.malejol.com" style="text-decoration:none; color:#3d3d3b">Malejol</a></span></p>
+							<p>Powered By: <span><a href="https://malejol.site" style="text-decoration:none; color:#3d3d3b">Malejol</a></span></p>
 						</div>
 					
 					</div>

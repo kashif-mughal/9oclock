@@ -138,7 +138,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                     <div class="card border-none">
                         <div class="card-header p-2" id="headingTwo">
                             <div class="card-header sidebar-menu-title p-0" id="headingOne">
-                                <a href="tel:+44 01793 694088" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
+                                <a href="tel:01793694088" class="btn-block bg-transparent d-flex align-items-center p-0" type="button"
                                     >
                                     <img src="<?php echo base_url() ?>assets/img/call_us.png" class="d-inline pr-4" alt="">
                                     <h4 class="d-inline">Call Us</h4>
@@ -224,7 +224,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                               <div class="input-group mb-1">
                                  <input type="text" name="q" id="q" class="form-control font-weight-400 border-none" placeholder="I'm Shopping for..." onfocus="this.value=''">
                                  <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" style="border-radius: 0 0.25rem 0.25rem 0;" type="submit">
+                                    <button id="fmsrch" class="btn btn-outline-secondary button-primary text-white border-none px-4 font-size-14" style="border-radius: 0 0.25rem 0.25rem 0;" type="submit">
                                        Search
                                        <!-- <i class="fas fa-search"></i> -->
                                     </button>
@@ -236,6 +236,11 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </div>
                   </div>
                </div>
+                <script type="text/javascript">
+                   $('#fmsrch').click(function(){
+                        $('#q').val($('#q').val().replace("%", "~~"));
+                   });
+               </script>
                <!-- Search Bar Ends -->
                   <!-- Phone Number & Add to Cart Button -->
                   <!-- <div class="col-lg-3 col-md-6 col-sm-5 mb-sm-2 order-lg-3 order-2 text-lg-left text-left pl-1"> -->
@@ -338,8 +343,10 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
          dropdownMenu.parent().toggleClass("open");
       }
    });
-  if(searchText){
-    $("#q").val(searchText.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ' '));
+  if(searchText){debugger;
+      var t = decodeURI(searchText);
+      t = t.replace(/[&\/\\#,+()$%.'":*?<>{}]/g, ' ');
+      $('#q').val(t.replace("~~", "%"));
   }
   var selectedCat = urlVars["categoryId"];
   if(selectedCat){
@@ -624,9 +631,11 @@ function removeItemFromShoppingCart(currentElem){
       showEmptyResponse($('.cart-page'));
       loadCartData();
    }
-   function changeSelectedCat(currentElem){
+   function changeSelectedCat(currentElem){debugger;
       $('#categoryId').val($(currentElem).data('value'));
-      $('#q').attr("placeholder" , $(currentElem).text());
+      var t = decodeURI(currentElem.text());
+      t = t.replace(/[&\/\\#,+()$%.'":*?<>{}]/g, ' ');
+      $('#q').attr("placeholder" , t.replace("~~", "%"));
    }
    
    function getUrlVars(){

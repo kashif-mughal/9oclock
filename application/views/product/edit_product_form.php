@@ -13,6 +13,15 @@
         text-decoration: none;
         -webkit-transition: color 0.2s;
     }
+    .delImg{
+        font-size: 20px;
+        position: absolute;
+        right: -5px;
+        top: -15px;
+        font-weight: 900;
+        color: red;
+        cursor: pointer;
+    }
 
     a.tag::before {
         background: #fff;
@@ -363,6 +372,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="multipleUpload" class="col-sm-3 col-form-label">Images </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="multipleUpload[]" multiple class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">&nbsp; </label>
+                            <div class="col-sm-6">
+                                <?php for ($i=0; $i < count($Images->Thumb); $i++) {?>
+                                    <span style="display: inline-block; position: relative; vertical-align: top;">
+                                        <span class="delImg" data-imgName="<?=$Images->Thumb[$i]?>">&times;</span>
+                                        <img style="background: green; max-width: 100px;" src="<?=base_url($Images->Thumb[$i])?>">
+                                    </span>
+                                <?php }?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="Tags" class="col-sm-3 col-form-label">Tags </label>
                             <div class="col-sm-6">
                                 <div class="input-group">
@@ -486,6 +513,23 @@
     //         $(currentElem).closest('tr').find('.val').html('<input type="color" class="form-control" name="vValue[]"/>');
     //     }
     // }
+    $('.delImg').click(function(){
+
+        var imgName = $(this).data("imgname");
+        $.ajax({
+            type: "GET",
+            url: '<?php echo base_url('Cproduct/del_img'); ?>',
+            data: {imgNm: imgName},
+            dataType: 'json',
+            success: function (data) {
+                debugger;
+            },
+            error: function(error) {
+                debugger;
+                console.log(error)
+            }
+        });
+    });
 </script>
 
 

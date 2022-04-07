@@ -70,9 +70,9 @@
          </div>
          <div style="display: none;">
             <script type="text" id="clone-cart">
-               <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                   <div class="featured-products-content mb-2 d-flex justify-content-between">
-                       <div class="card each-prod product-card-inner">
+               <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 px-0">
+                   <div class="featured-products-content mb-2 d-flex align-items-center justify-content-start">
+                       <div class="card mr-2 each-prod product-card-inner" style="padding-top:5px;">
                            <div class="card-body p-0">
                                    <div class="header">
                                        {discountString}
@@ -85,7 +85,7 @@
                                <img class="img-fluid text-center" src="{imgUrl}" alt="Card image cap">
                                </a>
                                <div class="product-info text-left">
-                                   <p class="product-card-inner-subcategory">Vegetables</p>
+                                   <p class="product-card-inner-subcategory">{cat}</p>
                                    <p class="card-text product-card-inner-name" title="{productName}">{productName}</p>
                                    
                                    <div class="d-flex justify-content-start align-items-center product-card-inner-price">
@@ -160,23 +160,10 @@
                                      echo '<h5>Out Of Season</h5>';
                                  } ?>
                               <div class="header">
-                                 <!-- <?php if ($discountPercentage != 0)
-                                    { ?> 
-                                    <h5 class="card-title float-left"><?php echo round($discountPercentage) . "% OFF"; ?></h5>
-                                    <?php
-                                       } ?> -->
-                                 <!--<a href="#" class="add_to_favorite">
-                                    <i class="fas fa-heart float-right"></i>
-                                    </a>-->
                               </div>
                            </div>
                            <a href="<?php echo base_url() . 'Cproduct/viewProduct/' . $value['ProductId']; ?>">
-                              <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url() . $value['ProductImg']; ?>" alt="Card image cap">
-                              <?php if ($discountPercentage > 0)
-                                 { ?> 
-                              <p class="product-card-discount-banner"><?php echo round($discountPercentage) . "% OFF"; ?></p>
-                              <?php
-                                 } ?>
+                              <img style="max-height: 145px;" class="img-fluid text-center" src="<?php echo base_url() . $value['Images']->Thumb[0]; ?>" alt="Card image cap">
                            </a>
                            <div class="product-info text-center" style="    margin-left: auto; width: 98%;">
                               <div class="text-left mx-2">
@@ -189,7 +176,7 @@
                                        ?>",0)); </script></p> -->
                               </div>
                               <?php
-                                 $productObject = (object)['id' => $value['ProductId'], 'pName' => $value['ProductName'], 'price' => $value['SalePrice'], 'img' => base_url() . $value['ProductImg'], 'saleUnitQty' => $value['SaleUnitQty'], 'saleUnit' => $value['SaleUnitName']];
+                                 $productObject = (object)['id' => $value['ProductId'], 'pName' => $value['ProductName'], 'price' => $value['SalePrice'], 'img' => base_url() . $value['Images']->Thumb[0], 'saleUnitQty' => $value['SaleUnitQty'], 'saleUnit' => $value['SaleUnitName']];
                                  ?>
                               <?php if ($value['stock'] == '1')
                                  { ?>
@@ -263,16 +250,12 @@
                   <?php
                      } ?>
                </div>
-               <?php if ($TotalProducts && $TotalProducts >= $PerPage)
-                  { ?>
                <div class="product-info text-center">
                   <button class="product-card-btn mx-auto loadmore" id="load-more">
                      <div id="spinner"></div>
                      <span class="btntext">Load More</span>
                   </button>
                </div>
-               <?php
-                  } ?>
             </div>
          </div>
       </div>
@@ -280,38 +263,48 @@
    </div>
 </section>
 <script type="text/javascript">
-   var page = 0;
+   var page = 1;
+   var pp = 100;
    $(document).ready(function(){
-       $('#q').keydown(function(){
-           var currentElem = $(this);
+       $('#q').keyup(function(){
+           loadProductMoreData($(this), true, false);
+       });
+      $('#load-more').click(function(){
+            loadProductMoreData($(this), false, true);
+      });
+   });
+   function loadProductMoreData(currentElem, emptyDiv, countPage){
            var urlVars = getUrlVars();
            $(currentElem.find('#spinner')[0]).addClass('spinner-border text-info');
-           var perpage = urlVars['perpage'] ? urlVars['perpage'] : -1;
+           var perpage = urlVars['perpage'] ? urlVars['perpage'] : pp;
            $.ajax({
                url : '<?=base_url("Cproduct/fetch"); ?>',
                type : 'GET',
                data : {
-                   'q' : currentElem.val(),
+                   'q' : currentElem.val().replace("%", "~~"),
                    'categoryId' : urlVars['categoryId'],
-                   'page': 0,
-                   'perpage' : 40
+                   'page': page,
+                   'perpage' : 100
                },
                dataType:'json',
-               success : function(data) {
+               success : function(data) {debugger;
+              if(countPage)
+                     page++;
                    var baseUrl = '<?=base_url() ?>';
                    if(!data){
-                       //currentElem.hide();
+                  $('#load-more').hide();
                    }else{
                        var totalProducts = data.total;
                        data = data.products;
                        var cartTemplate = $('#clone-cart').text();
                        var productArea = $('#products-area');
-                       productArea.empty();
+                  if(emptyDiv)
+                           productArea.empty();
                        for (var i = 0; i < data.length; i++) {
                            var discountPercentage = parseFloat(((data[i].Price - data[i].SalePrice)/data[i].Price) * 100);
                            var disText = null;
                            if(discountPercentage != 0){
-                               var disString = `<h5 class="card-title float-left">${discountPercentage}% OFF</h5>`;
+                               var disString = ``;
                                var priceString = '';//`<span class="product-discount"><del>${formatCurrency(data[i].Price,0)}</del></span>`;
                            }
                            var cartTemplateCopy = cartTemplate;
@@ -323,17 +316,21 @@
                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, priceString);
                            else
                                cartTemplateCopy = cartTemplateCopy.replace(/{priceString}/g, "");
-                           cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].ProductImg);
+                           cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].Images.Thumb[0]);
                            cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
-                           cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
+                           cartTemplateCopy = cartTemplateCopy.replace(/{cat}/g, data[i].catName);
+                           cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i
+                              ].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
                            cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice));
                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
-                           pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].ProductImg};
+                           pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].Images.Thumb[0]};
                            cartTemplateCopy = cartTemplateCopy.replace(/{pjsonString}/g, data[i].Jsn);
                            productArea.append(cartTemplateCopy);
                        }
-                       if(data.length < perpage)
-                           currentElem.hide();
+                       if(data.length < perpage){
+                     debugger;
+                     $('#load-more').hide();
+                  }
                        loadCartData();
                    }
                },
@@ -346,6 +343,5 @@
                    currentElem.attr('disabled', false);
                }
            });
-       });
-   });
+   }
 </script>

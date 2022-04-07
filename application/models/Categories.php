@@ -193,6 +193,9 @@ class Categories extends CI_Model {
         $query = $this->db->query($query);
         if ($query->num_rows() > 0) {
             $returnData["products"] = $query->result_array();
+            $CI = & get_instance();
+            $CI->load->model('Products');
+            $returnData["products"] = $CI->Products->getAndAddProductImages($returnData["products"]);
             $returnData["products"] = $this->product_data_after_varient_sort($returnData["products"]);
             return $returnData;
         }

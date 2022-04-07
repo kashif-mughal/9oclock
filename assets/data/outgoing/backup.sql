@@ -35,3 +35,24 @@ INSERT INTO `grocery_order_detail` (`OrderId`, `ItemId`, `ItemQuantity`, `SoldPr
 INSERT INTO `grocery_order_detail` (`OrderId`, `ItemId`, `ItemQuantity`, `SoldPrice`, `CreatedOn`, `Status`) VALUES (270, '836', 1, '0.25', '2021-11-07 19:28:10', 1);
 INSERT INTO `grocery_order_detail` (`OrderId`, `ItemId`, `ItemQuantity`, `SoldPrice`, `CreatedOn`, `Status`) VALUES (270, '2560', 1, '2.99', '2021-11-07 19:28:10', 1);
 INSERT INTO `grocery_order_detail` (`OrderId`, `ItemId`, `ItemQuantity`, `SoldPrice`, `CreatedOn`, `Status`) VALUES (270, '4355', 1, '1.39', '2021-11-07 19:28:10', 1);
+INSERT INTO `user_login` (`user_id`, `user_type`, `status`, `username`, `password`) VALUES ('c09dde8cadbd70ee05ea', 1, 1, 'mkmughal15@gmail.com', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `email`, `address`, `status`, `AddressId`, `address_details`, `is_promotion`) VALUES ('c09dde8cadbd70ee05ea', 'Mughl', 'lkasf', '+44346003058', 'mkmughal15@gmail.com', 'abc', 1, 0, '', 1);
+INSERT INTO `grocery_user_address` (`Address`, `zip_code`, `town`, `city`, `UserId`, `Status`) VALUES ('abc', '74600', 'Karachi', 'Karachi', 'c09dde8cadbd70ee05ea', 1);
+INSERT INTO `grocery_otp` (`email_address`, `code`, `expiry_date`, `verified`) VALUES ('mkmughal15@gmail.com', 5076, '2022-01-22 19:41:25', 0);
+UPDATE `grocery_otp` SET `verified` = 1, `verified_on` = '2022-01-22 19:35:04'
+WHERE `email_address` = 'mkmughal15@gmail.com';
+UPDATE `grocery_products` SET `ProductName` = 'Tango ORANGE', `ParentProduct` = '', `Unit` = '1', `OriginalPrice` = '0', `Price` = '0.69', `SalePrice` = '0.69', `IsFeatured` = 0, `IsHot` = 0, `Category` = '11', `Status` = 1, `Brand` = '1', `SaleUnitQty` = '0', `SaleUnit` = '1', `ModifiedOn` = '2022-03-07 16:38:25', `tags` = '', `stock` = '1', `season` = NULL, `sort` = '0', `Description` = ''
+WHERE `ProductId` = '843';
+UPDATE `grocery_products` SET `ProductName` = 'DIET PEPSI', `ParentProduct` = '', `Unit` = '1', `OriginalPrice` = '0', `Price` = '0.59', `SalePrice` = '0.59', `IsFeatured` = 0, `IsHot` = 0, `Category` = '11', `Status` = 1, `Brand` = '1', `SaleUnitQty` = '0', `SaleUnit` = '1', `ModifiedOn` = '2022-03-07 16:38:56', `tags` = '', `stock` = '1', `season` = NULL, `sort` = '0', `Description` = ''
+WHERE `ProductId` = '845';
+UPDATE `grocery_products` SET `ProductName` = 'DIET PEPSI', `ParentProduct` = '0', `Unit` = '1', `OriginalPrice` = '0', `Price` = '0.59', `SalePrice` = '0.59', `IsFeatured` = 0, `IsHot` = 0, `Category` = '11', `Status` = 1, `Brand` = '1', `SaleUnitQty` = '0', `SaleUnit` = '1', `ModifiedOn` = '2022-03-07 16:41:24', `tags` = '', `stock` = '1', `season` = NULL, `sort` = '0', `Description` = '', `ProductImg` = 'assets/img/products/13236bfd8eaec7f66cf401352f382602.JPEG'
+WHERE `ProductId` = '845';
+UPDATE `grocery_products` SET `ProductName` = 'DIET PEPSI', `ParentProduct` = '0', `Unit` = '1', `OriginalPrice` = '0', `Price` = '0.59', `SalePrice` = '0.59', `IsFeatured` = 0, `IsHot` = 0, `Category` = '11', `Status` = 1, `Brand` = '1', `SaleUnitQty` = '0', `SaleUnit` = '1', `ModifiedOn` = '2022-03-07 17:06:11', `tags` = '', `stock` = '1', `season` = NULL, `sort` = '0', `Description` = ''
+WHERE `ProductId` = '845';
+INSERT INTO `grocery_product_images` (`ProductId`, `Img`, `Size`, `ModifiedOn`) VALUES ('845', 'assets/img/products/f05b3d9aaa2269b6f957eaf48b95bd89.jpg', 'thumb', '2022-03-07 17:09:55');
+INSERT INTO `grocery_product_images` (`ProductId`, `Img`, `Size`, `ModifiedOn`) VALUES ('845', 'assets/img/products/47d5c4a23b36e6cc36660cc4794baad0.jpeg', 'thumb', '2022-03-07 17:09:55');
+INSERT INTO `grocery_product_images` (`ProductId`, `Img`, `Size`, `ModifiedOn`) VALUES ('845', 'assets/img/products/f36189a963eb5ad6b128d33bc3bf3b5e.jpg', 'thumb', '2022-03-07 17:09:55');
+UPDATE `grocery_products` SET `ProductName` = 'DIET PEPSI', `ParentProduct` = '0', `Unit` = '1', `OriginalPrice` = '0', `Price` = '0.59', `SalePrice` = '0.59', `IsFeatured` = 0, `IsHot` = 0, `Category` = '11', `Status` = 1, `Brand` = '1', `SaleUnitQty` = '0', `SaleUnit` = '1', `ModifiedOn` = '2022-03-07 17:09:55', `tags` = '', `stock` = '1', `season` = NULL, `sort` = '0', `Description` = ''
+WHERE `ProductId` = '845';
+UPDATE `grocery_products` SET `ProductName` = 'DIET PEPSI', `ParentProduct` = '0', `Unit` = '1', `OriginalPrice` = '0', `Price` = '0.59', `SalePrice` = '0.59', `IsFeatured` = 0, `IsHot` = 0, `Category` = '11', `Status` = 1, `Brand` = '1', `SaleUnitQty` = '0', `SaleUnit` = '1', `ModifiedOn` = '2022-03-07 19:33:20', `tags` = '', `stock` = '1', `season` = NULL, `sort` = '0', `Description` = '', `ProductImg` = 'assets/img/products/8a9005eca3953fb518303e0521cc5299.jpg'
+WHERE `ProductId` = '845';
