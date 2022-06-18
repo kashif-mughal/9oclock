@@ -51,4 +51,10 @@ class Cpage extends CI_Controller {
         $content = $this->lpage->categories();
         $this->template->full_html_view($content);
     }
+
+    public function contactus() {
+        //default page
+        $content = $this->lpage->contactus();
+        $this->template->full_html_view($content);
+    }
 }
