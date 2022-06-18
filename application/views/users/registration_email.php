@@ -176,7 +176,7 @@ processing has begun.</p>
                </div>
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputPhoneContainer">
                   <i class="fas fa-mobile-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
-                  <input type="tel" name="inputPhone" id="inputPhone" class="form-control simple-field-data-mask" data-mask="+44-000-0000000" placeholder="Phone Number" value="+44-" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
+                  <input type="tel" name="inputPhone" id="inputPhone" class="form-control simple-field-data-mask" data-mask="000-0000000" placeholder="Phone Number" value="" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputAddressContainer">
                   <i class="fas fa-map-marker-alt" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
@@ -194,10 +194,10 @@ processing has begun.</p>
                   <input type="text" name="inputTown" id="inputTown" class="form-control" placeholder="Town" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
                </div>
 
-               <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputCityContainer">
+               <!-- <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputCityContainer">
                   <i class="fas fa-city" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
                   <input type="text" name="inputCity" id="inputCity" class="form-control" placeholder="City" style="padding: 6px 6px 6px 42px; border:none; width: 98%; font-weight: 500;" autocomplete="off">
-               </div>
+               </div> -->
 
                <div class="m-3" style="border-bottom: 1px solid #B6B6B6; position: relative; width: 97%; padding: 8px;" id="inputPasswordContainer">
                   <i class="fas fa-lock" style="position: absolute; top:22px; left: 12px; color: #B6B6B6;"></i>
@@ -512,8 +512,8 @@ processing has begun.</p>
          if(!$('#inputTown').val()) { $('#inputTownContainer').css("border-bottom", "0.13rem solid red"); }
 			else { $('#inputTownContainer').css("border-bottom", "0.13rem solid green"); }
 
-         if(!$('#inputCity').val()) { $('#inputCityContainer').css("border-bottom", "0.13rem solid red"); }
-			else { $('#inputCityContainer').css("border-bottom", "0.13rem solid green"); }
+         // if(!$('#inputCity').val()) { $('#inputCityContainer').css("border-bottom", "0.13rem solid red"); }
+			// else { $('#inputCityContainer').css("border-bottom", "0.13rem solid green"); }
 
 			if(!$('#inputPassword').val()) { $('#inputPasswordContainer').css("border-bottom", "0.13rem solid red"); }
 			else { $('#inputPasswordContainer').css("border-bottom", "0.13rem solid green"); }
@@ -521,13 +521,13 @@ processing has begun.</p>
 			if(!$('#inputConfirmPassword').val()) { $('#inputConfirmPasswordContainer').css("border-bottom", "0.13rem solid red"); }
 			else { $('#inputConfirmPasswordContainer').css("border-bottom", "0.13rem solid green"); }
 
-         if($('#inputPhone').val() == "" || $('#inputPhone').val() == "+44-") {
+         if($('#inputPhone').val() == "" || $('#inputPhone').val() == "") {
             $('#inputPhoneContainer').css("border-bottom", "0.13rem solid red");
          } else { $('#inputPhoneContainer').css("border-bottom", "0.13rem solid green"); }
 
          console.log("Status 1");
 
-			if(!$('#inputFirstName').val() || !$('#inputLastName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputCity').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val() ) {
+			if(!$('#inputFirstName').val() || !$('#inputLastName').val() || !$('#inputEmail').val() || !$('#inputAddress').val() || !$('#inputZipCode').val() || !$('#inputTown').val() || !$('#inputPassword').val() || !$('#inputConfirmPassword').val() ) {
 
             console.log('Error');
 
