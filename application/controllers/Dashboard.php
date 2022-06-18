@@ -271,7 +271,7 @@ class Dashboard extends CI_Controller {
         $isEmailExist = $CI->Auths->is_email_exist($email_address);
         $signUpPage = base_url() . 'dashboard/user_login_email';
         if(!$isEmailExist) {
-            $result['response'] = 'This email address does not exist, please <a href="' . $signUpPage . '">sign up</a>';
+            $result['response'] = ' This email address does not exist, please <a style="color: #F8CB2E;text-decoration: underline;" href="' . $signUpPage . '">sign up</a>';
             $result['status'] = 'error';
             echo json_encode($result);
             return;
