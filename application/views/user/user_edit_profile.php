@@ -97,6 +97,7 @@
                                 <div class="form-label-group mb-3">
                                     <input type="file" id="logo" name="logo" class="form-control">
                                     <input type="hidden" name="old_logo" value="{logo}" />
+                                    <input type="hidden" name="AddressId" value="{AddressId}">
                                 </div>
                                 
                             </div>

@@ -37,7 +37,8 @@ class Luser {
             'city' => $edit_data[0]['Address']['city'],
             'town' => $edit_data[0]['Address']['town'],
             'zip_code' => $edit_data[0]['Address']['zip_code'],
-            'Address' => $edit_data[0]['Address']['Address']
+            'Address' => $edit_data[0]['Address']['Address'],
+            'AddressId' => $edit_data[0]['Address']['AddressId']
         );
         return $CI->parser->parse('user/user_edit_profile', $data, true);
     }

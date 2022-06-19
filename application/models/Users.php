@@ -217,9 +217,34 @@ class Users extends CI_Model {
         $last_name = $this->input->post('last_name');
         $user_name = $this->input->post('user_name');
         $email = $this->input->post('user_email');
+        $phone = $this->input->post('phone');
+
+        $zip_code = $this->input->post('zip_code');
+        $Address = $this->input->post('Address');
+        $city = $this->input->post('city');
+        $town = $this->input->post('town');
+        $AddressId = $this->input->post('AddressId');
+
         $new_logo = (!empty($logo) ? $logo : $old_logo);
 
-        return $this->db->query("UPDATE `users` AS `a`,`user_login` AS `b` SET `a`.`first_name` = '$first_name', `a`.`email` = '$email', `a`.`last_name` = '$last_name', `b`.`username` = '$user_name',`a`.`logo` = '$new_logo' WHERE `a`.`user_id` = '$user_id' AND `a`.`user_id` = `b`.`user_id`");
+        $this->db->query("UPDATE `grocery_user_address` AS `a` SET `a`.`city` = '$city', `a`.`town` = '$town', `a`.`zip_code` = '$zip_code', `a`.`Address` = '$Address' WHERE `a`.`AddressId` = $AddressId");
+
+        $result =  $this->db->query("UPDATE `users` AS `a`,`user_login` AS `b` SET `a`.`first_name` = '$first_name', `a`.`email` = '$email', `a`.`last_name` = '$last_name', `a`.`phone` = '$phone', `b`.`username` = '$user_name',`a`.`logo` = '$new_logo' WHERE `a`.`user_id` = '$user_id' AND `a`.`user_id` = `b`.`user_id`");
+            
+        $user_data = array(
+            'user_name' => $first_name . " " . $last_name,
+            'user_email' => $user_name,
+            'address' => $Address,
+            'addressText' => $Address,
+            'zip_code' => $zip_code,
+            'town' => $town,
+            'city' => $city,
+            'phone' => $phone,
+            'email' => $email
+        );
+        $this->session->set_userdata($user_data);
+
+        return $result;
     }
 
     //Change Password
