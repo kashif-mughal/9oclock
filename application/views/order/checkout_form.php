@@ -246,6 +246,14 @@
     </div>
     <div class="row">
         <div id="checkoutCartContainer">
+            <p class="heading">Additional Instructions <small>(max 50 characters)</small></p>
+            <div class="input-group">
+                <input type="text" class="form-control" maxlength="50" id="additionalInstructions" name="additionalInstructions" aria-label="Additional Instructions" /> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="checkoutCartContainer">
             <p class="heading">Payment Option</p>
             <div class="d-flex flex-column">
                 <div class="mRadio checkoutRadio">
@@ -401,11 +409,13 @@ $(document).ready(function() {
         }
     }
 
+    var instruction = $('#additionalInstructions').val();debugger;
+
     // YYYY-MM-DD HH:MM:SS
     $.ajax({
         type: "POST",
         url: '<?php echo base_url('Corder/proceed_to_checkout') ?>',
-        data: {order: getCookie('baskit'), delivery_charges: deliveryCharges, delivery_date: deliveryDate, delivery_date_from: deliveryFrom, delivery_date_to: deliveryTo },
+        data: {order: getCookie('baskit'), delivery_charges: deliveryCharges, delivery_date: deliveryDate, delivery_date_from: deliveryFrom, delivery_date_to: deliveryTo, additionalInstructions: instruction },
         cache: false,
         success: function (pageLocation)
         {

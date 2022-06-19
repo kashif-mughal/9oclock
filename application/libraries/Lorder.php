@@ -197,6 +197,7 @@ class Lorder {
         $deliveryTimeFrom = $CI->session->userdata("deliveryTimeFrom");
         $deliveryTimeTo = $CI->session->userdata("deliveryTimeTo");
         $addressText = $CI->session->userdata("addressText");
+        $instructions = $CI->session->userdata("additionalInstructions");   
         if(!is_numeric($addressId) || empty($addressText))
             return 0;
 
@@ -232,6 +233,7 @@ class Lorder {
             'DeliveryUpto' => $dtUpto,
             'DeliveryAddress' => $addressId,
             'deliveryCharges' => $deliveryCharges,
+            'AdditionalInstruction' => $instructions,
             'Status' => 1,
         );
         if(!empty($copunId) && $copunDiscount != 0){

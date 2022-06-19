@@ -445,6 +445,7 @@ class Lproduct {
         $CI = & get_instance();
         $CI->load->model('Categories');
         $result =  $CI->Categories->getCatPrducts($catId, $productName, $page * $perpage, $perpage, $brand);
+        //echo '<pre>'; print_r($result);die;
         return $result;
     }
 }
