@@ -173,7 +173,17 @@ class Users extends CI_Model {
             $this->db->where('user_id', $user_id);
             $query2 = $this->db->get();
             if ($query2->num_rows() > 0) {
-                return $query->result_array();
+                $users = $query2->result_array();
+                $users[0]["Address"] = null;
+                $this->db->select('AddressId, Address, zip_code, town, city');
+                $this->db->from('grocery_user_address');
+                $this->db->where('UserId', $user_id);
+                $this->db->where('Status', 1);
+                $query = $this->db->get();
+                if ($query->num_rows() > 0) {
+                    $users[0]["Address"] = $query->result_array()[0];
+                }
+                return $users;
             }
             else
                 return false;
@@ -227,9 +237,15 @@ class Users extends CI_Model {
 
         $new_logo = (!empty($logo) ? $logo : $old_logo);
 
-        $this->db->query("UPDATE `grocery_user_address` AS `a` SET `a`.`city` = '$city', `a`.`town` = '$town', `a`.`zip_code` = '$zip_code', `a`.`Address` = '$Address' WHERE `a`.`AddressId` = $AddressId");
+        if(empty($AddressId)){
+            $this->db->query("INSERT into grocery_user_address(Address, zip_code, town, city, UserId, Status) Values('$Address', '$zip_code', '$town', '$city', '$user_id', 1)");
+        }
+        else{
+            $this->db->query("UPDATE `grocery_user_address` AS `a` SET `a`.`city` = '$city', `a`.`town` = '$town', `a`.`zip_code` = '$zip_code', `a`.`Address` = '$Address' WHERE `a`.`AddressId` = $AddressId");
+        }
+        $result =  $this->db->query("UPDATE `user_login` AS `b` SET `b`.`username` = '$user_name' WHERE `b`.`user_id` = '$user_id'");
 
-        $result =  $this->db->query("UPDATE `users` AS `a`,`user_login` AS `b` SET `a`.`first_name` = '$first_name', `a`.`email` = '$email', `a`.`last_name` = '$last_name', `a`.`phone` = '$phone', `b`.`username` = '$user_name',`a`.`logo` = '$new_logo' WHERE `a`.`user_id` = '$user_id' AND `a`.`user_id` = `b`.`user_id`");
+        $result =  $this->db->query("UPDATE `users` AS `a` SET `a`.`first_name` = '$first_name', `a`.`email` = '$email', `a`.`last_name` = '$last_name', `a`.`phone` = '$phone', `a`.`logo` = '$new_logo' WHERE `a`.`user_id` = '$user_id'");
             
         $user_data = array(
             'user_name' => $first_name . " " . $last_name,
