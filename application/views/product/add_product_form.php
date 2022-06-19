@@ -257,11 +257,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="multipleUpload" class="col-sm-3 col-form-label">Images </label>
+                            <label for="multipleUpload" class="col-sm-3 col-form-label">Thumbnails </label>
                             <div class="col-sm-6">
                                 <input type="file" name="multipleUpload[]" multiple class="form-control">
                             </div>
                         </div>
+
                         <!-- <div class="form-group row">
                             <label for="varient" class="col-sm-3 col-form-label">Varient </label>
                             <div class="col-sm-9">

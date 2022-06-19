@@ -77,6 +77,16 @@ foreach($CatList as $key => $value) {
 				<a href="<?=base_url("cproduct/products?brand=".$value['BrandId'])?>" id="<?=$value['BrandId']?>"><?=$value['BrandName']?> (<?=$value['Total_Products']?>)</a>
 				<?php } ?>
 			</div>
+			
+				<div class="top-brands my-4">
+				<h4>Customer Services</h4>
+				<a href="<?=base_url("cpage/cancellationrefundandreturn")?>" style="padding-right: 10px; border-right: 1px solid #666666;"> Cancellation, Returns and Refunds
+					   </a>
+					
+					<a href="<?=base_url("cpage/contactus")?>" > Contact Us
+					   </a>
+				
+			</div>
 
 			<div class="company-address">
 				<div class="container">

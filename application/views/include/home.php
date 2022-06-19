@@ -83,7 +83,7 @@
                         <?php
                            $productObject = (object)['id' => $value['ProductId'], 'pName' => $value['ProductName'], 'price' => $value['SalePrice'], 'img' => base_url() . $value['ProductImg'], 'saleUnitQty' => $value['SaleUnitQty'], 'saleUnit' => $value['UnitName'], 'varient' => $value['VarientData']];
                            ?>
-                        <?php if (count($value['VarientData']) > 0)
+                        <?php if (is_array($value['VarientData']) && count($value['VarientData']) > 0)
                            { ?>
                         <div class="input-group product-card-dropdown">
                            <select class="custom-select prodvari" id="inputGroupSelect04" aria-label="Example select with button addon" style="background: url(<?php echo base_url('assets/img/dropdown-angle-down.png') ?>);background-repeat: no-repeat;background-size: 11px 7px;background-position: 95% 50%;">

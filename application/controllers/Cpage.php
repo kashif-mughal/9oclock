@@ -39,8 +39,20 @@ class Cpage extends CI_Controller {
         $content = $this->lpage->faq();
         $this->template->full_html_view($content);
     }
-
-    public function returnandrefund() {
+	
+	public function cancellationrefundandreturn() {
+        //default page
+        $content = $this->lpage->cancellationrefundandreturn();
+        $this->template->full_html_view($content);
+    }
+	
+	public function contactus() {
+        //default page
+        $content = $this->lpage->contactus();
+        $this->template->full_html_view($content);
+    }
+	
+	public function returnandrefund() {
         //default page
         $content = $this->lpage->returnandrefund();
         $this->template->full_html_view($content);

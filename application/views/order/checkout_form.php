@@ -161,7 +161,7 @@
     </div>
     <div class="row">
         <div id="checkoutCartContainer">
-            <p class="heading">Your Details</p>
+            <p class="heading">Your Details <a href="<?php echo base_url()?>/User/edit_profile"><span style="float:right;">Edit</span></a></p>
             <div class="d-flex justify-content-start align-items-sm-end align-items-center checkoutItem">
                 <div class="imageContainer">
                     <img src="<?=base_url('assets/img/Checkout/new_icons/user_name.png') ?>" alt="">
@@ -195,13 +195,34 @@
     </div>
     <div class="row">
         <div id="checkoutCartContainer">
-            <p class="heading">Schedule Delivery</p>
+            <p class="heading">Delivery Method</p>
+            <div class="d-flex flex-column">
+                <div class="mRadio checkoutRadio">
+                    <label class="custom-radio-btn">
+                        <input type="radio" name="DeliveryMethod" value="hd" checked>
+                        <span class="checkmark"></span>
+                    </label>
+                    <span>Home Delivery</span>
+                </div>
+                <div class="mRadio checkoutRadio">
+                    <label class="custom-radio-btn">
+                        <input type="radio" name="DeliveryMethod" value="cfs">
+                        <span class="checkmark"></span>
+                    </label>
+                    <span>Collection From Store</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="checkoutCartContainer">
+            <p class="heading" id="scheduleElem">Schedule Delivery</p>
             <div class="d-flex justify-content-start align-items-center checkoutItem">
                 <div class="imageContainer">
                     <img src="<?=base_url('assets/img/Checkout/new_icons/delivery_day.png') ?>" alt="">
                 </div>
                 <div class="checkoutCartTextContainer">
-                    <p class="checkoutCartText">Delivery Day:</p>
+                    <p class="checkoutCartText" id="dayText">Delivery Day:</p>
                 </div>
                 <div class="input-group checkoutDropdown">
                     <select class="custom-select" id="checkoutDeliveryDay" aria-label="Checkout Delivery Day">
@@ -213,7 +234,7 @@
                     <img src="<?=base_url('assets/img/Checkout/new_icons/delivery_time.png') ?>" alt="">
                 </div>
                 <div class="checkoutCartTextContainer">
-                    <p class="checkoutCartText">Delivery Time:</p>
+                    <p class="checkoutCartText" id="timeText">Delivery Time:</p>
                 </div>
                 
                 <div class="input-group checkoutDropdown">
@@ -245,7 +266,22 @@
 
 
 <script>
-
+$(document).ready(function(){
+    var dayTextElem = $('#dayText');
+    var timeTextElem = $('#timeText');
+    var scheduleElem = $('#scheduleElem');
+    $("input[name='DeliveryMethod']").click(function(){
+        if(this.value == 'cfs'){
+            dayTextElem.html("Collection Day");
+            timeTextElem.html("Collection Time");
+            scheduleElem.html("Schedule Collection");
+        }else{
+            dayTextElem.html("Delivery Day");
+            timeTextElem.html("Delivery Time");
+            scheduleElem.html("Schedule Delivery");
+        }
+    });
+});
 function ChangeDeliveryDate(){
     var todayDateTime = new Date();
     var dtOptionString = '';

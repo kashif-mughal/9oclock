@@ -302,7 +302,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Img" class="col-sm-3 col-form-label">Icon </label>
+                            <label for="Img" class="col-sm-3 col-form-label">Large Image </label>
                             <div class="col-sm-6">
                                 <input type="file" name="image" class="form-control" id="image">
                             </div>
@@ -372,7 +372,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="multipleUpload" class="col-sm-3 col-form-label">Images </label>
+                            <label for="multipleUpload" class="col-sm-3 col-form-label">Thumbnails </label>
                             <div class="col-sm-6">
                                 <input type="file" name="multipleUpload[]" multiple class="form-control">
                             </div>
@@ -381,10 +381,10 @@
                         <div class="form-group row">
                             <label for="" class="col-sm-3 col-form-label">&nbsp; </label>
                             <div class="col-sm-6">
-                                <?php for ($i=0; $i < count($Images->Thumb); $i++) {?>
+                                <?php for ($i=0; $i < count($Images); $i++) {?>
                                     <span style="display: inline-block; position: relative; vertical-align: top;">
-                                        <span class="delImg" data-imgName="<?=$Images->Thumb[$i]?>">&times;</span>
-                                        <img style="background: green; max-width: 100px;" src="<?=base_url($Images->Thumb[$i])?>">
+                                        <span class="delImg" data-imgName="<?=$Images[$i]?>">&times;</span>
+                                        <img style="background: green; max-width: 100px;" src="<?=base_url($Images[$i])?>">
                                     </span>
                                 <?php }?>
                             </div>
@@ -513,15 +513,18 @@
     //         $(currentElem).closest('tr').find('.val').html('<input type="color" class="form-control" name="vValue[]"/>');
     //     }
     // }
-    $('.delImg').click(function(){
-
-        var imgName = $(this).data("imgname");
+	$('.delImg').click(function(){
+		var currentElem = $(this);
+        var imgName = currentElem.data("imgname");
         $.ajax({
             type: "GET",
             url: '<?php echo base_url('Cproduct/del_img'); ?>',
             data: {imgNm: imgName},
             dataType: 'json',
             success: function (data) {
+				if(data == 1){
+					currentElem.parent().remove();
+				}
                 debugger;
             },
             error: function(error) {

@@ -39,6 +39,7 @@
             <?php
             $this->session->unset_userdata('error_message');
         }
+		
         ?>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -77,7 +78,21 @@
                             </div>
                             <div class="col-sm-12 col-md-5 col-lg-4">
                                 <span><?=$OrderData["OrderDetail"][0]["DAddress"]?></span>
+                            </div>							
+                        </div>
+						<div class="row">
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">Town</label>
                             </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["OrderDetail"][0]["town"]?></span>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">City</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["OrderDetail"][0]["city"]?></span>
+                            </div>							
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-3 col-lg-2">
@@ -99,6 +114,12 @@
                             </div>
                             <div class="col-sm-12 col-md-5 col-lg-4">
                                 <span><?=$OrderData["OrderDetail"][0]["phone"]?></span>
+                            </div>
+							<div class="col-sm-12 col-md-3 col-lg-2">
+                                <label for="order_no">Zip Code</label>
+                            </div>
+                            <div class="col-sm-12 col-md-5 col-lg-4">
+                                <span><?=$OrderData["OrderDetail"][0]["zip_code"]?></span>
                             </div>
                         </div>
                         <div class="row">

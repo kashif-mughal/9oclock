@@ -468,4 +468,5 @@ class Dashboard extends CI_Controller {
             $this->output->set_header("Location: " . base_url() . 'dashboard/user_authentication', TRUE, 302);
         }
     }
+	
 }

@@ -264,7 +264,7 @@
 </section>
 <script type="text/javascript">
    var page = 1;
-   var pp = 100;
+	var pp = 100;
    $(document).ready(function(){
        $('#q').keyup(function(){
            loadProductMoreData($(this), true, false);
@@ -288,11 +288,11 @@
                },
                dataType:'json',
                success : function(data) {debugger;
-              if(countPage)
-                     page++;
+				  if(countPage)
+                  	page++;
                    var baseUrl = '<?=base_url() ?>';
                    if(!data){
-                  $('#load-more').hide();
+					   $('#load-more').hide();
                    }else{
                        var totalProducts = data.total;
                        data = data.products;
@@ -319,8 +319,7 @@
                            cartTemplateCopy = cartTemplateCopy.replace(/{imgUrl}/g, baseUrl + data[i].Images.Thumb[0]);
                            cartTemplateCopy = cartTemplateCopy.replace(/{productName}/g, data[i].ProductName);
                            cartTemplateCopy = cartTemplateCopy.replace(/{cat}/g, data[i].catName);
-                           cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i
-                              ].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
+                           cartTemplateCopy = cartTemplateCopy.replace(/{unitName}/g, !data[i].SaleUnitName ? data[i].UnitName : data[i].SaleUnitQty + " " + data[i].SaleUnitName );
                            cartTemplateCopy = cartTemplateCopy.replace(/{salePrice}/g, formatCurrency(data[i].SalePrice));
                            cartTemplateCopy = cartTemplateCopy.replace(/{productId}/g, baseUrl + 'Cproduct/viewProduct/' + data[i].ProductId);
                            pjsonString = {id: data[i].ProductId, pName: data[i].ProductName, price: data[i].SalePrice, img: data[i].Images.Thumb[0]};
@@ -328,9 +327,9 @@
                            productArea.append(cartTemplateCopy);
                        }
                        if(data.length < perpage){
-                     debugger;
-                     $('#load-more').hide();
-                  }
+						   debugger;
+						   $('#load-more').hide();
+					   }
                        loadCartData();
                    }
                },

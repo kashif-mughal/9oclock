@@ -151,7 +151,7 @@ class Orders extends CI_Model {
     public function retrieve_order_editdata($orderId, $requireAllSteps = false){
         if(is_null($orderId))
             return false;
-        $this->db->select('a.*, b.*, u.*, gua.Address DAddress, c.ProductName, c.ProductImg, d.UnitName');
+        $this->db->select('a.*, b.*, u.*, gua.Address DAddress, gua.zip_code, gua.town, gua.city, c.ProductName, c.ProductImg, d.UnitName');
         $this->db->from($this->tableName.' a');
         $this->db->join('grocery_order_detail b', 'a.OrderId = b.OrderId');
         $this->db->join('grocery_products c', 'b.ItemId = c.ProductId');

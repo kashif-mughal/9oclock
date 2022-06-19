@@ -33,7 +33,11 @@ class Luser {
             'email' => $edit_data[0]['email'],
             'phone' => $edit_data[0]['phone'],
             'user_name' => $edit_data[0]['username'],
-            'logo' => $edit_data[0]['logo']
+            'logo' => $edit_data[0]['logo'],
+            'city' => $edit_data[0]['Address']['city'],
+            'town' => $edit_data[0]['Address']['town'],
+            'zip_code' => $edit_data[0]['Address']['zip_code'],
+            'Address' => $edit_data[0]['Address']['Address']
         );
         return $CI->parser->parse('user/user_edit_profile', $data, true);
     }

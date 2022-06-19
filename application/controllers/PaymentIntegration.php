@@ -229,4 +229,15 @@ class PaymentIntegration extends CI_Controller {
       $content = $this->lpayment->save_record($responseData);
       return $content;
    }
+
+
+
+
+
+
+
+
+
+
+
 }

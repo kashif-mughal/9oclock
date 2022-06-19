@@ -1,3 +1,6 @@
+
+
+
 <section class="main-content">
     <div class="container">  
 		<div class="row d-flex justify-content-start align-items-center">
@@ -12,9 +15,8 @@
                     <div class="card-body" style="padding:50px;">
                         <!--<h3 class="mb-4">FAQs</h3>-->
                         <h2 class="mb-4" style="color: var(--main-color)">Contact Us</h2>
-                        <p class="mb-1">Contact us: contact@9oclock.co.uk</p> <br/>
-                        <p>9oClock Shop 54 Manchester Road, Swindon SN1 2AG England, United Kingdom</p> <br/>
-                        <p>Phone: 01793 694088</p> <br/>
+                        <p>9oClock Shop 54 Manchster Road, Swindon SN1 2AG England, United Kingdom</p> <br/>
+                        <p>Phone: 01793 694088</p> <br/> 
                     </div>
                 </div>
             </div>

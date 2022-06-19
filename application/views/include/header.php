@@ -236,7 +236,7 @@ $menuCatList = $CI->lcategory->get_category_hierarchy();
                      </div>
                   </div>
                </div>
-                <script type="text/javascript">
+				<script type="text/javascript">
                    $('#fmsrch').click(function(){
                         $('#q').val($('#q').val().replace("%", "~~"));
                    });

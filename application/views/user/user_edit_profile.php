@@ -77,7 +77,22 @@
                                     <input type="hidden" id="user_name" name="user_name" class="form-control" placeholder="User Name" value="{email}" autocomplete="off" required>
                                 </div>
                                 <div class="form-label-group mb-3">
+                                    <input id="phone" name="phone" class="form-control" placeholder="Phone" value="{phone}" autocomplete="off" required>
+                                </div>
+                                <div class="form-label-group mb-3">
                                     <input type="hidden" id="user_email" name="user_email" class="form-control" placeholder="User Email" value="{email}" autocomplete="off" required>
+                                </div>
+                                <div class="form-label-group mb-3">
+                                    <input id="city" name="city" class="form-control" placeholder="City" value="{city}" autocomplete="off" required>
+                                </div>
+                                <div class="form-label-group mb-3">
+                                    <input id="town" name="town" class="form-control" placeholder="town" value="{town}" autocomplete="off" required>
+                                </div>
+                                <div class="form-label-group mb-3">
+                                    <input id="zip_code" name="zip_code" class="form-control" placeholder="zip_code" value="{zip_code}" autocomplete="off" required>
+                                </div>
+                                <div class="form-label-group mb-3">
+                                    <input id="Address" name="Address" class="form-control" placeholder="Address" value="{Address}" autocomplete="off" required>
                                 </div>
                                 <div class="form-label-group mb-3">
                                     <input type="file" id="logo" name="logo" class="form-control">

@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Cproduct extends CI_Controller {
 
     public $product_id;
-    public $globaPerPageProducts = 20;
+    public $globaPerPageProducts = 100;
     function __construct() {
         parent::__construct();
         $this->load->database();
@@ -155,6 +155,16 @@ class Cproduct extends CI_Controller {
             } else {
                 $image = $this->upload->data();
                 $image_url = "assets/img/products/" . $image['file_name'];
+				
+				$largeImageData = array(
+					'ProductId'  => $product_id,
+					'Img'        => $image_url,
+					'Size'       => 'large',
+					'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+					'Status'     => 1
+				);
+
+				$this->db->insert('grocery_product_images', $largeImageData);
             }
         }
 
@@ -210,6 +220,7 @@ class Cproduct extends CI_Controller {
                     }
                 }
             }
+			
             $imgUrl = !empty($image_url) ? $image_url : 'assets/img/product.png';
             $data = array(
                 'ProductId'  => $result,
@@ -219,9 +230,9 @@ class Cproduct extends CI_Controller {
                 'CreatedOn'  => date_format(new DateTime(), 'Y-m-d H:i:s'),
                 'Status'     => 1
             );
-
+			
             $this->db->insert('grocery_product_images', $data);
-            
+			
             if(count($multipleUpload) > 0){
                 for ($i=0; $i < count($multipleUpload); $i++) { 
                     $data = array(
@@ -236,9 +247,7 @@ class Cproduct extends CI_Controller {
                     $this->db->insert('grocery_product_images', $data);
                 }
             }
-
-
-            $this->session->set_userdata(array('message' => 'Successfully Added'));
+			$this->session->set_userdata(array('message' => 'Successfully Added'));
             if (isset($_POST['add-product'])) {
                 redirect(base_url('Cproduct/manage_product'));
             } elseif (isset($_POST['add-customer-another'])) {
@@ -265,6 +274,8 @@ class Cproduct extends CI_Controller {
         $config['max_height'] = "*";
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
+		$largeImageName = "";
+		
         if ($_FILES['image']['name']) {
             if (!$this->upload->do_upload('image')) {
                 $error = array('error' => $this->upload->display_errors());
@@ -273,10 +284,19 @@ class Cproduct extends CI_Controller {
             } else {
                 $image = $this->upload->data();
                 $image_url = "assets/img/products/" . $image['file_name'];
+				
+				$largeImageData = array(
+					'ProductId'  => $product_id,
+					'Img'        => $image_url,
+					'Size'       => 'large',
+					'ModifiedOn' => date_format(new DateTime(), 'Y-m-d H:i:s'),
+					'Status'     => 1
+				);
+
+				$this->db->insert('grocery_product_images', $largeImageData);	
             }
         }
-
-
+		
         $fName = "";
         $fNames = array();
         $multipleUpload = array();
@@ -285,7 +305,6 @@ class Cproduct extends CI_Controller {
         if (isset($_FILES['multipleUpload'])) {
             $files = $_FILES;
             $cpt = count($_FILES ['multipleUpload'] ['name']);
-
             for ($i = 0; $i < $cpt; $i ++) {
                 if(empty($files ['multipleUpload'] ['name'] [$i]))
                     continue;
@@ -308,6 +327,7 @@ class Cproduct extends CI_Controller {
             }
         }
 
+		//print_r($multipleUpload);die;
         if(count($multipleUpload) > 0){
             for ($i=0; $i < count($multipleUpload); $i++) { 
                 $data = array(
@@ -361,20 +381,8 @@ class Cproduct extends CI_Controller {
             $this->db->where('Size', 'large');
             $this->db->update('grocery_product_images', $data);
         }
-
         $this->session->set_userdata(array('message' => display('successfully_updated')));
         redirect(base_url('Cproduct/manage_product'));
-    }
-
-    public function del_img(){
-        $this->auth->check_admin_auth();
-        $imgUrl = $this->input->get("imgNm");
-        $data = array(
-            'Status' => 0
-        );
-        $this->db->where('Img', $imgUrl);
-        $this->db->update('grocery_product_images', $data);
-        echo '1';
     }
     public function manage_product() {
         $CI = & get_instance();
@@ -388,6 +396,16 @@ class Cproduct extends CI_Controller {
         $this->template->full_admin_html_view($content);
     }
 
+    public function del_img(){
+        $this->auth->check_admin_auth();
+        $imgUrl = $this->input->get("imgNm");
+        $data = array(
+            'Status' => 0
+        );
+        $this->db->where('Img', $imgUrl);
+        $this->db->update('grocery_product_images', $data);
+        echo '1';
+    }
     //Add Product CSV
     public function add_product_csv() {
         $CI = & get_instance();

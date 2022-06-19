@@ -96,6 +96,11 @@
          margin-top: 172px !important;
       }
     }
+    .main.product-card-btn{
+      padding: 12px 100px !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+    }
 </style>
 
 <div class="bread_crumb bread_crumb_inner" style="padding-bottom:0px;">
@@ -178,11 +183,11 @@
                      </span>
                   </div>
                   <div class="my-3">
-                     <a href="javascript:void(0);" class="product-card-btn mx-auto add-cart"
+                     <a href="javascript:void(0);" class="main product-card-btn mx-auto add-cart"
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Add to Cart
                      </a>
-                     <a href="javascript:void(0);" style="display: none;" class="product-card-btn mx-auto remove-cart remove-cart-main"
+                     <a href="javascript:void(0);" style="display: none;" class="main product-card-btn mx-auto remove-cart remove-cart-main"
                         data-json="<?php echo htmlentities(json_encode($productObject), ENT_QUOTES, 'UTF-8'); ?>"
                         >Remove From Cart
                      </a>

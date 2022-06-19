@@ -156,7 +156,17 @@ class Users extends CI_Model {
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            $users = $query->result_array();
+            $users[0]["Address"] = null;
+            $this->db->select('AddressId, Address, zip_code, town, city');
+            $this->db->from('grocery_user_address');
+            $this->db->where('UserId', $user_id);
+            $this->db->where('Status', 1);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                $users[0]["Address"] = $query->result_array()[0];
+            }
+            return $users;
         }else{
             $this->db->select('*');
             $this->db->from('users');

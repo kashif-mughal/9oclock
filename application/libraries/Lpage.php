@@ -49,6 +49,24 @@ class Lpage {
         $brandList = $CI->parser->parse('pages/faq', $data, true);
         return $brandList;
     }
+	
+	public function cancellationrefundandreturn() {
+        $CI = & get_instance();
+        $data = array(
+            'title' => 'Cancellation, Return and Refunds'
+        );
+        $brandList = $CI->parser->parse('pages/cancellationrefundandreturn', $data, true);
+        return $brandList;
+    }
+	
+	public function contactus() {
+        $CI = & get_instance();
+        $data = array(
+            'title' => 'Contact Us'
+        );
+        $brandList = $CI->parser->parse('pages/contactus', $data, true);
+        return $brandList;
+    }
 
     public function returnandrefund() {
         $CI = & get_instance();

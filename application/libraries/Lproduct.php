@@ -110,7 +110,7 @@ class Lproduct {
             'sort' => $product_detail[0]['sort'],
             'Description' => $product_detail[0]['Description'],
             'product_varient' => $product_detail[0]['varientData'],
-            'Images' => $product_detail[0]['Images']
+            'Images' => $product_detail[0]['Images']->Thumb
         );
         //var_dump($data);exit();
         $chapterList = $CI->parser->parse('product/edit_product_form', $data, true);
