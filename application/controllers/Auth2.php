@@ -98,7 +98,7 @@ class Auth2 extends CI_Controller {
         $address = $this->input->Post('inputAddress');
         $zip_code = $this->input->Post('inputZipCode');
         $town = $this->input->Post('inputTown');
-        $city = $this->input->Post('inputCity');
+        // $city = $this->input->Post('inputCity');
         $password = $this->input->Post('inputPassword');
         $confirm_password = $this->input->Post('inputConfirmPassword');
         $promotion_email = $this->input->Post('chbxReceiveOffers');
@@ -114,7 +114,7 @@ class Auth2 extends CI_Controller {
         $this->form_validation->set_rules('inputAddress', 'Address', 'required');
         $this->form_validation->set_rules('inputZipCode', 'ZipCode', 'required');
         $this->form_validation->set_rules('inputTown', 'Town', 'required');
-        $this->form_validation->set_rules('inputCity', 'City', 'required');
+        // $this->form_validation->set_rules('inputCity', 'City', 'required');
         $this->form_validation->set_rules('inputPassword', 'Password', 'required');
         $this->form_validation->set_rules('inputConfirmPassword', 'Confirm Password', 'required|matches[inputPassword]');
 
@@ -154,7 +154,7 @@ class Auth2 extends CI_Controller {
                 $this->auths->insert_user_login_email($user_id, $email, $password);
 
                 // Insert record in users table
-                $this->auths->insert_user_email($user_id, $firstName, $lastName, $email, $phone, $address, $zip_code, $town, $city, $isPromotion);
+                $this->auths->insert_user_email($user_id, $firstName, $lastName, $email, '0' . $phone, $address, $zip_code, $town, '', $isPromotion);
 
                 // Insert otp record and send otp
                 $isEmailExist = $this->auths->is_email_exist($email);

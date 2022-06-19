@@ -25,7 +25,7 @@
 
 <!-- alert-info -->
 
- <div id="alertBox" class="alert alert-danger alert-dismissable" style="position: absolute;width: 100%; display: none;">
+ <div id="alertBox" class="alert alert-danger alert-dismissable" style="position: absolute;width: 100%; display: none;background-color: #B22727;color: #fff;">
      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
      <span></span>
  </div>
@@ -373,6 +373,6 @@ function showNoti(message, type){
    window.location.href = '#';
    setTimeout(function(){
       notiElem.hide();
-   }, 5000);
+   }, 10000);
 }
 </script>
