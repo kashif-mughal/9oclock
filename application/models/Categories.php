@@ -192,7 +192,17 @@ class Categories extends CI_Model {
         }
         $query = $this->db->query($query);
         if ($query->num_rows() > 0) {
+            $ignoreElems = array("a","an","the","in","with","of","by","on","and","or","but");
             $returnData["products"] = $query->result_array();
+            for ($j=0; $j < count($returnData["products"]); $j++) { 
+                $splt = explode(" ", $returnData["products"][$j]["ProductName"]);
+                for ($i=0; $i < count($splt); $i++) { 
+                    if(!in_array($splt[$i], $ignoreElems)){
+                        $splt[$i] = ucfirst($splt[$i]);
+                    }
+                }
+                $returnData["products"][$j]["ProductName"] = implode(' ', $splt);
+            }
             $CI = & get_instance();
             $CI->load->model('Products');
             $returnData["products"] = $CI->Products->getAndAddProductImages($returnData["products"]);

@@ -134,6 +134,28 @@ class Lproduct {
         
         $similar_products = $CI->Products->similarProducts($product_detail[0]['Category'], $product_detail[0]['Brand']);
         $similar_products = $CI->Products->getAndAddProductImages($similar_products);
+
+        $ignoreElems = array("a","an","the","in","with","of","by","on","and","or","but");
+
+        $splt = explode(" ", $product_detail[0]["ProductName"]);
+        for ($i=0; $i < count($splt); $i++) { 
+            if(!in_array($splt[$i], $ignoreElems)){
+                $splt[$i] = ucfirst($splt[$i]);
+                $product_detail[0]["ProductName"] = implode(' ', $splt);
+            }
+        }
+
+        for ($i=0; $i < count($similar_products); $i++) { 
+            $splt = explode(" ", $similar_products[$i]["ProductName"]);
+            for ($j=0; $j < count($splt); $j++) { 
+                if(!in_array($splt[$j], $ignoreElems)){
+                    $splt[$j] = ucfirst($splt[$j]);
+                }
+            }
+            $similar_products[$i]["ProductName"] = implode(' ', $splt);
+        }
+        
+
         $unitItem = null;
         foreach($units as $unit) {
             if ($product_detail[0]['SaleUnit'] == $unit["UnitId"]) {
