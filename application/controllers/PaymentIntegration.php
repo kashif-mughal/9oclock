@@ -14,8 +14,8 @@ class PaymentIntegration extends CI_Controller {
   }
 
   public function index() {
-   //$paymentPass = "d65e846a-c652-4f29-8780-9cdc4d9b8cd7"; // Test
-   $paymentPass = 'qjIG61$UAo3A.I)tHsG'; // Production
+   $paymentPass = "0a197fde-907b-476b-9a38-70d24eb820ee"; // Test
+   //$paymentPass = 'qjIG61$UAo3A.I)tHsG'; // Production
 
    $phone_number = $this->session->userdata('phone');
    if(strlen($phone_number) < 5) {
@@ -50,24 +50,27 @@ class PaymentIntegration extends CI_Controller {
    // $barclayCardModel->OWNERTELNO = $phone;
 
    // Production
-   $barclayCardModel = new stdClass();
-   $barclayCardModel->AMOUNT = ($Final_Amount * 100);
-   $barclayCardModel->CURRENCY = "GBP";
-   $barclayCardModel->LANGUAGE = "en_uk";
-   $barclayCardModel->ORDERID = $orderId;
-   $barclayCardModel->PSPID = "epdq1553511";
-   $barclayCardModel->Email = "adil.aman40@gmail.com";
-   $barclayCardModel->CN = "9 o'clock shop";
-   $barclayCardModel->OWNERZIP = $zip_code;
-   $barclayCardModel->OWNERADDRESS = $address;
-   $barclayCardModel->OWNERCTY = $city;
-   $barclayCardModel->OWNERTOWN = $town;
-   $barclayCardModel->OWNERTELNO = $phone;
+   // $barclayCardModel = new stdClass();
+   // $barclayCardModel->AMOUNT = ($Final_Amount * 100);
+   // $barclayCardModel->CURRENCY = "GBP";
+   // $barclayCardModel->LANGUAGE = "en_uk";
+   // $barclayCardModel->ORDERID = $orderId;
+   // $barclayCardModel->PSPID = "epdq1553511";
+   // $barclayCardModel->Email = "adil.aman40@gmail.com";
+   // $barclayCardModel->CN = "9 o'clock shop";
+   // $barclayCardModel->OWNERZIP = $zip_code;
+   // $barclayCardModel->OWNERADDRESS = $address;
+   // $barclayCardModel->OWNERCTY = $city;
+   // $barclayCardModel->OWNERTOWN = $town;
+   // $barclayCardModel->OWNERTELNO = $phone;
 
    // $flatPaymentData = "AMOUNT=" . $barclayCardModel->Amount . $paymentPass . "CN=" . $barclayCardModel->CN . $paymentPass . "CURRENCY=" . $barclayCardModel->Currency . $paymentPass . "EMAIL=" . $barclayCardModel->Email . $paymentPass . "LANGUAGE=" . $barclayCardModel->Language . $paymentPass . "ORDERID=" . $barclayCardModel->OrderId . $paymentPass . "OWNERZIP=" . $barclayCardModel->OWNERZIP . $paymentPass . "OWNERADDRESS=" . $barclayCardModel->OWNERADDRESS . $paymentPass . "OWNERCTY=" . $barclayCardModel->OWNERCTY . $paymentPass . "OWNERTOWN=" . $barclayCardModel->OWNERTOWN . $paymentPass . "OWNERTELNO=" . $barclayCardModel->OWNERTELNO . $paymentPass . "PSPID=" . $barclayCardModel->Pspid . $paymentPass;
 
-   
-   $flatPaymentData = "ACCEPTURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Success" . $paymentPass . "AMOUNT=" . $barclayCardModel->AMOUNT . $paymentPass . "CANCELURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Cancelled" . $paymentPass . "CN=" . $barclayCardModel->CN . $paymentPass ."CURRENCY=" . $barclayCardModel->CURRENCY . $paymentPass . "DECLINEURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Decline" . $paymentPass . "EXCEPTIONURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Cancelled" . $paymentPass . "LANGUAGE=" . $barclayCardModel->LANGUAGE . $paymentPass . "ORDERID=" . $barclayCardModel->ORDERID . $paymentPass . "OWNERADDRESS=" . $barclayCardModel->OWNERADDRESS . $paymentPass ."OWNERCTY=" . $barclayCardModel->OWNERCTY . $paymentPass ."OWNERTELNO=" . $barclayCardModel->OWNERTELNO . $paymentPass ."OWNERTOWN=" . $barclayCardModel->OWNERTOWN . $paymentPass . "OWNERZIP=" . $barclayCardModel->OWNERZIP . $paymentPass . "PSPID=" . $barclayCardModel->PSPID . $paymentPass;
+   // Local
+   $flatPaymentData = "ACCEPTURL=" . "http://localhost/9oclock/PaymentIntegration/Success" . $paymentPass . "AMOUNT=" . $barclayCardModel->AMOUNT . $paymentPass . "CANCELURL=" . "http://localhost/9oclock/PaymentIntegration/Cancelled" . $paymentPass . "CN=" . $barclayCardModel->CN . $paymentPass ."CURRENCY=" . $barclayCardModel->CURRENCY . $paymentPass . "DECLINEURL=" . "http://localhost/9oclock/PaymentIntegration/Decline" . $paymentPass . "EXCEPTIONURL=" . "http://localhost/9oclock/PaymentIntegration/Cancelled" . $paymentPass . "LANGUAGE=" . $barclayCardModel->LANGUAGE . $paymentPass . "ORDERID=" . $barclayCardModel->ORDERID . $paymentPass . "OWNERADDRESS=" . $barclayCardModel->OWNERADDRESS . $paymentPass ."OWNERCTY=" . $barclayCardModel->OWNERCTY . $paymentPass ."OWNERTELNO=" . $barclayCardModel->OWNERTELNO . $paymentPass ."OWNERTOWN=" . $barclayCardModel->OWNERTOWN . $paymentPass . "OWNERZIP=" . $barclayCardModel->OWNERZIP . $paymentPass . "PSPID=" . $barclayCardModel->PSPID . $paymentPass;
+
+   // Live
+   // $flatPaymentData = "ACCEPTURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Success" . $paymentPass . "AMOUNT=" . $barclayCardModel->AMOUNT . $paymentPass . "CANCELURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Cancelled" . $paymentPass . "CN=" . $barclayCardModel->CN . $paymentPass ."CURRENCY=" . $barclayCardModel->CURRENCY . $paymentPass . "DECLINEURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Decline" . $paymentPass . "EXCEPTIONURL=" . "https://9oclockshop.co.uk/PaymentIntegration/Cancelled" . $paymentPass . "LANGUAGE=" . $barclayCardModel->LANGUAGE . $paymentPass . "ORDERID=" . $barclayCardModel->ORDERID . $paymentPass . "OWNERADDRESS=" . $barclayCardModel->OWNERADDRESS . $paymentPass ."OWNERCTY=" . $barclayCardModel->OWNERCTY . $paymentPass ."OWNERTELNO=" . $barclayCardModel->OWNERTELNO . $paymentPass ."OWNERTOWN=" . $barclayCardModel->OWNERTOWN . $paymentPass . "OWNERZIP=" . $barclayCardModel->OWNERZIP . $paymentPass . "PSPID=" . $barclayCardModel->PSPID . $paymentPass;
 	
 
      $data["ShaPass"] = hash("sha1", $flatPaymentData);
@@ -77,6 +80,32 @@ class PaymentIntegration extends CI_Controller {
      $this->load->view("payment/index",$data);
   }
 
+
+   public function refund() {
+      $content = $this->lpayment->refund();
+      $this->template->full_html_view($content);
+   }
+
+   // Call Refund Process Page 
+   public function refundprocess() {
+      $post_data = $this->input->post();
+      $data["amount"] = ($post_data["refund_amount"] * 100);
+      $data["PSPID"] = "Test2A2zgrocery";
+      $data["USERID"] = "9oclockshopswindon";
+      $data["REFID"] = "PSPID";
+      $data["REFKIND"] =  //$post_data["REFKIND"];
+      $data["PSWD"] = "testPassword"; //$post_data["PSWD"];
+      $data["PAYID"] = "202"; //$post_data["PAYID"];
+      $data["orderID"] = "101"; //$post_data["orderID"];
+      $data["OPERATION"] = "RFD";
+      $data["Ecom_Payment_Card_Verification"] = "411"; //$post_data["Ecom_Payment_Card_Verification"];
+      $data["withroot"] = "testroot"; //$post_data["withroot"];
+      $data["submit2"] = "Submit";
+
+      $requestData["RefundPaymentModel"] = $data;
+
+     $this->load->view("payment/refundPost",$requestData);
+   }
   
 
   // add column enum in order table paymentStatus

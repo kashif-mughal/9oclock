@@ -57,6 +57,14 @@ class Lpayment {
         return $CI->parser->parse('payment/decline', $data, true);
     }
 
+    public function refund() {
+        $data = array(
+            'title' => '9o\'Clock | Buy each and everything home grocery'
+        );
+        $CI = & get_instance();
+        return $CI->parser->parse('payment/refund', $data, true);
+    }
+
 //     public function payement_form() {
 
 //         $CI = & get_instance();

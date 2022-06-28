@@ -1,10 +1,10 @@
 <!-- Production -->
-<form method="POST" action="https://payments.epdq.co.uk/ncol/prod/orderstandard.asp"
-id="paymentForm" name="paymentForm">
+<!-- <form method="POST" action="https://payments.epdq.co.uk/ncol/prod/orderstandard.asp"
+id="paymentForm" name="paymentForm"> -->
 
 <!-- Test -->
-<!-- <form method="POST" action="https://mdepayments.epdq.co.uk/ncol/test/orderstandard.asp"
-id="form" name="form"> -->
+<form method="POST" action="https://mdepayments.epdq.co.uk/ncol/test/orderstandard.asp"
+id="paymentForm" name="paymentForm">
 
 
    <!-- general parameters -->
